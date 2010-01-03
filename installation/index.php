@@ -39,6 +39,7 @@ if (isset($_POST['install'])) {
 		$config_ini->write($_CONFIG);
 		
 		echo '<h2 class="ok">'._('Application installée avec succès').'</h2>';
+		echo '<a href="../">Retour</a>';
 	}
 } else {
 ?>
