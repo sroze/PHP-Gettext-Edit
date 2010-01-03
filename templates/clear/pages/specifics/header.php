@@ -1,6 +1,6 @@
 <?php 
 $menus = array(
-	'projects' => _('Projets'),
+	'index' => _('Projets'),
 	'configuration' => _('Configuration'),
 	'help' => _('Aide')
 );
