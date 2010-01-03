@@ -19,13 +19,13 @@ if (!((int)$_CONFIG['installed'])) {
 }
 
 // What page is wanted by user ?
-$page_name = (empty($_GET['page'])) ? 'index' : $_GET['page'];
-if (!preg_match('#^([a-z0-9_-]+)$#i', $page_name)) {
+$_GET['page'] = (empty($_GET['page'])) ? 'index' : $_GET['page'];
+if (!preg_match('#^([a-z0-9_-]+)$#i', $_GET['page'])) {
 	echo _('Invalid page name');
 	exit();
 }
 
-if (!file_exists(PAGE_DIR.$page_name.'.php')) {
+if (!file_exists(PAGE_DIR.$_GET['page'].'.php')) {
 	echo _('Page doesn\'t exists');
 	exit();
 }
@@ -34,7 +34,7 @@ if (!file_exists(PAGE_DIR.$page_name.'.php')) {
 require_once PAGE_DIR.'specifics/header.php';
 
 // Includes the page
-require_once PAGE_DIR.$page_name.'.php';
+require_once PAGE_DIR.$_GET['page'].'.php';
 
 // Includes the footer
 require_once PAGE_DIR.'specifics/footer.php';
