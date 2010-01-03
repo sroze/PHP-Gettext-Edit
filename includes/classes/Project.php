@@ -82,7 +82,7 @@ class Project
 			'SELECT * FROM projects WHERE project_id = '.$this->id
 		);
 		
-		$this->informations = $query->fetchAll();
+		$this->informations = $query->fetch();
 		
 		if (empty($this->informations)) {
 			throw new Project_Exception(
@@ -102,8 +102,6 @@ class Project
 		if (!$this->informations) {
 			$this->getAll();
 		}
-		
-		var_dump($field, $this->informations);
 		
 		if (array_key_exists($field, $this->informations)) {
 			return $this->informations[$field];
