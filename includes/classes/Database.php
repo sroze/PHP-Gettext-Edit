@@ -56,7 +56,14 @@ class Database
 			$this->openConnection();
 		}
 		
-		return $this->database->query($query);
+		$result = $this->database->query($query);
+		if (!$result) {
+			 throw new Database_Exception(
+			 	_('La requête n\'as pas été éxécutée correctement').': '.print_r($this->database->errorInfo(), true)
+			 );
+		} else {
+			return $result;
+		}
 	}
 	
 	/**

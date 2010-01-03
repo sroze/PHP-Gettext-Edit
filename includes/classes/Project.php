@@ -53,11 +53,7 @@ class Project
 			'SELECT project_id, project_name FROM projects'
 		);
 		
-		if (empty($query)) {
-			return array();
-		} else {		
-			return $query->fetchAll();
-		}
+		return $query->fetchAll();
 	}
 	
 }
