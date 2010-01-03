@@ -35,8 +35,9 @@ class Database
 	{
 		$this->database = new PDO('sqlite:'.$this->filename);
 		if (!$this->database) {
+			$error = $this->database->errorInfo();
 			throw new Database_Exception(
-				'Impossible de se connecter à la base de données: '.$error
+				sprintf(_('Impossible de se connecter à la base de données: %s'), $error[2])
 			);
 			return false;
 		} else {
