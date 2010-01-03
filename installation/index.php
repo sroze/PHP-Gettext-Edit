@@ -21,6 +21,14 @@ require_once ROOT_PATH.'includes/configuration.php';
 	<div id="contents" class="with_sidebar">
 <?php
 if (isset($_POST['install'])) {
+	$fopen = fopen($sql->filename, 'a+');
+	if (!$fopen) {
+		echo '<div class="form_error">'.
+			sprintf(_('Impossible d\'ouvrir le fichier de base de données. <em>Chmodez</em> et <em>Chownez</em> comme il faut pour que %s soit accessible en lecture et écriture'), $sql->filename).
+			'</div>';
+	}
+	fclose($fopen);
+	
 	$sql->query('CREATE TABLE projects (
 		project_id INTEGER PRIMARY KEY AUTOINCREMENT,
 		project_name TEXT,
