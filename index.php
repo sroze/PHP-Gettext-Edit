@@ -8,6 +8,16 @@
  */
 define('ROOT_PATH', realpath(dirname(__FILE__)).'/');
 
+$uris = explode('/', $_SERVER['SCRIPT_NAME']); array_pop($uris); array_shift($uris);
+define('LOCAL_PATH', '/'.implode('/', $uris).'/');
+
+require_once ROOT_PATH.'includes/configuration.php';
+require_once ROOT_PATH.'includes/classes/Project.php';
+
+if (!((int)$_CONFIG['installed'])) {
+	header('Location: '.LOCAL_PATH.'installation/index.php');
+}
+
 // What page is wanted by user ?
 $page_name = (empty($_GET['page'])) ? 'index' : $_GET['page'];
 if (!preg_match('#^([a-z0-9_-]+)$#i', $page_name)) {

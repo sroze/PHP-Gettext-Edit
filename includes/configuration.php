@@ -1,5 +1,6 @@
 <?php
 require_once ROOT_PATH.'includes/librairies/File_INI.php';
+require_once ROOT_PATH.'includes/classes/Database.php';
 
 $config_ini = new File_INI(ROOT_PATH.'includes/configuration/configuration.ini');
 $_CONFIG = $config_ini->read();
@@ -11,4 +12,8 @@ if (!is_dir(TEMPLATE_DIR)) {
 }
 
 define('PAGE_DIR', TEMPLATE_DIR.'pages/');
+
+$sql = new Database(
+	ROOT_PATH.'includes/configuration/gettextedit.db'
+);
 ?>
