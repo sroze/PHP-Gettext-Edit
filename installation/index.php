@@ -39,13 +39,13 @@ if (isset($_POST['install'])) {
 		$config_ini->write($_CONFIG);
 		
 		echo '<h2 class="ok">'._('Application installée avec succès').'</h2>';
-		echo '<a href="../">Retour</a>';
+		echo '<a href="../">'._('Retour').'</a>';
 	}
 } else {
 ?>
 <form method="POST" action="">
 	<input type="hidden" name="install" value="1" />
-	<input type="submit" name="submit" value="Installation !" />
+	<input type="submit" name="submit" value="<?php echo _('Installation !'); ?>" />
 </form>
 <?php 
 }
