@@ -31,15 +31,30 @@ class Project
 	private $sql;
 	
 	/**
+	 * ID du projet défini par cette classe.
+	 * 
+	 * @var integer
+	 */
+	public $id = null;
+	
+	/**
+	 * Contient les informations du projet, une fois chargée depuis la base.
+	 * 
+	 * @var array
+	 */
+	private $informations;
+	
+	/**
 	 * Constructeur.
 	 * 
 	 * @return Project
 	 */
-	public function __construct ()
+	public function __construct ($id = null)
 	{
 		global $sql;
-		
 		$this->sql = $sql;
+		
+		$this->id = $id;
 	}
 	
 	/**
@@ -56,4 +71,44 @@ class Project
 		return $query->fetchAll();
 	}
 	
+	/**
+	 * Récupère toutes les informations du projet depuis la base de données.
+	 * 
+	 * @return void
+	 */
+	private function getAll ()
+	{
+		$query = $this->sql->query(
+			'SELECT * FROM projects WHERE id = '.$this->id
+		);
+		
+		$this->informations = $query->fetchAll();
+		if (empty($this->informations)) {
+			throw new Project_Exception(
+				sprintf(_('Le projet #%d ne semble pas exister'), $this->id)
+			);
+		}
+	}
+	
+	/**
+	 * Retourne une information tirée de la base de données à propos de project.
+	 * 
+	 * @param string $field
+	 * @return mixed
+	 */
+	public function get ($field)
+	{
+		if (!$this->informations) {
+			$this->getAll();
+		}
+		
+		if (array_key_exists($field, $this->informations)) {
+			return $this->informations[$field];
+		} else {
+			return null;
+		}
+	}
+	
 }
+
+class Project_Exception extends Exception {}

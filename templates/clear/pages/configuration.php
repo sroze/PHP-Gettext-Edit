@@ -2,7 +2,7 @@
 	<div id="contents">
 		<h2>Configuration</h2>
 		<?php
-		if (isset($_POST['install'])) {
+		if (isset($_POST['update_conf'])) {
 			$_CONFIG['template'] = $_POST['template'];
 			$config_ini->write($_CONFIG);
 			
@@ -23,7 +23,7 @@
 				?>
 			</select>
 			</p>
-			<input type="submit" value="Mettre à jour" />
+			<input type="submit" name="update_conf" value="Mettre à jour" />
 		</form>
 	</div>
 </div>
