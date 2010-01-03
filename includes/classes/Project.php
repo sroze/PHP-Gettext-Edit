@@ -82,10 +82,10 @@ class Project
 			'SELECT * FROM projects' // WHERE project_id = '.$this->id
 		);
 		
-		$this->informations = $query->fetchAll();
 		var_dump($query);
-		var_dump($query->fetchAll());
-		var_dump($query->queryString);
+		var_dump($query->fetch());
+		
+		$this->informations = $query->fetchAll();
 		if (empty($this->informations)) {
 			throw new Project_Exception(
 				sprintf(_('Le projet #%d ne semble pas exister'), $this->id)
