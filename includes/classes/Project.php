@@ -79,7 +79,7 @@ class Project
 	private function getAll ()
 	{
 		$query = $this->sql->query(
-			'SELECT * FROM projects WHERE id = '.$this->id
+			'SELECT * FROM projects WHERE project_id = '.$this->id
 		);
 		
 		$this->informations = $query->fetchAll();

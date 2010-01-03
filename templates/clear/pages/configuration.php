@@ -6,7 +6,9 @@
 			$_CONFIG['template'] = $_POST['template'];
 			$config_ini->write($_CONFIG);
 			
-			echo '<h2 class="ok">'._('Paramètre mis à jour').'</h2>';
+			echo '<div class="form_success">'.
+				_('Paramètres mis à jour').
+				'</div>'; 
 		}
 		?>
 		<form method="POST" action="">
