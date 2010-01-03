@@ -42,7 +42,7 @@ class Project
 	 * 
 	 * @var array
 	 */
-	private $informations;
+	private $informations = false;
 	
 	/**
 	 * Constructeur.
@@ -82,10 +82,8 @@ class Project
 			'SELECT * FROM projects WHERE project_id = '.$this->id
 		);
 		
-		var_dump($query);
-		var_dump($query->fetch());
-		
 		$this->informations = $query->fetchAll();
+		
 		if (empty($this->informations)) {
 			throw new Project_Exception(
 				sprintf(_('Le projet #%d ne semble pas exister'), $this->id)
@@ -104,6 +102,8 @@ class Project
 		if (!$this->informations) {
 			$this->getAll();
 		}
+		
+		var_dump($field, $this->informations);
 		
 		if (array_key_exists($field, $this->informations)) {
 			return $this->informations[$field];
