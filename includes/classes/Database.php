@@ -21,10 +21,9 @@ class Database
 	 * @param string $filename
 	 * @return Database
 	 */
-	public function __constuct ($filename)
+	public function __construct ($filename)
 	{
 		$this->filename = $filename;
-		var_dump($filename, $this->filename);
 	}
 	
 	/**
