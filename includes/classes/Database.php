@@ -58,8 +58,9 @@ class Database
 		
 		$result = $this->database->query($query);
 		if (!$result) {
+			$error = $this->database->errorInfo();
 			 throw new Database_Exception(
-			 	_('La requête n\'as pas été éxécutée correctement').': '.print_r($this->database->errorInfo(), true)
+			 	sprintf(_('La requête n\'as pas été éxécutée correctement: %s'), $error[2])
 			 );
 		} else {
 			return $result;
