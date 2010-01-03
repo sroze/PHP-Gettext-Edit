@@ -14,9 +14,12 @@
 				<?php
 				$template_dir = ROOT_PATH.'templates/';
 				$template_dir_opened = opendir($template_dir);
-				while ($entry = @readdir($template_dir_opened) && substr($entry, 0, 1) != '.' && is_dir($template_dir.$entry)) {
-					echo '<option value="'.$entry.'">'.$entry.'</option>';
+				while (false !== ($entry = readdir($template_dir_opened))) {
+					if (substr($entry, 0, 1) != '.' && is_dir($template_dir.$entry)) {
+						echo '<option value="'.$entry.'">'.$entry.'</option>';
+					}
 				}
+				closedir($template_dir_opened);
 				?>
 			</select>
 			</p>
