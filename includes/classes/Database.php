@@ -24,6 +24,7 @@ class Database
 	public function __constuct ($filename)
 	{
 		$this->filename = $filename;
+		var_dump($filename, $this->filename);
 	}
 	
 	/**
