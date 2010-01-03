@@ -58,6 +58,48 @@ class Project
 	}
 	
 	/**
+	 * Return all languages of the project.
+	 * 
+	 * @return array
+	 */
+	public function getLanguages ()
+	{
+		$directory_path = $this->get('project_path').$this->get('project_languages_path');
+		$directory = opendir($directory_path);
+	
+		$result = array();
+	    /* Ceci est la façon correcte de traverser un dossier. */
+	    while (false !== ($file = readdir($directory))) {
+	        if (substr($file, 0, 1) != '.' && is_dir($directory_path.$file)) {
+	        	$result[] = $file;
+	        }
+	    }
+	    
+	    return $result;
+	}
+	
+	/**
+	 * Retourne la liste des templates
+	 * 
+	 * @return array
+	 */
+	public function getTemplates ()
+	{
+		$directory_path = $this->get('project_path').$this->get('project_languages_path');
+		$directory = opendir($directory_path);
+	
+		$result = array();
+	    /* Ceci est la façon correcte de traverser un dossier. */
+	    while (false !== ($file = readdir($directory))) {
+	        if (is_file($directory_path.$file) && substr($file, -4) == '.pot') {
+	        	$result[] = substr($file, 0, -4);
+	        }
+	    }
+	    
+	    return $result;
+	}
+	
+	/**
 	 * Récupère la liste des projets
 	 * 
 	 * @return array

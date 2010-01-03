@@ -81,6 +81,14 @@ form p label {
 	text-align: right;
 	width: 175px;
 }
+div.box {
+	background-color: #FCFCFC;
+	border: 1px solid #E4E4E4;
+	color: #505050;
+}
+div.box.little {
+	width: 250px;
+}
 /* Footer */
 div#footer {
 	color: #888;

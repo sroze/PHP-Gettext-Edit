@@ -13,13 +13,27 @@
 					'</div>';
 			} else {
 				$_POST['path_app'] = str_replace('"', '\\"', $_POST['path_app']);
+				if (substr($_POST['path_app'], -1) != '/') {
+					$_POST['path_app'] .= '/';
+				}
+				
 				$_POST['path_lang'] = str_replace('"', '\\"', $_POST['path_lang']);
-				$sql->query('INSERT INTO projects (project_name, project_path, project_languages_path) VALUES
-					("'.$_POST['name'].'", "'.$_POST['path_app'].'", "'.$_POST['path_lang'].'")
-				');
-				echo '<div class="form_success">'.
-					_('Projet créé').
-					'</div>'; 
+				if (substr($_POST['path_lang'], -1) != '/') {
+					$_POST['path_lang'] .= '/';
+				}
+				
+				if (!is_dir($_POST['path_app'].$_POST['path_lang'])) {
+					echo '<div class="form_error">'.
+						sprintf(_('Le dossier %s n\'éxiste pas au sein du projet'), $_POST['path_lang']).
+						'</div>';
+				} else {
+					$sql->query('INSERT INTO projects (project_name, project_path, project_languages_path) VALUES
+						("'.$_POST['name'].'", "'.$_POST['path_app'].'", "'.$_POST['path_lang'].'")
+					');
+					echo '<div class="form_success">'.
+						_('Projet créé').
+						'</div>'; 
+				}
 			}
 		}
 		?>

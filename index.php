@@ -30,6 +30,22 @@ if (!file_exists(PAGE_DIR.$_GET['page'].'.php')) {
 	exit();
 }
 
+if (isset($_GET['project'])) {
+	if (!preg_match('#^([0-9]+)$#', $_GET['project'])) {
+		echo _('Project ID invalide');
+		exit();
+	}
+	
+	$project = new Project((int) $_GET['project']);
+	
+	try {
+		$project->get('project_name');
+	} catch (Exception $e) {
+		echo $e->getMessage();
+		exit();
+	}
+}
+
 // Includes the header
 require_once PAGE_DIR.'specifics/header.php';
 
