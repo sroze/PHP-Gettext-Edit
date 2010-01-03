@@ -83,6 +83,7 @@ class Project
 		);
 		
 		$this->informations = $query->fetchAll();
+		var_dump($query);
 		var_dump($query->fetchAll());
 		var_dump($query->queryString);
 		if (empty($this->informations)) {
