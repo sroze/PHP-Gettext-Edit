@@ -83,6 +83,7 @@ class Project
 		);
 		
 		$this->informations = $query->fetchAll();
+		var_dump($query->fetchAll());
 		if (empty($this->informations)) {
 			throw new Project_Exception(
 				sprintf(_('Le projet #%d ne semble pas exister'), $this->id)
