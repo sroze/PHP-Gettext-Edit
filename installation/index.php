@@ -1,5 +1,5 @@
 <?php
-define('ROOT_PATH', realpath(dirname(__FILE__)).'/');
+define('ROOT_PATH', realpath(dirname(__FILE__).'/../').'/');
 require_once ROOT_PATH.'includes/configuration.php';
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
