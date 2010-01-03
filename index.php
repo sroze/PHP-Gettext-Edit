@@ -8,8 +8,8 @@
  */
 define('ROOT_PATH', realpath(dirname(__FILE__)).'/');
 
-$uris = explode('/', $_SERVER['SCRIPT_NAME']); array_pop($uris); array_shift($uris);
-define('LOCAL_PATH', '/'.implode('/', $uris).'/');
+$uris = explode('/', $_SERVER['SCRIPT_NAME']); array_pop($uris); array_shift($uris); if (!empty($uris)) { $uris[] = ''; }
+define('LOCAL_PATH', '/'.implode('/', $uris));
 
 require_once ROOT_PATH.'includes/configuration.php';
 require_once ROOT_PATH.'includes/classes/Project.php';
