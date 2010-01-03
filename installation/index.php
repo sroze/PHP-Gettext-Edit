@@ -26,19 +26,20 @@ if (isset($_POST['install'])) {
 		echo '<div class="form_error">'.
 			sprintf(_('Impossible d\'ouvrir le fichier de base de données. <em>Chmodez</em> et <em>Chownez</em> comme il faut pour que %s soit accessible en lecture et écriture'), $sql->filename).
 			'</div>';
+	} else {
+		fclose($fopen);
+		
+		$sql->query('CREATE TABLE projects (
+			project_id INTEGER PRIMARY KEY AUTOINCREMENT,
+			project_name TEXT,
+			project_path TEXT,
+			project_languages_path TEXT
+		)');
+		$_CONFIG['installed'] = 1;
+		$config_ini->write($_CONFIG);
+		
+		echo '<h2 class="ok">'._('Application installée avec succès').'</h2>';
 	}
-	fclose($fopen);
-	
-	$sql->query('CREATE TABLE projects (
-		project_id INTEGER PRIMARY KEY AUTOINCREMENT,
-		project_name TEXT,
-		project_path TEXT,
-		project_languages_path TEXT
-	)');
-	$_CONFIG['installed'] = 1;
-	$config_ini->write($_CONFIG);
-	
-	echo '<h2 class="ok">'._('Application installée avec succès').'</h2>';
 } else {
 ?>
 <form method="POST" action="">
