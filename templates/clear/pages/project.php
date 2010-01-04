@@ -12,7 +12,7 @@ if (!isset($project)) {
 		<h1><?php echo $project->get('project_name'); ?></h1>
 		
 		<div class="box little right">
-		<div class="link right"><a class="add" href="index.php?page=new-template&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
+		<div class="link right"><a class="add" href="index.php?page=template-new&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
 		<h3>Templates</h3>
 		<?php 
 		$templates = $project->getTemplates();
@@ -28,7 +28,7 @@ if (!isset($project)) {
 		?>
 		</div>
 		<div class="box little right">
-		<div class="link right add"><a href="index.php?page=new-language&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
+		<div class="link right add"><a href="index.php?page=language-new&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
 		<h3>Langues</h3>
 		<?php 
 		$languages = $project->getLanguages();
