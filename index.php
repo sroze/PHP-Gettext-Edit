@@ -31,7 +31,7 @@ if (!file_exists(PAGE_DIR.$_GET['page'].'.php')) {
 }
 
 if (isset($_GET['project'])) {
-	if (!preg_match('#^([0-9]+)$#', $_GET['project'])) {
+	if (!preg_match('#^([0-9]+)$#i', $_GET['project'])) {
 		echo _('Project ID invalide');
 		exit();
 	}
@@ -46,7 +46,7 @@ if (isset($_GET['project'])) {
 	}
 	
 	if (isset($_GET['template'])) {
-		if (!preg_match('#^([a-z0-9_-]+)$#', $_GET['template'])) {
+		if (!preg_match('#^([a-z0-9_-]+)$#i', $_GET['template'])) {
 			echo _('Nom du template invalide');
 			exit();
 		}
@@ -59,7 +59,7 @@ if (isset($_GET['project'])) {
 		}
 	}
 	if (isset($_GET['language'])) {
-		if (!preg_match('#^([a-z0-9_-]+)$#', $_GET['language'])) {
+		if (!preg_match('#^([a-z0-9_-]+)$#i', $_GET['language'])) {
 			echo _('Nom de la langue invalide');
 			exit();
 		}
@@ -72,7 +72,7 @@ if (isset($_GET['project'])) {
 		}
 		
 		if (isset($_GET['file'])) {
-			if (!preg_match('#^([a-z0-9_-]+)$#', $_GET['file'])) {
+			if (!preg_match('#^([a-z0-9_-]+)$#i', $_GET['file'])) {
 				echo _('Nom du fichier invalide');
 				exit();
 			}
