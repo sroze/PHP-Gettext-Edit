@@ -12,7 +12,7 @@ if (!isset($language)) {
 		<div class="link right">
 			<a class="delete" href="index.php?page=language-delete&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo _('Supprimer'); ?></a>
 		</div>
-		<h1><?php echo $project->get('project_name'); ?> &raquo; <?php echo $language->getName(); ?></h1>
+		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo $language->getName(); ?></h1>
 		<ul>
 			<li>Créer un nouveau fichier .po</li>
 			<li>Compiler tous les fichiers</li>

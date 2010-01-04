@@ -13,7 +13,7 @@ if (!isset($template)) {
 			<a class="delete" href="index.php?page=template-delete&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>"><?php echo _('Supprimer'); ?></a>
 			<a class="edit" href="index.php?page=template-edit&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>"><?php echo _('Editer'); ?></a>
 		</div>
-		<h1><?php echo $project->get('project_name'); ?> &raquo; Template <code><?php echo $template->getName(); ?></code></h1>
+		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; Template <code><?php echo $template->getName(); ?></code></h1>
 		<ul>
 			<li>Regénérer le template</li>
 			<li>Modifier le template</li>
