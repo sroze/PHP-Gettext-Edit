@@ -54,10 +54,15 @@ class Language_Str
 	 */
 	public static function get ($language_code)
 	{
-		$language_code = strtolower($language_code);
+		$language_code_cleaned = $language_code;
 		
-		if (array_key_exists($language_code, self::$languages_strings)) {
-			return self::$languages_strings[$language_code];
+		if (strlen($language_code_cleaned) > 2) {
+			$language_code_cleaned = substr($language_code_cleaned, -2);
+		}
+		$language_code_cleaned = strtolower($language_code_cleaned);
+		
+		if (array_key_exists($language_code_cleaned, self::$languages_strings)) {
+			return self::$languages_strings[$language_code_cleaned];
 		} else {
 			return $language_code;
 		}
