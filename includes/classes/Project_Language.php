@@ -94,7 +94,6 @@ class Project_Language
 			}
 		} else {
 			$msginit = shell_exec('msginit -i "'.$template.'" -o "'.$file_path.'"');
-			var_dump($msginit, 'msginit -i "'.$template.'" -o "'.$file_path.'"');
 		}
 		
 		return new Project_Language_File($this, $name);
