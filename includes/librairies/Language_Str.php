@@ -2,7 +2,7 @@
 class Language_Str
 {
 	// http://www.loc.gov/standards/iso639-2/php/code_list.php
-	private $languages_strings = array(
+	static $languages_strings = array(
 		'aa' => 'Afar', 'ab' => 'Abkhazian', 'af' => 'Afrikaans', 'ak' => 'Akan', 'sq' => 'Albanian', 
 		'am' => 'Amharic', 'ar' => 'Arabic', 'an' => 'Aragonese', 'hy' => 'Armenian', 'as' => 'Assamese', 
 		'av' => 'Avaric', 'ae' => 'Avestan', 'ay' => 'Aymara', 'az' => 'Azerbaijani', 'ba' => 'Bashkir', 
