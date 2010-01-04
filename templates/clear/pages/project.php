@@ -6,8 +6,9 @@
 	<div id="contents" class="with_sidebar">
 		<h1><?php echo $project->get('project_name'); ?></h1>
 		
-		<div class="box little"><h3>Templates</h3>
-		<div class="right_link"><a href="index.php?page=new-template&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Créer un nouveau template'); ?></a></div>
+		<div class="box little right">
+		<div class="link right add"><a href="index.php?page=new-template&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
+		<h3>Templates</h3>
 		<?php 
 		$templates = $project->getTemplates();
 		if (empty($templates)) {
@@ -21,8 +22,9 @@
 		}
 		?>
 		</div>
-		<div class="box little"><h3>Langues</h3>
-		<div class="right_link"><a href="index.php?page=new-language&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Créer un nouvelle langue'); ?></a></div>
+		<div class="box little right">
+		<div class="link right add"><a href="index.php?page=new-language&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
+		<h3>Langues</h3>
 		<?php 
 		$languages = $project->getLanguages();
 		if (empty($languages)) {
