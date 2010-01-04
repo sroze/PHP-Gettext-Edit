@@ -70,6 +70,7 @@ class Project
 		$result = array();
 	    /* Ceci est la façon correcte de traverser un dossier. */
 	    while (false !== ($file = readdir($directory))) {
+	    	var_dump($file);
 	        if (substr($file, 0, 1) != '.' && is_dir($directory_path.$file)) {
 	        	$result[] = $file;
 	        }
@@ -91,6 +92,7 @@ class Project
 		$result = array();
 	    /* Ceci est la façon correcte de traverser un dossier. */
 	    while (false !== ($file = readdir($directory))) {
+	    	var_dump($file);
 	        if (is_file($directory_path.$file) && substr($file, -4) == '.pot') {
 	        	$result[] = substr($file, 0, -4);
 	        }
