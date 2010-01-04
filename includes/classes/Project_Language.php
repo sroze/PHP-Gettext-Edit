@@ -31,6 +31,72 @@ class Project_Language
 	}
 	
 	/**
+	 * Create a language.
+	 * 
+	 * @param Project $project
+	 * @param string $code
+	 * 
+	 * @return Project_Language
+	 */
+	static function create ($project, $code)
+	{
+		if (!mkdir($project->get('project_path').$project->get('project_languages_path').$code.'/')) {
+			throw new Project_Language_Exception(
+				_('Impossible de créer le dossier')
+			);
+		} 
+		
+		return new Project_Language($project, $code);
+	}
+	
+	/**
+	 * Create a new .po file for this language. (from a template, or not)
+	 * 
+	 * @param string $name
+	 * @param string $template
+	 * 
+	 * @return Project_Language_File
+	 */
+	public function createFile ($name, $template = null)
+	{
+		$file_path = $this->directory_path.$name;
+		
+		if (is_file($file_path)) {
+			throw new Project_Language_Exception(
+				_('Le fichier existe déjà')
+			);
+		}
+		
+		if ($template == null) {
+			$template = '';
+		} else if (is_string($template)) {
+			$template = new Project_Template($this->project, $template);
+			$template = $template->template_file;
+		} else if (is_object($template)) {
+			if (get_class($template) == 'Project_Template') {
+				$template = $template->template_file;
+			} else {
+				throw new Project_Language_Exception(
+					_('Type de template inconnu')
+				);
+			}
+		}
+		
+		if (empty($template)) {
+			if (!file_puts_contents($file_path, '')) {
+				throw new Project_Language_Exception(
+					_('Impossible d\'écrire le fichier vide')
+				);
+			}
+		} else {
+			$msginit = exec('msginit -i "'.$template.'" -o "'.$file_path.'"');
+			var_dump($msginit);
+		}
+		
+		return new Project_Language_File($this, $name);
+	}
+	
+	/**
 	 * Check if the language directory exists.
 	 * 
 	 * @return bool
@@ -74,6 +140,13 @@ class Project_Language
 		return $this->getFilesInDirectory('');
 	}
 	
+	/**
+	 * Search .po files from directory and its sub-directories.
+	 * 
+	 * @param string $directory_name
+	 * 
+	 * @return array
+	 */
 	private function getFilesInDirectory ($directory_name)
 	{
 		$directory = opendir($this->directory_path.$directory_name);
@@ -97,4 +170,6 @@ class Project_Language
 	    return $result;
 	}
 }
+
+class Project_Language_Exception extends Exception {}
 ?>

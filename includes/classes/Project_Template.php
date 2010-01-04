@@ -10,7 +10,7 @@ class Project_Template
 	
 	// Variables simples
 	private $name;
-	private $template_file;
+	public $template_file;
 	
 	/**
 	 * Constructeur.
@@ -50,6 +50,16 @@ class Project_Template
 		} else {
 			return true;
 		}
+	}
+	
+	/**
+	 * Get contents of the template file.
+	 * 
+	 * @return string
+	 */
+	public function getContents ()
+	{
+		return file_get_contents($this->template_file);
 	}
 }
 ?>
