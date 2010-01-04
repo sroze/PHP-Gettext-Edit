@@ -13,11 +13,6 @@ if (!isset($language)) {
 			<a class="delete" href="index.php?page=language-delete&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo _('Supprimer'); ?></a>
 		</div>
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo $language->getName(); ?></h1>
-		<ul>
-			<li>Créer un nouveau fichier .po</li>
-			<li>Compiler tous les fichiers</li>
-			<li>Mettre à jour les fichiers depuis leur template</li>
-		</ul>
 		<div class="box little right">
 		<h3>Fichiers .po</h3>
 		<?php 
@@ -32,6 +27,12 @@ if (!isset($language)) {
 			echo '<p>Aucun fichier .po n\'est créé</p>';
 		}
 		?>
+		<ul>
+			<li>Créer un nouveau fichier .po</li>
+			<li>Compiler tous les fichiers</li>
+			<li>Mettre à jour les fichiers depuis leur template</li>
+		</ul>
 		</div>
+		<div class="clear" />
 	</div>
 </div>

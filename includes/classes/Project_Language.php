@@ -71,13 +71,26 @@ class Project_Language
 	 */
 	public function getFiles ()
 	{
-		$directory = opendir($this->directory_path);
+		return $this->getFilesInDirectory('');
+	}
+	
+	private function getFilesInDirectory ($directory_name)
+	{
+		$directory = opendir($this->directory_path.$directory_name);
 	
 		$result = array();
 	    /* Ceci est la façon correcte de traverser un dossier. */
 	    while (false !== ($file = readdir($directory))) {
 	        if (is_file($this->directory_path.$file) && substr($file, -3) == '.po') {
-	        	$result[] = substr($file, 0, -3);
+	        	$result[] = str_replace(
+				        		'/',
+				        		'@',
+				        		$directory_name.substr($file, 0, -3)
+				        	);
+	        } else if (is_dir($this->directory_path.$file)) {
+	        	foreach ($this->getFilesInDirectory($directory_name.'/'.$file) as $file2) {
+	        		$result[] = $file2;
+	        	}
 	        }
 	    }
 	    
