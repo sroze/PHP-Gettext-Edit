@@ -20,6 +20,7 @@ if (!isset($project)) {
 				try {
 					$language = Project_Language::create($project, $_POST['code']);
 					
+					var_dump($_POST['templates']);
 					if (!empty($_POST['templates'])) {
 						foreach ($_POST['templates'] as $template) {
 							$language->createFile($template, $template);
