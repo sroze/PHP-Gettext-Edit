@@ -11,7 +11,7 @@
 		<h3>Templates</h3>
 		<?php 
 		$templates = $project->getTemplates();
-		if (empty($templates)) {
+		if (!empty($templates)) {
 			echo '<ul>';
 			foreach ($templates as $template) {
 				echo '<li>'.$template.'</li>';
@@ -27,7 +27,7 @@
 		<h3>Langues</h3>
 		<?php 
 		$languages = $project->getLanguages();
-		if (empty($languages)) {
+		if (!empty($languages)) {
 			echo '<ul>';
 			foreach ($languages as $lang) {
 				echo '<li>'.$lang.'</li>';
@@ -39,4 +39,5 @@
 		?>
 		</div>
 	</div>
+	<div class="clear" />
 </div>

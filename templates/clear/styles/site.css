@@ -107,6 +107,9 @@ div.link.add {
 	padding-left: 16px;
 	background: url(../images/icons/bullet_add.png) no-repeat;
 }
+div.clear {
+	clear: both;
+}
 /* Footer */
 div#footer {
 	color: #888;
