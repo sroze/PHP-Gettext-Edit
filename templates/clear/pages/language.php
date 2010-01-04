@@ -27,12 +27,12 @@ if (!isset($language)) {
 			echo '<p>Aucun fichier .po n\'est créé</p>';
 		}
 		?>
+		</div>
 		<ul>
 			<li>Créer un nouveau fichier .po</li>
 			<li>Compiler tous les fichiers</li>
 			<li>Mettre à jour les fichiers depuis leur template</li>
 		</ul>
-		</div>
 		<div class="clear" />
 	</div>
 </div>
