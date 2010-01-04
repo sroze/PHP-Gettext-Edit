@@ -40,7 +40,11 @@ class Project_Language
 	 */
 	static function create ($project, $code)
 	{
-		if (!mkdir($project->get('project_path').$project->get('project_languages_path').$code.'/')) {
+		if (is_dir($project->get('project_path').$project->get('project_languages_path').$code.'/')) {
+			throw new Project_Language_Exception(
+				sprintf(_('La langue %s existe déjà'), $code)
+			);
+		} else if (!mkdir($project->get('project_path').$project->get('project_languages_path').$code.'/')) {
 			throw new Project_Language_Exception(
 				_('Impossible de créer le dossier')
 			);
@@ -89,7 +93,7 @@ class Project_Language
 				);
 			}
 		} else {
-			$msginit = exec('msginit -i "'.$template.'" -o "'.$file_path.'"');
+			$msginit = shell_exec('msginit -i "'.$template.'" -o "'.$file_path.'"');
 			var_dump($msginit, 'msginit -i "'.$template.'" -o "'.$file_path.'"');
 		}
 		
