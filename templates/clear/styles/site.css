@@ -103,9 +103,17 @@ div.box p {
 div.link.right {
 	float: right;
 }
-div.link.add {
+div.link a.add {
 	padding-left: 16px;
 	background: url(../images/icons/bullet_add.png) no-repeat;
+}
+div.link a.edit {
+	padding-left: 16px;
+	background: url(../images/icons/bullet_orange.png) no-repeat;
+}
+div.link a.delete {
+	padding-left: 16px;
+	background: url(../images/icons/bullet_delete.png) no-repeat;
 }
 div.clear {
 	clear: both;

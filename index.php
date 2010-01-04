@@ -44,6 +44,47 @@ if (isset($_GET['project'])) {
 		echo $e->getMessage();
 		exit();
 	}
+	
+	if (isset($_GET['template'])) {
+		if (!preg_match('#^([a-z0-9_-]+)$#', $_GET['template'])) {
+			echo _('Nom du template invalide');
+			exit();
+		}
+		
+		$template = new Project_Template($project, $_GET['template']);
+		
+		if (!$template->check()) {
+			echo _('Template inconnu');
+			exit();
+		}
+	}
+	if (isset($_GET['language'])) {
+		if (!preg_match('#^([a-z0-9_-]+)$#', $_GET['language'])) {
+			echo _('Nom de la langue invalide');
+			exit();
+		}
+		
+		$language = new Project_Language($project, $_GET['language']);
+		
+		if (!$language->check()) {
+			echo _('Langue inconnue');
+			exit();
+		}
+		
+		if (isset($_GET['file'])) {
+			if (!preg_match('#^([a-z0-9_-]+)$#', $_GET['file'])) {
+				echo _('Nom du fichier invalide');
+				exit();
+			}
+			
+			$language_file = new Project_Language_File($language, $_GET['file']);
+			
+			if (!$language_file->check()) {
+				echo sprintf(_('Fichier %s inconnu dans la langue %s'), $_GET['file'], $language->getCode());
+				exit();
+			}
+		}
+	}
 }
 
 // Includes the header

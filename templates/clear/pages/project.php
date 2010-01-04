@@ -1,4 +1,9 @@
-<div id="page">
+<?php
+if (!isset($project)) {
+	echo 'Paramètres URL insuffisants';
+	exit();
+}
+?><div id="page">
 	<div id="sidebar">
 		<h3><?php echo _('Statistiques'); ?></h3>
 		<p>À venir</p>
@@ -7,14 +12,14 @@
 		<h1><?php echo $project->get('project_name'); ?></h1>
 		
 		<div class="box little right">
-		<div class="link right add"><a href="index.php?page=new-template&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
+		<div class="link right"><a class="add" href="index.php?page=new-template&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
 		<h3>Templates</h3>
 		<?php 
 		$templates = $project->getTemplates();
 		if (!empty($templates)) {
 			echo '<ul>';
 			foreach ($templates as $template) {
-				echo '<li>'.$template.'</li>';
+				echo '<li><a href="index.php?page=template&project='.$project->get('project_id').'&template='.$template.'">'.$template.'</a></li>';
 			}
 			echo '</ul>';
 		} else {
@@ -30,7 +35,8 @@
 		if (!empty($languages)) {
 			echo '<ul>';
 			foreach ($languages as $lang) {
-				echo '<li>'.$lang.'</li>';
+				$language = new Project_Language($project, $lang);
+				echo '<li><a href="index.php?page=language&project='.$project->get('project_id').'&language='.$language->getCode().'">'.$language->getName().'</li>';
 			}
 			echo '</ul>';
 		} else {
