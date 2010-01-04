@@ -12,7 +12,7 @@ class Language_Str
 		'zh' => 'Chinese', 'cu' => 'Church Slavic', 'cv' => 'Chuvash', 'kw' => 'Cornish', 'co' => 'Corsican', 
 		'cr' => 'Cree', 'cy' => 'Welsh', 'cs' => 'Czech', 'da' => 'Danish', 'de' => 'German', 
 		'dv' => 'Divehi; Dhivehi; Maldivian', 'nl' => 'Dutch; Flemish', 'dz' => 'Dzongkha', 'el' => 'Greek, Modern (1453-)', 'en' => 'English', 
-		'eo' => 'Esperanto', 'et' => 'Estonian', 'eu' => 'Basque', 'ee' => 'Ewe', 'fo' => 'Faroese', 
+		'eo' => 'Esperanto', 'et' => 'Estonian', 'eu' => 'Basque', 'ee' => 'Ewe', 'fo' => 'Faroese',
 		'fa' => 'Persian', 'fj' => 'Fijian', 'fi' => 'Finnish', 'fr' => 'French', 'fr' => 'French', 
 		'fy' => 'Western Frisian', 'ff' => 'Fulah', 'ka' => 'Georgian', 'de' => 'German', 'gd' => 'Gaelic; Scottish Gaelic', 
 		'ga' => 'Irish', 'gl' => 'Galician', 'gv' => 'Manx', 'el' => 'Greek, Modern (1453-)', 'gn' => 'Guarani', 
@@ -63,6 +63,8 @@ class Language_Str
 		
 		if (array_key_exists($language_code_cleaned, self::$languages_strings)) {
 			return self::$languages_strings[$language_code_cleaned];
+		} else if (array_key_exists(strtolower(substr($language_code, 0, 2)), self::$languages_strings)) {
+			return self::$languages_strings[strtolower(substr($language_code, 0, 2))];
 		} else {
 			return $language_code;
 		}
