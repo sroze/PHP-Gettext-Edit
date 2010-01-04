@@ -17,13 +17,13 @@ if (!isset($project)) {
 					_('Le code contient des caractères invalides').
 					'</div>';
 			} else {
-				$templates = $_POST['templates'];
-				
 				try {
 					$language = Project_Language::create($project, $_POST['code']);
 					
-					foreach ($templates as $template) {
-						$language->createFile($template, $template);
+					if (!empty($_POST['templates'])) {
+						foreach ($_POST['templates'] as $template) {
+							$language->createFile($template, $template);
+						}
 					}
 				} catch (Exception $e) {
 					echo '<div class="form_error">'.
