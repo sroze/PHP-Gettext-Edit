@@ -9,7 +9,7 @@ if (!isset($project)) {
 		<p>À venir</p>
 	</div>
 	<div id="contents" class="with_sidebar">
-		<h1><?php echo $project->get('project_name'); ?> &raquo; Nouvelle langue</h1>
+		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; Nouvelle langue</h1>
 		<?php
 		if (isset($_POST['code'])) {
 			if (!preg_match('#^([a-z0-9_-]+)$#i', $_POST['code'])) {
