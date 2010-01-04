@@ -25,6 +25,11 @@ if (!isset($project)) {
 							$language->createFile($template, $template);
 						}
 					}
+					
+					echo '<div class="form_success">'.
+						_('Langue créé').
+						'</div>'; 
+					empty($_POST);
 				} catch (Exception $e) {
 					echo '<div class="form_error">'.
 						$e->getMessage().
@@ -34,7 +39,9 @@ if (!isset($project)) {
 		}
 		?>
 		<form method="POST" action="">
-			<p><label>Code</label><input type="text" size="30" name="code" /><br />
+			<p><label>Code</label><input type="text" size="30" name="code"<?php
+			if (!empty($_POST['code'])) { echo ' value="'.$_POST['code'].'"'; }
+			?> /><br />
 				<em>Séquence de deux lettres, puis un underscore (_), puis à nouveau deux lettres. Exemple: en_US (Anglais)</em>
 			</p>
 			<?php
@@ -44,7 +51,8 @@ if (!isset($project)) {
 				<label>Créer les .po définis par les templates</label>
 				<?php
 				foreach ($templates as $template) {
-					echo '<input type="checkbox" name="templates[]" value="'.$template.'" /> '.$template.'<br />';
+					$checked = (isset($_POST['templates'], $_POST['templates'][$template])) ? ' checked="checked"' : '';
+					echo '<input type="checkbox" name="templates[]" value="'.$template.'"'.$checked.' /> '.$template.'<br />';
 				}
 				?>
 			</p><?php
