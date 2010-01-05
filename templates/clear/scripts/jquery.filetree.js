@@ -54,7 +54,7 @@ if(jQuery) (function($){
 					$(".jqueryFileTree.start").remove();
 					$.post(o.script, {dir: t, project: o.project}, function(data) {
 						$(c).find('.start').html('');
-						$(c)..append(data).find('a').removeClass('wait');
+						$(c).append(data);
 						if( o.root == t ) {
 							$(c).find('UL:hidden').show(); 
 						} else {
