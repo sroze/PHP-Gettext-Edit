@@ -6,7 +6,7 @@ require_once ROOT_PATH.'includes/classes/Project.php';
 
 $_POST['dir'] = urldecode($_POST['dir']);
 $project = new Project((int) $_POST['project']);
-$root = $project->get('project_path').$project->get('project_languages_path');
+$root = $project->get('project_path');
 
 if( file_exists($root . $_POST['dir']) ) {
 	$files = scandir($root . $_POST['dir']);
