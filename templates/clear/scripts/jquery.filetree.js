@@ -91,6 +91,7 @@ if(jQuery) (function($){
 									$(this).attr('checked', false);
 								} else {
 									$(this).attr('checked', true);
+								}
 							});
 						}
 						return false;
