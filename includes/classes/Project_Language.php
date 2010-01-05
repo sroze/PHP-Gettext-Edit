@@ -87,14 +87,14 @@ class Project_Language
 			}
 		}
 		
-		if (empty($template)) {
-			if (!file_puts_contents($file_path, '')) {
-				throw new Project_Language_Exception(
-					_('Impossible d\'écrire le fichier vide')
-				);
-			}
-		} else {
-			$msginit = shell_exec('msginit -i "'.$template.'" -o "'.$file_path.'"');
+		if (!file_puts_contents($file_path, '')) {
+			throw new Project_Language_Exception(
+				sprintf(_('Impossible d\'écrire le fichier: %s'), $file_path)
+			);
+		}
+		
+		if (!empty($template)) {
+			exec('msginit --input="'.$template.'" --output-file="'.$file_path.'"');
 		}
 		
 		return new Project_Language_File($this, $name);
