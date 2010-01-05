@@ -1,5 +1,6 @@
 <?php
 require_once ROOT_PATH.'includes/librairies/Language_Str.php';
+require_once ROOT_PATH.'includes/librairies/File.php';
 
 class Project_Language
 {
@@ -97,6 +98,22 @@ class Project_Language
 		}
 		
 		return new Project_Language_File($this, $name);
+	}
+	
+	/**
+	 * Delete the language (unreparable)
+	 * 
+	 * @return bool
+	 */
+	public function delete ()
+	{
+		if (!File::rm($this->directory_path)) {
+			throw new Project_Language_Exception(
+				_('Unable to delete the language directory')
+			);
+		}
+		
+		return true;
 	}
 	
 	/**
