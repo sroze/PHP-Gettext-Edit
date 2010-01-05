@@ -1,8 +1,8 @@
 <?php
 abstract class Project_File
 {
-	abstract protected private $file_path;
-	abstract protected public function __construct();
+	abstract private $file_path;
+	abstract public function __construct();
 
 	/**
 	 * Check if the file exists.
