@@ -11,13 +11,13 @@ if (!isset($language)) {
 			try {
 				$language->delete();
 				
-				echo '<div class="box large success">'.
-					_('Langue supprimée').' - <a href="index.php?page=project&project='.$project->get('project_id').'">'._('Retour').'</a>'.
-					'</div>';
+				echo '<div class="box large success"><p>'.
+					_('Langue supprimée').'</p><p><a href="index.php?page=project&project='.$project->get('project_id').'">'._('Retour').'</a>'.
+					'</p></div>';
 			} catch (Exception $e) {
-				echo '<div class="box large error">'.
+				echo '<div class="box large error"><p>'.
 					$e->getMessage().
-					'</div>';
+					'</p></div>';
 			}
 		} else {
 		?>
@@ -27,7 +27,7 @@ if (!isset($language)) {
 					echo _('Êtes-vous sûr de vouloir supprimer cette langue ?').' '.
 						_('Cette opération supprimera toutes les données associées de manière irréverssible');
 				?>
-			<p>
+			<p align="center">
 				<form action="" method="POST">
 					<label><input type="checkbox" name="sure" value="yes" /> Oui</label><br />
 					<label><input type="submit" value="Supprimer" /></label>
