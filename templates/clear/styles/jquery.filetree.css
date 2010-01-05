@@ -13,7 +13,9 @@ UL.jqueryFileTree LI {
 	margin: 0px;
 	white-space: nowrap;
 }
-
+UL.jqueryFileTree li.head {
+	padding: 0 !important;
+}
 UL.jqueryFileTree A {
 	color: #333;
 	text-decoration: none;

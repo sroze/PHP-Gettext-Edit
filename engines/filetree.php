@@ -13,6 +13,10 @@ if( file_exists($root . $_POST['dir']) ) {
 	natcasesort($files);
 	echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
 	
+	if ($_POST['dir'] == '/') {
+		echo "<li class=\"head\"><input type=\"checkbox\" name=\"scan_files[]\" value=\"/\" /><a href=\"#\" rel=\"/\" class=\"directory collapsed\">".$root."</a></li>";
+	}
+	
 	if( count($files) > 2 ) { /* The 2 accounts for . and .. */
 		// All dirs
 		foreach( $files as $file ) {
