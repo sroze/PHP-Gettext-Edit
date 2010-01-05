@@ -1,5 +1,5 @@
 <?php
-class Project_Template
+class Project_Template extends Project_File
 {
 	/**
 	 * Contient l'instance décrivant le projet.
@@ -10,7 +10,7 @@ class Project_Template
 	
 	// Variables simples
 	private $name;
-	public $template_file;
+	private $file_path;
 	
 	/**
 	 * Constructeur.
@@ -25,7 +25,7 @@ class Project_Template
 		$this->project = $project;
 		$this->name = $name;
 		
-		$this->template_file = $this->project->get('project_path').$this->project->get('project_languages_path').$this->name.'.pot';
+		$this->file_path = $this->project->get('project_path').$this->project->get('project_languages_path').$this->name.'.pot';
 	}
 	
 	/**
@@ -36,30 +36,6 @@ class Project_Template
 	public function getName ()
 	{
 		return $this->name;
-	}
-	
-	/**
-	 * Check if the template exists.
-	 * 
-	 * @return bool
-	 */
-	public function check ()
-	{
-		if (!is_file($this->template_file)) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	/**
-	 * Get contents of the template file.
-	 * 
-	 * @return string
-	 */
-	public function getContents ()
-	{
-		return file_get_contents($this->template_file);
 	}
 }
 ?>

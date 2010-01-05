@@ -76,10 +76,10 @@ class Project_Language
 			$template = '';
 		} else if (is_string($template)) {
 			$template = new Project_Template($this->project, $template);
-			$template = $template->template_file;
+			$template = $template->getFilePath();
 		} else if (is_object($template)) {
 			if (get_class($template) == 'Project_Template') {
-				$template = $template->template_file;
+				$template = $template->getFilePath();
 			} else {
 				throw new Project_Language_Exception(
 					_('Type de template inconnu')
