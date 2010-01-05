@@ -4,6 +4,8 @@ class Project_Language_File
 	private $language;
 	private $name;
 	
+	private $file_path;
+	
 	/**
 	 * Constructeur.
 	 * 
@@ -16,6 +18,8 @@ class Project_Language_File
 	{
 		$this->language = $language;
 		$this->name = $name;
+		
+		$this->file_path = $this->language->directory_path.$this->name.'.po';
 	}
 	
 	/**
@@ -25,7 +29,7 @@ class Project_Language_File
 	 */
 	public function check ()
 	{
-		if (!is_file($this->language->directory_path.$name.'.po')) {
+		if (!is_file()) {
 			return false;
 		} else {
 			return true;
@@ -40,6 +44,22 @@ class Project_Language_File
 	public function getName ()
 	{
 		return $this->name;
+	}
+	
+	/**
+	 * Get contents of file.
+	 * 
+	 * @return string
+	 */
+	public function getContents ()
+	{
+		if (!$this->check) {
+			throw new Project_Language_File_Exception(
+				_('Invalid file')
+			);
+		}
+		
+		return file_get_contents($this->file_path);
 	}
 	
 	/**
@@ -66,7 +86,27 @@ class Project_Language_File
 	}
 	
 	/**
+	 * Change the headers.
+	 * 
+	 * @param array $headers Array with keys, ie like
+	 * 
+	 * @return bool
+	 */
+	public function setHeaders ($headers)
+	{
+		$result = array();
+		
+		foreach ($headers as $header => $content) {
+			$result[] = $header.':'.$content;
+		}
+		
+		return $this->setHeaderBrut($result);
+	}
+	
+	/**
 	 * Result the header lines which are in the file.
+	 * 	[Content-Type] => '...',
+	 * 	...
 	 * 
 	 * @return array
 	 */
@@ -74,6 +114,8 @@ class Project_Language_File
 	{
 		$result = array();
 		$position = 0;
+		
+		$file_contents = $this->getContents();
 		
 		while (false !== ($position = strpos($file_contents, 'msgid', $position))) {
 			$futur_msgid = strpos($file_contents, 'msgid', $position+1);
@@ -98,7 +140,7 @@ class Project_Language_File
 					if ($file_contents[$bracket_position-1] != '\\') {
 						$string = trim($string);
 						if ($string != '"' AND !empty($string)) {
-							$result[] = $string;
+							$result[] = str_replace('\\"', '"', $string);
 						}
 						$string = '';
 					}
@@ -114,5 +156,59 @@ class Project_Language_File
 		
 		return $result;
 	}
+	
+	/**
+	 * Set .po file headers.
+	 * 
+	 * @param array $headers Array with headers strings. (no keys)
+	 * @return bool
+	 */
+	private function setHeaderBrut ($headers)
+	{
+		$result = 'msgid ""'."\n".'msgstr ""'."\n";
+		foreach ($headers as $header) {
+			if (substr($header, -2) != '\n') { // Important: '\n' et pas "\n"
+				$header .= '\n';
+			}
+			
+			$result .= '"'.str_replace('"', '\\"', $header).'"'."\n";
+		}
+		
+		$file_contents = $this->getContents();
+		
+		$position = 0;
+		while (false !== ($position = strpos($file_contents, 'msgid', $position))) {
+			$first_crochet = strpos($file_contents, '"', $position);
+			
+			if ($file_contents[$first_crochet+1] == '"') { // On a notre "header"
+				// On va chercher le prochain msgid
+				$futur_msgid = strpos($file_contents, 'msgid', $position+1);		
+				// On va prendre le bout entre les deux
+				$part = trim(substr($file_contents, $position, $futur_msgid-$position));
+				
+				break;
+			}
+			$position++;
+		}
+		
+		$puts = file_put_contents(
+			$this->file_path,
+			str_replace(
+				$part,
+				$result,
+				$file_contents
+			)
+		);
+		
+		if (!$puts) {
+			throw new Project_Language_File_Exception(
+				_('Impossible d\'écrire le nouveau fichier')
+			);
+		} else {
+			return true;
+		}
+	}
 }
+
+class Project_Language_File_Exception extends Exception {}
 ?>
