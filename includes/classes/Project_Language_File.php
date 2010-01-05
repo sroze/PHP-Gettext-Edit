@@ -6,8 +6,6 @@ class Project_Language_File extends Project_File
 	private $language;
 	private $name;
 	
-	private $file_path;
-	
 	/**
 	 * Constructeur.
 	 * 

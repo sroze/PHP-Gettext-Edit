@@ -11,6 +11,7 @@ abstract class Project_File
 	 */
 	public function check ()
 	{
+		var_dump($this->file_path);
 		if (!is_file($this->file_path)) {
 			return false;
 		} else {

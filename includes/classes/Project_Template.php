@@ -12,7 +12,6 @@ class Project_Template extends Project_File
 	
 	// Variables simples
 	private $name;
-	private $file_path;
 	
 	/**
 	 * Constructeur.
