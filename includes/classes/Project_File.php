@@ -1,7 +1,7 @@
 <?php
 abstract class Project_File
 {
-	abstract private $file_path;
+	private $file_path;
 	abstract public function __construct();
 
 	/**
