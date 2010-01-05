@@ -70,7 +70,7 @@ if(jQuery) (function($){
 									$(this).parent().find('a.directory').removeClass('expanded').addClass('collapsed');
 								}
 								$(this).parent().find('UL').remove(); // cleanup
-								showTree( $(this), escape($(this).attr('rel').match( /.*\// )) );
+								showTree( $(this).parent(), escape($(this).attr('rel').match( /.*\// )) );
 								$(this).removeClass('collapsed').addClass('expanded');
 							} else {
 								// Collapse
