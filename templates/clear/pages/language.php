@@ -29,9 +29,15 @@ if (!isset($language)) {
 		?>
 		</div>
 		<ul>
-			<li>Créer un nouveau fichier .po</li>
-			<li>Compiler tous les fichiers</li>
-			<li>Mettre à jour les fichiers depuis leur template</li>
+			<li><a href="index.php?page=language-new-po-file&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
+				Créer un nouveau fichier .po
+			</a></li>
+			<li><a href="index.php?page=language-compile-files&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
+				Compiler tous les fichiers
+			</a></li>
+			<li><a href="index.php?page=language-update-files&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
+				Mettre à jour les fichiers depuis leur template
+			</a></li>
 		</ul>
 		<div class="clear" />
 	</div>

@@ -12,5 +12,7 @@ function templateTypeChange (select_object)
 	
 	if (which == '@other@') {
 		$('div#other_type').slideDown();
+	} else {
+		$('div#other_type').slideUp();
 	}
 }

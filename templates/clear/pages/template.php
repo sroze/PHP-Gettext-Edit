@@ -15,8 +15,12 @@ if (!isset($template)) {
 		</div>
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; Template <code><?php echo $template->getName(); ?></code></h1>
 		<ul>
-			<li>Regénérer le template</li>
-			<li>Modifier le template</li>
+			<li><a href="index.php?page=template-update&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">
+				Regénérer le template
+			</a></li>
+			<li><a href="index.php?page=template-edit&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">
+				Modifier le template
+			</a></li>
 		</ul>
 	</div>
 </div>

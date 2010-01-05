@@ -28,7 +28,7 @@ if (!isset($project)) {
 		?>
 		</div>
 		<div class="box little right">
-		<div class="link right add"><a href="index.php?page=language-new&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
+		<div class="link right"><a class="add" href="index.php?page=language-new&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
 		<h3>Langues</h3>
 		<?php 
 		$languages = $project->getLanguages();
