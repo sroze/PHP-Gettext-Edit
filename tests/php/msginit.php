@@ -1,6 +1,7 @@
 <?php
 define('ROOT_PATH', realpath(dirname(__FILE__)).'/');
 
-$exec = exec('msginit -i "'.ROOT_PATH.'file.pot" -o "'.ROOT_PATH.'file.po" --no-translator');
-var_dump($exec);
+$command = 'msginit --input="'.ROOT_PATH.'file.pot" --output="'.ROOT_PATH.'file.po" --locale=fr_FR --no-translator';
+$exec = exec($command);
+var_dump($command, $exec);
 ?>
