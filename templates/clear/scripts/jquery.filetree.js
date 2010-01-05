@@ -86,7 +86,7 @@ if(jQuery) (function($){
 								$(this).removeClass('expanded').addClass('collapsed');
 							}
 						} else {
-							// Nothing
+							$(this).parent().find('input').attr('checked', true);
 						}
 						return false;
 					});
