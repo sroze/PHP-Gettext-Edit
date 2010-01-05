@@ -72,8 +72,16 @@ if (!isset($project)) {
 					<input type="text" name="keywords" value="" /><br />
 					<em>En temps normal, les mots clés des chaines à traduire sont <code>gettext</code> ou <code>_</code>. S'il y en a d'autres, tapez-les ici, séparés par des virgules</em>
 				</p>
+				<p><label>Dossiers et fichiers à analyser</label>
+					<div class="form_p" id="tree_container"></div>
+				</p>
 			</fieldset>
 			<input type="submit" value="Créer" />
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready( function() {
+    $('#tree_container').fileTree(<?php echo $project->get('project_id'); ?>);
+});
+</script>
