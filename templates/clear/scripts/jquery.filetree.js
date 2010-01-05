@@ -73,8 +73,12 @@ if(jQuery) (function($){
 									$(this).parent().parent().find('UL').slideUp({ duration: o.collapseSpeed, easing: o.collapseEasing });
 									$(this).parent().find('a.directory').removeClass('expanded').addClass('collapsed');
 								}
-								$(this).parent().find('UL').remove(); // cleanup
-								showTree( $(this).parent(), escape($(this).attr('rel').match( /.*\// )) );
+								var uls = $(this).parent().find('UL');
+								if (uls.length > 0) {
+									uls.slideDown({ duration: o.expandSpeed, easing: o.expandEasing });
+								} else {
+									showTree( $(this).parent(), escape($(this).attr('rel').match( /.*\// )) );
+								}
 								$(this).removeClass('collapsed').addClass('expanded');
 							} else {
 								// Collapse
