@@ -14,7 +14,8 @@ if( file_exists($root . $_POST['dir']) ) {
 	echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
 	
 	if ($_POST['dir'] == '/') {
-		echo "<li class=\"head\"><input type=\"checkbox\" name=\"scan_files[]\" value=\"/\" /><a href=\"#\" rel=\"/\" class=\"directory collapsed\">".$root."</a></li>";
+		echo "<li class=\"head\"><input type=\"checkbox\" name=\"scan_files[]\" value=\"/\" /><a href=\"#\" rel=\"/\" class=\"directory collapsed\">".$root."</a>";
+		echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
 	}
 	
 	if( count($files) > 2 ) { /* The 2 accounts for . and .. */
@@ -33,6 +34,9 @@ if( file_exists($root . $_POST['dir']) ) {
 		}
 	} else {
 		echo '<li>Vide</li>';
+	}
+	if ($_POST['dir'] == '/') {
+		echo "</li></ul>";
 	}
 	
 	echo "</ul>";	
