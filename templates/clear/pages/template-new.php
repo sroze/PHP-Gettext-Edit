@@ -46,7 +46,7 @@ if (!isset($project)) {
 						<option disabled>------------</option>
 						<option value="@other@">Autre</option>
 					</select>
-					<div id="other_type" style="display: none;">
+					<div class="form_p" id="other_type" style="display: none;">
 						<input type="text" name="other_type" value="" />
 					</div>
 				</p>
