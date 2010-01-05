@@ -1,4 +1,6 @@
 <?php
+require_once ROOT_PATH.'includes/classes/Project_File.php';
+
 class Project_Template extends Project_File
 {
 	/**
