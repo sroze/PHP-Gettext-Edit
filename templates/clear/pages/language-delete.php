@@ -26,7 +26,7 @@ if (!isset($language)) {
 				<?php
 					echo _('Êtes-vous sûr de vouloir supprimer cette langue ?').' '.
 						_('Cette opération supprimera toutes les données associées de manière irréverssible');
-				?></div>
+				?>
 			<p>
 				<form action="" method="POST">
 					<label><input type="checkbox" name="sure" value="yes" /> Oui</label><br />
