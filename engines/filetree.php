@@ -14,7 +14,7 @@ if( file_exists($root . $_POST['dir']) ) {
 	echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
 	
 	if ($_POST['dir'] == '/') {
-		echo "<li class=\"head\"><input type=\"checkbox\" name=\"scan_files[]\" value=\"/\" /><a href=\"#\" rel=\"/\" class=\"directory expanded\">".$root."</a>";
+		echo "<li class=\"head\"><input type=\"checkbox\" name=\"scan_files[]\" value=\"/\" checked /><a href=\"#\" rel=\"/\" class=\"directory expanded\">".$root."</a>";
 		echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
 	}
 	
