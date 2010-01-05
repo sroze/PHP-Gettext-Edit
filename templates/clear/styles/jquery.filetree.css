@@ -26,6 +26,16 @@ UL.jqueryFileTree A {
 UL.jqueryFileTree A:hover {
 	background: #BDF;
 }
+div.tree {
+	border: 1px solid #ccc;
+	float: left;
+	height: 300px;
+	margin-left: 200px;
+	margin-top: -30px;
+	overflow: auto;
+	padding-left: 0;
+	width: 400px;
+}
 
 /* Core Styles */
 .jqueryFileTree li a.directory { background: url(../images/filetree/directory.png) left top no-repeat; }

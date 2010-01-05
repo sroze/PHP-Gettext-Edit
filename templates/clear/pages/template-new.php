@@ -73,7 +73,7 @@ if (!isset($project)) {
 					<em>En temps normal, les mots clés des chaines à traduire sont <code>gettext</code> ou <code>_</code>. S'il y en a d'autres, tapez-les ici, séparés par des virgules</em>
 				</p>
 				<p><label>Dossiers et fichiers à analyser</label>
-					<div class="form_p" id="tree_container"></div>
+					<div class="tree" id="tree_container"></div>
 				</p>
 			</fieldset>
 			<input type="submit" value="Créer" />
