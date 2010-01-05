@@ -50,11 +50,11 @@ if(jQuery) (function($){
 			$(this).each( function() {
 				
 				function showTree(c, t) {
-					$(c).addClass('wait');
+					$(c).find('a').addClass('wait');
 					$(".jqueryFileTree.start").remove();
 					$.post(o.script, {dir: t, project: o.project}, function(data) {
 						$(c).find('.start').html('');
-						$(c).removeClass('wait').append(data);
+						$(c)..append(data).find('a').removeClass('wait');
 						if( o.root == t ) {
 							$(c).find('UL:hidden').show(); 
 						} else {
