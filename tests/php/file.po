@@ -1,0 +1,12 @@
+
+
+msgid "test2"
+msgstr "translation2"
+
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Last-Translator: Samuel ROZE <samuel.roze@gmail.com>\n"
+
+msgid "test"
+msgstr "translation"
