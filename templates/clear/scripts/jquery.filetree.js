@@ -86,7 +86,12 @@ if(jQuery) (function($){
 								$(this).removeClass('expanded').addClass('collapsed');
 							}
 						} else {
-							$(this).parent().find('input').attr('checked', true);
+							$(this).parent().find('input').each(function () {
+								if ($(this).attr('checked')) {
+									$(this).attr('checked', false);
+								} else {
+									$(this).attr('checked', true);
+							});
 						}
 						return false;
 					});
