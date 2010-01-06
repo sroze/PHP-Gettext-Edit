@@ -32,6 +32,11 @@ $(document).ready(function() {
 			{display: 'Chaine d\'origine', name : 'msgid', isdefault: true},
 			{display: 'Traduction', name : 'msgstr'}
 		],
+		params:[
+			{name: 'project', value: '<?php echo $project->get('project_id'); ?>'},
+			{name: 'language', value: '<?php echo $language->getCode(); ?>'},
+			{name: 'file', value: '<?php echo $language_file->getName(); ?>'}
+		],
 		sortname: "msgid",
 		sortorder: "asc",
 		usepager: false,

@@ -12,3 +12,9 @@ msgstr ""
 #:file.php:12
 msgid "test"
 msgstr "translation"
+
+msgid "longue, très longue traduction"
+msgstr ""
+"Ça c'est du jamais vu!"
+"Parce que elle est très très longur"
+"voir plus..."
