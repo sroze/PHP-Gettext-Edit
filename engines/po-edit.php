@@ -11,6 +11,17 @@ $language = new Project_Language($project, $_POST['language']);
 $language_file = new Project_Language_File($language, $_POST['file']);
 
 $messages = $language_file->getMessages();
+$asc = ($_POST['sortorder'] == 'asc') ? true : false;
+
+switch ($_POST['sortname']) {
+	case 'msgid':
+		if ($asc) {
+			ksort($messages);
+		} else {
+			krsort($messages);
+		}
+		break;
+}
 
 // No expires
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" ); 
@@ -21,17 +32,19 @@ header("Content-type: text/x-json");
 
 echo '{total:'.count($messages).',rows:[';
 
-$i = 0;
+$fuzzies = '';
+$out = '';
 foreach ($messages as $msgid => $informations) {
-	if ($i > 0) {
-		echo ',';
-	}
-	echo '{id:'.$i.',cell:[';
-		echo ($informations['fuzzy'] ? '1' : '0').',\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\'';
-	echo ']}'."\n";
 	
-	$i++;
+	if ($informations['fuzzy']) {
+		if (!empty($fuzzies)) { echo ','; }
+		$fuzzies .= '{id:'.$i.',cell:[1,\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\']}'."\n";
+	} else {
+		if (!empty($out)) { echo ','; }
+		$out .= '{id:'.$i.',cell:[1,\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\']}'."\n";
+	}
 }
+echo $fuzzies, $out;
 
 echo ']}';
 

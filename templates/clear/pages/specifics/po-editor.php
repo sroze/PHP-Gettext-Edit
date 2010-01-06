@@ -16,7 +16,7 @@ $(document).ready(function() {
 		url: '<?php echo LOCAL_PATH; ?>engines/po-edit.php',
 		dataType: 'json',
 		colModel: [
-			{display: 'Fuzzy', name : 'fuzzy', width : 15, sortable : true, align: 'center'},
+			{display: 'Fuzzy', name : 'fuzzy', width : 15, sortable : false, align: 'center'},
 			{display: 'Chaine d\'origine', name : 'msgid', width : colWidth, sortable : true, align: 'left'},
 			{display: 'Traduction', name : 'msgstr', width : colWidth, sortable : true, align: 'left'}
 		],
