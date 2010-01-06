@@ -400,8 +400,10 @@
 				this.buildpager();
 
 				//build new body
-				//var tbody = document.createElement('tbody');
 				var tbody = $(t).find('tbody');
+				if (tbody.length <= 0) {
+					tbody = document.createElement('tbody');
+				}
 				
 				if (p.dataType=='json')
 				{
