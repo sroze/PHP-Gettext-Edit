@@ -77,6 +77,7 @@ class Project_Template extends Project_File
 	 * @param array   $keywords 		Additionnal keywords
 	 * @param array	  $search_files		What type of files we want to search, array like ('*.php', '*.js')
 	 * @param array   $files			Files and directories to scan (cleaned by File::cleanTree please)
+	 * @param string  $encoding			How files are encoded ?
 	 * @param bool    $delete_old		Delete, or not, entries that aren't still used
 	 * 
 	 * @return Project_Template
@@ -84,13 +85,42 @@ class Project_Template extends Project_File
 	static function create ($project, $name, $type, $language, $keywords = null, $search_files = array('*.php'), $files = null, $encoding = 'UTF-8', $delete_old = false)
 	{
 		$template = new Project_Template($project, $name);
-		$file_root = $project->get('project_path');
 		
 		if (file_put_contents($template->file_path, '') === false) {
 			throw new Project_Template_Exception(
 				sprintf(_('Impossible d\'écrire dans le nouveau fichier (%s)'), $template->file_path)
 			);
-		} else if (!in_array($language, self::$available_languages)) {
+		}
+		
+		$template->update();
+		$template->setType($type);
+		
+		if (!$template->check()) {
+			throw new Project_Template_Exception(
+				_('Une erreur inconnue est arrivée')
+			);
+		} else {
+			return $template;
+		}
+	}
+
+	/**
+	 * Re-génère le template
+	 * 
+	 * @param string  $language 		In what code, like PHP, C, C++...
+	 * @param array   $keywords 		Additionnal keywords
+	 * @param array	  $search_files		What type of files we want to search, array like ('*.php', '*.js')
+	 * @param array   $files			Files and directories to scan (cleaned by File::cleanTree please)
+	 * @param string  $encoding			How files are encoded ?
+	 * @param bool    $delete_old		Delete, or not, entries that aren't still used
+	 * 
+	 * @return void
+	 */
+	public function update ($language, $keywords = null, $search_files = array('*.php'), $files = null, $encoding = 'UTF-8', $delete_old = false)
+	{
+		$file_root = $this->project->get('project_path');
+		
+		if (!in_array($language, self::$available_languages)) {
 			throw new Project_Template_Exception(
 				_('Le language de programmation n\'est pas valide')
 			);
@@ -127,7 +157,7 @@ class Project_Template extends Project_File
 				'--sort-output '.
 				'--language="'.$language.'" '.
 				'--from-code="'.$encoding.'" '.
-				'--output="'.$template->file_path.'" ';
+				'--output="'.$this->file_path.'" ';
 		
 		if (substr($file_root, -1) == '/') {
 			$file_root = substr($file_root, 0, -1);
@@ -152,14 +182,20 @@ class Project_Template extends Project_File
 				_('Aucun fichier/dossier séléctionné')
 			);
 		}
+	}
+	
+	/**
+	 * Set the type of template.
+	 * 
+	 * @param string $type
+	 * @return bool
+	 */
+	public function setType ($type)
+	{
+		$headers = $this->getHeaders();
+		$headers['GetTextEdit-type'] = $type;
 		
-		if (!$template->check()) {
-			throw new Project_Template_Exception(
-				_('Une erreur inconnue est arrivée')
-			);
-		} else {
-			return $template;
-		}
+		return $this->setHeaders($headers);
 	}
 }
 
