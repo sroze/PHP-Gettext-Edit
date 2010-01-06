@@ -185,6 +185,7 @@ class Project_Language
 		$result = array();
 	    /* Ceci est la façon correcte de traverser un dossier. */
 	    while (false !== ($file = readdir($directory))) {
+	    	var_dump($file, $directory_path.$file);
 	        if (is_file($directory_path.$file) && substr($file, -3) == '.po') {
 	        	$result[] = str_replace(
 				        		'/',
