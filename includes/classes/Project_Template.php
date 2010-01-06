@@ -103,7 +103,7 @@ class Project_Template extends Project_File
 		$keywords_string = '';
 		if (!empty($keywords)) {
 			foreach ($keywords as $keyword) {
-				if (empty(trim($keyword))) {
+				if (trim($keyword) == '') {
 					continue;
 				}
 				$keywords_string .= '--keyword="'.$keyword.'" ';
