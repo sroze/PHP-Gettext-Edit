@@ -41,3 +41,8 @@
 					<em>Séparés par des virgules. Exemple: <code>*.php,*.myphpext,language_*</code></em>
 				</p>
 			</fieldset>
+			<script type="text/javascript">
+			$(document).ready( function() {
+			    $('#tree_container').fileTree(<?php echo $project->get('project_id'); ?>);
+			});
+			</script>

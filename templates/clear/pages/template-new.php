@@ -92,8 +92,3 @@ if (!isset($project)) {
 		</form>
 	</div>
 </div>
-<script type="text/javascript">
-$(document).ready( function() {
-    $('#tree_container').fileTree(<?php echo $project->get('project_id'); ?>);
-});
-</script>

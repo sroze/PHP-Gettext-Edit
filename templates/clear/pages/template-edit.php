@@ -18,11 +18,7 @@ if (!isset($template)) {
 				$type = $_POST['type'];
 			}
 			
-			if (!preg_match('#^([a-z0-9_-]+)$#i', $_POST['name'])) {
-				echo '<div class="form_error">'.
-					_('Le nom contient des caractères invalides').
-					'</div>';
-			} else if (empty($type)) {
+			if (empty($type)) {
 				echo '<div class="form_error">'.
 					_('Le type est vide').
 					'</div>';
