@@ -21,7 +21,7 @@ if (!isset($language)) {
 					$template = new Project_Template($project, $_POST['template']);
 					$template->check();
 					
-					$language_file = $language->createFile($_POST['code'], $template);
+					$language_file = $language->createFile($_POST['name'], $template);
 					
 					echo '<div class="form_success">'.
 						_('Fichier .po créé').
