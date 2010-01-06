@@ -86,7 +86,12 @@ class Project_Language_File extends Project_File
 			//var_dump($command, $exec_result);
 		}
 		
-		return new Project_Language_File($language, $template->getType().'/'.$name);
+		$language_file = new Project_Language_File($language, $template->getType().'/'.$name);
+		$language_file_headers = $language_file->getHeaders();
+		$language_file_headers['GetTextEdit-template'] = $template->getName();
+		$language_file->setHeaders($language_file_headers);
+		
+		return $language_file;
 	}
 	
 	/**
@@ -96,7 +101,31 @@ class Project_Language_File extends Project_File
 	 */
 	public function update ()
 	{
+		$template = $this->getTemplate();
 		
+		$command = 'msgmerge '.
+			'--update '.
+			'--sort-output '.
+			'--quiet '.
+			'"'.$this->file_path.'" "'.$template->file_path.'"';
+		$exec_result = exec($command);
+		var_dump($command, $exec_result);
+	}
+	
+	/**
+	 * Delete the file.
+	 * 
+	 * @return bool
+	 */
+	public function delete ()
+	{
+		if (!unlink($this->file_path)) {
+			throw new Project_Language_File_Exception(
+				sprintf(_('Impossible de supprimer le fichier: %s'), $this->file_path)
+			);
+		} else {
+			return true;
+		}
 	}
 	
 	/**
@@ -107,6 +136,17 @@ class Project_Language_File extends Project_File
 	private function getTemplate ()
 	{
 		$headers = $this->getHeaders();
+		
+		if (!array_key_exists('GetTextEdit-template', $headers)) {
+			throw new Project_Language_Exception(
+				_('Impossible d\'identifier le template de ce fichier')
+			);
+		} else {
+			return new Project_Template(
+				$this->language->project,
+				trim($headers['GetTextEdit-template'])
+			);
+		}
 	}
 }
 
