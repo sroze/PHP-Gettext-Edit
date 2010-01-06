@@ -9,6 +9,8 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+	var gridWidth = Math.round($('div#contents').width() / 2) - 20;
+	
 	$("#po_datagrid").flexigrid({
 		url: '<?php echo LOCAL_PATH; ?>engines/po-edit.php',
 		dataType: 'json',
@@ -35,13 +37,11 @@ $(document).ready(function() {
 		title: 'Traductions',
 		useRp: false,
 		showTableToggleBtn: false,
-		width: 500,
+		width: gridWidth,
 		height: 400
 	});
 
-	$('div#msgeditor').width(
-		$('div#contents').width() - 500 - 40
-	);
+	$('div#msgeditor').width(gridWidth);
 });
 function test(com,grid)
 {
