@@ -20,7 +20,7 @@ if (empty($projects_list)) {
 		<p><?php echo _('Vous pouvez créer différents projets, qui pourront contenir leurs propre configuration, ce qui vous permettera de gérer de manière automatisée, une fois configurés, les traductions.'); ?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
-		<div class="right_link"><a href="index.php?page=project-new"><?php echo _('Créer un nouveau projet'); ?></a></div>
+		<div class="link right"><a class="add" href="index.php?page=project-new"><?php echo _('Créer un nouveau projet'); ?></a></div>
 		<h1><?php echo _('Projets'); ?></h1>
 		<ul class="projects_list">
 			<?php echo $projects_list; ?>
