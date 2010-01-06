@@ -21,8 +21,9 @@ if (!isset($project)) {
 					$language = Project_Language::create($project, $_POST['code']);
 					
 					if (!empty($_POST['templates'])) {
-						foreach ($_POST['templates'] as $template) {
-							$language->createFile($template, $template);
+						foreach ($_POST['templates'] as $template_name) {
+							$template = new Project_Template($project, $template_name);
+							Project_Language_File::create($language, $template_name, $template);
 						}
 					}
 					
