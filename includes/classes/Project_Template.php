@@ -209,7 +209,12 @@ class Project_Template extends Project_File
 			);
 		}
 		
-		$this->setHeaders($headers);
+		$this->setHeaders(
+			array_merge(
+				$this->getHeaders(),
+				$headers
+			)
+		);
 	}
 	
 	/**
