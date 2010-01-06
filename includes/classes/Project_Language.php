@@ -89,7 +89,7 @@ class Project_Language
 			}
 		}
 		
-		$file_path = $directory_path.$name;
+		$file_path = $directory_path.$name.'.po';
 		
 		if (is_file($file_path)) {
 			throw new Project_Language_Exception(
@@ -185,7 +185,6 @@ class Project_Language
 		$result = array();
 	    /* Ceci est la façon correcte de traverser un dossier. */
 	    while (false !== ($file = readdir($directory))) {
-	    	var_dump($file);
 	        if (is_file($this->directory_path.$file) && substr($file, -3) == '.po') {
 	        	$result[] = str_replace(
 				        		'/',
