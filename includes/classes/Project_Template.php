@@ -69,6 +69,17 @@ class Project_Template extends Project_File
 	}
 	
 	/**
+	 * Get the template type.
+	 * 
+	 * @return string
+	 */
+	public function getType ()
+	{
+		$headers = $this->getHeaders();	
+		return $headers['GetTextEdit-type'];
+	}
+	
+	/**
 	 * Create a new template.
 	 * @param Project $project
 	 * @param string  $name 			Name of the template, likes messages

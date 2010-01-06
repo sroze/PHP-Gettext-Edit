@@ -57,31 +57,22 @@ class Project_Language
 	/**
 	 * Create a new .po file for this language. (from a template, or not)
 	 * 
-	 * @param string $name
-	 * @param string $template
+	 * @param string		 	$name
+	 * @param Project_Template 	$template
 	 * 
 	 * @return Project_Language_File
 	 */
 	public function createFile ($name, $template)
 	{
-		$file_path = $this->directory_path.$name;
-		
-		if (is_file($file_path)) {
-			throw new Project_Language_Exception(
-				_('Le fichier existe déjà')
-			);
-		}
-		
 		if (empty($template)) {
 			throw new Project_Language_Exception(
 				_('Pour initialiser un fichier .po, il faut un template')
 			);
 		} else if (is_string($template)) {
 			$template = new Project_Template($this->project, $template);
-			$template = $template->file_path;
 		} else if (is_object($template)) {
 			if (get_class($template) == 'Project_Template') {
-				$template = $template->file_path;
+				// Perfect!
 			} else {
 				throw new Project_Language_Exception(
 					sprintf(_('Type de template inconnu: %s'), get_class($template))
@@ -89,14 +80,32 @@ class Project_Language
 			}
 		}
 		
-		if (file_put_contents($file_path, '') === false) {
+		$directory_path = $this->directory_path.$template->getType().'/';
+		if (!is_dir($directory_path)) {
+			if (!mkdir($directory_path)) {
+				throw new Project_Language_Exception(
+					sprintf(_('Impossible de créer le dossier du type: %s'), $directory_path)
+				);
+			}
+		}
+		
+		$file_path = $directory_path.$name;
+		
+		if (is_file($file_path)) {
+			throw new Project_Language_Exception(
+				_('Le fichier existe déjà')
+			);
+		} else if (file_put_contents($file_path, '') === false) {
 			throw new Project_Language_Exception(
 				sprintf(_('Impossible d\'écrire le fichier: %s'), $file_path)
 			);
 		}
 		
 		if (!empty($template)) {
-			exec('msginit --input="'.$template.'" --output-file="'.$file_path.'"');
+			$command = 'msginit --input="'.$template.'" --output-file="'.$file_path.'"';
+			$exec_result = exec($command);
+			
+			var_dump($command, $exec_result);
 		}
 		
 		return new Project_Language_File($this, $name);
