@@ -126,8 +126,6 @@ class Project_Template extends Project_File
 		$file_root = $this->project->get('project_path');
 		$headers = $this->getHeaders();
 		
-		var_dump($headers);
-		
 		$language = $headers['GetTextEdit-language'];
 		$encoding = $headers['GetTextEdit-encoding'];
 		if (array_key_exists('GetTextEdit-keywords', $headers)) {
@@ -198,7 +196,7 @@ class Project_Template extends Project_File
 					$command = $xgettext_command.'"'.$file_root.$file.'"';
 				}
 				$exec_result = exec($command);
-				var_dump($command, $exec_result);
+				//var_dump($command, $exec_result);
 			}
 		} else {
 			throw new Project_Template_Exception(
