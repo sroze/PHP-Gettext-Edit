@@ -102,7 +102,7 @@ class Project_Language
 		}
 		
 		if (!empty($template)) {
-			$command = 'msginit --input="'.$template->file_path.'" --output-file="'.$file_path.'"';
+			$command = 'msginit --input="'.$template->file_path.'" --output-file="'.$file_path.'" --no-translator';
 			$exec_result = exec($command);
 			
 			var_dump($command, $exec_result);
