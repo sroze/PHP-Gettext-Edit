@@ -140,7 +140,7 @@ class Project_Template extends Project_File
 			$files = unserialize($headers['GetTextEdit-files']);
 		}
 		
-		var_dump($files);
+		file_put_contents($template->file_path, ''); // Clear file
 		
 		if (!in_array($language, self::$available_languages)) {
 			throw new Project_Template_Exception(
@@ -177,6 +177,7 @@ class Project_Template extends Project_File
 				'--force-po '.
 				'--add-location '.
 				'--sort-output '.
+				'--join-existing '.
 				'--language="'.$language.'" '.
 				'--from-code="'.$encoding.'" '.
 				'--output="'.$this->file_path.'" ';
