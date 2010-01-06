@@ -8,5 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Last-Translator: Samuel ROZE <samuel.roze@gmail.com>\n"
 
+# Welcome
+#:file.php:12
 msgid "test"
 msgstr "translation"

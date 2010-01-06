@@ -11,11 +11,22 @@ while (false !== ($position = strpos($file_contents, 'msgid', $position))) {
 		// On va chercher le prochain msgid
 		$futur_msgid = strpos($file_contents, 'msgid', $position+1);		
 		// On va prendre le bout entre les deux
-		$part = trim(substr($file_contents, $position, $futur_msgid-$position));
+		$part = substr($file_contents, $position, $futur_msgid-$position);
+		// Puis on cherche..la fin!
+		$comment_pos = strpos($part, '#');
+		if ($comment_pos !== false) {
+			$part = substr($part, 0, $comment_pos);
+		} else {
+			$prev_quote = strrpos($part, '"');
+			$part = substr($part, 0, $prev_quote);
+		}
+		$part = trim($part);
 		
 		break;
 	}
 	$position++;
 }
+
+var_dump($part);
 
 ?>
