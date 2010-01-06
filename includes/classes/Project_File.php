@@ -113,7 +113,7 @@ abstract class Project_File
 						$string = trim($string);
 						if ($string != '"' AND !empty($string)) {
 							var_dump($string);
-							$result[] = str_replace("\\\"", '"', $string);
+							$result[] = str_replace('&#147;', '"', $string);
 						}
 						$string = '';
 					}
@@ -144,7 +144,7 @@ abstract class Project_File
 				$header .= '\n';
 			}
 			
-			$result .= '"'.str_replace('"', '\\"', $header).'"'."\n";
+			$result .= '"'.str_replace('"', '&#147;', $header).'"'."\n";
 		}
 		
 		$file_contents = $this->getContents();
