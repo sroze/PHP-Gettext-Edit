@@ -11,7 +11,6 @@ $language = new Project_Language($project, $_POST['language']);
 $language_file = new Project_Language_File($language, $_POST['file']);
 
 $messages = $language_file->getMessages();
-var_dump($messages);
 
 echo '{total:'.count($messages).',rows:[';
 
@@ -21,7 +20,7 @@ foreach ($messages as $msgid => $informations) {
 		echo ',';
 	}
 	echo '{id:'.$i.',cell:[';
-		echo $informations['fuzzy'].',\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\'';
+		echo ($informations['fuzzy'] ? '1' : '0').',\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\'';
 	echo ']}'."\n";
 	
 	$i++;
