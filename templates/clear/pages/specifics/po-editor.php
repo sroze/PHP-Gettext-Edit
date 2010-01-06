@@ -40,15 +40,11 @@ $(document).ready(function() {
 			{display: 'Traduction', name : 'msgstr', width : colWidth, sortable : true, align: 'left'}
 		],
 		buttons: [
-		    {name: 'Sauvegarder', bclass: 'save', onpress: function (a, b){
-				$('form#msgeditorform').submit()
-			}},
-			{separator: true},
 			{name: 'Ajouter', bclass: 'add', onpress : function (a,grid){
 				$("#po_datagrid").each(function(){
 					var new_data = $(this)[0].grid.storedData;
 					var new_id = new_data.total;
-					new_data.rows.push({id:new_id, cell:[0, '', '']});
+					new_data.rows.unshift({id:new_id, cell:[0, '', '']});
 					$(this).flexAddData(new_data);
 					$('tr#row'+new_id).dblclick();
 				});
