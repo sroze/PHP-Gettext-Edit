@@ -111,11 +111,14 @@ class Project_Template extends Project_File
 		}
 	
 		if (!empty($search_files)) {
-			foreach ($search_files as $search_file) {
-				$files_string .= ' '.trim($search_file);
+			$search_string = '\\(';
+			for ($i = 0; $i < count($search_files); $i++) {
+				$search_files[$i] = '-iname "'.trim($search_files[$i]).'"';
 			}
+			$search_string .= implode(' -o ', $search_files);
+			$search_string .= '\\)';
 		} else {
-			$search_files = '*';
+			$search_string = '"*"';
 		}
 		
 		$xgettext_command = 'xgettext '.
@@ -129,7 +132,7 @@ class Project_Template extends Project_File
 		if (!empty($files)) {
 			foreach ($files as $file) {
 				if (substr($file, -1) == '/') { // directory
-					$command = 'find '.$file_root.$file.' -type f -iname "'.$search_files.'" | '.$xgettext_command.'-f -';
+					$command = 'find '.$file_root.$file.' -type f '.$search_string.' | '.$xgettext_command.'-f -';
 				} else { // file
 					$command = $xgettext_command.'"'.$file_root.$file.'"';
 				}

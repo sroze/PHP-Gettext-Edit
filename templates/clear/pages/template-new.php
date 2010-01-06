@@ -46,13 +46,15 @@ if (!isset($project)) {
 					'</div>';
 			} else {
 				try {
+					$search_files = (!empty($_POST['search_files'])) ? explode(',', $_POST['search_files']) : null;
+					
 					Project_Template::create(
 						$project,
 						$_POST['name'],
 						$type,
 						$_POST['program_language'],
 						explode(',', $_POST['keywords']),
-						explode(',', $_POST['search_files']),
+						$search_files,
 						File::cleanTree($_POST['scan_files']),
 						$_POST['encoding'],
 						(isset($_POST['delete_old']))
