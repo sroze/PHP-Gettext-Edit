@@ -10,14 +10,15 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var gridWidth = Math.round($('div#contents').width() / 2) - 20;
+	var colWidth = (gridWidth - 15) / 2;
 	
 	$("#po_datagrid").flexigrid({
 		url: '<?php echo LOCAL_PATH; ?>engines/po-edit.php',
 		dataType: 'json',
 		colModel: [
-			{display: 'Fuzzy', name : 'fuzzy', width : 20, sortable : true, align: 'center'},
-			{display: 'Chaine d\'origine', name : 'msgid', width : 240, sortable : true, align: 'left'},
-			{display: 'Traduction', name : 'msgstr', width : 240, sortable : true, align: 'left'}
+			{display: 'Fuzzy', name : 'fuzzy', width : 15, sortable : true, align: 'center'},
+			{display: 'Chaine d\'origine', name : 'msgid', width : colWidth, sortable : true, align: 'left'},
+			{display: 'Traduction', name : 'msgstr', width : colWidth, sortable : true, align: 'left'}
 		],
 		buttons: [
 		    {name: 'Sauvegarder', bclass: 'save', onpress: test},
