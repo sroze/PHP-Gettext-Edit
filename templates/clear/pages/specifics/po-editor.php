@@ -59,7 +59,7 @@ $(document).ready(function() {
 				if ($('.trSelected',grid).length == 0) {
 					alert('Vous devez sélectionner une élément');
 				} else {
-					$('.trSelected',grid)[0].dblclick();
+					$('.trSelected:first',grid).dblclick();
 				}
 			}}
 		],
