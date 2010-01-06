@@ -104,8 +104,7 @@ class Project_Language
 		if (!empty($template)) {
 			$command = 'msginit --input="'.$template->file_path.'" --output-file="'.$file_path.'" --no-translator --locale="'.$this->code.'"';
 			$exec_result = exec($command);
-			
-			var_dump($command, $exec_result);
+			//var_dump($command, $exec_result);
 		}
 		
 		return new Project_Language_File($this, $name);
