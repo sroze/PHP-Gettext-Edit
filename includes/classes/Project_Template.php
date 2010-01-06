@@ -109,37 +109,38 @@ class Project_Template extends Project_File
 				$keywords_string .= '--keyword="'.$keyword.'" ';
 			}
 		}
-		
-		$directories_string = '';
-		$files_string = '';
-		if (!empty($files)) {
-			foreach ($files as $file) {
-				if (substr($file, -1) == '/') { // directory
-					$directories_string .= '--directory="'.$file_root.$file.'" ';
-				} else {
-					$files_string .= '"'.$file_root.$file.'" ';
-				}
-			}
-		}
+	
 		if (!empty($search_files)) {
 			foreach ($search_files as $search_file) {
 				$files_string .= ' '.trim($search_file);
 			}
+		} else {
+			$search_files = '*';
 		}
 		
-		$command = 'xgettext '.
-			'--force-po '.
-			'--add-location '.
-			'--sort-output '.
-			'--language="'.$language.'" '.
-			'--from-code="'.$encoding.'" '.
-			'--output="'.$template->file_path.'" '.
-			$keywords_string.
-			$directories_string.
-			$files_string;
-		$exec_result = exec($command);
+		$xgettext_command = 'xgettext '.
+				'--force-po '.
+				'--add-location '.
+				'--sort-output '.
+				'--language="'.$language.'" '.
+				'--from-code="'.$encoding.'" '.
+				'--output="'.$template->file_path.'" ';
 		
-		var_dump($command, $exec_result);
+		if (!empty($files)) {
+			foreach ($files as $file) {
+				if (substr($file, -1) == '/') { // directory
+					$command = 'find '.$file_root.$file.' -type f -iname "'.$search_files.'" | '.$xgettext_command;
+				} else { // file
+					$command = $xgettext_command.'"'.$file_root.$file.'"';
+				}
+				$exec_result = exec($command);
+				var_dump($command, $exec_result);
+			}
+		} else {
+			throw new Project_Template_Exception(
+				_('Aucun fichier/dossier séléctionné')
+			);
+		}
 		
 		if (!$template->check()) {
 			throw new Project_Template_Exception(
