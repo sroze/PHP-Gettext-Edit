@@ -32,6 +32,17 @@ class Project_Template extends Project_File
 	);
 	
 	/**
+	 * Posible file encoding
+	 * 
+	 * @var array
+	 */
+	static $available_encoding = array(
+		'UTF-8',
+		'ISO-8859-1',
+		'ASCII'
+	);
+	
+	/**
 	 * Constructeur.
 	 * 
 	 * @param Project $project
@@ -64,12 +75,13 @@ class Project_Template extends Project_File
 	 * @param string  $type 			Type of template, like LC_MESSAGES
 	 * @param string  $language 		In what code, like PHP, C, C++...
 	 * @param array   $keywords 		Additionnal keywords
+	 * @param array	  $search_files		What type of files we want to search, array like ('*.php', '*.js')
 	 * @param array   $files			Files and directories to scan (cleaned by File::cleanTree please)
 	 * @param bool    $delete_old		Delete, or not, entries that aren't still used
 	 * 
 	 * @return Project_Template
 	 */
-	static function create ($project, $name, $type, $language, $keywords = null, $files = null, $delete_old = false)
+	static function create ($project, $name, $type, $language, $keywords = null, $search_files = array('*.php'), $files = null, $encoding = 'UTF-8', $delete_old = false)
 	{
 		$template = new Project_Template($project, $name);
 		$file_root = $project->get('project_path');
@@ -82,11 +94,18 @@ class Project_Template extends Project_File
 			throw new Project_Template_Exception(
 				_('Le language de programmation n\'est pas valide')
 			);
+		} else if (!in_array($encoding, self::$available_encoding)) {
+			throw new Project_Template_Exception(
+				_('L\'encodage n\'est pas valide')
+			);
 		}
 		
 		$keywords_string = '';
 		if (!empty($keywords)) {
 			foreach ($keywords as $keyword) {
+				if (empty(trim($keyword))) {
+					continue;
+				}
 				$keywords_string .= '--keyword="'.$keyword.'" ';
 			}
 		}
@@ -102,9 +121,22 @@ class Project_Template extends Project_File
 				}
 			}
 		}
+		if (!empty($search_files)) {
+			foreach ($search_files as $search_file) {
+				$files_string .= ' '.trim($search_file);
+			}
+		}
 		
-		$command = 'xgettext --force-po --add-location --sort-output --language="'.$language.'" --output="'.$template->file_path.'"'.
-			$keywords_string.$directories_string.$files_string;
+		$command = 'xgettext '.
+			'--force-po '.
+			'--add-location '.
+			'--sort-output '.
+			'--language="'.$language.'" '.
+			'--from-code="'.$encoding.'" '.
+			'--output="'.$template->file_path.'" '.
+			$keywords_string.
+			$directories_string.
+			$files_string;
 		$exec_result = exec($command);
 		
 		var_dump($command, $exec_result);

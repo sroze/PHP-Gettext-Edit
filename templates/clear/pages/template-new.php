@@ -32,9 +32,17 @@ if (!isset($project)) {
 				echo '<div class="form_error">'.
 					_('Le language de programmation est invalide').
 					'</div>';
+			} else if (!in_array($_POST['encoding'], Project_Template::$available_encoding)) {
+				echo '<div class="form_error">'.
+					_('L\'encodage est invalide').
+					'</div>';
 			} else if (!preg_match('#^([a-z0-9->_,]*)$#i', $_POST['keywords'])) {
 				echo '<div class="form_error">'.
 					_('Un ou plusieurs mots de clés sont invalides').
+					'</div>';
+			} else if (!preg_match('#^([a-z0-9*\.,_-]*)$#i', $_POST['search_files'])) {
+				echo '<div class="form_error">'.
+					_('La chaine des fichiers à rechercher n\'est pas correcte').
 					'</div>';
 			} else {
 				try {
@@ -44,7 +52,9 @@ if (!isset($project)) {
 						$type,
 						$_POST['program_language'],
 						explode(',', $_POST['keywords']),
+						explode(',', $_POST['search_files']),
 						File::cleanTree($_POST['scan_files']),
+						$_POST['encoding'],
 						(isset($_POST['delete_old']))
 					);
 					
@@ -91,15 +101,35 @@ if (!isset($project)) {
 						?>
 					</select>
 				</p>
+				<p><label>Encodage</label>
+					<select name="encoding">
+						<?php 
+						foreach (Project_Template::$available_encoding as $l) {
+							$selected = (isset($_POST['encoding']) && $_POST['encoding'] == $l) ? ' selected="selected"' : '';
+							echo '<option name="'.$l.'"'.$selected.'>'.$l.'</option>';
+						}
+						?>
+					</select>
+				</p>
 				<p><label>Supprimer les entrées inutilisées</label>
-					<input type="checkbox" name="delete_old" value="yes" />
+					<input type="checkbox" name="delete_old" value="yes"<?php
+				if (isset($_POST['name'])) { echo ' checked'; }
+				?> />
 				</p>
 				<p><label>Mots clés supplémentaires</label>
-					<input type="text" name="keywords" value="" /><br />
+					<input type="text" name="keywords" value="<?php
+				if (!empty($_POST['keywords'])) { echo $_POST['keywords']; }
+				?>" /><br />
 					<em>En temps normal, les mots clés des chaines à traduire sont <code>gettext</code> ou <code>_</code>. S'il y en a d'autres, tapez-les ici, séparés par des virgules</em>
 				</p>
 				<p><label>Dossiers et fichiers à analyser</label>
 					<div class="tree" id="tree_container"></div>
+				</p>
+				<p><label>Types de fichiers à rechercher</label>
+					<input type="text" name="search_files" value="<?php
+				if (!empty($_POST['search_files'])) { echo $_POST['search_files']; } else { echo '*.php'; }
+				?>" /><br />
+					<em>Séparés par des virgules. Exemple: <code>*.php,*.myphpext,language_*</code></em>
 				</p>
 			</fieldset>
 			<input type="submit" value="Créer" />
