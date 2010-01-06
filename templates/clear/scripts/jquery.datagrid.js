@@ -400,7 +400,8 @@
 				this.buildpager();
 
 				//build new body
-				var tbody = document.createElement('tbody');
+				//var tbody = document.createElement('tbody');
+				var tbody = $(t).find('tbody');
 				
 				if (p.dataType=='json')
 				{
@@ -510,8 +511,7 @@
 
 				$('tr',t).unbind();
 				//$(t).empty();
-				
-				$(t).append(tbody);
+				//$(t).append(tbody);
 				this.addCellProp();
 				this.addRowProp();
 				
