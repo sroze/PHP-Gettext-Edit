@@ -158,7 +158,7 @@ abstract class Project_File
 				// On va prendre le bout entre les deux
 				$part = substr($file_contents, $position, $futur_msgid-$position);
 				// Puis on cherche..la fin!
-				$comment_pos = strpos($part, '#');
+				$comment_pos = strpos($part, "\n".'#');
 				if ($comment_pos !== false) {
 					$part = substr($part, 0, $comment_pos);
 				} else {
