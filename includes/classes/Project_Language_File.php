@@ -109,7 +109,7 @@ class Project_Language_File extends Project_File
 			'--quiet '.
 			'"'.$this->file_path.'" "'.$template->file_path.'"';
 		$exec_result = exec($command);
-		var_dump($command, $exec_result);
+		//var_dump($command, $exec_result);
 	}
 	
 	/**
