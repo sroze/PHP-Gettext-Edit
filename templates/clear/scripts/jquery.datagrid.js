@@ -1492,5 +1492,9 @@
 
 function openPoLine (object)
 {
-	alert('dblclick');
+	$('tr.trSelected').removeClass('trSelected');
+	$(object).toggleClass('trSelected').focus();
+	
+	// Load all
+	alert('and load msgid informations');
 }
