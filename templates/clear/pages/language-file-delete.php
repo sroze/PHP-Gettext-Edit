@@ -15,7 +15,7 @@ if (!isset($language_file)) {
 				$language_file->delete();
 				
 				echo '<div class="box large success"><p>'.
-					_('Fichier supprimé').'</p><p><a href="index.php?page=project&project='.$project->get('project_id').'&language='.$language->getCode().'">'._('Retour').'</a>'.
+					_('Fichier supprimé').'</p><p><a href="index.php?page=language&project='.$project->get('project_id').'&language='.$language->getCode().'">'._('Retour').'</a>'.
 					'</p></div>';
 			} catch (Exception $e) {
 				echo '<div class="box large error"><p>'.
