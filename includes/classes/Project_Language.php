@@ -9,7 +9,7 @@ class Project_Language
 	 * 
 	 * @var Project
 	 */
-	private $project;
+	public $project;
 	
 	// Simple variables
 	private $code;
