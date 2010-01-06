@@ -37,10 +37,10 @@ $out = '';
 foreach ($messages as $msgid => $informations) {
 	
 	if ($informations['fuzzy']) {
-		if (!empty($fuzzies)) { echo ','; }
+		if (!empty($fuzzies)) { $fuzzies .= ','; }
 		$fuzzies .= '{id:'.$i.',cell:[1,\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\']}'."\n";
 	} else {
-		if (!empty($out)) { echo ','; }
+		if (!empty($out)) { $out .= ','; }
 		$out .= '{id:'.$i.',cell:[1,\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\']}'."\n";
 	}
 }
