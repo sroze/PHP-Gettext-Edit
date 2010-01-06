@@ -1,7 +1,7 @@
 <?php
 abstract class Project_File
 {
-	protected $file_path;
+	public $file_path;
 	abstract public function __construct();
 
 	/**
@@ -16,16 +16,6 @@ abstract class Project_File
 		} else {
 			return true;
 		}
-	}
-	
-	/**
-	 * Return the file path.
-	 * 
-	 * @return string
-	 */
-	public function getFilePath ()
-	{
-		return $this->file_path;
 	}
 
 	/**

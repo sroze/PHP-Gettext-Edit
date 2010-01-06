@@ -3,6 +3,7 @@ if (!isset($project)) {
 	echo 'Paramètres URL insuffisants';
 	exit();
 }
+$available_languages = array('PHP', 'C', 'C++', 'Shell', 'Python', 'Scheme', 'Java', 'C#', 'Perl', 'Glade');
 ?><div id="page">
 	<div id="sidebar">
 		<h3><?php echo _('Création du nouveau template'); ?></h3>
@@ -12,13 +13,39 @@ if (!isset($project)) {
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; Nouveau template</h1>
 		<?php
 		if (isset($_POST['name'])) {
+			if ($_POST['type'] == '@other@') {
+				$type = $_POST['other_type'];
+			} else {
+				$type = $_POST['type'];
+			}
+				
 			if (!preg_match('#^([a-z0-9_-]+)$#i', $_POST['name'])) {
 				echo '<div class="form_error">'.
 					_('Le nom contient des caractères invalides').
 					'</div>';
+			} else if (empty($type)) {
+				echo '<div class="form_error">'.
+					_('Le type est vide').
+					'</div>';
+			} else if (!in_array($_POST['program_language'], $available_languages)) {
+				echo '<div class="form_error">'.
+					_('Le language de programmation est invalide').
+					'</div>';
+			} else if (!preg_match('#^([a-z0-9->_,]+)$#i', $_POST['keywords'])) {
+				echo '<div class="form_error">'.
+					_('Un ou plusieurs mots de clés sont invalides').
+					'</div>';
 			} else {
 				try {
-					
+					Project_Template::create(
+						$project,
+						$_POST['name'],
+						$type,
+						$_POST['program_language'],
+						explode(',', $_POST['keywords']),
+						File::cleanTree($_POST['scan_files']),
+						(isset($_POST['delete_old']))
+					);
 					
 					echo '<div class="form_success">'.
 						_('Template créé').
@@ -56,8 +83,6 @@ if (!isset($project)) {
 				<p><label>Language de programmation</label>
 					<select name="program_language">
 						<?php 
-						$available_languages = array('PHP', 'C', 'C++', 'Shell', 'Python', 'Scheme', 'Java', 'C#', 'Perl', 'Glade');
-						
 						foreach ($available_languages as $l) {
 							$selected = (isset($_POST['program_language']) && $_POST['program_language'] == $l) ? ' selected="selected"' : '';
 							echo '<option name="'.$l.'"'.$selected.'>'.$l.'</option>';

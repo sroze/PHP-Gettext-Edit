@@ -38,5 +38,64 @@ class Project_Template extends Project_File
 	{
 		return $this->name;
 	}
+	
+	/**
+	 * Create a new template.
+	 * @param Project $project
+	 * @param string  $name 			Name of the template, likes messages
+	 * @param string  $type 			Type of template, like LC_MESSAGES
+	 * @param string  $language 		In what code, like PHP, C, C++...
+	 * @param array   $keywords 		Additionnal keywords
+	 * @param array   $files			Files and directories to scan (cleaned by File::cleanTree please)
+	 * @param bool    $delete_old		Delete, or not, entries that aren't still used
+	 * 
+	 * @return Project_Template
+	 */
+	static function create ($project, $name, $type, $language, $keywords = null, $files = null, $delete_old = false)
+	{
+		$template = new Project_Template($project, $name);
+		$file_root = $project->get('project_path');
+		
+		if (!file_put_contents($template->file_path, '')) {
+			throw new Project_Template_Exception(
+				sprintf(_('Impossible d\'écrire dans le nouveau fichier (%s)'), $template->file_path)
+			);
+		}
+		
+		$keywords_string = '';
+		if (!empty($keywords)) {
+			foreach ($keywords as $keyword) {
+				$keywords_string .= '--keyword="'.$keyword.'" ';
+			}
+		}
+		
+		$directories_string = '';
+		$files_string = '';
+		if (!empty($files)) {
+			foreach ($files as $file) {
+				if (substr($file, -1) == '/') { // directory
+					$directories_string .= '--directory="'.$file_root.$file.'" ';
+				} else {
+					$files_string .= '"'.$file_root.$file.'" ';
+				}
+			}
+		}
+		
+		$command = 'xgettext --force-po --add-location --sort-output --output="'.$template->file_path.'"'.
+			$keywords_string.$directories_string.$files_string;
+		$exec_result = exec($command);
+		
+		var_dump($command, $exec_result);
+		
+		if (!$template->check()) {
+			throw new Project_Template_Exception(
+				_('Une erreur inconnue est arrivée')
+			);
+		} else {
+			return $template;
+		}
+	}
 }
+
+class Project_Template_Exception extends Exception {}
 ?>
