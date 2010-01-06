@@ -129,7 +129,7 @@ class Project_Template extends Project_File
 		if (!empty($files)) {
 			foreach ($files as $file) {
 				if (substr($file, -1) == '/') { // directory
-					$command = 'find '.$file_root.$file.' -type f -iname "'.$search_files.'" | '.$xgettext_command.' -';
+					$command = 'find '.$file_root.$file.' -type f -iname "'.$search_files.'" | '.$xgettext_command.'-f -';
 				} else { // file
 					$command = $xgettext_command.'"'.$file_root.$file.'"';
 				}
