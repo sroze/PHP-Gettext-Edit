@@ -62,7 +62,7 @@ class Project_Language
 	 * 
 	 * @return Project_Language_File
 	 */
-	public function createFile ($name, $template = null)
+	public function createFile ($name, $template)
 	{
 		$file_path = $this->directory_path.$name;
 		
@@ -72,8 +72,10 @@ class Project_Language
 			);
 		}
 		
-		if ($template == null) {
-			$template = '';
+		if (empty($template)) {
+			throw new Project_Language_Exception(
+				_('Pour initialiser un fichier .po, il faut un template')
+			);
 		} else if (is_string($template)) {
 			$template = new Project_Template($this->project, $template);
 			$template = $template->file_path;
@@ -82,7 +84,7 @@ class Project_Language
 				$template = $template->file_path;
 			} else {
 				throw new Project_Language_Exception(
-					_('Type de template inconnu')
+					sprintf(_('Type de template inconnu: %s'), get_class($template))
 				);
 			}
 		}

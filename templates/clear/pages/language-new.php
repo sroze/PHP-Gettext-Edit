@@ -29,7 +29,7 @@ if (!isset($project)) {
 					echo '<div class="form_success">'.
 						_('Langue créé').
 						'</div>'; 
-					empty($_POST);
+					unset($_POST);
 				} catch (Exception $e) {
 					echo '<div class="form_error">'.
 						$e->getMessage().

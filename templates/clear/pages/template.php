@@ -18,8 +18,8 @@ if (!isset($template)) {
 			<li><a href="index.php?page=template-update&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">
 				Regénérer le template
 			</a></li>
-			<li><a href="index.php?page=template-edit&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">
-				Modifier le template
+			<li><a href="index.php?page=template-file-editor&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">
+				Modifier le contenu du template
 			</a></li>
 		</ul>
 	</div>
