@@ -135,7 +135,7 @@ class Project_Template extends Project_File
 			$search_files = explode(',', $headers['GetTextEdit-search-files']);
 		}
 		if (array_key_exists('GetTextEdit-files', $headers)) {
-			$files = unserialize($headers['GetTextEdit-files']);
+			$files = unserialize(stripslashes($headers['GetTextEdit-files']));
 		}
 		
 		if (!in_array($language, self::$available_languages)) {
