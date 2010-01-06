@@ -12,7 +12,7 @@ if (!isset($template)) {
 				$template->delete();
 				
 				echo '<div class="box large success"><p>'.
-					_('Template supprimée').'</p><p><a href="index.php?page=project&project='.$project->get('project_id').'">'._('Retour').'</a>'.
+					_('Template supprimé').'</p><p><a href="index.php?page=project&project='.$project->get('project_id').'">'._('Retour').'</a>'.
 					'</p></div>';
 			} catch (Exception $e) {
 				echo '<div class="box large error"><p>'.
