@@ -93,7 +93,7 @@ class Project_Template extends Project_File
 		}
 		
 		// Now, we'll store configuration in file
-		$this->edit(
+		$template->edit(
 			$type,
 			$language,
 			$encoding,
