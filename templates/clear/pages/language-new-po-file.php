@@ -9,7 +9,7 @@ if (!isset($language)) {
 		<p>À venir</p>
 	</div>
 	<div id="contents" class="with_sidebar">
-		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo $language->getName(); ?> &raquo; Nouveau fichier .po</h1>
+		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <a href="index.php?page=language&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo $language->getName(); ?></a> &raquo; Nouveau fichier .po</h1>
 		<?php 
 		if (isset($_POST['name'])) {
 			if (!preg_match('#^([a-z0-9_-]+)$#i', $_POST['name'])) {
