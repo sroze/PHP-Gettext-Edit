@@ -1,25 +1,23 @@
 <?php
-require_once ROOT_PATH.'includes/classes/Project_Template.php';
-
-if (!isset($project)) {
+if (!isset($template)) {
 	echo 'Paramètres URL insuffisants';
 	exit();
 }
 ?><div id="page">
 	<div id="sidebar">
-		<h3><?php echo _('Création du nouveau template'); ?></h3>
+		<h3><?php echo _('Editer le template'); ?></h3>
 		<p>À venir</p>
 	</div>
 	<div id="contents" class="with_sidebar">
-		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; Nouveau template</h1>
+		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <a href="index.php?page=template&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">Template <code><?php echo $template->getName(); ?></code></a> &raquo; Editer</h1>
 		<?php
-		if (isset($_POST['name'])) {
+		if (isset($_POST['program_language'])) {
 			if ($_POST['type'] == '@other@') {
 				$type = $_POST['other_type'];
 			} else {
 				$type = $_POST['type'];
 			}
-				
+			
 			if (!preg_match('#^([a-z0-9_-]+)$#i', $_POST['name'])) {
 				echo '<div class="form_error">'.
 					_('Le nom contient des caractères invalides').
@@ -48,9 +46,7 @@ if (!isset($project)) {
 				try {
 					$search_files = (!empty($_POST['search_files'])) ? explode(',', $_POST['search_files']) : null;
 					
-					Project_Template::create(
-						$project,
-						$_POST['name'],
+					$template->edit(
 						$type,
 						$_POST['program_language'],
 						explode(',', $_POST['keywords']),
@@ -61,7 +57,7 @@ if (!isset($project)) {
 					);
 					
 					echo '<div class="form_success">'.
-						_('Template créé').
+						_('Template re-généré').
 						'</div>';
 						
 					unset($_POST);
@@ -71,29 +67,43 @@ if (!isset($project)) {
 						'</div>';
 				}
 			}
+		} else {
+			$headers = $template->getHeaders();
+			$_POST['program_language'] = $headers['GetTextEdit-language'];
+			$_POST['encoding'] = $headers['GetTextEdit-encoding'];
+			if (array_key_exists('GetTextEdit-keywords', $headers)) {
+				$_POST['keywords'] = $headers['GetTextEdit-keywords'];
+			}
+			if (array_key_exists('GetTextEdit-search-files', $headers)) {
+				$_POST['search_files'] = $headers['GetTextEdit-search-files'];
+			}
+			if (array_key_exists('GetTextEdit-files', $headers)) {
+				$_POST['files'] = unserialize($headers['GetTextEdit-files']);
+			}
+			$type = $headers['GetTextEdit-type'];
+			if ($type == 'LC_MESSAGES') {
+				$_POST['type'] = $type;
+			} else {
+				$_POST['type'] = '@other@';
+				$_POST['other_type'] = $type;
+			}
 		}
 		?>
 		<form method="POST" action="">
 			<fieldset>
 				<legend>Général</legend>
-				<p><label>Nom</label><input type="text" size="30" name="name"<?php
-				if (!empty($_POST['name'])) { echo ' value="'.$_POST['name'].'"'; }
-				?> /><br />
-					<em>Lettres, chiffres, underscore (_) et tirets autorisés</em>
+				<p><label>Nom</label><input type="text" size="30" name="name" value="<?php
+				echo $template->getName();
+				?>" disabled /><br />
 				</p>
-				<?php
+				<?php 
 				require PAGE_DIR.'specifics/template-general-options.php';
 				?>
 			</fieldset>
 			<?php
 			require PAGE_DIR.'specifics/template-code-options.php';
 			?>
-			<input type="submit" value="Créer" />
+			<input type="submit" value="Editer" />
 		</form>
 	</div>
 </div>
-<script type="text/javascript">
-$(document).ready( function() {
-    $('#tree_container').fileTree(<?php echo $project->get('project_id'); ?>);
-});
-</script>

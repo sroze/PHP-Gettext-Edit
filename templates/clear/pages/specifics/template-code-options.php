@@ -22,7 +22,7 @@
 				</p>
 				<p><label>Supprimer les entrées inutilisées</label>
 					<input type="checkbox" name="delete_old" value="yes"<?php
-				if (isset($_POST['name'])) { echo ' checked'; }
+				if (isset($_POST['delete_old'])) { echo ' checked'; }
 				?> />
 				</p>
 				<p><label>Mots clés supplémentaires</label>

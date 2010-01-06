@@ -92,8 +92,18 @@ class Project_Template extends Project_File
 			);
 		}
 		
-		$template->update($language, $keywords, $search_files, $files, $encoding, $delete_old);
-		$template->setType($type);
+		// Now, we'll store configuration in file
+		$this->edit(
+			$type,
+			$language,
+			$encoding,
+			$keywords,
+			$search_files,
+			$files
+		);
+		
+		// Generate the file
+		$template->update($delete_old);
 		
 		if (!$template->check()) {
 			throw new Project_Template_Exception(
@@ -107,18 +117,26 @@ class Project_Template extends Project_File
 	/**
 	 * Re-génère le template
 	 * 
-	 * @param string  $language 		In what code, like PHP, C, C++...
-	 * @param array   $keywords 		Additionnal keywords
-	 * @param array	  $search_files		What type of files we want to search, array like ('*.php', '*.js')
-	 * @param array   $files			Files and directories to scan (cleaned by File::cleanTree please)
-	 * @param string  $encoding			How files are encoded ?
 	 * @param bool    $delete_old		Delete, or not, entries that aren't still used
 	 * 
 	 * @return void
 	 */
-	public function update ($language, $keywords = null, $search_files = array('*.php'), $files = null, $encoding = 'UTF-8', $delete_old = false)
+	public function update ($delete_old = false)
 	{
 		$file_root = $this->project->get('project_path');
+		$headers = $this->getHeaders();
+		
+		$language = $headers['GetTextEdit-language'];
+		$encoding = $headers['GetTextEdit-encoding'];
+		if (array_key_exists('GetTextEdit-keywords', $headers)) {
+			$keywords = explode(',', $headers['GetTextEdit-keywords']);
+		}
+		if (array_key_exists('GetTextEdit-search-files', $headers)) {
+			$search_files = explode(',', $headers['GetTextEdit-search-files']);
+		}
+		if (array_key_exists('GetTextEdit-files', $headers)) {
+			$files = unserialize($headers['GetTextEdit-files']);
+		}
 		
 		if (!in_array($language, self::$available_languages)) {
 			throw new Project_Template_Exception(
@@ -175,27 +193,56 @@ class Project_Template extends Project_File
 					$command = $xgettext_command.'"'.$file_root.$file.'"';
 				}
 				$exec_result = exec($command);
-				//var_dump($command, $exec_result);
+				var_dump($command, $exec_result);
 			}
 		} else {
 			throw new Project_Template_Exception(
 				_('Aucun fichier/dossier séléctionné')
 			);
 		}
+		
+		$this->setHeaders($headers);
 	}
 	
 	/**
-	 * Set the type of template.
+	 * Edit template informations/configuration
 	 * 
-	 * @param string $type
+	 * @param string  $type
+	 * @param string  $language 		In what code, like PHP, C, C++...
+	 * @param array   $keywords 		Additionnal keywords
+	 * @param array	  $search_files		What type of files we want to search, array like ('*.php', '*.js')
+	 * @param array   $files			Files and directories to scan (cleaned by File::cleanTree please)
+	 * @param string  $encoding			How files are encoded ?
+	 * 
 	 * @return bool
 	 */
-	public function setType ($type)
+	public function edit ($type, $language, $encoding, $keywords = null, $search_files = null, $files = null)
 	{
 		$headers = $this->getHeaders();
 		$headers['GetTextEdit-type'] = $type;
+		$headers['GetTextEdit-language'] = $language;
+		$headers['GetTextEdit-encoding'] = $encoding;
+		if (!empty($keywords)) {
+			$headers['GetTextEdit-keywords'] = implode(',', $keywords);
+		}
+		if (!empty($search_files)) {
+			$headers['GetTextEdit-search-files'] = implode(',', $search_files);
+		}
+		if (!empty($files)) {
+			$headers['GetTextEdit-files'] = serialize($files);
+		}
 		
 		return $this->setHeaders($headers);
+	}
+	
+	/**
+	 * Delete template.
+	 * 
+	 * @return bool
+	 */
+	public function delete ()
+	{
+		return unlink($this->file_path);
 	}
 }
 
