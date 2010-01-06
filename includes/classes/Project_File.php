@@ -112,7 +112,6 @@ abstract class Project_File
 					if ($file_contents[$bracket_position-1] != '\\') {
 						$string = trim($string);
 						if ($string != '"' AND !empty($string)) {
-							var_dump($string);
 							$result[] = str_replace('&#147;', '"', $string);
 						}
 						$string = '';
