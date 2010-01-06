@@ -1,4 +1,12 @@
 <table id="po_datagrid"></table>
+<div class="flexigrid">
+	<div class="mDiv">
+		<div class="title">Édition de la séléction</div>
+	</div>
+	<div class="grid">
+		<p>Données</p>
+	</div>
+</div>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#po_datagrid").flexigrid({
@@ -10,6 +18,8 @@ $(document).ready(function() {
 			{display: 'Traduction', name : 'msgstr', width : 240, sortable : true, align: 'left'}
 		],
 		buttons: [
+		    {name: 'Sauvegarder', bclass: 'save', onpress: test},
+			{separator: true},
 			{name: 'Ajouter', bclass: 'add', onpress : test},
 			{name: 'Supprimer', bclass: 'delete', onpress : test},
 			{separator: true},
@@ -24,7 +34,7 @@ $(document).ready(function() {
 		usepager: false,
 		title: 'Traductions',
 		useRp: false,
-		showTableToggleBtn: true,
+		showTableToggleBtn: false,
 		width: 500,
 		height: 400
 	});
@@ -42,3 +52,4 @@ function test(com,grid)
 	alert('Button pressed: '+com);
 }
 </script>
+<div class="clear" />

@@ -9,6 +9,7 @@
 	border: 0px solid #eee;
 	overflow: hidden;
 	color: #000;
+	float: left;
 	}
 
 	.flexigrid.hideBody
@@ -726,8 +727,13 @@ div.colCopy {
 /* buttons style */
 .flexigrid div.fbutton .add {
 	background: url(../images/icons/add.png) no-repeat center left;
-}	
+}
 .flexigrid div.fbutton .delete {
 	background: url(../images/icons/close.png) no-repeat center left;
-}	
-		
+}
+.flexigrid div.fbutton .save {
+	background: url(../images/icons/table_save.png) no-repeat center left;
+}
+.flexigrid div.fbutton .edit {
+	background: url(../images/icons/textfield_rename.png) no-repeat center left;
+}
