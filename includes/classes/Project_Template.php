@@ -92,7 +92,7 @@ class Project_Template extends Project_File
 			);
 		}
 		
-		$template->update();
+		$template->update($language, $keywords, $search_files, $files, $encoding, $delete_old);
 		$template->setType($type);
 		
 		if (!$template->check()) {
