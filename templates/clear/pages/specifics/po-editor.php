@@ -1,5 +1,5 @@
 <table id="po_datagrid"></table>
-<div class="flexigrid">
+<div id="msgeditor" class="flexigrid my">
 	<div class="mDiv">
 		<div class="title">Édition de la séléction</div>
 	</div>
@@ -38,6 +38,10 @@ $(document).ready(function() {
 		width: 500,
 		height: 400
 	});
+
+	$('div#msgeditor').width(
+		$('div#contents').width() - 500 - 40
+	);
 });
 function test(com,grid)
 {

@@ -11,7 +11,11 @@
 	color: #000;
 	float: left;
 	}
-
+.flexigrid.my
+	{
+	margin-left: 20px;
+	border: 1px;
+	}
 	.flexigrid.hideBody
 		{
 		height: 26px !important;
