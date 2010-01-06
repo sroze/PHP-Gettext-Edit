@@ -18,13 +18,13 @@ if (!isset($language_file)) {
 		<p>À venir</p>
 		</div>
 		<ul>
-			<li><a href="index.php?page=language-file-update&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file='<?php echo $language_file->getName(); ?>">
+			<li><a href="index.php?page=language-file-update&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
 				Recharger depuis le template
 			</a></li>
-			<li><a href="index.php?page=language-file-editor&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file='<?php echo $language_file->getName(); ?>">
+			<li><a href="index.php?page=language-file-editor&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
 				Editer le contenu
 			</a></li>
-			<li><a href="index.php?page=language-file-compile&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file='<?php echo $language_file->getName(); ?>">
+			<li><a href="index.php?page=language-file-compile&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
 				Compiler
 			</a></li>
 		</ul>
