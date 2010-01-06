@@ -34,6 +34,7 @@ echo '{total:'.count($messages).',rows:[';
 
 $fuzzies = '';
 $out = '';
+$i = 0;
 foreach ($messages as $msgid => $informations) {
 	
 	if ($informations['fuzzy']) {
@@ -43,6 +44,7 @@ foreach ($messages as $msgid => $informations) {
 		if (!empty($out)) { $out .= ','; }
 		$out .= '{id:'.$i.',cell:[1,\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\']}'."\n";
 	}
+	$i++;
 }
 echo $fuzzies, $out;
 
