@@ -193,7 +193,7 @@ class Project_Language
 				        		$directory_name.substr($file, 0, -3)
 				        	);
 	        } else if (is_dir($directory_path.$file) && substr($file, 0, 1) != '.') {
-	        	foreach ($this->getFilesInDirectory($directory_name.'/'.$file) as $file2) {
+	        	foreach ($this->getFilesInDirectory($directory_name.$file.'/') as $file2) {
 	        		$result[] = $file2;
 	        	}
 	        }
