@@ -403,6 +403,7 @@
 				var tbody = $(t).find('tbody');
 				if (tbody.length <= 0) {
 					tbody = document.createElement('tbody');
+					$(t).append(tbody);
 				}
 				
 				if (p.dataType=='json')
