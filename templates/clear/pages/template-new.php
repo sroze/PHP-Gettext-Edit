@@ -32,7 +32,7 @@ if (!isset($project)) {
 				echo '<div class="form_error">'.
 					_('Le language de programmation est invalide').
 					'</div>';
-			} else if (!preg_match('#^([a-z0-9->_,]+)$#i', $_POST['keywords'])) {
+			} else if (!preg_match('#^([a-z0-9->_,]*)$#i', $_POST['keywords'])) {
 				echo '<div class="form_error">'.
 					_('Un ou plusieurs mots de clés sont invalides').
 					'</div>';
