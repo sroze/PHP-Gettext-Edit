@@ -126,6 +126,8 @@ class Project_Template extends Project_File
 		$file_root = $this->project->get('project_path');
 		$headers = $this->getHeaders();
 		
+		var_dump($headers);
+		
 		$language = $headers['GetTextEdit-language'];
 		$encoding = $headers['GetTextEdit-encoding'];
 		if (array_key_exists('GetTextEdit-keywords', $headers)) {
@@ -137,6 +139,8 @@ class Project_Template extends Project_File
 		if (array_key_exists('GetTextEdit-files', $headers)) {
 			$files = unserialize(stripslashes($headers['GetTextEdit-files']));
 		}
+		
+		var_dump($files);
 		
 		if (!in_array($language, self::$available_languages)) {
 			throw new Project_Template_Exception(
