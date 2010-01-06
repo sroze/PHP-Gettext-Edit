@@ -138,8 +138,6 @@ class Project_Template extends Project_File
 			$files = unserialize($headers['GetTextEdit-files']);
 		}
 		
-		file_put_contents($template->file_path, ''); // Clear file
-		
 		if (!in_array($language, self::$available_languages)) {
 			throw new Project_Template_Exception(
 				_('Le language de programmation n\'est pas valide')
@@ -185,6 +183,13 @@ class Project_Template extends Project_File
 		}
 		
 		if (!empty($files)) {
+		
+			if (false === file_put_contents($this->file_path, '')) { // Clear file
+				throw new Project_Template_Exception(
+					_('Impossible de nettoyer le fichier template')
+				);
+			}
+		
 			foreach ($files as $file) {
 				if (substr($file, 0, 1) != '/') {
 					$file = '/'.$file;
