@@ -145,7 +145,7 @@ class Project_Template extends Project_File
 					$command = $xgettext_command.'"'.$file_root.$file.'"';
 				}
 				$exec_result = exec($command);
-				var_dump($command, $exec_result);
+				//var_dump($command, $exec_result);
 			}
 		} else {
 			throw new Project_Template_Exception(
