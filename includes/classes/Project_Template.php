@@ -129,10 +129,14 @@ class Project_Template extends Project_File
 				'--from-code="'.$encoding.'" '.
 				'--output="'.$template->file_path.'" ';
 		
+		if (substr($file_root, -1) == '/') {
+			$file_root = substr($file_root, 0, -1);
+		}
+		
 		if (!empty($files)) {
 			foreach ($files as $file) {
-				if (substr($file_root, -1) == '/' && substr($file, 0, 1) == '/') {
-					$file = substr($file, 1);
+				if (substr($file, 0, 1) != '/') {
+					$file = '/'.$file;
 				}
 				
 				if (substr($file, -1) == '/') { // directory
