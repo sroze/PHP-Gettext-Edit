@@ -87,7 +87,7 @@ class Project_Language
 			}
 		}
 		
-		if (!file_puts_contents($file_path, '')) {
+		if (file_puts_contents($file_path, '') === false) {
 			throw new Project_Language_Exception(
 				sprintf(_('Impossible d\'écrire le fichier: %s'), $file_path)
 			);

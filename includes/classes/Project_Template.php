@@ -74,7 +74,7 @@ class Project_Template extends Project_File
 		$template = new Project_Template($project, $name);
 		$file_root = $project->get('project_path');
 		
-		if (!file_put_contents($template->file_path, '')) {
+		if (file_put_contents($template->file_path, '') === false) {
 			throw new Project_Template_Exception(
 				sprintf(_('Impossible d\'écrire dans le nouveau fichier (%s)'), $template->file_path)
 			);
