@@ -45,11 +45,10 @@ if (!isset($template)) {
 					$template->edit(
 						$type,
 						$_POST['program_language'],
-						explode(',', $_POST['keywords']),
-						$search_files,
-						File::cleanTree($_POST['files']),
 						$_POST['encoding'],
-						(isset($_POST['delete_old']))
+						explode(',', $_POST['keywords']),
+						$search_files, 
+						File::cleanTree($_POST['files'])
 					);
 					
 					echo '<div class="form_success">'.
