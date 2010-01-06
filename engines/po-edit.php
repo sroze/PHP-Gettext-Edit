@@ -42,7 +42,7 @@ foreach ($messages as $msgid => $informations) {
 		$fuzzies .= '{id:'.$i.',cell:[1,\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\']}'."\n";
 	} else {
 		if (!empty($out)) { $out .= ','; }
-		$out .= '{id:'.$i.',cell:[1,\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\']}'."\n";
+		$out .= '{id:'.$i.',cell:[0,\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\']}'."\n";
 	}
 	$i++;
 }
