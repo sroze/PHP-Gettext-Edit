@@ -10,7 +10,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var gridWidth = Math.round($('div#contents').width() / 2) - 20;
-	var colWidth = (gridWidth - 15) / 2 - 15;
+	var colWidth = (gridWidth - 15) / 2 - 25;
 	
 	$("#po_datagrid").flexigrid({
 		url: '<?php echo LOCAL_PATH; ?>engines/po-edit.php',
