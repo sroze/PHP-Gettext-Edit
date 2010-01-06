@@ -367,7 +367,7 @@
 				
 				$('.pReload',this.pDiv).removeClass('loading');
 				this.loading = false;
-				this.data = data;
+				this.storedData = data;
 
 				if (!data) 
 					{
