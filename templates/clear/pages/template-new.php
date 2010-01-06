@@ -1,9 +1,10 @@
 <?php
+require_once ROOT_PATH.'includes/classes/Project_Template.php';
+
 if (!isset($project)) {
 	echo 'Paramètres URL insuffisants';
 	exit();
 }
-$available_languages = array('PHP', 'C', 'C++', 'Shell', 'Python', 'Scheme', 'Java', 'C#', 'Perl', 'Glade');
 ?><div id="page">
 	<div id="sidebar">
 		<h3><?php echo _('Création du nouveau template'); ?></h3>
@@ -27,7 +28,7 @@ $available_languages = array('PHP', 'C', 'C++', 'Shell', 'Python', 'Scheme', 'Ja
 				echo '<div class="form_error">'.
 					_('Le type est vide').
 					'</div>';
-			} else if (!in_array($_POST['program_language'], $available_languages)) {
+			} else if (!in_array($_POST['program_language'], Project_Template::$available_languages)) {
 				echo '<div class="form_error">'.
 					_('Le language de programmation est invalide').
 					'</div>';
@@ -83,7 +84,7 @@ $available_languages = array('PHP', 'C', 'C++', 'Shell', 'Python', 'Scheme', 'Ja
 				<p><label>Language de programmation</label>
 					<select name="program_language">
 						<?php 
-						foreach ($available_languages as $l) {
+						foreach (Project_Template::$available_languages as $l) {
 							$selected = (isset($_POST['program_language']) && $_POST['program_language'] == $l) ? ' selected="selected"' : '';
 							echo '<option name="'.$l.'"'.$selected.'>'.$l.'</option>';
 						}

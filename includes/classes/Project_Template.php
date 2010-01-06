@@ -10,8 +10,26 @@ class Project_Template extends Project_File
 	 */
 	private $project;
 	
-	// Variables simples
+	// Simple variables
 	private $name;
+	
+	/**
+	 * Languages that user can chose for xgettext.
+	 * 
+	 * @var array
+	 */
+	static $available_languages = array(
+		'PHP', 
+		'C', 
+		'C++', 
+		'Shell', 
+		'Python', 
+		'Scheme', 
+		'Java', 
+		'C#', 
+		'Perl', 
+		'Glade'
+	);
 	
 	/**
 	 * Constructeur.
@@ -60,6 +78,10 @@ class Project_Template extends Project_File
 			throw new Project_Template_Exception(
 				sprintf(_('Impossible d\'écrire dans le nouveau fichier (%s)'), $template->file_path)
 			);
+		} else if (!in_array($language, self::$available_languages)) {
+			throw new Project_Template_Exception(
+				_('Le language de programmation n\'est pas valide')
+			);
 		}
 		
 		$keywords_string = '';
@@ -81,7 +103,7 @@ class Project_Template extends Project_File
 			}
 		}
 		
-		$command = 'xgettext --force-po --add-location --sort-output --output="'.$template->file_path.'"'.
+		$command = 'xgettext --force-po --add-location --sort-output --language="'.$language.'" --output="'.$template->file_path.'"'.
 			$keywords_string.$directories_string.$files_string;
 		$exec_result = exec($command);
 		
