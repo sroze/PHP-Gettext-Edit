@@ -1,12 +1,14 @@
-<table id="po_datagrid"></table>
-<div id="msgeditor" class="flexigrid my">
-	<div class="mDiv">
-		<div class="title">Édition de la séléction</div>
+<form id="msgeditorform" method="POST" action="">
+	<table id="po_datagrid"></table>
+	<div id="msgeditor" class="flexigrid my">
+		<div class="mDiv">
+			<div class="title">Édition de la séléction</div>
+		</div>
+		<div class="grid">
+			<p>Données</p>
+		</div>
 	</div>
-	<div class="grid">
-		<p>Données</p>
-	</div>
-</div>
+</form>
 <script type="text/javascript">
 $(document).ready(function() {
 	var gridWidth = Math.round($('div#contents').width() / 2) - 20;
@@ -21,9 +23,17 @@ $(document).ready(function() {
 			{display: 'Traduction', name : 'msgstr', width : colWidth, sortable : true, align: 'left'}
 		],
 		buttons: [
-		    {name: 'Sauvegarder', bclass: 'save', onpress: test},
+		    {name: 'Sauvegarder', bclass: 'save', onpress: function (a, b){
+				$('form#msgeditorform').submit()
+			}},
 			{separator: true},
-			{name: 'Ajouter', bclass: 'add', onpress : test},
+			{name: 'Ajouter', bclass: 'add', onpress : function (a,b){
+				$("#po_datagrid").each(function(){
+					var new_data = $(this).data;
+					new_data.rows.push({id:new_data.total+1, cell:[0, '', '']});
+					$(this).flexAddData(new_data);
+				});
+			}},
 			{name: 'Supprimer', bclass: 'delete', onpress : test},
 			{separator: true},
 			{name: 'Éditer', bclass: 'edit', onpress: test}

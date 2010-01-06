@@ -367,6 +367,7 @@
 				
 				$('.pReload',this.pDiv).removeClass('loading');
 				this.loading = false;
+				this.data = data;
 
 				if (!data) 
 					{
@@ -400,11 +401,7 @@
 				this.buildpager();
 
 				//build new body
-				var tbody = $(t).find('tbody');
-				if (tbody.length <= 0) {
-					tbody = document.createElement('tbody');
-					$(t).append(tbody);
-				}
+				var tbody = document.createElement('tbody');
 				
 				if (p.dataType=='json')
 				{
@@ -513,8 +510,9 @@
 				}
 
 				$('tr',t).unbind();
-				//$(t).empty();
-				//$(t).append(tbody);
+				$(t).empty();
+				
+				$(t).append(tbody);
 				this.addCellProp();
 				this.addRowProp();
 				
@@ -1447,7 +1445,9 @@
 	$.fn.flexAddData = function(data) { // function to add data to grid
 
 		return this.each( function() {
-				if (this.grid) this.grid.addData(data);
+				if (this.grid) {
+					this.grid.addData(data);
+				}
 			});
 
 	};
