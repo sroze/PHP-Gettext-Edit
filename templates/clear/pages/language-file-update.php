@@ -11,7 +11,7 @@ if (!isset($language_file)) {
 	<div id="contents" class="with_sidebar">
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; 
 			<a href="index.php?page=language&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo $language->getName(); ?></a> &raquo; 
-			<a href="index.php?page=language&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo $language_file->getName(); ?></a> &raquo; 
+			<a href="index.php?page=language-file&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo $language_file->getName(); ?></a> &raquo; 
 			Mettre à niveau</h1>
 		<?php 
 		if (isset($_POST['action'])) {
@@ -19,7 +19,7 @@ if (!isset($language_file)) {
 				$language_file->update();
 				
 				echo '<div class="form_success">'.
-					_('Fichier mis à niveau').' - <a href="index.php?page=project&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Retour').'</a>'.
+					_('Fichier mis à niveau').' - <a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Retour').'</a>'.
 					'</div>';
 			} catch (Exception $e) {
 				echo '<div class="form_error">'.
