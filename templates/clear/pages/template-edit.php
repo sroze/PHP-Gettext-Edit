@@ -53,7 +53,7 @@ if (!isset($template)) {
 					);
 					
 					echo '<div class="form_success">'.
-						_('Template re-généré').
+						_('Template édité').
 						'</div>';
 						
 					unset($_POST);

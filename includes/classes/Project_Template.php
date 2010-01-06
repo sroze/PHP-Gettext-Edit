@@ -209,6 +209,8 @@ class Project_Template extends Project_File
 			);
 		}
 		
+		$headers['GetTextEdit-updated'] = time();
+		
 		$this->setHeaders(
 			array_merge(
 				$this->getHeaders(),
@@ -244,6 +246,8 @@ class Project_Template extends Project_File
 		if (!empty($files)) {
 			$headers['GetTextEdit-files'] = serialize($files);
 		}
+		
+		$headers['GetTextEdit-edited'] = time();
 		
 		return $this->setHeaders($headers);
 	}
