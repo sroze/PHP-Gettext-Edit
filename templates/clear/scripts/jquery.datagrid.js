@@ -509,7 +509,7 @@
 				}
 
 				$('tr',t).unbind();
-				$(t).empty();
+				//$(t).empty();
 				
 				$(t).append(tbody);
 				this.addCellProp();
@@ -762,7 +762,9 @@
 									},
 								function () {}						
 							)
-							;
+							.dblclick(function (e){
+								openPoLine(this);
+							});
 							
 							if ($.browser.msie&&$.browser.version<7.0)
 								{
@@ -1484,3 +1486,8 @@
 	}; //end noSelect
 		
 })(jQuery);
+
+function openPoLine (object)
+{
+	alert('dblclick');
+}
