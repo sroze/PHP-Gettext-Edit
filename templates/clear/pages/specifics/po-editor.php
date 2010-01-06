@@ -29,7 +29,7 @@ $(document).ready(function() {
 			{separator: true},
 			{name: 'Ajouter', bclass: 'add', onpress : function (a,b){
 				$("#po_datagrid").each(function(){
-					var new_data = $(this).storedData;
+					var new_data = $(this).grid.storedData;
 					new_data.rows.push({id:new_data.total+1, cell:[0, '', '']});
 					$(this).flexAddData(new_data);
 				});
