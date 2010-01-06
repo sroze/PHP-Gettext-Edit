@@ -187,11 +187,7 @@ class Project_Language
 	    while (false !== ($file = readdir($directory))) {
 	    	var_dump($file, $directory_path.$file);
 	        if (is_file($directory_path.$file) && substr($file, -3) == '.po') {
-	        	$result[] = str_replace(
-				        		'/',
-				        		'@',
-				        		$directory_name.substr($file, 0, -3)
-				        	);
+	        	$result[] = $directory_name.substr($file, 0, -3);
 	        } else if (is_dir($directory_path.$file) && substr($file, 0, 1) != '.') {
 	        	foreach ($this->getFilesInDirectory($directory_name.$file.'/') as $file2) {
 	        		$result[] = $file2;

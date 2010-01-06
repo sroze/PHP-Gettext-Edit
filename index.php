@@ -72,7 +72,7 @@ if (isset($_GET['project'])) {
 		}
 		
 		if (isset($_GET['file'])) {
-			if (!preg_match('#^([a-z0-9_-]+)$#i', $_GET['file'])) {
+			if (!preg_match('#^([a-z0-9_/-]+)$#i', $_GET['file']) || substr($_GET['file'], 0, 1) == '/') {
 				echo _('Nom du fichier invalide');
 				exit();
 			}

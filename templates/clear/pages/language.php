@@ -20,7 +20,9 @@ if (!isset($language)) {
 		if (!empty($files)) {
 			echo '<ul>';
 			foreach ($files as $file) {
-				echo '<li><a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$file.'">'.$file.'.po</a></li>';
+				echo '<li><a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$file.'">'.
+					$file.
+					'.po</a></li>';
 			}
 			echo '</ul>';
 		} else {
