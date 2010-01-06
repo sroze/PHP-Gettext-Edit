@@ -172,6 +172,11 @@ abstract class Project_File
 			$position++;
 		}
 		
+		if (empty($part)) { // pas d'en-tête actuellement
+			$part = 'msgid ""'."\n".'msgstr ""'."\n".'"GetTextEdit-header"';
+			$file_contents = $part."\n".$file_contents;
+		}
+		
 		$puts = file_put_contents(
 			$this->file_path,
 			str_replace(
