@@ -129,6 +129,17 @@ class Project_Language_File extends Project_File
 	}
 	
 	/**
+	 * Return the name of the file template
+	 * 
+	 * @return string
+	 */
+	public function getTemplateName ()
+	{
+		$template = $this->getTemplate();
+		return $template->getName();
+	}
+	
+	/**
 	 * Return the template instance of file.
 	 * 
 	 * @return Project_Template

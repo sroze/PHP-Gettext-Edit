@@ -30,8 +30,7 @@ if (!isset($language_file)) {
 		?>
 		<form action="" method="POST">
 			<p><label>Template</label><?php
-			$template = $language_file->getTemplate();
-			echo $template->getName();
+			echo $language_file->getTemplateName();
 			?></p>
 			<input type="hidden" name="action" value="update" />
 			<p><input type="submit" value="Mettre à niveau" /></p>
