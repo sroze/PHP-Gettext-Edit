@@ -296,7 +296,7 @@ class Project_Language_File extends Project_File
 		$new_msgstr_formated = 'msgstr "';
 		$x = explode("\n", $new_msgstr);
 		$x = array_map('addslashes', $x);
-		$new_msgstr_formated .= implode('\n"'."\n".'"');
+		$new_msgstr_formated .= implode('\n"'."\n".'"', $x);
 		$new_msgstr_formated .= '"';
 		
 		if (!isset($part)) { // le msgid n'a pas été trouvé
