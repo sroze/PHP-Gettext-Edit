@@ -9,6 +9,10 @@ if (!isset($project)) {
 		<p>À venir</p>
 	</div>
 	<div id="contents" class="with_sidebar">
+		<div class="link right">
+			<a class="delete" href="index.php?page=project-delete&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Supprimer'); ?></a>
+			<a class="edit" href="index.php?page=project-edit&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Editer'); ?></a>
+		</div>
 		<h1><?php echo $project->get('project_name'); ?></h1>
 		
 		<div class="box little right">

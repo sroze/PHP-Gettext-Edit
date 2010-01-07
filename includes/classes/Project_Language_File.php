@@ -97,7 +97,7 @@ class Project_Language_File extends Project_File
 	/**
 	 * Update file from its template.
 	 * 
-	 * @return bool
+	 * @return void
 	 */
 	public function update ()
 	{
@@ -110,6 +110,32 @@ class Project_Language_File extends Project_File
 			'"'.$this->file_path.'" "'.$template->file_path.'"';
 		$exec_result = exec($command);
 		//var_dump($command, $exec_result);
+	}
+	
+	/**
+	 * Compile the .po file into an .mo file.
+	 * 
+	 * @param bool $use_fuzzy
+	 * 
+	 * @return string $output_file_path
+	 */
+	public function compile ($use_fuzzy = false)
+	{
+		$output_file_path = substr($this->file_path, 0, -2).'mo'; // Remplace .po by .mo
+		$command = 'msgfmt '.
+			($use_fuzzy ? '--use-fuzzy ' : '').
+			'--output-file="'.$output_file_path.'" '.
+			'"'.$this->file_path.'"';
+			
+		$exec_result = exec($command);
+		
+		if (is_file($output_file_path)) {
+			return $output_file_path;
+		} else {
+			throw new Project_Language_File_Exception(
+				sprintf(_('La compilation vers le fichier "%s" a échoué.'), $output_file_path)
+			);
+		}
 	}
 	
 	/**

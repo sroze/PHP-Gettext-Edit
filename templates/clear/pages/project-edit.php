@@ -1,6 +1,11 @@
-<div id="page">
+<?php
+if (!isset($project)) {
+	echo _('Paramètres URL insuffisants');
+	exit();
+}
+?><div id="page">
 	<div id="contents">
-		<h1><?php echo _('Nouveau projet'); ?></h1>
+		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo _('Éditer'); ?></h1>
 		<?php
 		if (isset($_POST['name'])) {
 			if (!preg_match('#^([a-z0-9-]+)$#i', $_POST['name'])) {
@@ -13,13 +18,13 @@
 					'</div>';
 			} else { 
 				try {
-					$project_id = Project::create($_POST['name'], $_POST['path_app'], $_POST['path_lang']);
+					$project->edit($_POST['name'], $_POST['path_app'], $_POST['path_lang']);
 					
 					echo '<div class="message success"><p>'.
-						_('Projet créé').'</p>';
+						_('Projet édité').'</p>';
 					echo '<p><form action="index.php" method="GET">'.
 						'<input type="hidden" name="page" value="project" />'.
-						'<input type="hidden" name="project" value="'.$project_id.'" />'.
+						'<input type="hidden" name="project" value="'.$project->get('project_id').'" />'.
 						'<input type="submit" value="'._('Continuer').'" />'.
 						'</form></p>';
 					echo '</div>';
@@ -29,6 +34,8 @@
 					echo '<div class="message error"><p>'.$e->getMessage().'</p></div>';
 				}
 			}
+		} else {
+			
 		}
 		?>
 		<form method="POST" action=""><?php 

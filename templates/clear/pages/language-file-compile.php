@@ -12,6 +12,31 @@ if (!isset($language_file)) {
 			<a href="index.php?page=language&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo $language->getName(); ?></a> &raquo; 
 			<a href="index.php?page=language-file&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo $language_file->getName(); ?></a> &raquo; 
 			<?php echo _('Compiler'); ?></h1>
-		
+		<?php 
+		if (isset($_POST['compile'])) {
+			try {
+				$output_file_path = $language_file->compile();
+				
+				echo '<div class="box success">'.
+					'<p>'.sprintf(_('Fichier compilé: <strong>%s</strong>'), $output_file_path).' - <a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Retour').'</a></p>'.
+					'</div>';
+			} catch (Exception $e) {
+				echo '<div class="box success">'.
+					'<p>'.$e->getMessage().'</p>'.
+					'</div>';
+			}
+		}
+		?>
+		<div class="box">
+			<p><?php echo _('Pour compiler votre fichier de <code>.po</code> de traduction, et ainsi pouvoir l\'utiliser juste après '.
+			'dans votre application, il vous suffit de cliquer sur le button "Compiler".'); ?> <?php echo _('Voici quelques informations '.
+			'concernenant la version actuelle de votre fichier .mo (compilé) :'); ?></p>
+			<ul>
+				<li><?php echo _('Le fichier n\'éxiste pas encore'); ?></li>
+			</ul>
+			<form action="" method="POST">
+				<p><input type="submit" name="compile" value="<?php echo _('Compiler le fichier .po'); ?>" /></p>
+			</form>
+		</div>
 	</div>
 </div>

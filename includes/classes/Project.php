@@ -61,6 +61,107 @@ class Project
 		
 		$this->id = $id;
 	}
+	/**
+	 * Create a new project.
+	 * 
+	 * @param string $name
+	 * @param string $path
+	 * @param string $lang_path
+	 * 
+	 * @return integer $id
+	 */
+	static function create ($name, $path, $lang_path)
+	{
+		global $sql;
+			
+		$this->checkData($name, $path, $lang_path);
+		
+		$query = $sql->query('INSERT INTO projects (project_name, project_path, project_languages_path) VALUES
+			("'.$name.'", "'.$path.'", "'.$lang_path.'")
+		');
+		
+		if ($query) {
+			return $sql->lastInsertId();
+		}
+	}
+	
+	/**
+	 * Edit project's fields.
+	 * 
+	 * @param string $name
+	 * @param string $path
+	 * @param string $lang_path
+	 * 
+	 * @return bool
+	 */
+	public function edit ($name, $path, $lang_path)
+	{
+		$this->checkData($name, $path, $lang_path);
+		
+		$query = $this->sql->query('UPDATE projects SET 
+			project_name = "'.$name.'", 
+			project_path = "'.$path.'", 
+			project_languages_path = "'.$lang_path.'"
+			WHERE id = '.$this->id
+		);
+		
+		if ($query) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Delete the project.
+	 * 
+	 * @return bool
+	 */
+	public function delete ()
+	{
+		$query = $this->sql->query('DELETE FROM projects WHERE id = '.$this->id);
+		
+		if ($query) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Check and parse data from user.
+	 * 
+	 * @param string $name
+	 * @param string $path
+	 * @param string $lang_path
+	 * 
+	 * @return bool
+	 */
+	private function checkData ($name, &$path, &$lang_path)
+	{
+		$path = str_replace('"', '\\"', $path);
+		if (substr($path, -1) != '/') {
+			$path .= '/';
+		}
+				
+		$lang_path = str_replace('"', '\\"', $lang_path);
+		if (substr($lang_path, -1) != '/') {
+			$lang_path .= '/';
+		}
+		
+		$path = realpath($path);
+		if ($path === false) {
+			throw new Project_Exception(
+				sprintf(_('Le dossier "%s" n\'éxiste pas ou n\'est pas accessible'), $path)
+			);
+		} else if (!is_dir($path.$lang_path)) {
+			throw new Project_Exception(
+				sprintf(_('Le dossier "%s" n\'éxiste pas au sein du projet'), $lang_path)
+			);
+		}
+		
+		return true;
+	}
 	
 	/**
 	 * Return all languages of the project.
