@@ -221,7 +221,6 @@ abstract class Project_File
 					'fuzzy' => false,
 					'comments' => ''
 				);
-				var_dump('a', $result[$msgid]['comments']);
 				
 				$comments_part = substr($file_contents, $prev_position, $position-$prev_position);
 				
@@ -273,14 +272,10 @@ abstract class Project_File
 					$bracket_position++;
 				}
 				
-				var_dump('b', $result[$msgid]['comments']);
-				
 				$result[$msgid]['msgstr'] = $string;
 				if (!empty($result[$msgid]['comments'])) {
 					$result[$msgid]['comments'] = substr($result[$msgid]['comments'], 0, -1);
 				}
-				
-				var_dump('c', $result[$msgid]['comments']);
 				
 				unset($last_bracket_position);
 			}
