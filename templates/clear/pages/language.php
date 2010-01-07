@@ -32,9 +32,9 @@ if (!isset($language)) {
 					if (!$need_update && in_array(Project_Language_File::W_UPDATE, $file_warnings)) {
 						$need_update = true;
 					}
-					$class = 'important';
+					$class = 'invalid';
 				} else {
-					$class = 'inutile';
+					$class = 'valid';
 				}
 				
 				echo '<li class="'.$class.'"><a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$file->getName().'">'.
