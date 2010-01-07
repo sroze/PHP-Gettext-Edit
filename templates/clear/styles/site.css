@@ -37,6 +37,30 @@ ul li p {
 	margin: 5px 0px 15px 0px;
 	padding: 0;
 }
+ul li {
+	list-style: none;
+	background: url(../images/icons/bullet.png) no-repeat;
+	padding-left: 25px;
+}
+ul li.spacer {
+	list-style: none; 
+	height: 8px;
+}
+ul li.important {
+	background: url(../images/icons/exclamation.png) no-repeat;
+}
+ul li.important a {
+	color: #C61A1A;
+	font-weight: bold;
+}
+ul li.inutile {
+	background: url(../images/icons/tick.png) no-repeat;
+}
+ul li.inutile a {
+	color: #279A08;
+	font-weight: bold;
+	text-decoration: line-through;
+}
 code {
 	background: #EAEAEA;
 	font-family: Consolas,Monaco,monospace;

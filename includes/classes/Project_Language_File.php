@@ -184,7 +184,7 @@ class Project_Language_File extends Project_File
 	 * 
 	 * @return Project_Template
 	 */
-	private function getTemplate ()
+	public function getTemplate ()
 	{
 		$headers = $this->getHeaders();
 		
