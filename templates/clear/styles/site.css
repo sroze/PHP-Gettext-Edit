@@ -24,6 +24,14 @@ div#header h2 {
 	font-style: italic;
 	font-weight: normal;
 }
+a, a:link, a:visited {
+	color: #2A5685;
+	text-decoration: none;
+}
+a:hover, a:focus {
+	color: #C61A1A;
+	text-decoration: underline;
+}
 /* Menu */
 ul#top_menu {
 	margin: 1px 0 0 10px;;
