@@ -1523,10 +1523,14 @@
 					url: p.url,
 					data: param,
 					dataType: p.dataType,
-					success: function(data) {
-						$('div#right_message').text('Sauvegardé').slideDown();
-					},
-					error: function(data) { try { if (p.onError) p.onError(data); } catch (e) {} }
+					success: function(data) {},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						if (XMLHttpRequest.status == 201) {
+							$('div#right_message').text('Sauvegardé').slideDown();
+						} else {
+							$('div#right_message').addClass('error').text('Erreur: '+errorThrown);
+						}
+					}
 				});
 				
 				// Reload-data...
