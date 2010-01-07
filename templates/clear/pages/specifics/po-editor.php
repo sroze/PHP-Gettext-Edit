@@ -4,7 +4,7 @@
 		<div class="mDiv">
 			<div class="title">Édition de la séléction</div>
 		</div>
-		<div class="grid">
+		<div class="my grid">
 			<fieldset>
 				<legend>msgid</legend>
 				<textarea id="right_msgid" name="msgid"></textarea>

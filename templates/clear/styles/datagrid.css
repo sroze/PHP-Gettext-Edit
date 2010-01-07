@@ -741,6 +741,14 @@ div.colCopy {
 			{
 			overflow: hidden;
 			}			
+/* po editor */
+
+.grid.my {
+	padding: 5px;
+}
+div.grid textarea {
+	width: 99%;
+}
 /* buttons style */
 .flexigrid div.fbutton .add {
 	background: url(../images/icons/add.png) no-repeat center left;
