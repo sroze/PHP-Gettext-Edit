@@ -69,8 +69,9 @@ while (false !== ($position = strpos($file_contents, 'msgid', $position))) {
 		}
 		
 		$result[$msgid]['msgstr'] = $string;
-		$result[$msgid]['comments'] = substr($result[$msgid]['comments'], 0, -1);
-		
+		if (!empty($result[$msgid]['comments'])) {
+			$result[$msgid]['comments'] = substr($result[$msgid]['comments'], 0, -1);
+		}
 		unset($last_bracket_position);
 	}
 	
