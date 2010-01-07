@@ -219,7 +219,7 @@ abstract class Project_File
 					'msgstr' => null,
 					'references' => array(),
 					'fuzzy' => false,
-					'comments' => ''
+					'comments' => array()
 				);
 				
 				$comments_part = substr($file_contents, $prev_position, $position-$prev_position);
@@ -240,7 +240,7 @@ abstract class Project_File
 							}
 							break;
 						default:
-							$result[$msgid]['comments'] .= trim(substr($line, 1))."\n";
+							$result[$msgid]['comments'][] = trim(substr($line, 1));
 							break;
 					}
 				}
@@ -273,7 +273,6 @@ abstract class Project_File
 				}
 				
 				$result[$msgid]['msgstr'] = $string;
-				$result[$msgid]['comments'] = substr($result[$msgid]['comments'], 0, -1);
 				
 				unset($last_bracket_position);
 			}
