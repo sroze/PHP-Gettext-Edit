@@ -64,7 +64,7 @@ if ($_POST['query'] == 'select') {
 	$msgids = json_decode($_POST['msgids']);
 	
 	foreach ($msgids as $msgid) {
-		$language_file->editMessage($msgid, null);
+		$language_file->editMessage($msgid, false);
 	}
 	
     header("HTTP/1.0 204 No Content");

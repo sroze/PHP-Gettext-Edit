@@ -116,3 +116,27 @@ voir plus...',
 	)
 ));
 
+
+$unittest->setTestTitle('editMessage (delete)');
+$file->editMessage('test2', false);
+$unittest->mustBeEqual($file->getMessages(), array(
+	'test' => array(
+		'msgstr' => 'translation3',
+		'references' => array(
+			'file.php:12'
+		),
+		'fuzzy' => false,
+		'comments' => array(
+			'Welcome'
+		)
+	),	
+	'longue, très longue traduction' => array(
+		'msgstr' => 'Ça c\'est du jamais vu!
+Parce que elle est très très longur
+voir plus...',
+		'references' => array(),
+		'fuzzy' => false,
+		'comments' => array()
+	)
+));
+
