@@ -1593,6 +1593,7 @@ function openPoLine (object)
 {
 	$('tr.trSelected').removeClass('trSelected');
 	$(object).toggleClass('trSelected').focus();
+	$('div#right_message').slideUp();
 	
 	var trId = object.id.substr(3);
 	var id = searchRowId('id', trId);
