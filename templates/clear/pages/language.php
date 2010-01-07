@@ -37,8 +37,8 @@ if (!isset($language)) {
 					$class = 'inutile';
 				}
 				
-				echo '<li class="'.$class.'"><a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$file.'">'.
-					$file.
+				echo '<li class="'.$class.'"><a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$file->getName().'">'.
+					$file->getName().
 					'.po</a></li>';
 			}
 			echo '</ul>';
