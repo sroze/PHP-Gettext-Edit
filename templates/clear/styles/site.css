@@ -33,6 +33,9 @@ a:hover, a:focus {
 	color: #C61A1A;
 	text-decoration: underline;
 }
+div#contents ul {
+	padding-left: 20px;
+}
 div#contents ul li p {
 	margin: 5px 0px 15px 0px;
 	padding: 0;
@@ -47,14 +50,14 @@ div#contents ul li.spacer {
 	background: none;
 	height: 8px;
 }
-div#contents ul li.important {
+div#contents ul li.important, div#contents ul li.invalid {
 	background: url(../images/icons/exclamation.png) no-repeat;
 }
 div#contents ul li.important a {
 	color: #C61A1A;
 	font-weight: bold;
 }
-div#contents ul li.inutile {
+div#contents ul li.inutile, div#contents ul li.valid {
 	background: url(../images/icons/tick.png) no-repeat;
 }
 div#contents ul li.inutile a {
@@ -170,6 +173,9 @@ div.box.error {
 	border: 1px solid #DE2323;
 	padding-left: 25px;
 	margin-bottom: 10px;
+}
+div.box ul {
+	padding-left: 5px;
 }
 div.link.right {
 	float: right;

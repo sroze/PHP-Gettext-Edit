@@ -17,10 +17,31 @@ if (!isset($language)) {
 		<h3><?php echo _('Fichiers .po'); ?></h3>
 		<?php 
 		$files = $language->getFiles();
+		$need_compile = false;
+		$need_update = false;
+		
 		if (!empty($files)) {
 			echo '<ul>';
 			foreach ($files as $file) {
-				echo '<li><a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$file.'">'.
+				$language_file = new Project_Language_File($language, $file);
+				$language_file_headers = $language_file->getHeaders();
+				$template = $language_file->getTemplate();
+				$template_headers = $template->getHeaders();
+				
+				$class = ' class="valid"';
+				
+				if (!array_key_exists('GetTextEdit-updated', $language_file_headers) OR
+					(int) $template_headers['GetTextEdit-updated'] > (int) $language_file_headers['GetTextEdit-updated']) {
+					$need_update = true;
+					$class = ' class="invalid"';
+				}
+				if (!array_key_exists('GetTextEdit-compiled', $language_file_headers) OR
+				(int) $language_file_headers['GetTextEdit-updated'] > (int) $language_file_headers['GetTextEdit-compiled']) {
+					$need_compile = true;
+					$class = ' class="invalid"';
+				}
+				
+				echo '<li'.$class.'><a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$file.'">'.
 					$file.
 					'.po</a></li>';
 			}
@@ -31,14 +52,27 @@ if (!isset($language)) {
 		?>
 		</div>
 		<ul>
-			<li><a href="index.php?page=language-new-po-file&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
-				<?php echo _('Créer un nouveau fichier .po'); ?>
-			</a></li>
-			<li><a href="index.php?page=language-compile-files&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
+			<li<?php 
+			if ($need_compile) {
+				echo ' class="important"';
+			} else {
+				echo ' class="inutile"';
+			}
+			?>><a href="index.php?page=language-compile-files&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
 				<?php echo _('Compiler tous les fichiers'); ?>
 			</a></li>
-			<li><a href="index.php?page=language-update-files&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
+			<li<?php 
+			if ($need_update) {
+				echo ' class="important"';
+			} else {
+				echo ' class="inutile"';
+			}
+			?>><a href="index.php?page=language-update-files&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
 				<?php echo _('Mettre à jour les fichiers depuis leur template'); ?>
+			</a></li>
+			<li class="spacer"></li>
+			<li><a href="index.php?page=language-new-po-file&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
+				<?php echo _('Créer un nouveau fichier .po'); ?>
 			</a></li>
 		</ul>
 		<div class="clear" />
