@@ -60,8 +60,10 @@ if (!isset($project)) {
 				<label><?php echo _('Créer les .po définis par les templates'); ?></label>
 				<?php
 				foreach ($templates as $template) {
-					$checked = (isset($_POST['templates'], $_POST['templates'][$template])) ? ' checked="checked"' : '';
-					echo '<input type="checkbox" name="templates[]" value="'.$template.'"'.$checked.' /> '.$template.'<br />';
+					$template_name = $template->getName();
+					
+					$checked = (isset($_POST['templates'], $_POST['templates'][$template_name])) ? ' checked="checked"' : '';
+					echo '<input type="checkbox" name="templates[]" value="'.$template_name.'"'.$checked.' /> '.$template_name.'<br />';
 				}
 				?>
 			</p><?php

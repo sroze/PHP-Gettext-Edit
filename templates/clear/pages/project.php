@@ -23,7 +23,8 @@ if (!isset($project)) {
 		if (!empty($templates)) {
 			echo '<ul>';
 			foreach ($templates as $template) {
-				echo '<li><a href="index.php?page=template&project='.$project->get('project_id').'&template='.$template.'">'.$template.'</a></li>';
+				$template_name = $template->getName();
+				echo '<li><a href="index.php?page=template&project='.$project->get('project_id').'&template='.$template_name.'">'.$template_name.'</a></li>';
 			}
 			echo '</ul>';
 		} else {
@@ -38,9 +39,13 @@ if (!isset($project)) {
 		$languages = $project->getLanguages();
 		if (!empty($languages)) {
 			echo '<ul>';
-			foreach ($languages as $lang) {
-				$language = new Project_Language($project, $lang);
-				echo '<li><a href="index.php?page=language&project='.$project->get('project_id').'&language='.$language->getCode().'">'.$language->getName().'</li>';
+			foreach ($languages as $language) {
+				if (!empty($language->getWarnings())) {
+					$class = 'important';
+				} else {
+					$class = 'inutile';
+				}
+				echo '<li class="'.$class.'"><a href="index.php?page=language&project='.$project->get('project_id').'&language='.$language->getCode().'">'.$language->getName().'</li>';
 			}
 			echo '</ul>';
 		} else {

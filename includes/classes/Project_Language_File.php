@@ -3,6 +3,11 @@ require_once ROOT_PATH.'includes/classes/Project_File.php';
 
 class Project_Language_File extends Project_File
 {
+	// Warnings const
+	const W_COMPILE = 1;
+	const W_UPDATE = 2;
+	
+	// Vars
 	private $language;
 	private $name;
 	
@@ -198,6 +203,31 @@ class Project_Language_File extends Project_File
 				trim($headers['GetTextEdit-template'])
 			);
 		}
+	}
+	
+	/**
+	 * Return warnings.
+	 * 
+	 * @return array
+	 */
+	public function getWarnings ()
+	{
+		$warnings = array();
+		
+		$headers = $this->getHeaders();
+		$template = $this->getTemplate();
+		$template_headers = $template->getHeaders();
+
+		if (!array_key_exists('GetTextEdit-updated', $language_file_headers) OR
+			(int) $template_headers['GetTextEdit-updated'] > (int) $language_file_headers['GetTextEdit-updated']) {
+			$warnings[] = self::W_UPDATE;
+		}
+		if (!array_key_exists('GetTextEdit-compiled', $language_file_headers) OR
+		(int) $language_file_headers['GetTextEdit-edited'] > (int) $language_file_headers['GetTextEdit-compiled']) {
+			$warnings[] = self::W_COMPILE;
+		}
+		
+		return $warnings;
 	}
 }
 

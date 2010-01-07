@@ -177,7 +177,7 @@ class Project
 	    /* Ceci est la façon correcte de traverser un dossier. */
 	    while (false !== ($file = readdir($directory))) {
 	        if (substr($file, 0, 1) != '.' && is_dir($directory_path.$file)) {
-	        	$result[] = $file;
+	        	$result[] = new Project_Language($this, $file);
 	        }
 	    }
 	    
@@ -198,7 +198,10 @@ class Project
 	    /* Ceci est la façon correcte de traverser un dossier. */
 	    while (false !== ($file = readdir($directory))) {
 	        if (is_file($directory_path.$file) && substr($file, -4) == '.pot') {
-	        	$result[] = substr($file, 0, -4);
+	        	$result[] = new Project_Template(
+	        		$this,
+	        		substr($file, 0, -4)
+	        	);
 	        }
 	    }
 	    

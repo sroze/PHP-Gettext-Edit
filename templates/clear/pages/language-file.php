@@ -4,8 +4,7 @@ if (!isset($language_file)) {
 	exit();
 }
 
-$template = $language_file->getTemplate();
-$template_headers = $template->getHeaders();
+$warnings = $language_file->getWarnings();
 $file_headers = $language_file->getHeaders();
 
 ?><div id="page">
@@ -36,20 +35,18 @@ $file_headers = $language_file->getHeaders();
 		</ul>
 		</div>
 		<ul><li<?php			
-			if (!array_key_exists('GetTextEdit-updated', $file_headers) OR
-				(int) $template_headers['GetTextEdit-updated'] > (int) $file_headers['GetTextEdit-updated']) {
+			if (in_array(Project_Language_File::W_UPDATE, $warnings)) {
 				echo ' class="important"';
-			} else if ((int) $template_headers['GetTextEdit-updated'] <= (int) $file_headers['GetTextEdit-updated']) {
+			} else {
 				echo ' class="inutile"';
 			}
 			?>><a href="index.php?page=language-file-update&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
 				<?php echo _('Recharger depuis le template'); ?>
 			</a></li>
 			<li<?php 
-			if (!array_key_exists('GetTextEdit-compiled', $file_headers) OR
-				(int) $file_headers['GetTextEdit-edited'] > (int) $file_headers['GetTextEdit-compiled']) {
+			if (in_array(Project_Language_File::W_COMPILE, $warnings)) {
 				echo ' class="important"';
-			} else if ((int) $file_headers['GetTextEdit-edited'] <= (int) $file_headers['GetTextEdit-compiled']) {
+			} else {
 				echo ' class="inutile"';
 			}
 			?>><a href="index.php?page=language-file-compile&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">

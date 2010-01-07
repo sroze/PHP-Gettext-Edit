@@ -23,25 +23,21 @@ if (!isset($language)) {
 		if (!empty($files)) {
 			echo '<ul>';
 			foreach ($files as $file) {
-				$language_file = new Project_Language_File($language, $file);
-				$language_file_headers = $language_file->getHeaders();
-				$template = $language_file->getTemplate();
-				$template_headers = $template->getHeaders();
+				$file_warnings = $file->getWarnings();
 				
-				$class = ' class="valid"';
-				
-				if (!array_key_exists('GetTextEdit-updated', $language_file_headers) OR
-					(int) $template_headers['GetTextEdit-updated'] > (int) $language_file_headers['GetTextEdit-updated']) {
-					$need_update = true;
-					$class = ' class="invalid"';
-				}
-				if (!array_key_exists('GetTextEdit-compiled', $language_file_headers) OR
-				(int) $language_file_headers['GetTextEdit-edited'] > (int) $language_file_headers['GetTextEdit-compiled']) {
-					$need_compile = true;
-					$class = ' class="invalid"';
+				if (!empty($file_warnings)) {
+					if (!$need_compile && in_array(Project_Language_File::W_COMPILE, $file_warnings)) {
+						$need_compile = true;
+					}
+					if (!$need_update && in_array(Project_Language_File::W_UPDATE, $file_warnings)) {
+						$need_update = true;
+					}
+					$class = 'important';
+				} else {
+					$class = 'inutile';
 				}
 				
-				echo '<li'.$class.'><a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$file.'">'.
+				echo '<li class="'.$class.'"><a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$file.'">'.
 					$file.
 					'.po</a></li>';
 			}

@@ -133,12 +133,32 @@ class Project_Language
 	        	$result[] = $directory_name.substr($file, 0, -3);
 	        } else if (is_dir($directory_path.$file) && substr($file, 0, 1) != '.') {
 	        	foreach ($this->getFilesInDirectory($directory_name.$file.'/') as $file2) {
-	        		$result[] = $file2;
+	        		$result[] = new Project_Language_File($this, $file2);
 	        	}
 	        }
 	    }
 	    
 	    return $result;
+	}
+	
+	/**
+	 * Return language's and language's files' warnings.
+	 * 
+	 * @return array
+	 */
+	public function getWarnings ()
+	{
+		$warnings = array();
+		
+		foreach ($this->getFiles() as $file) {
+			foreach ($file->getWarnings() as $file_warning) {
+				if (!in_array($file_warning, $warnings)) {
+					$warnings[] = $file_warning;
+				}
+			}
+		}
+		
+		return $warnings;
 	}
 }
 

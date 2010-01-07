@@ -49,7 +49,9 @@ if (!isset($language)) {
 				<p><label><?php echo _('À partir du modèle'); ?></label>
 					<select name="template">
 						<?php 
-						foreach ($project->getTemplates() as $template_name) {
+						foreach ($project->getTemplates() as $template) {
+							$template_name = $template->getName();
+							
 							$selected = (isset($_POST['template']) && $_POST['template'] == $template_name) ? ' selected="selected"' : '';
 							echo '<option name="'.$template_name.'"'.$selected.'>'.$template_name.'</option>';
 						}
