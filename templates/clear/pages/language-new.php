@@ -1,6 +1,6 @@
 <?php
 if (!isset($project)) {
-	echo 'Paramètres URL insuffisants';
+	echo _('Paramètres URL insuffisants');
 	exit();
 }
 ?><div id="page">
@@ -9,11 +9,11 @@ if (!isset($project)) {
 		<p>À venir</p>
 	</div>
 	<div id="contents" class="with_sidebar">
-		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; Nouvelle langue</h1>
+		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo _('Nouvelle langue'); ?></h1>
 		<?php
 		if (isset($_POST['code'])) {
 			if (!preg_match('#^([a-z0-9_-]+)$#i', $_POST['code'])) {
-				echo '<div class="form_error">'.
+				echo '<div class="message error">'.
 					_('Le code contient des caractères invalides').
 					'</div>';
 			} else {
@@ -27,12 +27,18 @@ if (!isset($project)) {
 						}
 					}
 					
-					echo '<div class="form_success">'.
-						_('Langue créé').
-						'</div>'; 
+					echo '<div class="message success"><p>'.
+						_('Langue créée').'</p>';
+					echo '<p><form action="index.php" method="GET">'.
+						'<input type="hidden" name="page" value="language" />'.
+						'<input type="hidden" name="project" value="'.$project->get('project_id').'" />'.
+						'<input type="hidden" name="language" value="'.$language->getCode().'" />'.
+						'<input type="submit" value="'._('Continuer').'" />'.
+						'</form></p>';
+					echo '</div>';
 					unset($_POST);
 				} catch (Exception $e) {
-					echo '<div class="form_error">'.
+					echo '<div class="message error">'.
 						$e->getMessage().
 						'</div>';
 				}
@@ -40,16 +46,18 @@ if (!isset($project)) {
 		}
 		?>
 		<form method="POST" action="">
-			<p><label>Code</label><input type="text" size="30" name="code"<?php
+			<p><label><?php echo _('Code'); ?></label><input type="text" size="30" name="code"<?php
 			if (!empty($_POST['code'])) { echo ' value="'.$_POST['code'].'"'; }
 			?> /><br />
-				<em>Séquence de deux lettres, puis un underscore (_), puis à nouveau deux lettres. Exemple: en_US (Anglais)</em>
+				<em><?php echo _('Séquence de deux lettres, puis un underscore (_), puis à nouveau deux lettres.');
+				echo _('Exemple:');
+				echo ' en_US ('._('Anglais').')'; ?></em>
 			</p>
 			<?php
 			$templates = $project->getTemplates();
 			if (!empty($templates)) {
 			?><p>
-				<label>Créer les .po définis par les templates</label>
+				<label><?php echo _('Créer les .po définis par les templates'); ?></label>
 				<?php
 				foreach ($templates as $template) {
 					$checked = (isset($_POST['templates'], $_POST['templates'][$template])) ? ' checked="checked"' : '';
@@ -58,7 +66,7 @@ if (!isset($project)) {
 				?>
 			</p><?php
 			}
-			?><input type="submit" value="Créer" />
+			?><input type="submit" value="<?php echo _('Créer'); ?>" />
 		</form>
 	</div>
 </div>

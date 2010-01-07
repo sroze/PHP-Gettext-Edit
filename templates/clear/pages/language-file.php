@@ -1,6 +1,6 @@
 <?php
 if (!isset($language_file)) {
-	echo 'Paramètres URL insuffisants';
+	echo _('Paramètres URL insuffisants');
 	exit();
 }
 ?><div id="page">
@@ -14,18 +14,18 @@ if (!isset($language_file)) {
 		</div>
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <a href="index.php?page=language&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo $language->getName(); ?></a> &raquo; <?php echo $language_file->getName(); ?></h1>
 		<div class="box little right">
-		<h3>Informations</h3>
+		<h3><?php echo _('Informations'); ?></h3>
 		<p>À venir</p>
 		</div>
 		<ul>
 			<li><a href="index.php?page=language-file-update&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
-				Recharger depuis le template
+				<?php echo _('Recharger depuis le template'); ?>
 			</a></li>
 			<li><a href="index.php?page=language-file-editor&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
-				Editer le contenu
+				<?php echo _('Editer le contenu'); ?>
 			</a></li>
 			<li><a href="index.php?page=language-file-compile&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
-				Compiler
+				<?php echo _('Compiler'); ?>
 			</a></li>
 		</ul>
 		<div class="clear" />

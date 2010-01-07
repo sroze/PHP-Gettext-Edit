@@ -1,6 +1,6 @@
 <?php
 if (!isset($language)) {
-	echo 'Paramètres URL insuffisants';
+	echo _('Paramètres URL insuffisants');
 	exit();
 }
 ?><div id="page">
@@ -14,7 +14,7 @@ if (!isset($language)) {
 		</div>
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo $language->getName(); ?></h1>
 		<div class="box little right">
-		<h3>Fichiers .po</h3>
+		<h3><?php echo _('Fichiers .po'); ?></h3>
 		<?php 
 		$files = $language->getFiles();
 		if (!empty($files)) {
@@ -26,19 +26,19 @@ if (!isset($language)) {
 			}
 			echo '</ul>';
 		} else {
-			echo '<p>Aucun fichier .po n\'est créé</p>';
+			echo '<p>'._('Aucun fichier .po n\'est créé').'</p>';
 		}
 		?>
 		</div>
 		<ul>
 			<li><a href="index.php?page=language-new-po-file&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
-				Créer un nouveau fichier .po
+				<?php echo _('Créer un nouveau fichier .po'); ?>
 			</a></li>
 			<li><a href="index.php?page=language-compile-files&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
-				Compiler tous les fichiers
+				<?php echo _('Compiler tous les fichiers'); ?>
 			</a></li>
 			<li><a href="index.php?page=language-update-files&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>">
-				Mettre à jour les fichiers depuis leur template
+				<?php echo _('Mettre à jour les fichiers depuis leur template'); ?>
 			</a></li>
 		</ul>
 		<div class="clear" />

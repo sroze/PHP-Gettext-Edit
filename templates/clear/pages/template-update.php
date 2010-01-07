@@ -1,6 +1,6 @@
 <?php
 if (!isset($template)) {
-	echo 'Paramètres URL insuffisants';
+	echo _('Paramètres URL insuffisants');
 	exit();
 }
 ?><div id="page">
@@ -9,7 +9,7 @@ if (!isset($template)) {
 		<p>À venir</p>
 	</div>
 	<div id="contents" class="with_sidebar">
-		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <a href="index.php?page=template&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">Template <code><?php echo $template->getName(); ?></code></a> &raquo; Regénérer</h1>
+		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <a href="index.php?page=template&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>"><?php echo _('Modèle'); ?> <code><?php echo $template->getName(); ?></code></a> &raquo; <?php echo _('Regénérer'); ?></h1>
 		<?php
 		if (isset($_POST['action'])) {
 			try {
@@ -17,9 +17,16 @@ if (!isset($template)) {
 					isset($_POST['delete_old'])
 				);
 				
-				echo '<div class="form_success">'.
-					_('Template re-généré').
-					'</div>';
+					
+				echo '<div class="message success"><p>'.
+					_('Modèle regénéré').'</p>';
+				echo '<p><form action="index.php" method="GET">'.
+					'<input type="hidden" name="page" value="project" />'.
+					'<input type="hidden" name="project" value="'.$project->get('project_id').'" />'.
+					'<input type="hidden" name="template" value="'.$template->getName().'" />'.
+					'<input type="submit" value="'._('Retour').'" />'.
+					'</form></p>';
+				echo '</div>';
 					
 				unset($_POST);
 			} catch (Exception $e) {
@@ -30,13 +37,13 @@ if (!isset($template)) {
 		}
 		?>
 		<form method="POST" action="">
-			<p><label>Supprimer les entrées inutilisées</label>
+			<p><label><?php echo _('Supprimer les entrées inutilisées'); ?></label>
 				<input type="checkbox" name="delete_old" value="yes"<?php
 			if (isset($_POST['delete_old'])) { echo ' checked'; }
 			?> />
 			</p>
 			<input type="hidden" name="action" value="update" />
-			<input type="submit" value="Regénérer" />
+			<input type="submit" value="<?php echo _('Regénérer'); ?>" />
 		</form>
 	</div>
 </div>

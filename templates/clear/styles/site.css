@@ -125,6 +125,18 @@ div.link a.delete {
 div.clear {
 	clear: both;
 }
+div.message {
+	padding: 5px;
+	text-align: center;
+}
+div.message.error {
+	background: #FFA4A4;
+	border: 1px solid #DE2323;
+}
+div.message.success {
+	background: #B8FFA4;
+	border: 1px solid #45BE24;
+}
 /* Footer */
 div#footer {
 	color: #888;

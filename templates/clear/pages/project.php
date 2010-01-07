@@ -1,6 +1,6 @@
 <?php
 if (!isset($project)) {
-	echo 'Paramètres URL insuffisants';
+	echo _('Paramètres URL insuffisants');
 	exit();
 }
 ?><div id="page">
@@ -13,7 +13,7 @@ if (!isset($project)) {
 		
 		<div class="box little right">
 		<div class="link right"><a class="add" href="index.php?page=template-new&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
-		<h3>Templates</h3>
+		<h3><?php echo _('Modèles'); ?></h3>
 		<?php 
 		$templates = $project->getTemplates();
 		if (!empty($templates)) {
@@ -23,13 +23,13 @@ if (!isset($project)) {
 			}
 			echo '</ul>';
 		} else {
-			echo '<p>Aucun template n\'est créé</p>';
+			echo '<p>'._('Aucun template n\'est créé').'</p>';
 		}
 		?>
 		</div>
 		<div class="box little right">
 		<div class="link right"><a class="add" href="index.php?page=language-new&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
-		<h3>Langues</h3>
+		<h3><?php echo _('Langues'); ?></h3>
 		<?php 
 		$languages = $project->getLanguages();
 		if (!empty($languages)) {
@@ -40,7 +40,7 @@ if (!isset($project)) {
 			}
 			echo '</ul>';
 		} else {
-			echo '<p>Aucune langue n\'est actuellement créée</p>';
+			echo '<p>'._('Aucune langue n\'est actuellement créée').'</p>';
 		}
 		?>
 		</div>

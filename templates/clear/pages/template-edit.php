@@ -1,6 +1,6 @@
 <?php
 if (!isset($template)) {
-	echo 'Paramètres URL insuffisants';
+	echo _('Paramètres URL insuffisants');
 	exit();
 }
 ?><div id="page">
@@ -9,7 +9,7 @@ if (!isset($template)) {
 		<p>À venir</p>
 	</div>
 	<div id="contents" class="with_sidebar">
-		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <a href="index.php?page=template&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">Template <code><?php echo $template->getName(); ?></code></a> &raquo; Editer</h1>
+		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <a href="index.php?page=template&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>"><?php echo _('Modèle'); ?> <code><?php echo $template->getName(); ?></code></a> &raquo; <?php echo _('Editer'); ?></h1>
 		<?php
 		if (isset($_POST['program_language'])) {
 			if ($_POST['type'] == '@other@') {
@@ -19,23 +19,23 @@ if (!isset($template)) {
 			}
 			
 			if (empty($type)) {
-				echo '<div class="form_error">'.
+				echo '<div class="message error">'.
 					_('Le type est vide').
 					'</div>';
 			} else if (!in_array($_POST['program_language'], Project_Template::$available_languages)) {
-				echo '<div class="form_error">'.
+				echo '<div class="message error">'.
 					_('Le language de programmation est invalide').
 					'</div>';
 			} else if (!in_array($_POST['encoding'], Project_Template::$available_encoding)) {
-				echo '<div class="form_error">'.
+				echo '<div class="message error">'.
 					_('L\'encodage est invalide').
 					'</div>';
 			} else if (!preg_match('#^([a-z0-9->_,]*)$#i', $_POST['keywords'])) {
-				echo '<div class="form_error">'.
+				echo '<div class="message error">'.
 					_('Un ou plusieurs mots de clés sont invalides').
 					'</div>';
 			} else if (!preg_match('#^([a-z0-9*\.,_-]*)$#i', $_POST['search_files'])) {
-				echo '<div class="form_error">'.
+				echo '<div class="message error">'.
 					_('La chaine des fichiers à rechercher n\'est pas correcte').
 					'</div>';
 			} else {
@@ -51,13 +51,19 @@ if (!isset($template)) {
 						File::cleanTree($_POST['files'])
 					);
 					
-					echo '<div class="form_success">'.
-						_('Template édité').
-						'</div>';
+					echo '<div class="message success"><p>'.
+						_('Modèle édité').'</p>';
+					echo '<p><form action="index.php" method="GET">'.
+						'<input type="hidden" name="page" value="project" />'.
+						'<input type="hidden" name="project" value="'.$project->get('project_id').'" />'.
+						'<input type="hidden" name="template" value="'.$template->getName().'" />'.
+						'<input type="submit" value="'._('Retour').'" />'.
+						'</form></p>';
+					echo '</div>';
 						
 					unset($_POST);
 				} catch (Exception $e) {
-					echo '<div class="form_error">'.
+					echo '<div class="message error">'.
 						$e->getMessage().
 						'</div>';
 				}
@@ -86,8 +92,8 @@ if (!isset($template)) {
 		?>
 		<form method="POST" action="">
 			<fieldset>
-				<legend>Général</legend>
-				<p><label>Nom</label><input type="text" size="30" name="name" value="<?php
+				<legend><?php echo _('Général'); ?></legend>
+				<p><label><?php echo _('Nom'); ?></label><input type="text" size="30" name="name" value="<?php
 				echo $template->getName();
 				?>" disabled /><br />
 				</p>
@@ -98,7 +104,7 @@ if (!isset($template)) {
 			<?php
 			require PAGE_DIR.'specifics/template-code-options.php';
 			?>
-			<input type="submit" value="Editer" />
+			<input type="submit" value="<?php echo _('Editer'); ?>" />
 		</form>
 	</div>
 </div>
