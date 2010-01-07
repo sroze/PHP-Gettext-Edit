@@ -1532,8 +1532,8 @@
 				//..on datagrid
 				var trTds = $('tr#row'+rowId).find('td').find('div');
 				trTds[0].text((fuzzy ? '1' : '0'));
-				trTds[1].find('div').text(msgid);
-				trTds[2].find('div').text(msgstr);
+				trTds[1].text(msgid);
+				trTds[2].text(msgstr);
 				//..in storedData
 				var rowData = $("#po_datagrid")[0].grid.storedData.rows[searchRowId('id', rowId)];
 				rowData.cell[0] = fuzzy;
