@@ -367,26 +367,27 @@ abstract class Project_File
 			$position++;
 		}
 		
-		$new_msgstr_formated = '';
+		$new_comments_formated = '';
 		foreach ($other_header_lines as $other_line) {
-			$new_msgstr_formated .= $other_line."\n";
+			$new_comments_formated .= $other_line."\n";
 		}
 		if ($comments !== false) {
 			foreach (explode("\n", $comments) as $comment) {
-				$new_msgstr_formated .= '# '.$comment."\n";
+				$new_comments_formated .= '# '.$comment."\n";
 			}
 		}
 		if ($fuzzy) {
-			$new_msgstr_formated .= '#, fuzzy'."\n";
+			$new_comments_formated .= '#, fuzzy'."\n";
 		}
-		$new_msgstr_formated .= 'msgstr "';
+		
+		$new_msgstr_formated = 'msgstr "';
 		$x = explode("\n", $new_msgstr);
 		$x = array_map('addslashes', $x);
 		$new_msgstr_formated .= implode('"'."\n".'"', $x);
 		$new_msgstr_formated .= '"';
 		
 		if (!isset($part)) { // le msgid n'a pas été trouvé
-			$file_contents .= "\n\n".
+			$file_contents .= "\n\n".$new_comments_formated.
 				'msgid "'.addslashes($searched_msgid).'"'."\n".
 				$new_msgstr_formated;
 		} else if ($new_msgstr === false) {
@@ -394,7 +395,7 @@ abstract class Project_File
 		} else {
 			$file_contents = str_replace(
 				$part,
-				'msgid "'.addslashes($searched_msgid).'"'."\n".
+				$new_comments_formated.'msgid "'.addslashes($searched_msgid).'"'."\n".
 				$new_msgstr_formated,
 				$file_contents
 			);
