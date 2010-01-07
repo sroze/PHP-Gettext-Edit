@@ -42,9 +42,9 @@ if (!isset($project)) {
 			foreach ($languages as $language) {
 				$language_warnings = $language->getWarnings();
 				if (!empty($language_warnings)) {
-					$class = 'important';
+					$class = 'invalid';
 				} else {
-					$class = 'inutile';
+					$class = 'valid';
 				}
 				echo '<li class="'.$class.'"><a href="index.php?page=language&project='.$project->get('project_id').'&language='.$language->getCode().'">'.$language->getName().'</li>';
 			}
