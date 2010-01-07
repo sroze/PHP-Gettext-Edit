@@ -351,15 +351,18 @@ abstract class Project_File
 							}
 							$prev_dieze_position = $dieze_position;
 						}
-					} else {
-						// Puis on cherche..la fin!
-						$comment_pos = strpos($part, "\n".'#');
-						if ($comment_pos !== false) {
-							$part = substr($part, 0, $comment_pos);
-						} else {
-							$prev_quote = strrpos($part, '"');
-							$part = substr($part, 0, $prev_quote+1);
-						}
+					}
+					
+					// Puis on cherche..la fin!
+					$comment_pos = strpos(
+						$part,
+						"\n".'#',
+						($start_comments !== false) ? strlen($comments_part) : 0
+					);
+					if ($comment_pos !== false) {
+						$part = substr($part, 0, $comment_pos);
+					} else if (($prev_quote = strrpos($part, '"')) !== false) {
+						$part = substr($part, 0, $prev_quote+1);
 					}
 					$part = trim($part);
 					
