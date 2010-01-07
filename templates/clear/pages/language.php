@@ -36,7 +36,7 @@ if (!isset($language)) {
 					$class = ' class="invalid"';
 				}
 				if (!array_key_exists('GetTextEdit-compiled', $language_file_headers) OR
-				(int) $language_file_headers['GetTextEdit-updated'] > (int) $language_file_headers['GetTextEdit-compiled']) {
+				(int) $language_file_headers['GetTextEdit-edited'] > (int) $language_file_headers['GetTextEdit-compiled']) {
 					$need_compile = true;
 					$class = ' class="invalid"';
 				}
