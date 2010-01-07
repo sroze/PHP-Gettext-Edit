@@ -258,11 +258,13 @@ abstract class Project_File
 					
 					if ($i%2) {
 						if (isset($last_bracket_position)) {
+							if (!empty($string) && $file_contents[$bracket_position-1] != '\\') {
+								$string .= "\n";
+							}
 							$string .= substr($file_contents, $last_bracket_position+1, $bracket_position-$last_bracket_position-1);
 						}
 					}
 					if ($file_contents[$bracket_position-1] != '\\') {
-						$string .= "\n";
 						$i++;
 					}
 					
