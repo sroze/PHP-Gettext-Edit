@@ -749,6 +749,11 @@ div.colCopy {
 div.grid textarea {
 	width: 99%;
 }
+div.grid div.message {
+	padding: 2px 2px 2px 25px;
+	background: #AEFF94 url(../images/icons/accept.png) no-repeat center left;
+	border: 1px solid #00E400;
+}
 /* buttons style */
 .flexigrid div.fbutton .add {
 	background: url(../images/icons/add.png) no-repeat center left;

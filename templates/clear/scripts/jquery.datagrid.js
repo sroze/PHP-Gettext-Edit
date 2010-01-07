@@ -1523,7 +1523,9 @@
 					url: p.url,
 					data: param,
 					dataType: p.dataType,
-					success: function(data) {},
+					success: function(data) {
+						$('div#right_message').text('Sauvegardé').slideDown();
+					},
 					error: function(data) { try { if (p.onError) p.onError(data); } catch (e) {} }
 				});
 				

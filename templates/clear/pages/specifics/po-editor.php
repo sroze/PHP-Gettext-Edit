@@ -5,6 +5,7 @@
 			<div class="title">Édition de la séléction</div>
 		</div>
 		<div class="my grid">
+			<div id="right_message" class="message" style="display: none;"></div>
 			<fieldset>
 				<legend>msgid</legend>
 				<textarea id="right_msgid" name="msgid"></textarea>
