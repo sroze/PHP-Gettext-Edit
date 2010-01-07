@@ -1471,7 +1471,7 @@
 				rows.each(function(){
 					var id = this.id.substr(3);
 					msgids.push(
-						data.rows[id].cell[1]
+						data.rows[id-1].cell[1]
 					);
 					$(this).removeClass('trSelected').addClass('trDeleted');
 				});
