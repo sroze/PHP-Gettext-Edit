@@ -34,7 +34,7 @@ if (!isset($language_file)) {
 			<ul>
 			<?php 
 			$headers = $language_file->getHeaders();
-			if (!array_key_exists('GetTextEdit-compiled')) {
+			if (!array_key_exists('GetTextEdit-compiled', $headers)) {
 				echo '<li>'._('Le fichier n\'éxiste pas encore').'</li>';
 			} else {
 				echo '<li>'._('Compilé le').' '.date('d/m/Y H:i:s', (int) $headers['GetTextEdit-compiled']);
