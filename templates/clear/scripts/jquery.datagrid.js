@@ -1530,8 +1530,8 @@
 				// Reload-data...
 				var rowId = $('input#right_row_id').val();
 				//..on datagrid
-				var trTds = $('tr#row'+rowId).find('td');
-				trTds[0].find('div').text((fuzzy ? '1' : '0'));
+				var trTds = $('tr#row'+rowId).find('td').find('div');
+				trTds[0].text((fuzzy ? '1' : '0'));
 				trTds[1].find('div').text(msgid);
 				trTds[2].find('div').text(msgstr);
 				//..in storedData
