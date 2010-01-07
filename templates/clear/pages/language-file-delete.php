@@ -30,7 +30,7 @@ if (!isset($language_file)) {
 			}
 		} else {
 		?>
-		<div class="box large warning">
+		<div class="message error">
 			<p align="center">
 				<?php
 					echo _('Êtes-vous sûr de vouloir supprimer ce fichier ?').' '.
@@ -38,7 +38,7 @@ if (!isset($language_file)) {
 				?>
 			<p align="center">
 				<form action="" method="POST">
-					<label><input type="checkbox" name="sure" value="yes" /> <?php echo _('Oui'); ?></label><br />
+					<label><input type="checkbox" name="sure" value="yes" /> <?php echo _('Oui'); ?></label>
 					<label><input type="submit" value="<?php echo _('Supprimer'); ?>" /></label>
 				</form>
 			</p>
