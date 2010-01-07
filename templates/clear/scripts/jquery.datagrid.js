@@ -1497,7 +1497,7 @@
 		});
 	};
 	
-	$.fn.editSave = function (row, msgid, msgstr, comments, fuzzy) {
+	$.fn.editSave = function (msgid, msgstr, comments, fuzzy) {
 		return this.each(function(){
 			if (this.p) {
 				var p = this.p;
