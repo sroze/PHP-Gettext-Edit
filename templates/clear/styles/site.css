@@ -6,7 +6,7 @@ body, html {
 	font-family:Verdana,sans-serif;
 }
 div#header {
-	height: 80px;
+	height: 70px;
 	background: #fff;
 	color: #000;
 	margin: 0 10px 0 10px;
@@ -15,13 +15,13 @@ div#header {
 }
 div#header h1 {
 	margin: 0;
-	font-size: 1.8em;
+	font-size: 1.6em;
 	padding: 8px 0 0 25px;
 }
 div#header h2 {
-	font-size: 1em;
+	font-size: 0.8em;
 	margin: 0;
-	padding: 5px 0 0 25px;
+	padding: 0px 0 0 25px;
 	font-style: italic;
 	font-weight: normal;
 }
@@ -32,6 +32,10 @@ a, a:link, a:visited {
 a:hover, a:focus {
 	color: #C61A1A;
 	text-decoration: underline;
+}
+ul li p {
+	margin: 5px 0px 15px 0px;
+	padding: 0;
 }
 /* Menu */
 ul#top_menu {
@@ -70,6 +74,9 @@ div#page div#sidebar {
 	float: right;
 	width: 200px;
 }
+div#page div#sidebar p {
+	text-align: justify;
+}
 div#page div#contents {
 	background: #fff;
 	border: 1px solid #ccc;
@@ -101,6 +108,7 @@ div.box {
 	background-color: #F9F9F9;
 	border: 1px solid #E4E4E4;
 	color: #505050;
+	padding: 5px;
 }
 div.box.little {
 	width: 250px;
@@ -110,7 +118,7 @@ div.box.right {
 	margin-left: 10px;
 }
 div.box h3 {
-	margin: 10px 0 5px 10px;
+	margin: 2px 0 0 5px;
 }
 div.box p {
 	margin: 0;
