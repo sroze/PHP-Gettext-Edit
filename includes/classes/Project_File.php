@@ -176,6 +176,7 @@ abstract class Project_File
 			$part = 'msgid ""'."\n".'msgstr ""'."\n".'"GetTextEdit-header"';
 			$file_contents = $part."\n".$file_contents;
 		}
+		var_dump($part);
 		
 		$puts = file_put_contents(
 			$this->file_path,
