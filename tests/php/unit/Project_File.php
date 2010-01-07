@@ -47,6 +47,10 @@ $unittest->mustBeEqual($file->getHeaders(), array(
 ));
 
 
+echo '<pre>';
+print_r(file($file_path));
+echo '</pre>';
+
 $unittest->setTestTitle('setHeaders');
 $file->setHeaders(array(
 	'Content-Type' => 'text/plain; charset=UTF-8',
@@ -57,6 +61,10 @@ $unittest->mustBeEqual($file->getHeaders(), array(
 	'Edited-width' => 'Project_File TEST'
 ));
 
+
+echo '<pre>';
+print_r(file($file_path));
+echo '</pre>';
 
 $unittest->setTestTitle('getMessages');
 $unittest->mustBeEqual($file->getMessages(), array(
