@@ -143,6 +143,10 @@ div.link a.delete {
 	padding-left: 16px;
 	background: url(../images/icons/bullet_delete.png) no-repeat;
 }
+div.link a.compile {
+	padding-left: 16px;
+	background: url(../images/icons/bullet_disk.png) no-repeat;
+}
 div.clear {
 	clear: both;
 }
