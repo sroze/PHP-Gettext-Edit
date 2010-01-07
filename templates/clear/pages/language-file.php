@@ -6,6 +6,7 @@ if (!isset($language_file)) {
 
 $warnings = $language_file->getWarnings();
 $file_headers = $language_file->getHeaders();
+$template = $language_file->getTemplate();
 
 ?><div id="page">
 	<div id="sidebar">
