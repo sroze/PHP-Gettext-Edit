@@ -51,6 +51,9 @@ class Project_Template extends Project_File
 	private $forbidden_file_extensions = array(
 		'po', 'mo', 'pot'
 	);
+	private $forbidden_directories = array(
+		'.svn'
+	);
 	
 	/**
 	 * Constructeur.
@@ -312,16 +315,17 @@ class Project_Template extends Project_File
 	    	if (($datei != '.') && ($datei != '..')) {
 	        	$file = $directory.$datei;
 	        	if (is_dir($file)) {
-	            	$highest = $this->getHighestFileTimestamp($file.'/');
+	        		if (!in_array($datai, $this->forbidden_directories)) {
+	            		$highest = $this->getHighestFileTimestamp($file.'/');
+	        		}
 	            } else { // file
-	            	$file_x = explode('.', $file);
+	            	$file_x = explode('.', $datei);
 	            	if (!in_array($file_x[count($file_x)-1], $this->forbidden_file_extensions)) {
 	                	$highest = filemtime($file);
 	            	}
 	            }
 	            
 	            if ($highest > $highestKnown) {
-	            	var_dump($file);
 	     			$highestKnown = $highest;
 	        	}
 	    	}

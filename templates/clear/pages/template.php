@@ -3,10 +3,8 @@ if (!isset($template)) {
 	echo _('Paramètres URL insuffisants');
 	exit();
 }
-$t1 = microtime(true);
-$last_edited = $template->getLastEditedFileTimestamp();
-echo 'Last edited file time got in '.(microtime(true)-$t1).' s';
 
+$last_edited = $template->getLastEditedFileTimestamp();
 $template_headers = $template->getHeaders();
 ?><div id="page">
 	<div id="sidebar">
