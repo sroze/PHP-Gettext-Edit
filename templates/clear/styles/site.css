@@ -75,7 +75,7 @@ div#page div#sidebar {
 	width: 200px;
 	padding-right: 5px;
 }
-div#page div#sidebar h3:first {
+div#page div#sidebar h3 {
 	margin-top: 0;
 }
 div#page div#sidebar p {
@@ -149,6 +149,11 @@ div.clear {
 div.message {
 	padding: 5px;
 	text-align: center;
+}
+div.message p {
+	font-size:1.2em;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
 div.message.error {
 	background: #FFA4A4;
