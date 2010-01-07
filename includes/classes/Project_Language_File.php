@@ -218,12 +218,12 @@ class Project_Language_File extends Project_File
 		$template = $this->getTemplate();
 		$template_headers = $template->getHeaders();
 
-		if (!array_key_exists('GetTextEdit-updated', $language_file_headers) OR
-			(int) $template_headers['GetTextEdit-updated'] > (int) $language_file_headers['GetTextEdit-updated']) {
+		if (!array_key_exists('GetTextEdit-updated', $headers) OR
+			(int) $template_headers['GetTextEdit-updated'] > (int) $headers['GetTextEdit-updated']) {
 			$warnings[] = self::W_UPDATE;
 		}
-		if (!array_key_exists('GetTextEdit-compiled', $language_file_headers) OR
-		(int) $language_file_headers['GetTextEdit-edited'] > (int) $language_file_headers['GetTextEdit-compiled']) {
+		if (!array_key_exists('GetTextEdit-compiled', $headers) OR
+		(int) $headers['GetTextEdit-edited'] > (int) $headers['GetTextEdit-compiled']) {
 			$warnings[] = self::W_COMPILE;
 		}
 		
