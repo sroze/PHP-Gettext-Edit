@@ -64,7 +64,7 @@ $unittest->mustBeEqual($file->getMessages(), array(
 		'msgstr' => 'translation2',
 		'references' => array(),
 		'fuzzy' => false,
-		'comments' => array()
+		'comments' => ''
 	),
 	'test' => array(
 		'msgstr' => 'translation',
@@ -72,9 +72,7 @@ $unittest->mustBeEqual($file->getMessages(), array(
 			'file.php:12'
 		),
 		'fuzzy' => false,
-		'comments' => array(
-			'Welcome'
-		)
+		'comments' => 'Welcome'
 	),	
 	'longue, très longue traduction' => array(
 		'msgstr' => 'Ça c\'est du jamais vu!
@@ -82,7 +80,7 @@ Parce que elle est très très longur
 voir plus...',
 		'references' => array(),
 		'fuzzy' => false,
-		'comments' => array()
+		'comments' => ''
 	)
 ));
 
@@ -94,7 +92,7 @@ $unittest->mustBeEqual($file->getMessages(), array(
 		'msgstr' => 'translation2',
 		'references' => array(),
 		'fuzzy' => false,
-		'comments' => array()
+		'comments' => ''
 	),
 	'test' => array(
 		'msgstr' => 'translation3',
@@ -102,9 +100,7 @@ $unittest->mustBeEqual($file->getMessages(), array(
 			'file.php:12'
 		),
 		'fuzzy' => false,
-		'comments' => array(
-			'Welcome'
-		)
+		'comments' => 'Welcome'
 	),	
 	'longue, très longue traduction' => array(
 		'msgstr' => 'Ça c\'est du jamais vu!
@@ -112,7 +108,7 @@ Parce que elle est très très longur
 voir plus...',
 		'references' => array(),
 		'fuzzy' => false,
-		'comments' => array()
+		'comments' => ''
 	)
 ));
 
@@ -126,9 +122,7 @@ $unittest->mustBeEqual($file->getMessages(), array(
 			'file.php:12'
 		),
 		'fuzzy' => false,
-		'comments' => array(
-			'Welcome'
-		)
+		'comments' => 'Welcome'
 	),	
 	'longue, très longue traduction' => array(
 		'msgstr' => 'Ça c\'est du jamais vu!
@@ -136,7 +130,7 @@ Parce que elle est très très longur
 voir plus...',
 		'references' => array(),
 		'fuzzy' => false,
-		'comments' => array()
+		'comments' => ''
 	)
 ));
 

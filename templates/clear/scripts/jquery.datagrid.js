@@ -1496,6 +1496,39 @@
 			}
 		});
 	};
+	
+	$.fn.editSave = function (msgid, msgstr, comments, fuzzy) {
+		return this.each(function(){
+			if (this.p) {
+				var p = this.p;
+				
+				var param = [
+					{name: 'query', value: 'edit'},
+				    {name: 'object', value:
+						$.toJSON({
+							msgid: msgid,
+							msgstr: msgstr,
+							comments: comments,
+							fuzzy: fuzzy
+				    	})
+				    }
+				];
+				
+				for (var pi = 0; pi < p.params.length; pi++) {
+					param[param.length] = p.params[pi];
+				}
+							
+				$.ajax({
+					type: p.method,
+					url: p.url,
+					data: param,
+					dataType: p.dataType,
+					success: function(data) {},
+					error: function(data) { try { if (p.onError) p.onError(data); } catch (e) {} }
+				});
+			}
+		});
+	};
 
 	$.fn.noSelect = function(p) { //no select plugin by me :-)
 
@@ -1545,14 +1578,7 @@ function openPoLine (object)
 
 	$('textarea#right_msgid').val(row.cell[1]);
 	$('textarea#right_msgstr').val(row.cell[2]);
-	$('ul#right_comments').empty();
-	if (row.comments.length == 0) {
-		$('ul#right_comments').append('<li><em>Aucun commentaire</em></li>');
-	} else {
-		for (var icom = 0; icom < row.comments.length; icom++) {
-			$('ul#right_comments').append('<li>'+row.comments[icom]+'</li>');
-		}
-	}
+	$('textarea#right_comments').val(row.comments);
 	
 	$('ul#right_references').empty();
 	if (row.references.length == 0) {

@@ -7,10 +7,13 @@ msgid "test2"
 msgstr "translation2"
 
 # Welcome
+# man!
 #:file.php:12
+# other...
 msgid "test"
 msgstr "translation"
 
+# Commentaire :-)
 msgid "longue, très longue traduction"
 msgstr ""
 "Ça c'est du jamais vu!"

@@ -219,7 +219,7 @@ abstract class Project_File
 					'msgstr' => null,
 					'references' => array(),
 					'fuzzy' => false,
-					'comments' => array()
+					'comments' => ''
 				);
 				
 				$comments_part = substr($file_contents, $prev_position, $position-$prev_position);
@@ -240,7 +240,7 @@ abstract class Project_File
 							}
 							break;
 						default:
-							$result[$msgid]['comments'][] = trim(substr($line, 1));
+							$result[$msgid]['comments'] .= trim(substr($line, 1))."\n";
 							break;
 					}
 				}
@@ -273,6 +273,7 @@ abstract class Project_File
 				}
 				
 				$result[$msgid]['msgstr'] = $string;
+				$result[$msgid]['comments'] = substr($result[$msgid]['comments'], 0, -1);
 				
 				unset($last_bracket_position);
 			}
@@ -289,15 +290,18 @@ abstract class Project_File
 	 * 
 	 * @param string $searched_msgid
 	 * @param string $new_msgstr
+	 * @param string $comments
 	 * 
 	 * @return void
 	 */
-	public function editMessage ($searched_msgid, $new_msgstr)
+	public function editMessage ($searched_msgid, $new_msgstr, $comments = false, $fuzzy = false)
 	{
 		$file_contents = $this->getContents();
+		$comments_lines = array();
 		
 		$position = 0;
 		$prev_position = 0;
+		
 		while (false !== ($position = strpos($file_contents, 'msgid', $position))) {
 			$first_crochet = strpos($file_contents, '"', $position);
 			
@@ -305,20 +309,53 @@ abstract class Project_File
 				$msgid_end_post = strpos($file_contents, '"', $first_crochet+1);
 				$msgid = substr($file_contents, $first_crochet+1, $msgid_end_post-$first_crochet-1);
 				
-				if (stripslashes($msgid) == $searched_msgid) {
+				if (addslashes($searched_msgid) == $msgid) {
+				
 					$futur_msgid = strpos($file_contents, 'msgid', $position+1);
 					if ($futur_msgid === false) {
 						$futur_msgid = strlen($file_contents);
 					}
 					$part = substr($file_contents, $position, $futur_msgid-$position);
+					$comments_part = substr($file_contents, $prev_position, $position-$prev_position);
+					$comments_lines = array();
+					$other_header_lines = array();
 					
-					// Puis on cherche..la fin!
-					$comment_pos = strpos($part, "\n".'#');
-					if ($comment_pos !== false) {
-						$part = substr($part, 0, $comment_pos);
+					$dieze_position = 0;
+					$prev_dieze_position = 0;
+					$start_comments = strpos($comments_part, "\n".'#');
+					if ($start_comments !== false) {
+						$comments_part = substr($comments_part, $start_comments);
+						$part = $comments_part.$part;
+						
+						while (false !== ($dieze_position = strpos($comments_part, "\n".'#', $dieze_position))) {
+							$dieze_position++;
+							$dieze_end = strpos($comments_part, "\n", $dieze_position);
+							$line = substr($comments_part, $dieze_position, $dieze_end-$dieze_position);
+							
+							switch (substr($line, 0, 2)) {
+								case '# ':
+									$comments_lines[] = $line;
+									break;
+								case '#,':
+									if (!strpos($line, 'fuzzy')) {
+										$other_header_lines[] = $line;
+									}
+									break;
+								default:
+									$other_header_lines[] = $line;
+									break;
+							}
+							$prev_dieze_position = $dieze_position;
+						}
 					} else {
-						$prev_quote = strrpos($part, '"');
-						$part = substr($part, 0, $prev_quote+1);
+						// Puis on cherche..la fin!
+						$comment_pos = strpos($part, "\n".'#');
+						if ($comment_pos !== false) {
+							$part = substr($part, 0, $comment_pos);
+						} else {
+							$prev_quote = strrpos($part, '"');
+							$part = substr($part, 0, $prev_quote+1);
+						}
 					}
 					$part = trim($part);
 					
@@ -330,7 +367,19 @@ abstract class Project_File
 			$position++;
 		}
 		
-		$new_msgstr_formated = 'msgstr "';
+		$new_msgstr_formated = '';
+		foreach ($other_header_lines as $other_line) {
+			$new_msgstr_formated .= $other_line."\n";
+		}
+		if ($comments !== false) {
+			foreach (explode("\n", $comments) as $comment) {
+				$new_msgstr_formated .= '# '.$comment."\n";
+			}
+		}
+		if ($fuzzy) {
+			$new_msgstr_formated .= '#, fuzzy'."\n";
+		}
+		$new_msgstr_formated .= 'msgstr "';
 		$x = explode("\n", $new_msgstr);
 		$x = array_map('addslashes', $x);
 		$new_msgstr_formated .= implode('"'."\n".'"', $x);

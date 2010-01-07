@@ -70,6 +70,14 @@ if ($_POST['query'] == 'select') {
     header("HTTP/1.0 204 No Content");
 	header("status: 204");
 	flush();
+} else if ($_POST['query'] == 'edit') {
+	$object = json_decode($_POST['object'], true);
+	
+	$language_file->editMessage($object['msgid'], $object['msgstr'], $object['comments'], $object['fuzzy']);
+	
+    header("HTTP/1.0 201 Created");
+	header("status: 201");
+	flush();
 }
 
 
