@@ -246,6 +246,87 @@ class Project_Language_File extends Project_File
 		
 		return $result;
 	}
+	
+	/**
+	 * Edit a message.
+	 * 
+	 * @param string $searched_msgid
+	 * @param string $new_msgstr
+	 * 
+	 * @return void
+	 */
+	public function editMessage ($searched_msgid, $new_msgstr)
+	{
+		$file_contents = $this->getContents();
+		
+		$position = 0;
+		$prev_position = 0;
+		while (false !== ($position = strpos($file_contents, 'msgid', $position))) {
+			$first_crochet = strpos($file_contents, '"', $position);
+			
+			if ($file_contents[$first_crochet+1] != '"') { // Chaine non-vide (n'est pas le header)
+				$msgid_end_post = strpos($file_contents, '"', $first_crochet+1);
+				$msgid = substr($file_contents, $first_crochet+1, $msgid_end_post-$first_crochet-1);
+				
+				if (stripslashes($msgid) == $searched_msgid) {
+					$futur_msgid = strpos($file_contents, 'msgid', $position+1);
+					if ($futur_msgid === false) {
+						$futur_msgid = strlen($file_contents);
+					}
+					$part = substr($file_contents, $position, $futur_msgid-$position);
+					
+					// Puis on cherche..la fin!
+					$comment_pos = strpos($part, "\n".'#');
+					if ($comment_pos !== false) {
+						$part = substr($part, 0, $comment_pos);
+					} else {
+						$prev_quote = strrpos($part, '"');
+						$part = substr($part, 0, $prev_quote+1);
+					}
+					$part = trim($part);
+					
+					break;
+				}
+			}
+			
+			$prev_position = $position;
+			$position++;
+		}
+		
+		$new_msgstr_formated = 'msgstr "';
+		$x = explode("\n", $new_msgstr);
+		$x = array_map('addslashes', $x);
+		$new_msgstr_formated .= implode('\n"'."\n".'"');
+		$new_msgstr_formated .= '"';
+		
+		if (!isset($part)) { // le msgid n'a pas été trouvé
+			$file_contents .= "\n\n".
+				'msgid "'.addslashes($searched_msgid).'"'."\n".
+				$new_msgstr_formated;
+		} else if ($new_msgstr === false) {
+			$file_contents = str_replace($part, '', $file_contents);
+		} else {
+			$file_contents = str_replace(
+				$part,
+				'msgid "'.addslashes($searched_msgid).'"'."\n".
+				$new_msgstr_formated,
+				$file_contents
+			);
+		}
+		
+		$puts = file_put_contents(
+			$this->file_path,
+			$file_contents
+		);
+		
+		if (!$puts) {
+			throw new Project_File_Exception(
+				_('Impossible d\'écrire le nouveau fichier')
+			);
+		} else {
+			return true;
+		}
+	}
 }
 
 class Project_Language_File_Exception extends Exception {}

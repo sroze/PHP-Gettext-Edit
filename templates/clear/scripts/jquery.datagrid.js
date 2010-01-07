@@ -1478,7 +1478,7 @@
 				
 				var param = [
 				    {name: 'query', value: 'delete'},
-				    {name: 'msgids', value: msgids}
+				    {name: 'msgids', value: $.toJSON(msgids)}
 				];
 				for (var pi = 0; pi < p.params.length; pi++) {
 					param[param.length] = p.params[pi];
