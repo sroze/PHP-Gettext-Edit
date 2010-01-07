@@ -98,9 +98,13 @@ $unittest->mustBeEqual($file->getMessages(), array(
 	),
 	'test' => array(
 		'msgstr' => 'translation3',
-		'references' => array(),
+		'references' => array(
+			'file.php:12'
+		),
 		'fuzzy' => false,
-		'comments' => array()
+		'comments' => array(
+			'Welcome'
+		)
 	),	
 	'longue, très longue traduction' => array(
 		'msgstr' => 'Ça c\'est du jamais vu!
