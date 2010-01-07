@@ -42,16 +42,19 @@ $(document).ready(function() {
 		buttons: [
 			{name: 'Ajouter', bclass: 'add', onpress : function (a,grid){
 				$("#po_datagrid").each(function(){
-					var new_data = $(this)[0].grid.storedData;
-					var new_id = new_data.total;
-					new_data.rows.unshift({id:new_id, cell:[0, '', '']});
-					$(this).flexAddData(new_data);
+					var new_id = $(this).editAdd({cell:[0, '', ''],comments:[],references:[],fuzzy:false});
 					$('tr#row'+new_id).dblclick();
 				});
 			}},
 			{name: 'Supprimer', bclass: 'delete', onpress : function (a,grid){
 				if (confirm('Êtes-vous sur de vouloir supprimer ces '+$('.trSelected',grid).length+' éléments ?')) {
-					$('.trSelected',grid).remove();
+					var ids = new Array();
+					$('.trSelected',grid).each(function(){
+						var id = this.id.substr(3);
+						ids.push(id);
+						$(this).remove();
+					});
+					alert('Suppression de: '+ids);
 				}
 			}},
 			{separator: true},
@@ -84,17 +87,5 @@ $(document).ready(function() {
 
 	$('div#msgeditor').width(gridWidth);
 });
-function test(com,grid)
-{
-	/*if (com=='Delete')
-		{
-			confirm('Delete ' + $('.trSelected',grid).length + ' items?')
-		}
-	else if (com=='Add')
-		{
-			alert('Add New Item');
-		}*/
-	alert('Button pressed: '+com);
-}
 </script>
 <div class="clear" />

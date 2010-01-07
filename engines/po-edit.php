@@ -30,24 +30,34 @@ header("Cache-Control: no-cache, must-revalidate" );
 header("Pragma: no-cache" );
 header("Content-type: text/x-json");
 
-echo '{total:'.count($messages).',rows:[';
+$out = array(
+	'total' => count($messages),
+	'rows' => array()
+);
 
-$fuzzies = '';
-$out = '';
 $i = 0;
 foreach ($messages as $msgid => $informations) {
 	
+	$row = array(
+		'id' => $i,
+		'cell' => array(
+			($informations['fuzzy'] ? '1' : '0'),
+			$msgid,
+			$informations['msgstr']
+		),
+		'comments' => $informations['comments'],
+		'references' => $informations['references'],
+		'fuzzy' => $informations['fuzzy']
+	);
+	
 	if ($informations['fuzzy']) {
-		if (!empty($fuzzies)) { $fuzzies .= ','; }
-		$fuzzies .= '{id:'.$i.',cell:[1,\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\']}'."\n";
+		array_unshift($out['rows'], $row);
 	} else {
-		if (!empty($out)) { $out .= ','; }
-		$out .= '{id:'.$i.',cell:[0,\''.addslashes($msgid).'\',\''.addslashes($informations['msgstr']).'\']}'."\n";
+		array_push($out['rows'], $row);
 	}
 	$i++;
 }
-echo $fuzzies, $out;
 
-echo ']}';
+echo json_encode($out);
 
 ?>

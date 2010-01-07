@@ -1451,6 +1451,18 @@
 			});
 
 	};
+	
+	// Increment a data
+	$.fn.editAdd = function (data) {
+		var new_data = $(this)[0].grid.storedData;
+		var new_id = new_data.total;
+		data.id = new_id;
+		new_data.rows.unshift(data);
+		
+		$(this).flexAddData(new_data);
+		
+		return new_id;
+	}
 
 	$.fn.noSelect = function(p) { //no select plugin by me :-)
 
@@ -1495,6 +1507,6 @@ function openPoLine (object)
 	$('tr.trSelected').removeClass('trSelected');
 	$(object).toggleClass('trSelected').focus();
 	
-	// Load all
-	alert('and load msgid informations');
+	var id = this.id.substr(3);
+	alert('msgid #'+id);
 }
