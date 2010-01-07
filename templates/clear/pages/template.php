@@ -29,9 +29,7 @@ $template_headers = $template->getHeaders();
 			if (array_key_exists('GetTextEdit-updated', $template_headers)) {
 				echo '<li>'._('Mis à jour le').' '.date('d/m/Y H:i:s', (int) $template_headers['GetTextEdit-updated']).'</li>';
 			}
-			if (array_key_exists('GetTextEdit-compiled', $template_headers)) {
-				echo '<li>'._('Dernier fichier du projet modifié le').' '.date('d/m/Y H:i:s', $last_edited).'</li>';
-			}
+			echo '<li>'._('Dernier fichier du projet modifié le').' '.date('d/m/Y H:i:s', $last_edited).'</li>';
 			?>
 		</ul>
 		</div>
