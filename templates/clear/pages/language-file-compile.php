@@ -28,11 +28,18 @@ if (!isset($language_file)) {
 		}
 		?>
 		<div class="box">
-			<p><?php echo _('Pour compiler votre fichier de <code>.po</code> de traduction, et ainsi pouvoir l\'utiliser juste après '.
+			<p><?php echo _('Pour compiler votre fichier <code>.po</code> de traduction, et ainsi pouvoir l\'utiliser juste après '.
 			'dans votre application, il vous suffit de cliquer sur le button "Compiler".'); ?> <?php echo _('Voici quelques informations '.
 			'concernenant la version actuelle de votre fichier .mo (compilé) :'); ?></p>
 			<ul>
-				<li><?php echo _('Le fichier n\'éxiste pas encore'); ?></li>
+			<?php 
+			$headers = $language_file->getHeaders();
+			if (!array_key_exists('GetTextEdit-compiled')) {
+				echo '<li>'._('Le fichier n\'éxiste pas encore').'</li>';
+			} else {
+				echo '<li>'._('Compilé le').' '.date('d/m/Y H:i:s', (int) $headers['GetTextEdit-compiled']);
+			}
+			?>
 			</ul>
 			<form action="" method="POST">
 				<p><input type="submit" name="compile" value="<?php echo _('Compiler le fichier .po'); ?>" /></p>
