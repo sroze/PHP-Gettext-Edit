@@ -600,12 +600,9 @@
 				if (p.page>p.pages) p.page = p.pages;
 				//var param = {page:p.newp, rp: p.rp, sortname: p.sortname, sortorder: p.sortorder, query: p.query, qtype: p.qtype};
 				var param = [
-					 { name : 'page', value : p.newp }
-					,{ name : 'rp', value : p.rp }
-					,{ name : 'sortname', value : p.sortname}
-					,{ name : 'sortorder', value : p.sortorder }
-					,{ name : 'query', value : p.query}
-					,{ name : 'qtype', value : p.qtype}
+					{ name : 'sortname', value : p.sortname},
+					{ name : 'sortorder', value : p.sortorder},
+					{ name : 'query', value : 'select'}
 				];							 
 							 
 				if (p.params)
@@ -1462,6 +1459,43 @@
 		$(this).flexAddData(new_data);
 		
 		return new_id;
+	};
+	
+	$.fn.editRemove = function (rows) {
+		return this.each(function(){
+			if (this.p && this.grid) {
+				var p = this.p;
+				var data = this.grid.storedData;
+				
+				var msgids = Array();
+				rows.each(function(){
+					var id = this.id.substr(3);
+					msgids.push(
+						data.rows[id].cell[1]
+					);
+					$(this).toogleClass('trDeleted');
+				});
+				
+				var param = [
+				    {name: 'query', value: 'delete'},
+				    {name: 'msgids', value: msgids}
+				];
+				for (var pi = 0; pi < p.params.length; pi++) {
+					param[param.length] = p.params[pi];
+				}
+				
+				$.ajax({
+					type: p.method,
+					url: p.url,
+					data: param,
+					dataType: p.dataType,
+					success: function(data) {
+						rows.remove();
+					},
+					error: function(data) { try { if (p.onError) p.onError(data); } catch (e) {} }
+				});
+			}
+		});
 	}
 
 	$.fn.noSelect = function(p) { //no select plugin by me :-)

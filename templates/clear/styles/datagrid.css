@@ -563,7 +563,20 @@ div.colCopy {
 			border-bottom: 1px solid #a8d8eb;
 			}
 
-	/* novstripe adjustments */
+		.flexigrid div.bDiv tr.trDeleted:hover td, 
+		.flexigrid div.bDiv tr.trDeleted:hover td.sorted,
+		.flexigrid div.bDiv tr.trOver.trDeleted td.sorted, 
+		.flexigrid div.bDiv tr.trOver.trDeleted td,
+		.flexigrid tr.trDeleted td.sorted, 
+		.flexigrid tr.trDeleted td
+			{
+			background: #d5effc url(../images/datagrid/hl_grey.png) repeat-x top;
+			border-right: 1px solid #d2e3ec;
+			border-left: 1px solid #eef8ff;
+			border-bottom: 1px solid #ccc;
+			}
+
+/* novstripe adjustments */
 
 	.flexigrid.novstripe .bDiv table
 	{

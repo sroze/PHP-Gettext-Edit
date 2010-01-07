@@ -41,20 +41,12 @@ $(document).ready(function() {
 		],
 		buttons: [
 			{name: 'Ajouter', bclass: 'add', onpress : function (a,grid){
-				$("#po_datagrid").each(function(){
-					var new_id = $(this).editAdd({cell:[0, '', ''],comments:[],references:[],fuzzy:false});
-					$('tr#row'+new_id).dblclick();
-				});
+				var new_id = $("#po_datagrid").editAdd({id:0,cell:[0, '', ''],comments:[],references:[],fuzzy:false});
+				$('tr#row'+new_id, grid).dblclick();
 			}},
 			{name: 'Supprimer', bclass: 'delete', onpress : function (a,grid){
 				if (confirm('Êtes-vous sur de vouloir supprimer ces '+$('.trSelected',grid).length+' éléments ?')) {
-					var ids = new Array();
-					$('.trSelected',grid).each(function(){
-						var id = this.id.substr(3);
-						ids.push(id);
-						$(this).remove();
-					});
-					alert('Suppression de: '+ids);
+					$("#po_datagrid").editRemove($('.trSelected',grid));
 				}
 			}},
 			{separator: true},
