@@ -298,6 +298,8 @@ abstract class Project_File
 	 */
 	public function editMessage ($searched_msgid, $new_msgstr, $comments = false, $fuzzy = false)
 	{
+		$searched_msgid = str_replace('"', '\\"', $searched_msgid);
+		
 		$file_contents = $this->getContents();
 		$comments_lines = array();
 		
@@ -311,7 +313,7 @@ abstract class Project_File
 				$msgid_end_post = strpos($file_contents, '"', $first_crochet+1);
 				$msgid = substr($file_contents, $first_crochet+1, $msgid_end_post-$first_crochet-1);
 				
-				if (addslashes($searched_msgid) == $msgid) {
+				if ($searched_msgid == $msgid) {
 				
 					$futur_msgid = strpos($file_contents, 'msgid', $position+1);
 					if ($futur_msgid === false) {
@@ -384,20 +386,22 @@ abstract class Project_File
 		
 		$new_msgstr_formated = 'msgstr "';
 		$x = explode("\n", $new_msgstr);
-		$x = array_map('addslashes', $x);
+		foreach ($x as $i => $message) {
+			$x[$i] = str_replace('"', '\\"', $message);
+		}
 		$new_msgstr_formated .= implode('"'."\n".'"', $x);
 		$new_msgstr_formated .= '"';
 		
 		if (!isset($part)) { // le msgid n'a pas été trouvé
 			$file_contents .= "\n\n".$new_comments_formated.
-				'msgid "'.addslashes($searched_msgid).'"'."\n".
+				'msgid "'.str_replace('"', '\\"', $searched_msgid).'"'."\n".
 				$new_msgstr_formated;
 		} else if ($new_msgstr === false) {
 			$file_contents = str_replace($part, '', $file_contents);
 		} else {
 			$file_contents = str_replace(
 				$part,
-				$new_comments_formated.'msgid "'.addslashes($searched_msgid).'"'."\n".
+				$new_comments_formated.'msgid "'.str_replace('"', '\\"', $searched_msgid).'"'."\n".
 				$new_msgstr_formated,
 				$file_contents
 			);
