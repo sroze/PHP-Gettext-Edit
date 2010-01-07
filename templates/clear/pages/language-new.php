@@ -45,7 +45,7 @@ if (!isset($project)) {
 			}
 		}
 		?>
-		<form method="POST" action="">
+		<form method="POST" action="" class="formatted">
 			<p><label><?php echo _('Code'); ?></label><input type="text" size="30" name="code"<?php
 			if (!empty($_POST['code'])) { echo ' value="'.$_POST['code'].'"'; }
 			?> /><br />

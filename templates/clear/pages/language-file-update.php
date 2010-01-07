@@ -35,7 +35,7 @@ if (!isset($language_file)) {
 			}
 		}
 		?>
-		<form action="" method="POST">
+		<form action="" method="POST" class="formatted">
 			<p><label><?php echo _('Modèle'); ?></label><?php
 			echo $language_file->getTemplateName();
 			?></p>

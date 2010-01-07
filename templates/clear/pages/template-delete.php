@@ -32,12 +32,13 @@ if (!isset($template)) {
 					echo _('Êtes-vous sûr de vouloir supprimer ce template ?').' '.
 						_('Cette opération supprimera toutes les données associées de manière irréverssible');
 				?>
-			<p align="center">
-				<form action="" method="POST">
+			</p>
+			<form action="" method="POST">
+				<p align="center">
 					<label><input type="checkbox" name="sure" value="yes" /> <?php echo _('Oui'); ?></label>
 					<label><input type="submit" value="<?php echo _('Supprimer'); ?>" /></label>
-				</form>
-			</p>
+				</p>
+			</form>
 		</div>
 		<?php 
 		}

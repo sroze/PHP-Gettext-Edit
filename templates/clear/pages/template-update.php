@@ -36,7 +36,7 @@ if (!isset($template)) {
 			}
 		}
 		?>
-		<form method="POST" action="">
+		<form method="POST" action="" class="formatted">
 			<p><label><?php echo _('Supprimer les entrées inutilisées'); ?></label>
 				<input type="checkbox" name="delete_old" value="yes"<?php
 			if (isset($_POST['delete_old'])) { echo ' checked'; }

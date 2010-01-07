@@ -75,6 +75,6 @@ if (!isset($language)) {
 				<?php echo _('Créer un nouveau fichier .po'); ?>
 			</a></li>
 		</ul>
-		<div class="clear" />
+		<div class="clear"></div>
 	</div>
 </div>

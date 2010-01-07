@@ -90,7 +90,7 @@ if (!isset($template)) {
 			}
 		}
 		?>
-		<form method="POST" action="">
+		<form method="POST" action="" class="formatted">
 			<fieldset>
 				<legend><?php echo _('Général'); ?></legend>
 				<p><label><?php echo _('Nom'); ?></label><input type="text" size="30" name="name" value="<?php

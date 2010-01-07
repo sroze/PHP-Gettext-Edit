@@ -44,7 +44,7 @@ if (!isset($language_file)) {
 			?>
 			</ul>
 			<form action="" method="POST">
-				<p><input type="checkbox" name="with-fuzzy" value="yes" /> <?php echo _('Inclure les valeurs qualifiées de <code>fuzzy</code>'); ?></p>
+				<p><label><input type="checkbox" name="with-fuzzy" value="yes" /> <?php echo _('Inclure les valeurs qualifiées de <code>fuzzy</code>'); ?></label></p>
 				<p><input type="submit" name="compile" value="<?php echo _('Compiler le fichier .po'); ?>" /></p>
 			</form>
 		</div>

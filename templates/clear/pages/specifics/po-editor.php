@@ -22,7 +22,7 @@
 				<legend><?php echo _('Références'); ?></legend>
 				<ul id="right_references"></ul>
 			</fieldset>
-			<div><input id="right_fuzzy" type="checkbox" name="fuzzy" value="true" /> Fuzzy</div>
+			<div><label><input id="right_fuzzy" type="checkbox" name="fuzzy" value="true" /> Fuzzy</label></div>
 			<div><input id="right_row_id" type="hidden" name="rowid" /><input type="submit" value="<?php echo _('Sauvegarder'); ?>" /></div>
 		</div>
 	</div>

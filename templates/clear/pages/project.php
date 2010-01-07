@@ -48,6 +48,6 @@ if (!isset($project)) {
 		}
 		?>
 		</div>
-		<div class="clear" />
+		<div class="clear"></div>
 	</div>
 </div>

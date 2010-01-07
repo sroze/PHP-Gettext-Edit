@@ -11,7 +11,7 @@
 				'</p></div>'; 
 		}
 		?>
-		<form method="POST" action="">
+		<form method="POST" action="" class="formatted">
 			<p><label>Style</label><select name="template">
 				<?php
 				$template_dir = ROOT_PATH.'templates/';

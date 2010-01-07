@@ -38,7 +38,7 @@ if (!isset($project)) {
 			
 		}
 		?>
-		<form method="POST" action=""><?php 
+		<form method="POST" action="" class="formatted"><?php 
 		require PAGE_DIR.'specifics/project-form.php';
 		?>
 			<input type="submit" value="<?php echo _('Créer'); ?>" />
