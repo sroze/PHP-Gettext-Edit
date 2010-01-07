@@ -1461,6 +1461,7 @@
 		return new_id;
 	};
 	
+	// Remove a field
 	$.fn.editRemove = function (rows) {
 		return this.each(function(){
 			if (this.p && this.grid) {
@@ -1471,9 +1472,9 @@
 				rows.each(function(){
 					var id = this.id.substr(3);
 					msgids.push(
-						data.rows[id-1].cell[1]
+						data.rows[searchRowId(id)].cell[1]
 					);
-					$(this).removeClass('trSelected').addClass('trDeleted');
+					$(this).remove();
 				});
 				
 				var param = [
@@ -1489,14 +1490,12 @@
 					url: p.url,
 					data: param,
 					dataType: p.dataType,
-					success: function(data) {
-						rows.remove();
-					},
+					success: function(data) {},
 					error: function(data) { try { if (p.onError) p.onError(data); } catch (e) {} }
 				});
 			}
 		});
-	}
+	};
 
 	$.fn.noSelect = function(p) { //no select plugin by me :-)
 
@@ -1541,6 +1540,45 @@ function openPoLine (object)
 	$('tr.trSelected').removeClass('trSelected');
 	$(object).toggleClass('trSelected').focus();
 	
-	var id = object.id.substr(3);
-	alert('msgid #'+id);
+	var id = searchRowId(object.id.substr(3));
+	var row = $("#po_datagrid")[0].grid.storedData.rows[id];
+
+	$('textarea#right_msgid').val(row.cell[1]);
+	$('textarea#right_msgstr').val(row.cell[2]);
+	$('ul#right_comments').empty();
+	if (row.comments.length == 0) {
+		$('ul#right_comments').append('<li><em>Aucun commentaire</em></li>');
+	} else {
+		for (var icom = 0; icom < row.comments.length; icom++) {
+			$('ul#right_comments').append('<li>'+row.comments[icom]+'</li>');
+		}
+	}
+	
+	$('ul#right_references').empty();
+	if (row.references.length == 0) {
+		$('ul#right_references').append('<li><em>Aucune référence</em></li>');
+	} else {
+		for (var iref = 0; iref < row.references.length; iref++) {
+			$('ul#right_references').append('<li>'+row.references[iref]+'</li>');
+		}
+	}
+	
+	if (row.fuzzy) {
+		$('input#right_fuzzy').attr('checked');
+	} else {
+		$('input#right_fuzzy').removeAttr('checked');
+	}
+}
+
+function searchRowId (search_id)
+{
+	var rows = $("#po_datagrid")[0].grid.storedData.rows;
+	
+	for (var i = 0; i < rows.length; i++) {
+		if (rows[i].id == search_id) {
+			return i;
+		}
+	}
+	
+	return false;
 }

@@ -7,21 +7,21 @@
 		<div class="grid">
 			<fieldset>
 				<legend>msgid</legend>
-				<textarea name="msgid"></textarea>
+				<textarea id="right_msgid" name="msgid"></textarea>
 			</fieldset>
 			<fieldset>
 				<legend>msgstr</legend>
-				<textarea name="msgstr"></textarea>
+				<textarea id="right_msgstr" name="msgstr"></textarea>
 			</fieldset>
 			<fieldset>
 				<legend>Commentaires</legend>
-				<ul id="comments"></ul>
+				<ul id="right_comments"></ul>
 			</fieldset>
 			<fieldset>
 				<legend>Références</legend>
-				<ul id="references"></ul>
+				<ul id="right_references"></ul>
 			</fieldset>
-			<div><input type="checkbox" name="fuzzy" value="true" /> Fuzzy</div>
+			<div><input id="right_fuzzy" type="checkbox" name="fuzzy" value="true" /> Fuzzy</div>
 			<div><input type="submit" value="Sauvegarder" /></div>
 		</div>
 	</div>
