@@ -1473,8 +1473,8 @@
 					msgids.push(
 						data.rows[id].cell[1]
 					);
+					$(this).removeClass('trSelected').addClass('trDeleted');
 				});
-				rows.toogleClass('trDeleted');
 				
 				var param = [
 				    {name: 'query', value: 'delete'},
