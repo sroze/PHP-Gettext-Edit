@@ -26,7 +26,7 @@ msgstr ""
 "Parce que elle est très très longur"
 "voir plus..."
 EOF;
-$puts = file_puts_contents(
+$puts = file_put_contents(
 	$file_path,
 	$file_contents
 );
