@@ -46,11 +46,6 @@ $unittest->mustBeEqual($file->getHeaders(), array(
 	'Last-Translator' => 'Samuel ROZE <samuel.roze@gmail.com>'
 ));
 
-
-echo '<pre>';
-print_r(file($file_path));
-echo '</pre>';
-
 $unittest->setTestTitle('setHeaders');
 $file->setHeaders(array(
 	'Content-Type' => 'text/plain; charset=UTF-8',
@@ -60,11 +55,6 @@ $unittest->mustBeEqual($file->getHeaders(), array(
 	'Content-Type' => 'text/plain; charset=UTF-8',
 	'Edited-width' => 'Project_File TEST'
 ));
-
-
-echo '<pre>';
-print_r(file($file_path));
-echo '</pre>';
 
 $unittest->setTestTitle('getMessages');
 $unittest->mustBeEqual($file->getMessages(), array(
@@ -94,10 +84,11 @@ voir plus...',
 
 
 $unittest->setTestTitle('editMessage');
-
+/*
 echo '<pre>';
 print_r(file($file_path));
 echo '</pre>';
+*/
 $file->editMessage('test', 'translation3');
 $unittest->mustBeEqual($file->getMessages(), array(
 	'test2' => array(
@@ -112,7 +103,7 @@ $unittest->mustBeEqual($file->getMessages(), array(
 			'file.php:12'
 		),
 		'fuzzy' => false,
-		'comments' => 'Welcome'
+		'comments' => ''
 	),	
 	'longue, très longue traduction' => array(
 		'msgstr' => 'Ça c\'est du jamais vu!
@@ -123,9 +114,11 @@ voir plus...',
 		'comments' => ''
 	)
 ));
+/*
 echo '<pre>';
 print_r(file($file_path));
 echo '</pre>';
+*/
 
 $unittest->setTestTitle('editMessage (delete)');
 $file->editMessage('test2', false);
@@ -136,7 +129,7 @@ $unittest->mustBeEqual($file->getMessages(), array(
 			'file.php:12'
 		),
 		'fuzzy' => false,
-		'comments' => 'Welcome'
+		'comments' => ''
 	),	
 	'longue, très longue traduction' => array(
 		'msgstr' => 'Ça c\'est du jamais vu!
