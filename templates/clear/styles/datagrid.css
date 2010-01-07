@@ -751,14 +751,14 @@ div.grid textarea {
 }
 div.grid div.message {
 	padding: 5px 5px 5px 25px;
-	background: #AEFF94 url(../images/icons/accept.png) no-repeat center 5px;
+	background: #AEFF94 url(../images/icons/accept.png) no-repeat 5px 5px;
 	border: 1px solid #00E400;
 	text-align: left;
 	margin-bottom: 5px;
 }
 div.grid div.message.error {
 	background: #FFA4A4;
-	border: 1px solid #DE2323 url(../images/icons/exclamation.png) no-repeat center 5px;
+	border: 1px solid #DE2323 url(../images/icons/exclamation.png) no-repeat 5px 5px;
 }
 /* buttons style */
 .flexigrid div.fbutton .add {
