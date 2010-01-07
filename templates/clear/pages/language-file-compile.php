@@ -15,7 +15,9 @@ if (!isset($language_file)) {
 		<?php 
 		if (isset($_POST['compile'])) {
 			try {
-				$output_file_path = $language_file->compile();
+				$output_file_path = $language_file->compile(
+					isset($_POST['with-fuzzy'])
+				);
 				
 				echo '<div class="box success">'.
 					'<p>'.sprintf(_('Fichier compilé: <strong>%s</strong>'), $output_file_path).' - <a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Retour').'</a></p>'.
@@ -42,6 +44,7 @@ if (!isset($language_file)) {
 			?>
 			</ul>
 			<form action="" method="POST">
+				<p><input type="checkbox" name="with-fuzzy" value="yes" /> <?php echo _('Inclure les valeurs qualifiées de <code>fuzzy</code>'); ?></p>
 				<p><input type="submit" name="compile" value="<?php echo _('Compiler le fichier .po'); ?>" /></p>
 			</form>
 		</div>
