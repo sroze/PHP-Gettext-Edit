@@ -163,7 +163,7 @@ abstract class Project_File
 					$part = substr($part, 0, $comment_pos);
 				} else {
 					$prev_quote = strrpos($part, '"');
-					$part = substr($part, 0, $prev_quote);
+					$part = substr($part, 0, $prev_quote+1);
 				}
 				$part = trim($part);
 				
@@ -176,7 +176,6 @@ abstract class Project_File
 			$part = 'msgid ""'."\n".'msgstr ""'."\n".'"GetTextEdit-header"';
 			$file_contents = $part."\n".$file_contents;
 		}
-		var_dump($part, $result);
 		
 		$puts = file_put_contents(
 			$this->file_path,
