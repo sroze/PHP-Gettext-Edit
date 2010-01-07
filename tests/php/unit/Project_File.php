@@ -60,21 +60,55 @@ $unittest->mustBeEqual($file->getHeaders(), array(
 
 $unittest->setTestTitle('getMessages');
 $unittest->mustBeEqual($file->getMessages(), array(
-	'test2' => 'translation2',
-	'test' => 'translation',
-	'longue, très longue traduction' => 'Ça c\'est du jamais vu!
+	'test2' => array(
+		'msgstr' => 'translation2',
+		'references' => array(),
+		'fuzzy' => false,
+		'comments' => array()
+	),
+	'test' => array(
+		'msgstr' => 'translation',
+		'references' => array(
+			'file.php:12'
+		),
+		'fuzzy' => false,
+		'comments' => array(
+			'Welcome'
+		)
+	),	
+	'longue, très longue traduction' => array(
+		'msgstr' => 'Ça c\'est du jamais vu!
 Parce que elle est très très longur
 voir plus...',
+		'references' => array(),
+		'fuzzy' => false,
+		'comments' => array()
+	)
 ));
 
 
 $unittest->setTestTitle('editMessage');
 $file->editMessage('test', 'translation3');
 $unittest->mustBeEqual($file->getMessages(), array(
-	'test2' => 'translation2',
-	'test' => 'translation3',
-	'longue, très longue traduction' => 'Ça c\'est du jamais vu!
+	'test2' => array(
+		'msgstr' => 'translation2',
+		'references' => array(),
+		'fuzzy' => false,
+		'comments' => array()
+	),
+	'test' => array(
+		'msgstr' => 'translation3',
+		'references' => array(),
+		'fuzzy' => false,
+		'comments' => array()
+	),	
+	'longue, très longue traduction' => array(
+		'msgstr' => 'Ça c\'est du jamais vu!
 Parce que elle est très très longur
 voir plus...',
+		'references' => array(),
+		'fuzzy' => false,
+		'comments' => array()
+	)
 ));
 
