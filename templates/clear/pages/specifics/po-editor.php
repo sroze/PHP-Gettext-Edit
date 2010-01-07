@@ -90,6 +90,7 @@ $(document).ready(function() {
 
 	$('div#msgeditor').width(gridWidth);
 	$('form#msgeditorform').submit(function(){
+		$('div#right_message').slideUp('fast');
 		$("#po_datagrid").editSave(
 			$('textarea#right_msgid').val(),
 			$('textarea#right_msgstr').val(),
