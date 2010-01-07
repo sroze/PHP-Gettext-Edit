@@ -1455,7 +1455,7 @@
 	// Increment a data
 	$.fn.editAdd = function (data) {
 		var new_data = $(this)[0].grid.storedData;
-		var new_id = new_data.total;
+		var new_id = new_data.total+1;
 		data.id = new_id;
 		new_data.rows.unshift(data);
 		

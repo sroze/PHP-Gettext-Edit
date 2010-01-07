@@ -35,7 +35,7 @@ $out = array(
 	'rows' => array()
 );
 
-$i = 0;
+$i = 1;
 foreach ($messages as $msgid => $informations) {
 	
 	$row = array(
