@@ -21,7 +21,7 @@ if (!isset($template)) {
 				echo '<div class="message success"><p>'.
 					_('Modèle regénéré').'</p>';
 				echo '<p><form action="index.php" method="GET">'.
-					'<input type="hidden" name="page" value="project" />'.
+					'<input type="hidden" name="page" value="template" />'.
 					'<input type="hidden" name="project" value="'.$project->get('project_id').'" />'.
 					'<input type="hidden" name="template" value="'.$template->getName().'" />'.
 					'<input type="submit" value="'._('Retour').'" />'.
