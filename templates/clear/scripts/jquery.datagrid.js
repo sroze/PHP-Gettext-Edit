@@ -1472,7 +1472,7 @@
 				rows.each(function(){
 					var id = this.id.substr(3);
 					msgids.push(
-						data.rows[searchRowId(id)].cell[1]
+						data.rows[searchRowId('id', id)].cell[1]
 					);
 					$(this).remove();
 				});
@@ -1497,7 +1497,7 @@
 		});
 	};
 	
-	$.fn.editSave = function (msgid, msgstr, comments, fuzzy) {
+	$.fn.editSave = function (row, msgid, msgstr, comments, fuzzy) {
 		return this.each(function(){
 			if (this.p) {
 				var p = this.p;
@@ -1526,6 +1526,20 @@
 					success: function(data) {},
 					error: function(data) { try { if (p.onError) p.onError(data); } catch (e) {} }
 				});
+				
+				// Reload-data...
+				var rowId = $('input#right_row_id').val();
+				//..on datagrid
+				var trTds = $('tr#row'+rowId).find('td');
+				trTds[0].find('div').text((fuzzy ? '1' : '0'));
+				trTds[1].find('div').text(msgid);
+				trTds[2].find('div').text(msgstr);
+				//..in storedData
+				var rowData = $("#po_datagrid")[0].grid.storedData.rows[searchRowId('id', rowId)];
+				rowData.cell[0] = fuzzy;
+				rowData.cell[1] = msgid;
+				rowData.cell[2] = msgstr;
+				rowData.comments = comments;
 			}
 		});
 	};
@@ -1573,9 +1587,11 @@ function openPoLine (object)
 	$('tr.trSelected').removeClass('trSelected');
 	$(object).toggleClass('trSelected').focus();
 	
-	var id = searchRowId(object.id.substr(3));
+	var trId = object.id.substr(3);
+	var id = searchRowId('id', trId);
 	var row = $("#po_datagrid")[0].grid.storedData.rows[id];
 
+	$('input#right_row_id').val(trId);
 	$('textarea#right_msgid').val(row.cell[1]);
 	$('textarea#right_msgstr').val(row.cell[2]);
 	$('textarea#right_comments').val(row.comments);
@@ -1596,12 +1612,12 @@ function openPoLine (object)
 	}
 }
 
-function searchRowId (search_id)
+function searchRowId (field, search)
 {
 	var rows = $("#po_datagrid")[0].grid.storedData.rows;
 	
 	for (var i = 0; i < rows.length; i++) {
-		if (rows[i].id == search_id) {
+		if (rows[i][field] == search) {
 			return i;
 		}
 	}

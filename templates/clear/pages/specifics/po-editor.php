@@ -22,7 +22,7 @@
 				<ul id="right_references"></ul>
 			</fieldset>
 			<div><input id="right_fuzzy" type="checkbox" name="fuzzy" value="true" /> Fuzzy</div>
-			<div><input type="submit" value="Sauvegarder" /></div>
+			<div><input id="right_row_id" type="hidden" name="rowid" /><input type="submit" value="Sauvegarder" /></div>
 		</div>
 	</div>
 </form>
@@ -85,7 +85,7 @@ $(document).ready(function() {
 			$('textarea#right_msgid').val(),
 			$('textarea#right_msgstr').val(),
 			$('textarea#right_comments').val(),
-			($('input#right_fuzzy').attr('checked') !== undefined)
+			$('input#right_fuzzy').attr('checked')
 		);
 		
 		return false;
