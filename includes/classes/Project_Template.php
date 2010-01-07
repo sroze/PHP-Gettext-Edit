@@ -43,6 +43,16 @@ class Project_Template extends Project_File
 	);
 	
 	/**
+	 * Files extensions that aren't considered while search for files
+	 * with $this->getHighestFileTimestamp
+	 * 
+	 * @var array
+	 */
+	private $forbidden_file_extensions = array(
+		'po', 'mo', 'pot'
+	);
+	
+	/**
 	 * Constructeur.
 	 * 
 	 * @param Project $project
@@ -294,6 +304,7 @@ class Project_Template extends Project_File
 	 * @return integer
 	 */
 	private function getHighestFileTimestamp($directory) {
+		$highest = 0;
 		$highestKnown = 0;
 		$handle = opendir($directory);
 	     
@@ -302,8 +313,11 @@ class Project_Template extends Project_File
 	        	$file = $directory.$datei;
 	        	if (is_dir($file)) {
 	            	$highest = $this->getHighestFileTimestamp($file.'/');
-	            } else {
-	                $highest = filemtime($file);
+	            } else { // file
+	            	$file_x = explode('.', $file);
+	            	if (!in_array($file_x[count($file_x)-1], $this->forbidden_file_extensions)) {
+	                	$highest = filemtime($file);
+	            	}
 	            }
 	            
 	            if ($highest > $highestKnown) {
