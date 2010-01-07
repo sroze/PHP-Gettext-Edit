@@ -33,32 +33,33 @@ a:hover, a:focus {
 	color: #C61A1A;
 	text-decoration: underline;
 }
-ul li p {
+div#contents ul li p {
 	margin: 5px 0px 15px 0px;
 	padding: 0;
 }
-ul li {
+div#contents ul li {
 	list-style: none;
-	background: url(../images/icons/bullet.png) no-repeat;
+	background: url(../images/icons/bullet.png) no-repeat 8px 3px;
 	padding-left: 25px;
 }
-ul li.spacer {
+div#contents ul li.spacer {
 	list-style: none; 
+	background: none;
 	height: 8px;
 }
-ul li.important {
+div#contents ul li.important {
 	background: url(../images/icons/exclamation.png) no-repeat;
 }
-ul li.important a {
+div#contents ul li.important a {
 	color: #C61A1A;
 	font-weight: bold;
 }
-ul li.inutile {
+div#contents ul li.inutile {
 	background: url(../images/icons/tick.png) no-repeat;
 }
-ul li.inutile a {
+div#contents ul li.inutile a {
 	color: #279A08;
-	font-weight: bold;
+	font-weight: normal;
 	text-decoration: line-through;
 }
 code {
