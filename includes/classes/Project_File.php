@@ -415,6 +415,10 @@ abstract class Project_File
 			$file_contents
 		);
 		
+		$headers = $this->getHeaders();
+		$headers['GetTextEdit-edited'] = time();
+		$this->setHeaders($headers);
+		
 		if (!$puts) {
 			throw new Project_File_Exception(
 				_('Impossible d\'écrire le nouveau fichier')

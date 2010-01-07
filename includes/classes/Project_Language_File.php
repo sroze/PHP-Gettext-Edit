@@ -89,6 +89,13 @@ class Project_Language_File extends Project_File
 		$language_file = new Project_Language_File($language, $template->getType().'/'.$name);
 		$language_file_headers = $language_file->getHeaders();
 		$language_file_headers['GetTextEdit-template'] = $template->getName();
+		unset( // remove template headers
+			$language_file_headers['GetTextEdit-language'],
+			$language_file_headers['GetTextEdit-encoding'],
+			$language_file_headers['GetTextEdit-keywords'],
+			$language_file_headers['GetTextEdit-search-files'],
+			$language_file_headers['GetTextEdit-files']
+		);
 		$language_file->setHeaders($language_file_headers);
 		
 		return $language_file;
@@ -109,6 +116,10 @@ class Project_Language_File extends Project_File
 			'--quiet '.
 			'"'.$this->file_path.'" "'.$template->file_path.'"';
 		$exec_result = exec($command);
+		
+		$headers = $this->getHeaders();
+		$headers['GetTextEdit-updated'] = time();
+		$this->setHeaders($headers);
 		//var_dump($command, $exec_result);
 	}
 	
@@ -126,10 +137,13 @@ class Project_Language_File extends Project_File
 			($use_fuzzy ? '--use-fuzzy ' : '').
 			'--output-file="'.$output_file_path.'" '.
 			'"'.$this->file_path.'"';
-			
 		$exec_result = exec($command);
 		
 		if (is_file($output_file_path)) {
+			$headers = $this->getHeaders();
+			$headers['GetTextEdit-compiled'] = time();
+			$this->setHeaders($headers);
+			
 			return $output_file_path;
 		} else {
 			throw new Project_Language_File_Exception(
