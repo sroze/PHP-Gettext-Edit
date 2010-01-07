@@ -1507,6 +1507,6 @@ function openPoLine (object)
 	$('tr.trSelected').removeClass('trSelected');
 	$(object).toggleClass('trSelected').focus();
 	
-	var id = this.id.substr(3);
+	var id = object.id.substr(3);
 	alert('msgid #'+id);
 }
