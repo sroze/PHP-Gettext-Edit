@@ -321,6 +321,7 @@ class Project_Template extends Project_File
 	            }
 	            
 	            if ($highest > $highestKnown) {
+	            	var_dump($file);
 	     			$highestKnown = $highest;
 	        	}
 	    	}
