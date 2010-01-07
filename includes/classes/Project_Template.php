@@ -272,6 +272,47 @@ class Project_Template extends Project_File
 	{
 		return unlink($this->file_path);
 	}
+	
+	/**
+	 * Return the timestamp when the last edited file was edited
+	 * 
+	 * @return integer
+	 */
+	public function getLastEditedFileTimestamp ()
+	{
+		return $this->getHighestFileTimestamp(
+			$this->project->get('project_path')
+		);
+	}
+	
+	/**
+	 * Get the timestamp of the last edited file in a
+	 * directory.
+	 * 
+	 * @param string $directory
+	 * 
+	 * @return integer
+	 */
+	private function getHighestFileTimestamp($directory) {
+		$highestKnown = 0;
+	     
+	    while ($datei = readdir($handle)) {
+	    	if (($datei != '.') && ($datei != '..')) {
+	        	$file = $directory.$datei;
+	        	if (is_dir($file)) {
+	            	$highest = $this->getHighestFileTimestamp($file.'/');
+	            } else {
+	                $highest = filemtime($file);
+	            }
+	            
+	            if ($highest > $highestKnown) {
+	     			$highestKnown = $highest;
+	        	}
+	    	}
+	    }
+	    
+	    return $highestKnown;
+	}
 }
 
 class Project_Template_Exception extends Exception {}
