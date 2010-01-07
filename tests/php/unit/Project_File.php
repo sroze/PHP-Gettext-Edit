@@ -86,6 +86,8 @@ voir plus...',
 
 
 $unittest->setTestTitle('editMessage');
+
+print_r(file($file_path));
 $file->editMessage('test', 'translation3');
 $unittest->mustBeEqual($file->getMessages(), array(
 	'test2' => array(
@@ -111,7 +113,7 @@ voir plus...',
 		'comments' => ''
 	)
 ));
-
+print_r(file($file_path));
 
 $unittest->setTestTitle('editMessage (delete)');
 $file->editMessage('test2', false);
