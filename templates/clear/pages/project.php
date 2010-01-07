@@ -24,7 +24,15 @@ if (!isset($project)) {
 			echo '<ul>';
 			foreach ($templates as $template) {
 				$template_name = $template->getName();
-				echo '<li><a href="index.php?page=template&project='.$project->get('project_id').'&template='.$template_name.'">'.$template_name.'</a></li>';
+				$last_edited = $template->getLastEditedFileTimestamp();
+				$template_headers = $template->getHeaders();
+				if ($last_edited > (int) $template_headers['GetTextEdit-updated']) {
+					$class = 'invalid';
+				} else {
+					$class = 'valid';
+				}
+				
+				echo '<li class="'.$class.'"><a href="index.php?page=template&project='.$project->get('project_id').'&template='.$template_name.'">'.$template_name.'</a></li>';
 			}
 			echo '</ul>';
 		} else {

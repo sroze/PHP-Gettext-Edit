@@ -37,9 +37,12 @@ $template_headers = $template->getHeaders();
 			echo '<div class="box error">'.
 				_('Un ou plusieurs fichiers du projet ont étés modifiés depuis la création la dernière mise à jour du modèle').
 				'</div>';
+			$class = 'important';
+		} else {
+			$class = 'inutile';
 		}
 		?>
-			<li><a href="index.php?page=template-update&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">
+			<li class="<?php echo $class; ?>"><a href="index.php?page=template-update&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">
 				<?php echo _('Mettre à jour le modèle'); ?>
 			</a></li>
 		</ul>
