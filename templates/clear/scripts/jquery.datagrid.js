@@ -1606,7 +1606,7 @@ function openPoLine (object)
 	}
 	
 	if (row.fuzzy) {
-		$('input#right_fuzzy').attr('checked');
+		$('input#right_fuzzy').attr('checked', true);
 	} else {
 		$('input#right_fuzzy').removeAttr('checked');
 	}
