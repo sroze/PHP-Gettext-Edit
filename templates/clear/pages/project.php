@@ -40,7 +40,8 @@ if (!isset($project)) {
 		if (!empty($languages)) {
 			echo '<ul>';
 			foreach ($languages as $language) {
-				if (!empty($language->getWarnings())) {
+				$language_warnings = $language->getWarnings();
+				if (!empty($language_warnings)) {
 					$class = 'important';
 				} else {
 					$class = 'inutile';
