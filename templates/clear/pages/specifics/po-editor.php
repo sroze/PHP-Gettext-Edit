@@ -45,7 +45,7 @@ $(document).ready(function() {
 				$('tr#row'+new_id, grid).dblclick();
 			}},
 			{name: 'Supprimer', bclass: 'delete', onpress : function (a,grid){
-				if ($('.trSelected',grid).length) {
+				if ($('.trSelected',grid).length <= 0) {
 					alert('Vous devez sélectionner au moins un élément');
 				} else if (confirm('Êtes-vous sur de vouloir supprimer ces '+$('.trSelected',grid).length+' éléments ?')) {
 					$("#po_datagrid").editRemove($('.trSelected',grid));
