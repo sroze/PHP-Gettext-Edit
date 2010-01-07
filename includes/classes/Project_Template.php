@@ -295,6 +295,7 @@ class Project_Template extends Project_File
 	 */
 	private function getHighestFileTimestamp($directory) {
 		$highestKnown = 0;
+		$handle = opendir($directory);
 	     
 	    while ($datei = readdir($handle)) {
 	    	if (($datei != '.') && ($datei != '..')) {

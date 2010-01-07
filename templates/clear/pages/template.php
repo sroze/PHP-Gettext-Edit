@@ -47,5 +47,6 @@ $template_headers = $template->getHeaders();
 				<?php echo _('Mettre à jour le modèle'); ?>
 			</a></li>
 		</ul>
+		<div class="clear"></div>
 	</div>
 </div>
