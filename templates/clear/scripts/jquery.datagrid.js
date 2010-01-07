@@ -1540,6 +1540,7 @@
 				rowData.cell[1] = msgid;
 				rowData.cell[2] = msgstr;
 				rowData.comments = comments;
+				rowData.fuzzy = fuzzy;
 			}
 		});
 	};
