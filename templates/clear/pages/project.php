@@ -52,7 +52,7 @@ if (!isset($project)) {
 		if (!empty($languages)) {
 			echo '<ul>';
 			foreach ($languages as $language) {
-				$languages_files[$language] = $language->getFiles();
+				$languages_files[$language->getName()] = $language->getFiles();
 				
 				$language_warnings = $language->getWarnings();
 				if (!empty($language_warnings)) {
@@ -68,14 +68,14 @@ if (!isset($project)) {
 		}
 		
 		// Check if each languages have the same .po files
-		foreach ($languages_files as $language => $files) {
+		foreach ($languages_files as $language_name => $files) {
 			foreach ($files as $file) {
-				foreach ($languages_files as $other_language => $other_language_files) {
+				foreach ($languages_files as $other_language_name => $other_language_files) {
 					if (!in_array($file, $other_language_files)) {
 						echo '<div class="box error"><p>'.
 							sprintf(
 								_('La langue <strong>%s</strong> n\'a pas le fichier <strong>%s</strong>'),
-								$other_language->getName(),
+								$other_language_name,
 								$file->file_path
 							).
 							'</p></div>';
