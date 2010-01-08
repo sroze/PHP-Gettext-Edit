@@ -151,7 +151,7 @@ class Project_Language_File extends Project_File
 	public function compile ($type = 'normal', $use_fuzzy = false)
 	{
 		if ($type == 'json') {
-			return $this->toJSON($use_fuzzy);
+			$output_file_path = $this->toJSON($use_fuzzy);
 		} else if ($type == 'normal') {
 			$output_file_path = substr($this->file_path, 0, -2).'mo'; // Remplace .po by .mo
 			$command = 'msgfmt '.
@@ -164,8 +164,6 @@ class Project_Language_File extends Project_File
 				$headers = $this->getHeaders();
 				$headers['GetTextEdit-compiled'] = time();
 				$this->setHeaders($headers);
-				
-				return $output_file_path;
 			} else {
 				throw new Project_Language_File_Exception(
 					sprintf(_('La compilation vers le fichier "%s" a échoué.'), $output_file_path)
@@ -176,6 +174,12 @@ class Project_Language_File extends Project_File
 				sprintf(_('Type de compilation "%s" inconnu.'), $type)
 			);
 		}
+		
+		if (is_file($this->file_path.'~')) {
+			unlink($this->file_path.'~');
+		}
+		
+		return $output_file_path;
 	}
 	
 	/**

@@ -44,7 +44,7 @@ class Project_Template extends Project_File
 	
 	/**
 	 * Files extensions that aren't considered while search for files
-	 * with $this->getHighestFileTimestamp
+	 * with $this->getEditedFiles
 	 * 
 	 * @var array
 	 */
