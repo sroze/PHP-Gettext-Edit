@@ -141,28 +141,37 @@ class Project_Language_File extends Project_File
 	/**
 	 * Compile the .po file into an .mo file.
 	 * 
-	 * @param bool $use_fuzzy
+	 * @param string $type		Type of compilation: normal/json
+	 * @param bool   $use_fuzzy
 	 * 
 	 * @return string $output_file_path
 	 */
-	public function compile ($use_fuzzy = false)
+	public function compile ($type = 'normal', $use_fuzzy = false)
 	{
-		$output_file_path = substr($this->file_path, 0, -2).'mo'; // Remplace .po by .mo
-		$command = 'msgfmt '.
-			($use_fuzzy ? '--use-fuzzy ' : '').
-			'--output-file="'.$output_file_path.'" '.
-			'"'.$this->file_path.'"';
-		$exec_result = exec($command);
-		
-		if (is_file($output_file_path)) {
-			$headers = $this->getHeaders();
-			$headers['GetTextEdit-compiled'] = time();
-			$this->setHeaders($headers);
+		if ($type == 'json') {
+			return $this->toJSON($use_fuzzy);
+		} else if ($type == 'normal') {
+			$output_file_path = substr($this->file_path, 0, -2).'mo'; // Remplace .po by .mo
+			$command = 'msgfmt '.
+				($use_fuzzy ? '--use-fuzzy ' : '').
+				'--output-file="'.$output_file_path.'" '.
+				'"'.$this->file_path.'"';
+			$exec_result = exec($command);
 			
-			return $output_file_path;
+			if (is_file($output_file_path)) {
+				$headers = $this->getHeaders();
+				$headers['GetTextEdit-compiled'] = time();
+				$this->setHeaders($headers);
+				
+				return $output_file_path;
+			} else {
+				throw new Project_Language_File_Exception(
+					sprintf(_('La compilation vers le fichier "%s" a échoué.'), $output_file_path)
+				);
+			}
 		} else {
 			throw new Project_Language_File_Exception(
-				sprintf(_('La compilation vers le fichier "%s" a échoué.'), $output_file_path)
+				sprintf(_('Type de compilation "%s" inconnu.'), $type)
 			);
 		}
 	}

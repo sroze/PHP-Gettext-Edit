@@ -15,7 +15,8 @@ if (!isset($language_file)) {
 		<?php 
 		if (isset($_POST['compile'])) {
 			try {
-				$output_file_path = $language_file->toJSON(
+				$output_file_path = $language_file->compile(
+					'json',
 					isset($_POST['with-fuzzy'])
 				);
 				

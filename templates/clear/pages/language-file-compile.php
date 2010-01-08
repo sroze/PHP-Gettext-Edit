@@ -16,6 +16,7 @@ if (!isset($language_file)) {
 		if (isset($_POST['compile'])) {
 			try {
 				$output_file_path = $language_file->compile(
+					'normal',
 					isset($_POST['with-fuzzy'])
 				);
 				
