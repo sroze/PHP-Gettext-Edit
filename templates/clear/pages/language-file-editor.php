@@ -6,6 +6,7 @@ if (!isset($language_file)) {
 ?><div id="page">
 	<div id="contents">
 		<div class="link right">
+			<a class="compile_json" href="index.php?page=language-file-compile-json&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo _('Compiler en JSON'); ?></a>
 			<a class="compile" href="index.php?page=language-file-compile&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo _('Compiler'); ?></a>
 		</div>
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; 

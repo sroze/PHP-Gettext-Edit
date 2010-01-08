@@ -8,6 +8,15 @@ class Project_Language_File extends Project_File
 	const W_COMPILE = 2;
 	const W_COMPILE_JSON = 3;
 	
+	/**
+	 * List of possible compiled files' extensions.
+	 * 
+	 * @var array
+	 */
+	private $possible_compiled_file_extension = array(
+		'mo', 'json'
+	);
+	
 	// Vars
 	private $language;
 	private $name;
@@ -159,6 +168,46 @@ class Project_Language_File extends Project_File
 	}
 	
 	/**
+	 * Transform a .po file into a JSON file.
+	 * 
+	 * @param bool $use_fuzzy
+	 * 
+	 * @return string $output_file_path
+	 */
+	public function toJSON ($use_fuzzy = false)
+	{
+		$json_array = array();
+		$json_file_path = substr($this->file_path, 0, -2).'json';
+		$messages = $this->getMessages();
+		
+		foreach ($messages as $msgid => $message_informations) {
+			if ($use_fuzzy || !$message_informations['fuzzy']) {
+				$json_array[$msgid] = $message_informations['msgstr'];
+			}
+		}
+		
+		$puts = file_put_contents(
+			$json_file_path,
+			json_encode(
+				$json_array,
+				JSON_FORCE_OBJECT
+			)
+		);
+		
+		if ($puts === false) {
+			throw new Project_Language_File_Exception(
+				sprintf(_('Impossible d\'écrire dans le fichier "%s".'), $json_file_path)
+			);
+		} else if (!is_file($json_file_path)) {
+			throw new Project_Language_File_Exception(
+				sprintf(_('La compilation en JSON vers le fichier "%s" a échoué.'), $json_file_path)
+			);
+		} else {
+			return $json_file_path;
+		}
+	}
+	
+	/**
 	 * Delete the file.
 	 * 
 	 * @return bool
@@ -237,6 +286,48 @@ class Project_Language_File extends Project_File
 		}
 		
 		return $warnings;
+	}
+	
+	/**
+	 * Return a list of files which have the same name but with an
+	 * extension .mo or .json
+	 * 
+	 * @return array
+	 */
+	public function getCompiledFiles ()
+	{
+		$result = array();
+		$vierge_file_path = substr($this->file_path, 0, -2);
+		
+		foreach ($this->possible_compiled_file_extension as $possible_extension) {
+			$file = $vierge_file_path.$possible_extension;
+			
+			if (is_file($file)) {
+				$result[] = $file;
+			}
+		}
+		
+		return $result;
+	}
+	
+	/**
+	 * Remove a key from an array.
+	 * 
+	 * @return array
+	 */
+	private function array_remove_key ()
+	{
+		$args = func_get_args();
+		
+		return array_diff_key(
+			$args[0],
+			array_flip(
+				array_slice(
+					$args,
+					1
+				)
+			)
+		);
 	}
 }
 

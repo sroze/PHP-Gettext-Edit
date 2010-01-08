@@ -72,6 +72,21 @@ $template = $language_file->getTemplate();
 				<?php echo _('Editer le contenu'); ?>
 			</a></li>
 		</ul>
+		<h2><?php echo _('Compilations'); ?></h2>
+		<p><?php echo _('Voici le ou les fichiers compilés issus de ce fichier:'); ?></p>
+		<ul>
+		<?php
+		$compiled_files = $language_file->getCompiledFiles();
+		
+		if (empty($compiled_files)) {
+			echo '<li>'._('Aucun fichier compilé').'</li>';
+		} else {
+			foreach ($compiled_files as $file_path) {
+				echo '<li><strong>'.$file_path.'</strong> <code>'.date('d/m/Y H:i:s', filemtime($file_path)).'</code></li>';
+			}
+		}
+		?>
+		</ul>
 		<div class="clear"></div>
 	</div>
 </div>

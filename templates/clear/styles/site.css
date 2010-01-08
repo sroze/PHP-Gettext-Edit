@@ -130,6 +130,13 @@ div#contents h1 a {
 	color: #000;
 	text-decoration: none;
 }
+div#contents h2 {
+	margin-top: 25px;
+	margin-bottom: 5px;
+}
+div#contents p {
+	margin-top: 5px;
+}
 form.formatted p , div.form_p {
 	clear: left;
 	margin: 0;
@@ -195,6 +202,10 @@ div.link a.delete {
 div.link a.compile {
 	padding-left: 16px;
 	background: url(../images/icons/bullet_disk.png) no-repeat;
+}
+div.link a.compile_json {
+	padding-left: 16px;
+	background: url(../images/icons/bullet_feed.png) no-repeat;
 }
 div.clear {
 	clear: both;
