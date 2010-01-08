@@ -24,9 +24,9 @@ if (!isset($project)) {
 			echo '<ul>';
 			foreach ($templates as $template) {
 				$template_name = $template->getName();
-				$last_edited = $template->getLastEditedFileTimestamp();
-				$template_headers = $template->getHeaders();
-				if ($last_edited > (int) $template_headers['GetTextEdit-updated']) {
+				$last_edited_files = $template->getEditedFiles();
+				
+				if (!empty($last_edited_files)) {
 					$class = 'invalid';
 				} else {
 					$class = 'valid';
