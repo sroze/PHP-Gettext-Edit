@@ -43,7 +43,7 @@ if (!isset($project)) {
 							_('Fichier .po créé').' - '.
 							'<a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'.
 							_('Continuer').
-							'</a></p>';
+							'</a></p></div>';
 						
 						unset($language_file);
 					} catch (Exception $e) {
