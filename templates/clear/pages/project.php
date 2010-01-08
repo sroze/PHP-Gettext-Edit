@@ -66,7 +66,9 @@ if (!isset($project)) {
 		} else {
 			echo '<p>'._('Aucune langue n\'est actuellement créée').'</p>';
 		}
-		
+		?>
+		</div>
+		<?php
 		// Check if each languages have the same .po files
 		foreach ($languages_files as $language_name => $files) {
 			foreach ($files as $file) {
@@ -85,8 +87,6 @@ if (!isset($project)) {
 			array_shift($languages_files);
 		}
 		?>
-		</div>
-		
 		<ul>
 			<li><a href="index.php?page=project-new-po-file&project=<?php echo $project->get('project_id'); ?>">Créer un même fichier .po par langue</a></li>
 		</ul>
