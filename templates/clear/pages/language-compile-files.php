@@ -16,8 +16,9 @@ if (!isset($language)) {
 		<?php echo _('Compiler tous les fichiers'); ?></h1>
 		<?php 
 		if (isset($_POST['files'])) {
-			foreach ($_POST['files'] as $file => $type) {
-				var_dump('n', $file, $type);
+			foreach ($_POST['files'] as $file => $type_informations) {
+				$type_informations = array_keys($type_informations);
+				$type = $type_informations[0];
 				
 				try {
 					$language_file = new Project_Language_File($language, $file);
@@ -27,7 +28,7 @@ if (!isset($language)) {
 						'<p>'.sprintf(_('Fichier compilé: <strong>%s</strong>'), $output_file_path).' - <a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Continuer').'</a></p>'.
 						'</div>';
 				} catch (Exception $e) {
-					echo '<div class="box success">'.
+					echo '<div class="box error">'.
 						'<p>'.$e->getMessage().'</p>'.
 						'</div>';
 				}

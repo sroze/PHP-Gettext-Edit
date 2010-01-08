@@ -24,7 +24,7 @@ if (!isset($language_file)) {
 					'<p>'.sprintf(_('Fichier compilé: <strong>%s</strong>'), $output_file_path).' - <a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Retour').'</a></p>'.
 					'</div>';
 			} catch (Exception $e) {
-				echo '<div class="box success">'.
+				echo '<div class="box error">'.
 					'<p>'.$e->getMessage().'</p>'.
 					'</div>';
 			}
