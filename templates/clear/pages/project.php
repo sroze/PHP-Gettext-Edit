@@ -89,7 +89,7 @@ if (!isset($project)) {
 					}
 				}
 			}
-			array_shift($languages_files);
+			//array_shift($languages_files);
 		}
 		?>
 		<ul>
