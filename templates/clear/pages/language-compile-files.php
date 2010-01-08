@@ -22,7 +22,7 @@ if (!isset($language)) {
 				
 				try {
 					$language_file = new Project_Language_File($language, $file);
-					$language_file->compile($type, (isset($_POST['with-fuzzy'])));
+					$output_file_path = $language_file->compile($type, (isset($_POST['with-fuzzy'])));
 					
 					echo '<div class="box success">'.
 						'<p>'.sprintf(_('Fichier compilé: <strong>%s</strong>'), $output_file_path).' - <a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Continuer').'</a></p>'.
