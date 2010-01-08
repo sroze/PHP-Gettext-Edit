@@ -1,5 +1,13 @@
 <div id="page">
-	<div id="contents">
+	<div id="sidebar">
+		<h3><?php echo _('Créer un projet'); ?></h3>
+		<p><?php echo _('Créez un nouveau projet afin de gérer les différentes traductions '.
+			'de celui-ci dans PHP-Gettext-Edit '); ?></p>
+		<?php
+		require PAGE_DIR.'specifics/sidebar/project.php';
+		?>
+	</div>
+	<div id="contents" class="with_sidebar">
 		<h1><?php echo _('Nouveau projet'); ?></h1>
 		<?php
 		if (isset($_POST['name'])) {

@@ -4,7 +4,12 @@ if (!isset($project)) {
 	exit();
 }
 ?><div id="page">
-	<div id="contents">
+	<div id="sidebar">
+		<?php
+		require PAGE_DIR.'specifics/sidebar/project.php';
+		?>
+	</div>
+	<div id="contents" class="with_sidebar">
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo _('Éditer'); ?></h1>
 		<?php
 		if (isset($_POST['name'])) {

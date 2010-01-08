@@ -5,8 +5,8 @@ if (!isset($language)) {
 }
 ?><div id="page">
 	<div id="sidebar">
-		<h3><?php echo _('Statistiques'); ?></h3>
-		<p>À venir</p>
+		<h3><?php echo _('Une langue'); ?></h3>
+		<p><?php echo _('Dans PHP-GetText-Edit, une langue peut contenir plusieurs fichiers de traductions.')?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
 		<div class="link right">

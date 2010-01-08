@@ -1,6 +1,6 @@
 <div id="page">
 	<div id="contents">
-		<h2>Configuration</h2>
+		<h1>Configuration</h1>
 		<?php
 		if (isset($_POST['update_conf'])) {
 			$_CONFIG['template'] = $_POST['template'];

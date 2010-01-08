@@ -2,15 +2,16 @@ UL.jqueryFileTree {
 	font-family: Verdana, sans-serif;
 	font-size: 11px;
 	line-height: 18px;
-	padding: 0px;
-	margin: 0px;
+	padding: 0 !important;
+	margin: 0;
 }
 
 UL.jqueryFileTree LI {
-	list-style: none;
-	padding: 0px;
-	padding-left: 20px;
-	margin: 0px;
+	list-style: none !important;
+	background: none !important;
+	padding: 0px !important;
+	padding-left: 20px !important;
+	margin: 0px !important;
 	white-space: nowrap;
 }
 UL.jqueryFileTree li.head {

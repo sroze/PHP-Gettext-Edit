@@ -5,14 +5,16 @@ if (!isset($language_file)) {
 }
 ?><div id="page">
 	<div id="sidebar">
-		<h3><?php echo _('Mise à niveau'); ?></h3>
-		<p>À venir</p>
+		<h3><?php echo _('Mise à jour'); ?></h3>
+		<p><?php echo _('Un fichier de traduction étant créé depuis un modèle, si le modèle est modifié, alors le '.
+		'fichier de traduction doit être mis à jour afin d\'ajouter des nouvelles traductions et si besoin est d\'enlever '.
+		'celles qui ne sont plus utilisées.'); ?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; 
 			<a href="index.php?page=language&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo $language->getName(); ?></a> &raquo; 
 			<a href="index.php?page=language-file&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo $language_file->getName(); ?></a> &raquo; 
-			<?php echo _('Mettre à niveau'); ?></h1>
+			<?php echo _('Mettre à jour'); ?></h1>
 		<?php 
 		if (isset($_POST['action'])) {
 			try {
@@ -40,7 +42,7 @@ if (!isset($language_file)) {
 			echo $language_file->getTemplateName();
 			?></p>
 			<input type="hidden" name="action" value="update" />
-			<p><input type="submit" value="<?php echo _('Mettre à niveau'); ?>" /></p>
+			<p><input type="submit" value="<?php echo _('Mettre à jour'); ?>" /></p>
 		</form>
 	</div>
 </div>

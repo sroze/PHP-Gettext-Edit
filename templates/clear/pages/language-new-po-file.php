@@ -6,7 +6,9 @@ if (!isset($language)) {
 ?><div id="page">
 	<div id="sidebar">
 		<h3><?php echo _('Création d\'un fichier .po'); ?></h3>
-		<p>À venir</p>
+		<p><?php echo _('Un fichier .po est un fichier utilisé pour la traduction et pour la compilation.'), ' ',
+		_('À partir de celui-ci, vous créerez les traductions des chaines de caractère présentent dans le modèle, '.
+		'qui seront compilées pour servir à votre application'); ?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <a href="index.php?page=language&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo $language->getName(); ?></a> &raquo; <?php echo _('Nouveau fichier .po'); ?></h1>

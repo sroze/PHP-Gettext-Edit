@@ -5,8 +5,9 @@ if (!isset($project)) {
 }
 ?><div id="page">
 	<div id="sidebar">
-		<h3><?php echo _('Création du nouveau projet'); ?></h3>
-		<p>À venir</p>
+		<?php 
+		require PAGE_DIR.'specifics/sidebar/language.php';
+		?>
 	</div>
 	<div id="contents" class="with_sidebar">
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo _('Nouvelle langue'); ?></h1>

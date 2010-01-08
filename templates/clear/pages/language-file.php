@@ -10,8 +10,12 @@ $template = $language_file->getTemplate();
 
 ?><div id="page">
 	<div id="sidebar">
-		<h3><?php echo _('Statistiques'); ?></h3>
-		<p>À venir</p>
+		<h3><?php echo _('Gestion du fichier de traduction'); ?></h3>
+		<p><?php echo sprintf(
+			_('En <a href="%s">éditant de le contenu de ce fichier</a>, traduisez les chaines de caractères issues du modèle '.
+			'puis compilez-le de façon à obtenir un fichier utilisable par une librairie Gettext.'),
+			'index.php?page=language-file-editor&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName()
+		); ?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
 		<div class="link right">

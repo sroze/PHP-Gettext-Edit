@@ -8,8 +8,10 @@ $last_edited_files = $template->getEditedFiles();
 $template_headers = $template->getHeaders();
 ?><div id="page">
 	<div id="sidebar">
-		<h3><?php echo _('Statistiques'); ?></h3>
-		<p>À venir</p>
+		<h3><?php echo _('Modèle'); ?></h3>
+		<p><?php echo _('Un modèle, c\'est un fichier qui contient toutes les phrases et tous les mots qui sont à traduire.'), ' ',
+		_('Il se créé de manière automatique en analysant les sources de votre application et permet par la suite de créer des '.
+		'fichiers de traductions (ou fichier <code>.po</code>) qui pourront être compilés pour servir à votre application.')?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
 		<div class="link right">

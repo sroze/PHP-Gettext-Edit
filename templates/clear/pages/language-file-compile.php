@@ -4,7 +4,12 @@ if (!isset($language_file)) {
 	exit();
 }
 ?><div id="page">
-	<div id="contents">
+	<div id="sidebar">
+		<h3><?php echo _('Compilation'); ?></h3>
+		<p><?php echo _('Compiler un fichier de traduction <code>.po</code> permet de le transformer en un fichier binaire <code>.mo</code>, lisible par la librairie '.
+		'Gettext de manière beaucoup plus rapide qu\'un fichier non compilé pourrait être lu par une librairie tierce.'); ?></p>
+	</div>
+	<div id="contents" class="with_sidebar">
 		<div class="link right">
 			<a class="edit" href="index.php?page=language-file-editor&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo _('Editer'); ?></a>
 		</div>

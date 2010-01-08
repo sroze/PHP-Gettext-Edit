@@ -4,7 +4,12 @@ if (!isset($language_file)) {
 	exit();
 }
 ?><div id="page">
-	<div id="contents">
+	<div id="sidebar">
+		<h3><?php echo _('Compiler en JSON'); ?></h3>
+		<p><?php echo _('Transformer un fichier de traduction <code>.po</code> en JSON permet d\'utiliser les traductions qu\'il '.
+		'contient avec des librairie comme <a href="http://plugins.jquery.com/project/gettext">GetText pour JavaScript</a> (jQuery).'); ?></p>
+	</div>
+	<div id="contents" class="with_sidebar">
 		<div class="link right">
 			<a class="edit" href="index.php?page=language-file-editor&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo _('Editer'); ?></a>
 		</div>

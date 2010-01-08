@@ -5,8 +5,9 @@ if (!isset($language)) {
 }
 ?><div id="page">
 	<div id="sidebar">
-		<h3><?php echo _('Compiler tous les fichiers'); ?></h3>
-		<p>À venir</p>
+		<h3><?php echo _('Mettre à jour tous les fichiers'); ?></h3>
+		<p><?php echo _('Pour gagner du temps, cette page vous permet de mettre à jour tous les fichiers de traduction de votre '.
+		'langue en un seul clic.'); ?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
 		<div class="link right">
