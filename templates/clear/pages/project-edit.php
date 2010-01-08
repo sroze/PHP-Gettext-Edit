@@ -35,7 +35,9 @@ if (!isset($project)) {
 				}
 			}
 		} else {
-			
+			$_POST['name'] = $project->get('project_name');
+			$_POST['path_app'] = $project->get('project_path');
+			$_POST['path_lang'] = $project->get('project_languages_path');
 		}
 		?>
 		<form method="POST" action="" class="formatted"><?php 
