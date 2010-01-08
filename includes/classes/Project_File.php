@@ -302,6 +302,7 @@ abstract class Project_File
 		
 		$file_contents = $this->getContents();
 		$comments_lines = array();
+		$other_header_lines = array();
 		
 		$position = 0;
 		$prev_position = 0;
