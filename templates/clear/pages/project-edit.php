@@ -28,8 +28,6 @@ if (!isset($project)) {
 						'<input type="submit" value="'._('Continuer').'" />'.
 						'</form></p>';
 					echo '</div>';
-						
-					unset($_POST);
 				} catch (Exception $e) {
 					echo '<div class="message error"><p>'.$e->getMessage().'</p></div>';
 				}

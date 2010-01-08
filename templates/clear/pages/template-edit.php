@@ -60,8 +60,6 @@ if (!isset($template)) {
 						'<input type="submit" value="'._('Retour').'" />'.
 						'</form></p>';
 					echo '</div>';
-						
-					unset($_POST);
 				} catch (Exception $e) {
 					echo '<div class="message error">'.
 						$e->getMessage().
