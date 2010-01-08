@@ -51,16 +51,16 @@ if (!isset($language)) {
 						
 						echo '<li class="'.
 							(in_array(Project_Language_File::W_COMPILE, $file_warnings) ? 'invalid' : 'valid')
-							.'"><input type="checkbox" name="files['.$file->getName().'][normal]" value="yes"'.
+							.'"><label><input type="checkbox" name="files['.$file->getName().'][normal]" value="yes"'.
 							(isset($_POST['files'], $_POST['files'][$file->getName()], $_POST['files'][$file->getName()]['normal']) ?
 								' checked' : '')
-							.' /> <code>.mo</code></li> ';
+							.' /> <code>.mo</code></label></li> ';
 						echo '<li class="'.
 							(in_array(Project_Language_File::W_COMPILE_JSON, $file_warnings) ? 'invalid' : 'valid')
-							.'"><input type="checkbox" name="files['.$file->getName().'][json]" value="yes"'.
+							.'"><label><input type="checkbox" name="files['.$file->getName().'][json]" value="yes"'.
 							(isset($_POST['files'], $_POST['files'][$file->getName()], $_POST['files'][$file->getName()]['json']) ?
 								' checked' : '')
-							.' /> JSON</li> ';
+							.' /> JSON</label></li> ';
 						echo '</ul></li>';
 					}
 					?>
