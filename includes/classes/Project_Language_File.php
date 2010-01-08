@@ -281,7 +281,7 @@ class Project_Language_File extends Project_File
 			$warnings[] = self::W_COMPILE;
 		}
 		if (array_key_exists('GetTextEdit-compiledJSON', $headers) &&
-			(int)$file_headers['GetTextEdit-compiledJSON'] < (int)$file_headers['GetTextEdit-edited']) {
+			(int) $headers['GetTextEdit-edited'] > (int) $headers['GetTextEdit-compiledJSON']) {
 			$warnings[] = self::W_COMPILE_JSON;
 		}
 		
