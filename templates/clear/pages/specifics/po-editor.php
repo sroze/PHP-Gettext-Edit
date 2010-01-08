@@ -5,25 +5,30 @@
 			<div class="title"><?php echo _('Édition de la séléction'); ?></div>
 		</div>
 		<div class="my grid">
-			<div id="right_message" class="message" style="display: none;"></div>
-			<fieldset>
-				<legend><?php echo _('Message d\'origine'); ?></legend>
-				<textarea id="right_msgid" name="msgid"></textarea>
-			</fieldset>
-			<fieldset>
-				<legend><?php echo _('Traduction'); ?></legend>
-				<textarea id="right_msgstr" name="msgstr"></textarea>
-			</fieldset>
-			<fieldset>
-				<legend><?php echo _('Commentaires'); ?></legend>
-				<textarea id="right_comments" name="comments"></textarea>
-			</fieldset>
-			<fieldset>
-				<legend><?php echo _('Références'); ?></legend>
-				<ul id="right_references"></ul>
-			</fieldset>
-			<div><label><input id="right_fuzzy" type="checkbox" name="fuzzy" value="true" /> Fuzzy</label></div>
-			<div><input id="right_row_id" type="hidden" name="rowid" /><input type="submit" value="<?php echo _('Sauvegarder'); ?>" /></div>
+			<div id="right_grid_contents" style="display: none;">
+				<div id="right_message" class="message" style="display: none;"></div>
+				<fieldset>
+					<legend><?php echo _('Message d\'origine'); ?></legend>
+					<textarea id="right_msgid" name="msgid"></textarea>
+				</fieldset>
+				<fieldset>
+					<legend><?php echo _('Traduction'); ?></legend>
+					<textarea id="right_msgstr" name="msgstr"></textarea>
+				</fieldset>
+				<fieldset>
+					<legend><?php echo _('Commentaires'); ?></legend>
+					<textarea id="right_comments" name="comments"></textarea>
+				</fieldset>
+				<fieldset>
+					<legend><?php echo _('Références'); ?></legend>
+					<ul id="right_references"></ul>
+				</fieldset>
+				<div><label><input id="right_fuzzy" type="checkbox" name="fuzzy" value="true" /> Fuzzy</label></div>
+				<div><input id="right_row_id" type="hidden" name="rowid" /><input type="submit" value="<?php echo _('Sauvegarder'); ?>" /></div>
+			</div>
+			<div id="right_grid_no_contents">
+				<p align="center"><?php echo _('Double-cliquez sur un message pour le traduire et afficher les informations complémentaires.'); ?></p>
+			</div>
 		</div>
 	</div>
 </form>

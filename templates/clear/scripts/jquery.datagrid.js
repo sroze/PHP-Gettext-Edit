@@ -1595,6 +1595,12 @@ function openPoLine (object)
 	$(object).toggleClass('trSelected').focus();
 	$('div#right_message').slideUp();
 	
+	var div_contents = $('div#right_grid_contents');
+	if (div_contents.attr('display') != 'block') {
+		div_contents.slideDown('fast');
+		$('div#right_grid_no_contents').slideUp();
+	}
+	
 	var trId = object.id.substr(3);
 	var id = searchRowId('id', trId);
 	var row = $("#po_datagrid")[0].grid.storedData.rows[id];
