@@ -139,11 +139,7 @@ class Project
 	 */
 	private function checkData ($name, &$path, &$lang_path)
 	{
-		$path = str_replace('"', '\\"', $path);
-		if (substr($path, -1) != '/') {
-			$path .= '/';
-		}
-				
+		$path = str_replace('"', '\\"', $path);				
 		$lang_path = str_replace('"', '\\"', $lang_path);
 		if (substr($lang_path, -1) != '/') {
 			$lang_path .= '/';
