@@ -83,10 +83,7 @@ if (!isset($project)) {
 							sprintf(
 								_('La langue <strong>%s</strong> n\'a pas le fichier <strong>%s</strong>'),
 								$other_language_name,
-								substr(
-									$file,
-									$last_bracket
-								)
+								$file
 							).
 							'</p></div>';
 					}
