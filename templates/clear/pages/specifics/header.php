@@ -15,7 +15,7 @@ foreach ($menus as $page => $name) {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>GetTextEdit</title>
+<title>PHP-GetText-Edit</title>
 <link rel="stylesheet" href="<?php echo LOCAL_PATH; ?>templates/<?php echo $_CONFIG['template']; ?>/styles/site.css" type="text/css" media="all" />
 <link rel="stylesheet" href="<?php echo LOCAL_PATH; ?>templates/<?php echo $_CONFIG['template']; ?>/styles/jquery.filetree.css" type="text/css" media="all" />
 <link rel="stylesheet" href="<?php echo LOCAL_PATH; ?>templates/<?php echo $_CONFIG['template']; ?>/styles/datagrid.css" type="text/css" media="all" />
@@ -23,7 +23,7 @@ foreach ($menus as $page => $name) {
 </head>
 <body>
 <div id="header">
-	<h1>GetTextEdit</h1>
+	<h1>PHP-GetText-Edit</h1>
 	<h2><?php echo _('Gérez vos traductions simplement'); ?></h2>
 </div>
 <ul id="top_menu">
