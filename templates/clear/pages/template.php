@@ -4,7 +4,7 @@ if (!isset($template)) {
 	exit();
 }
 
-$last_edited = $template->getLastEditedFileTimestamp();
+$last_edited_files = $template->getEditedFiles();
 $template_headers = $template->getHeaders();
 ?><div id="page">
 	<div id="sidebar">
@@ -17,6 +17,35 @@ $template_headers = $template->getHeaders();
 			<a class="edit" href="index.php?page=template-edit&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>"><?php echo _('Editer'); ?></a>
 		</div>
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo _('Modèle'); ?> <code><?php echo $template->getName(); ?></code></h1>
+		<?php
+		$file_edited_information = '';
+		if (!empty($last_edited_files)) {
+			$last_edited = 0;
+			
+			$file_edited_information .= '<div class="box error"><p>';
+			if (count($last_edited_files) == 1) {
+				$file_edited_information .= _('Un fichier du projet a été modifié depuis la dernière mise à jour du modèle');
+			} else {
+				$file_edited_information .= sprintf(_('%d fichiers du projet ont étés modifiés depuis la dernière mise à jour du modèle'), count($last_edited_files));
+			}
+			
+			$file_edited_information .= '</p><p><a id="show_hide_files" href="javacript:;"></a></p><ul id="file_list" style="display: none;">';
+			
+			foreach ($last_edited_files as $file) {
+				$filemtime = filemtime($fime);
+				if ($filemtime > $last_edited) {
+					$last_edited = $timemtime;
+				}
+				
+				$file_edited_information .= '<li><code>'.date('d/m/Y H:i:s', $filemtime).'</code>'.$file.'</li>';
+			}
+			$file_edited_information .= '</ul></div>';
+			$class = 'important';
+		} else {
+			$last_edited = $template_headers['GetTextEdit-updated'];
+			$class = 'inutile';
+		}
+		?>
 		<div class="box little right">
 		<h3><?php echo _('Informations'); ?></h3>
 		<ul>
@@ -32,16 +61,8 @@ $template_headers = $template->getHeaders();
 		</ul>
 		</div>
 		<?php 
-		if ($last_edited > (int) $template_headers['GetTextEdit-updated']) {
-			echo '<div class="box error"><p>'.
-				_('Un ou plusieurs fichiers du projet ont étés modifiés depuis la création la dernière mise à jour du modèle').
-				'</p></div>';
-			$class = 'important';
-		} else {
-			$class = 'inutile';
-		}
-		?>
-		<ul>
+		echo $file_edited_information;
+		?><ul>
 			<li class="<?php echo $class; ?>"><a href="index.php?page=template-update&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">
 				<?php echo _('Mettre à jour le modèle'); ?>
 			</a></li>
@@ -49,3 +70,20 @@ $template_headers = $template->getHeaders();
 		<div class="clear"></div>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+	var see_string = '<?php echo _('Voir la liste'); ?>';
+	var hide_string = '<?php echo _('Cacher la liste'); ?>';
+	
+	$('a#show_hide_files').text(see_string);
+	$('a#show_hide_files').click(function (){
+		if ($('ul#file_list').css('display') != 'block') {
+			$('ul#file_list').slideDown();
+			$('a#show_hide_files').text(hide_string);
+		} else {
+			$('ul#file_list').slideUp();
+			$('a#show_hide_files').text(see_string);
+		}
+	});
+});
+</script>

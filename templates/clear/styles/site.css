@@ -170,13 +170,13 @@ div.box p {
 	padding: 5px 10px;
 }
 div.box.success {
-	background: #B8FFA4 url(../images/icons/accept.png) no-repeat 10px;
+	background: #B8FFA4 url(../images/icons/accept.png) no-repeat 10px 10px;
 	border: 1px solid #45BE24;
 	padding-left: 25px;
 	margin-bottom: 10px;
 }
 div.box.error {
-	background: #FFA4A4 url(../images/icons/exclamation.png) no-repeat 10px;
+	background: #FFA4A4 url(../images/icons/exclamation.png) no-repeat 10px 10px;
 	border: 1px solid #DE2323;
 	padding-left: 25px;
 	margin-bottom: 10px;

@@ -291,24 +291,26 @@ class Project_Template extends Project_File
 	 * 
 	 * @return integer
 	 */
-	public function getLastEditedFileTimestamp ()
+	public function getEditedFiles ()
 	{
-		return $this->getHighestFileTimestamp(
+		$headers = $this->getHeaders();
+		
+		return $this->getEditedFilesFromIn(
+			(int)$headers['GetTextEdit-updated'],
 			$this->project->get('project_path')
 		);
 	}
 	
 	/**
-	 * Get the timestamp of the last edited file in a
-	 * directory.
+	 * Get files edited after $from in $directory.
 	 * 
-	 * @param string $directory
+	 * @param integer $from
+	 * @param string  $directory
 	 * 
 	 * @return integer
 	 */
-	private function getHighestFileTimestamp($directory) {
-		$highest = 0;
-		$highestKnown = 0;
+	private function getEditedFilesFromIn($from, $directory) {
+		$result = array();
 		$handle = opendir($directory);
 	     
 	    while ($datei = readdir($handle)) {
@@ -316,22 +318,23 @@ class Project_Template extends Project_File
 	        	$file = $directory.$datei;
 	        	if (is_dir($file)) {
 	        		if (!in_array($datai, $this->forbidden_directories)) {
-	            		$highest = $this->getHighestFileTimestamp($file.'/');
+	            		$result = array_merge(
+	            			$result,
+	            			$this->getEditedFilesFromIn($from, $file.'/')
+	            		);
 	        		}
 	            } else { // file
 	            	$file_x = explode('.', $datei);
 	            	if (!in_array($file_x[count($file_x)-1], $this->forbidden_file_extensions)) {
-	                	$highest = filemtime($file);
+	                	if (filemtime($file) > $from) {
+	                		$result[] = $file;
+	                	}
 	            	}
 	            }
-	            
-	            if ($highest > $highestKnown) {
-	     			$highestKnown = $highest;
-	        	}
 	    	}
 	    }
 	    
-	    return $highestKnown;
+	    return $result;
 	}
 }
 
