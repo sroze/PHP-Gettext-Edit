@@ -154,7 +154,10 @@ class Project
 			throw new Project_Exception(
 				sprintf(_('Le dossier "%s" n\'éxiste pas ou n\'est pas accessible'), $path)
 			);
-		} else if (!is_dir($path.$lang_path)) {
+		}
+		$path .= '/';
+		
+		if (!is_dir($path.$lang_path)) {
 			throw new Project_Exception(
 				sprintf(_('Le dossier "%s" n\'éxiste pas au sein du projet'), $lang_path)
 			);
