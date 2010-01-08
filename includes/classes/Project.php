@@ -74,7 +74,7 @@ class Project
 	{
 		global $sql;
 			
-		$this->checkData($name, $path, $lang_path);
+		self::checkData($name, $path, $lang_path);
 		
 		$query = $sql->query('INSERT INTO projects (project_name, project_path, project_languages_path) VALUES
 			("'.$name.'", "'.$path.'", "'.$lang_path.'")
@@ -96,7 +96,7 @@ class Project
 	 */
 	public function edit ($name, $path, $lang_path)
 	{
-		$this->checkData($name, $path, $lang_path);
+		self::checkData($name, $path, $lang_path);
 		
 		$query = $this->sql->query('UPDATE projects SET 
 			project_name = "'.$name.'", 
@@ -137,7 +137,7 @@ class Project
 	 * 
 	 * @return bool
 	 */
-	private function checkData ($name, &$path, &$lang_path)
+	static function checkData ($name, &$path, &$lang_path)
 	{
 		$path = str_replace('"', '\\"', $path);				
 		$lang_path = str_replace('"', '\\"', $lang_path);
