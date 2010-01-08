@@ -5,12 +5,12 @@ require_once ROOT_PATH.'includes/configuration.php';
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>GetTextEdit</title>
+<title>PHP-GetText-Edit</title>
 <link rel="stylesheet" href="../templates/clear/styles/site.css" type="text/css" media="all" />
 </head>
 <body>
 <div id="header">
-	<h1>GetTextEdit</h1>
+	<h1>PHP-GetText-Edit</h1>
 	<h2><?php echo _('Installation de l\'application'); ?></h2>
 </div>
 <div id="page">
