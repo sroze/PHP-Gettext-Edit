@@ -187,22 +187,23 @@ class Project_Language_File extends Project_File
 	 */
 	public function toJSON ($use_fuzzy = false)
 	{
-		$json_array = array();
+		$json_string = array();
 		$json_file_path = substr($this->file_path, 0, -2).'json';
 		$messages = $this->getMessages();
 		
 		foreach ($messages as $msgid => $message_informations) {
 			if ($use_fuzzy || !$message_informations['fuzzy']) {
-				$json_array[$msgid] = $message_informations['msgstr'];
+				$json_strings[] = '"'.
+					str_replace('"', '\\"', $msgid).
+					'": "'.
+					str_replace('"', '\\"', $message_informations['msgstr']).
+					'"';
 			}
 		}
 		
 		$puts = file_put_contents(
 			$json_file_path,
-			json_encode(
-				$json_array,
-				JSON_FORCE_OBJECT
-			)
+			'{'.implode(',', $json_strings).'}'
 		);
 		
 		if ($puts === false) {
