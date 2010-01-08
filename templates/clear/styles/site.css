@@ -173,10 +173,10 @@ form.formatted p label {
 	width: 175px;
 }
 label.clean {
-	width: auto;
-	font-weight: normal;
-	margin-left: 0;
-	text-align: left;
+	width: auto !important;
+	font-weight: normal !important;
+	margin-left: 0 !important;
+	text-align: left !important;
 }
 div.box {
 	background-color: #F9F9F9;

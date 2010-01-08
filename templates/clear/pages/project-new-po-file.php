@@ -31,26 +31,21 @@ if (!isset($project)) {
 						'</div>';
 				}
 				
+				$name = $_POST['name'];
+				
 				foreach ($_POST['languages'] as $language_name) {
 					$language = new Project_Language($project, $language_name);
 					
 					try {
-						$language_file = Project_Language_File::create($language, $_POST['name'], $template);
+						$language_file = Project_Language_File::create($language, $name, $template);
 						
 						echo '<div class="box success"><p>'.
 							_('Fichier .po créé').' - '.
 							'<a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'.
 							_('Continuer').
 							'</a></p>';
-						echo '<p><form action="index.php" method="GET">'.
-							'<input type="hidden" name="page" value="language-file" />'.
-							'<input type="hidden" name="project" value="'.$project->get('project_id').'" />'.
-							'<input type="hidden" name="language" value="'.$language->getCode().'" />'.
-							'<input type="hidden" name="file" value="'.$language_file->getName().'" />'.
-							'<input type="submit" value="'._('Continuer').'" />'.
-							'</form></p>';
-						echo '</div>';
-						unset($_POST);
+						
+						unset($language_file);
 					} catch (Exception $e) {
 						echo '<div class="message error">'.
 							$e->getMessage().
@@ -84,7 +79,7 @@ if (!isset($project)) {
 						$language_code = $language->getCode();
 						
 						$checked = (isset($_POST['languages']) && in_array($language_code, $_POST['languages'])) ? ' checked' : '';
-						echo '<label class="clean"><input type="checkbox" name="languages[]" value="'.$language_code.'"'.$checked.' /> '.$language_name.'</label>';
+						echo '<label class="clean"><input type="checkbox" name="languages[]" value="'.$language_code.'"'.$checked.' /> '.$language_name.'</label><br />';
 					}
 					?>
 				</p>
