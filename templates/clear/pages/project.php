@@ -9,7 +9,7 @@ if (!isset($project)) {
 		<p><?php echo _('Grâce aux modèles que vous aurez préparez, vous pourrez des créer des fichiers de traduction pour chaque langue '.
 		'de votre application.'), ' ', _('Ainsi, il vous suffira de traduire les phrases grâce à l\'éditeur de PHP-GetText-Edit et de '.
 		'compiler pour voir votre application se doter d\'une nouvelle langue!'); ?></p>
-		<p><?php echo _('Note: Le necessaire doit être fait au niveau de votre application.'); ?></p>
+		<p><?php echo _('<strong>Note:</strong> Le necessaire doit être fait au niveau de votre application.'); ?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
 		<div class="link right">

@@ -147,7 +147,11 @@ div#contents.textual h1 {
 	margin-bottom: 0.1em;
 	padding-bottom: 0;
 }
-div#contents.textual h1, div#page h2, div#page h3, div#page h4 {
+div#contents.textual h1,
+div#contents.textual h2,
+div#contents.textual h3,
+div#sidebar h3,
+div#contents.textual h4 {
 	border-bottom: 1px solid #aaa;
 	color: #000;
 	font-weight: normal;

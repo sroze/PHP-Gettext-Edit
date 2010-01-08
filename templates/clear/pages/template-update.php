@@ -6,7 +6,10 @@ if (!isset($template)) {
 ?><div id="page">
 	<div id="sidebar">
 		<h3><?php echo _('Mettre à jour le modèle'); ?></h3>
-		<p>À venir</p>
+		<p><?php echo _('La mise à jour d\'un modèle permet de rechercher dans votre code source les nouvelles chaines '.
+		'de caractères créées et ainsi, de garantir que le modèle contienne tout ce qu\'il y a à traduire.'), ' ',
+		_('Une mise à jour du modèle n\'est donc utile que lorsque des fichiers du projet ont étés modifiés depuis la dernière '.
+		'mise à jour de celui-ci.'); ?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <a href="index.php?page=template&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>"><?php echo _('Modèle'); ?> <code><?php echo $template->getName(); ?></code></a> &raquo; <?php echo _('Mettre à jour'); ?></h1>
