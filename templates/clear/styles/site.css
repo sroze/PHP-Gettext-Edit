@@ -177,6 +177,7 @@ label.clean {
 	font-weight: normal !important;
 	margin-left: 0 !important;
 	text-align: left !important;
+	float: none !important;
 }
 div.box {
 	background-color: #F9F9F9;
