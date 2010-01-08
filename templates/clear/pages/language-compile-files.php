@@ -17,20 +17,21 @@ if (!isset($language)) {
 		<?php 
 		if (isset($_POST['files'])) {
 			foreach ($_POST['files'] as $file => $type_informations) {
-				$type_informations = array_keys($type_informations);
-				$type = $type_informations[0];
+				$types = array_keys($type_informations);
 				
-				try {
-					$language_file = new Project_Language_File($language, $file);
-					$output_file_path = $language_file->compile($type, (isset($_POST['with-fuzzy'])));
-					
-					echo '<div class="box success">'.
-						'<p>'.sprintf(_('Fichier compilé: <strong>%s</strong>'), $output_file_path).' - <a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Continuer').'</a></p>'.
-						'</div>';
-				} catch (Exception $e) {
-					echo '<div class="box error">'.
-						'<p>'.$e->getMessage().'</p>'.
-						'</div>';
+				foreach ($types as $type) {
+					try {
+						$language_file = new Project_Language_File($language, $file);
+						$output_file_path = $language_file->compile($type, (isset($_POST['with-fuzzy'])));
+						
+						echo '<div class="box success">'.
+							'<p>'.sprintf(_('Fichier compilé: <strong>%s</strong>'), $output_file_path).' - <a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Continuer').'</a></p>'.
+							'</div>';
+					} catch (Exception $e) {
+						echo '<div class="box error">'.
+							'<p>'.$e->getMessage().'</p>'.
+							'</div>';
+					}
 				}
 			}
 		}
@@ -50,10 +51,16 @@ if (!isset($language)) {
 						
 						echo '<label class="'.
 							(in_array(Project_Language_File::W_COMPILE, $file_warnings) ? 'invalid' : 'valid')
-							.'"><input type="checkbox" name="files['.$file->getName().'][normal]" value="yes" /> <code>.mo</code></label> ';
+							.'"><input type="checkbox" name="files['.$file->getName().'][normal]" value="yes"'.
+							(isset($_POST['files'], $_POST['files'][$file->getName()], $_POST['files'][$file->getName()]['normal']) ?
+								' checked' : '')
+							.' /> <code>.mo</code></label> ';
 						echo '<label class="'.
 							(in_array(Project_Language_File::W_COMPILE_JSON, $file_warnings) ? 'invalid' : 'valid')
-							.'"><input type="checkbox" name="files['.$file->getName().'][json]" value="yes" /> JSON</label> ';
+							.'"><input type="checkbox" name="files['.$file->getName().'][json]" value="yes"'.
+							(isset($_POST['files'], $_POST['files'][$file->getName()], $_POST['files'][$file->getName()]['json']) ?
+								' checked' : '')
+							.' /> JSON</label> ';
 						echo '</li>';
 					}
 					?>
