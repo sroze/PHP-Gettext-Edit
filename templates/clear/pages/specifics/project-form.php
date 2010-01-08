@@ -1,5 +1,5 @@
 			<p><label><?php echo _('Nom'); ?></label><input type="text" size="30" name="name"<?php
-			if (!empty($_POST['nom'])) { echo ' value="'.$_POST['nom'].'"'; }
+			if (!empty($_POST['name'])) { echo ' value="'.$_POST['name'].'"'; }
 			?> /><br />
 				<em><?php echo _('Lettres, chiffres et tirets autorisés'); ?></em>
 			</p>
