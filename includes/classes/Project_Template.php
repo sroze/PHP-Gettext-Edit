@@ -49,7 +49,7 @@ class Project_Template extends Project_File
 	 * @var array
 	 */
 	private $forbidden_file_extensions = array(
-		'po', 'mo', 'pot'
+		'po', 'mo', 'pot', 'json'
 	);
 	private $forbidden_directories = array(
 		'.svn'
