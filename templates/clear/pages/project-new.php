@@ -23,18 +23,24 @@
 						'<input type="submit" value="'._('Continuer').'" />'.
 						'</form></p>';
 					echo '</div>';
-						
+					
+					define('CREATED', true);
 					unset($_POST);
 				} catch (Exception $e) {
 					echo '<div class="message error"><p>'.$e->getMessage().'</p></div>';
 				}
 			}
 		}
+		
+		if (!defined('CREATED')) {
 		?>
 		<form method="POST" action="" class="formatted"><?php 
 		require PAGE_DIR.'specifics/project-form.php';
 		?>
 			<input type="submit" value="<?php echo _('Créer'); ?>" />
 		</form>
+		<?php 
+		}
+		?>
 	</div>
 </div>
