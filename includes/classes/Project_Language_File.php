@@ -136,6 +136,8 @@ class Project_Language_File extends Project_File
 		$headers['GetTextEdit-updated'] = time();
 		$this->setHeaders($headers);
 		//var_dump($command, $exec_result);
+		
+		return $this->file_path;
 	}
 	
 	/**
