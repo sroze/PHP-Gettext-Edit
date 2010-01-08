@@ -166,17 +166,17 @@ div.box h3 {
 	margin: 2px 0 0 5px;
 }
 div.box p {
-	margin: 0;
+	margin: 0 !important;
 	padding: 5px 10px;
 }
 div.box.success {
-	background: #B8FFA4 url(../images/icons/accept.png) no-repeat 5px 5px;
+	background: #B8FFA4 url(../images/icons/accept.png) no-repeat 10px;
 	border: 1px solid #45BE24;
 	padding-left: 25px;
 	margin-bottom: 10px;
 }
 div.box.error {
-	background: #FFA4A4 url(../images/icons/exclamation.png) no-repeat 5px 5px;
+	background: #FFA4A4 url(../images/icons/exclamation.png) no-repeat 10px;
 	border: 1px solid #DE2323;
 	padding-left: 25px;
 	margin-bottom: 10px;

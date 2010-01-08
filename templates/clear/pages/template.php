@@ -34,9 +34,9 @@ $template_headers = $template->getHeaders();
 		<ul>
 		<?php 
 		if ($last_edited > (int) $template_headers['GetTextEdit-updated']) {
-			echo '<div class="box error">'.
+			echo '<div class="box error"><p>'.
 				_('Un ou plusieurs fichiers du projet ont étés modifiés depuis la création la dernière mise à jour du modèle').
-				'</div>';
+				'</p></div>';
 			$class = 'important';
 		} else {
 			$class = 'inutile';

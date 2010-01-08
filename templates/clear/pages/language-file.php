@@ -47,7 +47,7 @@ $template = $language_file->getTemplate();
 			<?php 
 			if (in_array(Project_Language_File::W_COMPILE_JSON, $warnings)) {
 				$class_compile_json = ' class="important"';
-			} else if (array_key_exists('GetTextEdit-compileJSON', $file_headers)) {
+			} else if (array_key_exists('GetTextEdit-compiledJSON', $file_headers)) {
 				$class_compile_json = ' class="inutile"';
 			} else {
 				$class_compile_json = '';

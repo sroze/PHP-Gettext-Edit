@@ -203,6 +203,10 @@ class Project_Language_File extends Project_File
 				sprintf(_('La compilation en JSON vers le fichier "%s" a échoué.'), $json_file_path)
 			);
 		} else {
+			$headers = $this->getHeaders();
+			$headers['GetTextEdit-compiledJSON'] = time();
+			$this->setHeaders($headers);
+			
 			return $json_file_path;
 		}
 	}
@@ -280,8 +284,8 @@ class Project_Language_File extends Project_File
 				$warnings[] = self::W_COMPILE_JSON;
 			}
 		}
-		if (array_key_exists('GetTextEdit-compileJSON', $headers) &&
-			(int)$file_headers['GetTextEdit-compileJSON'] < (int)$file_headers['GetTextEdit-edited']) {
+		if (array_key_exists('GetTextEdit-compiledJSON', $headers) &&
+			(int)$file_headers['GetTextEdit-compiledJSON'] < (int)$file_headers['GetTextEdit-edited']) {
 			$warnings[] = self::W_COMPILE_JSON;
 		}
 		
