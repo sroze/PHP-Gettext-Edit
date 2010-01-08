@@ -17,20 +17,17 @@ if (!isset($language)) {
 		<?php 
 		if (isset($_POST['files'])) {
 			foreach ($_POST['files'] as $file) {
-				
-				foreach ($types as $type) {
-					try {
-						$language_file = new Project_Language_File($language, $file);
-						$output_file_path = $language_file->update();
+				try {
+					$language_file = new Project_Language_File($language, $file);
+					$output_file_path = $language_file->update();
 						
-						echo '<div class="box success">'.
-							'<p>'.sprintf(_('Fichier mis à jour: <strong>%s</strong>'), $output_file_path).' - <a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Continuer').'</a></p>'.
-							'</div>';
-					} catch (Exception $e) {
-						echo '<div class="box error">'.
-							'<p>'.$e->getMessage().'</p>'.
-							'</div>';
-					}
+					echo '<div class="box success">'.
+						'<p>'.sprintf(_('Fichier mis à jour: <strong>%s</strong>'), $output_file_path).' - <a href="index.php?page=language-file&project='.$project->get('project_id').'&language='.$language->getCode().'&file='.$language_file->getName().'">'._('Continuer').'</a></p>'.
+						'</div>';
+				} catch (Exception $e) {
+					echo '<div class="box error">'.
+						'<p>'.$e->getMessage().'</p>'.
+						'</div>';
 				}
 			}
 		}
