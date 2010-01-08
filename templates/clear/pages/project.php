@@ -74,11 +74,16 @@ if (!isset($project)) {
 			foreach ($files as $file) {
 				foreach ($languages_files as $other_language_name => $other_language_files) {
 					if (!in_array($file, $other_language_files)) {
+						$last_bracket = sttrpos($file->file_path, '/');
+						$last_bracket = sttrpos($file->file_path, '/', $last_bracket+1);
 						echo '<div class="box error"><p>'.
 							sprintf(
 								_('La langue <strong>%s</strong> n\'a pas le fichier <strong>%s</strong>'),
 								$other_language_name,
-								$file->file_path
+								substr(
+									$file->file_path,
+									$last_bracket
+								)
 							).
 							'</p></div>';
 					}
