@@ -47,21 +47,21 @@ if (!isset($language)) {
 					foreach ($files as $file) {
 						$file_warnings = $file->getWarnings();
 						
-						echo '<li class="'.(empty($file_warnings) ? 'valid' : 'invalid').'">'.$file->getName().'<br />Compiler en ';
+						echo '<li class="'.(empty($file_warnings) ? 'valid' : 'invalid').'">'.$file->getName().'<ul>';
 						
-						echo '<label class="'.
+						echo '<li class="'.
 							(in_array(Project_Language_File::W_COMPILE, $file_warnings) ? 'invalid' : 'valid')
 							.'"><input type="checkbox" name="files['.$file->getName().'][normal]" value="yes"'.
 							(isset($_POST['files'], $_POST['files'][$file->getName()], $_POST['files'][$file->getName()]['normal']) ?
 								' checked' : '')
-							.' /> <code>.mo</code></label> ';
-						echo '<label class="'.
+							.' /> <code>.mo</code></li> ';
+						echo '<li class="'.
 							(in_array(Project_Language_File::W_COMPILE_JSON, $file_warnings) ? 'invalid' : 'valid')
 							.'"><input type="checkbox" name="files['.$file->getName().'][json]" value="yes"'.
 							(isset($_POST['files'], $_POST['files'][$file->getName()], $_POST['files'][$file->getName()]['json']) ?
 								' checked' : '')
-							.' /> JSON</label> ';
-						echo '</li>';
+							.' /> JSON</li> ';
+						echo '</ul></li>';
 					}
 					?>
 				</ul>
