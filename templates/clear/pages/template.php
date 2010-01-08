@@ -29,15 +29,15 @@ $template_headers = $template->getHeaders();
 				$file_edited_information .= sprintf(_('%d fichiers du projet ont étés modifiés depuis la dernière mise à jour du modèle'), count($last_edited_files));
 			}
 			
-			$file_edited_information .= '</p><p><a id="show_hide_files" href="javacript:;"></a></p><ul id="file_list" style="display: none;">';
+			$file_edited_information .= '</p><p><a id="show_hide_files" href="javascript:;"></a></p><ul id="file_list" style="display: none;">';
 			
 			foreach ($last_edited_files as $file) {
-				$filemtime = filemtime($fime);
+				$filemtime = filemtime($file);
 				if ($filemtime > $last_edited) {
 					$last_edited = $timemtime;
 				}
 				
-				$file_edited_information .= '<li><code>'.date('d/m/Y H:i:s', $filemtime).'</code>'.$file.'</li>';
+				$file_edited_information .= '<li><code>'.date('d/m/Y H:i:s', $filemtime).'</code> <span>'.$file.'</span></li>';
 			}
 			$file_edited_information .= '</ul></div>';
 			$class = 'important';
