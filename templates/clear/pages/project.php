@@ -60,7 +60,7 @@ if (!isset($project)) {
 				} else {
 					$class = 'valid';
 				}
-				echo '<li class="'.$class.'"><a href="index.php?page=language&project='.$project->get('project_id').'&language='.$language->getCode().'">'.$language->getName().'</li>';
+				echo '<li class="'.$class.'"><a href="index.php?page=language&project='.$project->get('project_id').'&language='.$language->getCode().'">'.$language->getName().'</a></li>';
 			}
 			echo '</ul>';
 		} else {
