@@ -52,7 +52,12 @@ if (!isset($project)) {
 		if (!empty($languages)) {
 			echo '<ul>';
 			foreach ($languages as $language) {
-				$languages_files[$language->getName()] = $language->getFiles();
+				$languages_files[$language->getName()] = array();
+				foreach ($language->getFiles() as $language_file) {
+					$last_bracket = strrpos($language_file->file_path, '/');
+					$last_bracket = strrpos($language_file->file_path, '/', strlen($language_file->file_path)-$last_bracket+1);
+					$languages_files[$language->getName()][] = substr($language_file->file_path, $last_bracket);
+				}
 				
 				$language_warnings = $language->getWarnings();
 				if (!empty($language_warnings)) {
@@ -74,14 +79,12 @@ if (!isset($project)) {
 			foreach ($files as $file) {
 				foreach ($languages_files as $other_language_name => $other_language_files) {
 					if (!in_array($file, $other_language_files)) {
-						$last_bracket = strrpos($file->file_path, '/');
-						$last_bracket = strrpos($file->file_path, '/', strlen($file->file_path)-$last_bracket+2);
 						echo '<div class="box error"><p>'.
 							sprintf(
 								_('La langue <strong>%s</strong> n\'a pas le fichier <strong>%s</strong>'),
 								$other_language_name,
 								substr(
-									$file->file_path,
+									$file,
 									$last_bracket
 								)
 							).
