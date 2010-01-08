@@ -102,7 +102,7 @@ class Project
 			project_name = "'.$name.'", 
 			project_path = "'.$path.'", 
 			project_languages_path = "'.$lang_path.'"
-			WHERE id = '.$this->id
+			WHERE project_id = '.$this->id
 		);
 		
 		if ($query) {
@@ -119,7 +119,7 @@ class Project
 	 */
 	public function delete ()
 	{
-		$query = $this->sql->query('DELETE FROM projects WHERE id = '.$this->id);
+		$query = $this->sql->query('DELETE FROM projects WHERE project_id = '.$this->id);
 		
 		if ($query) {
 			return true;
