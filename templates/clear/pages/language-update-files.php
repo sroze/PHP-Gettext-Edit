@@ -16,8 +16,7 @@ if (!isset($language)) {
 		<?php echo _('Compiler tous les fichiers'); ?></h1>
 		<?php 
 		if (isset($_POST['files'])) {
-			foreach ($_POST['files'] as $file) {
-				var_dump($file);
+			foreach ($_POST['files'] as $file => $yes) {
 				try {
 					$language_file = new Project_Language_File($language, $file);
 					$output_file_path = $language_file->update();
