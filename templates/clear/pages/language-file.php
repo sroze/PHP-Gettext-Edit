@@ -44,14 +44,28 @@ $template = $language_file->getTemplate();
 			?>><a href="index.php?page=language-file-update&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
 				<?php echo _('Recharger depuis le template'); ?>
 			</a></li>
-			<li<?php 
-			if (in_array(Project_Language_File::W_COMPILE, $warnings)) {
-				echo ' class="important"';
+			<?php 
+			if (in_array(Project_Language_File::W_COMPILE_JSON, $warnings)) {
+				$class_compile_json = ' class="important"';
+			} else if (array_key_exists('GetTextEdit-compileJSON', $file_headers)) {
+				$class_compile_json = ' class="inutile"';
 			} else {
-				echo ' class="inutile"';
+				$class_compile_json = '';
 			}
-			?>><a href="index.php?page=language-file-compile&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
+			
+			if (in_array(Project_Language_File::W_COMPILE, $warnings)) {
+				$class_compile = ' class="important"';
+			} else if ($class_compile_json != ' class="inutile"') {
+				$class_compile = ' class="inutile"';
+			} else {
+				$class_compile = '';
+			}
+			?>
+			<li<?php echo $class_compile; ?>><a href="index.php?page=language-file-compile&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
 				<?php echo _('Compiler'); ?>
+			</a></li>
+			<li<?php echo $class_compile_json; ?>><a href="index.php?page=language-file-compile-json&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">
+				<?php echo _('Compiler en JSON'); ?>
 			</a></li>
 			<li class="spacer"></li>
 			<li><a href="index.php?page=language-file-editor&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>">

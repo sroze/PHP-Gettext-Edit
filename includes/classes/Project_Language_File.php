@@ -4,8 +4,9 @@ require_once ROOT_PATH.'includes/classes/Project_File.php';
 class Project_Language_File extends Project_File
 {
 	// Warnings const
-	const W_COMPILE = 1;
-	const W_UPDATE = 2;
+	const W_UPDATE = 1;
+	const W_COMPILE = 2;
+	const W_COMPILE_JSON = 3;
 	
 	// Vars
 	private $language;
@@ -223,8 +224,16 @@ class Project_Language_File extends Project_File
 			$warnings[] = self::W_UPDATE;
 		}
 		if (!array_key_exists('GetTextEdit-compiled', $headers) OR
-		(int) $headers['GetTextEdit-edited'] > (int) $headers['GetTextEdit-compiled']) {
-			$warnings[] = self::W_COMPILE;
+			(int) $headers['GetTextEdit-edited'] > (int) $headers['GetTextEdit-compiled']) {
+			if (!array_key_exists('GetTextEdit-compiledJSON', $headers)) {
+				$warnings[] = self::W_COMPILE;
+			} else {
+				$warnings[] = self::W_COMPILE_JSON;
+			}
+		}
+		if (array_key_exists('GetTextEdit-compileJSON', $headers) &&
+			(int)$file_headers['GetTextEdit-compileJSON'] < (int)$file_headers['GetTextEdit-edited']) {
+			$warnings[] = self::W_COMPILE_JSON;
 		}
 		
 		return $warnings;
