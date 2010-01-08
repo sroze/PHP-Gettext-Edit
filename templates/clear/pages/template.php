@@ -31,7 +31,6 @@ $template_headers = $template->getHeaders();
 			?>
 		</ul>
 		</div>
-		<ul>
 		<?php 
 		if ($last_edited > (int) $template_headers['GetTextEdit-updated']) {
 			echo '<div class="box error"><p>'.
@@ -42,6 +41,7 @@ $template_headers = $template->getHeaders();
 			$class = 'inutile';
 		}
 		?>
+		<ul>
 			<li class="<?php echo $class; ?>"><a href="index.php?page=template-update&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>">
 				<?php echo _('Mettre à jour le modèle'); ?>
 			</a></li>
