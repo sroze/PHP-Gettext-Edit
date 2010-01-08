@@ -34,7 +34,7 @@ $template_headers = $template->getHeaders();
 			foreach ($last_edited_files as $file) {
 				$filemtime = filemtime($file);
 				if ($filemtime > $last_edited) {
-					$last_edited = $timemtime;
+					$last_edited = $filemtime;
 				}
 				
 				$file_edited_information .= '<li><code>'.date('d/m/Y H:i:s', $filemtime).'</code> <span>'.$file.'</span></li>';
