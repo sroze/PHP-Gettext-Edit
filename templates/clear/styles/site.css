@@ -172,6 +172,12 @@ form.formatted p label {
 	text-align: right;
 	width: 175px;
 }
+label.clean {
+	width: auto;
+	font-weight: normal;
+	margin-left: 0;
+	text-align: left;
+}
 div.box {
 	background-color: #F9F9F9;
 	border: 1px solid #E4E4E4;

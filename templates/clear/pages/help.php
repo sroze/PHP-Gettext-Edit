@@ -51,10 +51,10 @@
 		<a name="languages_codes"></a><h2>Tableau des codes de langues</h2>
 		<p>Voici dans le tableau ci-dessous quelques codes de pays et leurs langues:</p>
 		<table class="languages">
-			<th>
-				<td>Langue</td>
-				<td>Code</td>
-			</th>
+			<tr>
+				<th>Langue</th>
+				<th>Code</th>
+			</tr>
 			<tr>
 				<td>Français</td>
 				<td><code>fr_FR</code></td>

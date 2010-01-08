@@ -46,11 +46,14 @@ if (!isset($project)) {
 		<div class="box little right">
 		<div class="link right"><a class="add" href="index.php?page=language-new&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
 		<h3><?php echo _('Langues'); ?></h3>
-		<?php 
+		<?php
 		$languages = $project->getLanguages();
+		$languages_files = array();
 		if (!empty($languages)) {
 			echo '<ul>';
 			foreach ($languages as $language) {
+				$languages_files[$language] = $language->getFiles();
+				
 				$language_warnings = $language->getWarnings();
 				if (!empty($language_warnings)) {
 					$class = 'invalid';
@@ -62,6 +65,24 @@ if (!isset($project)) {
 			echo '</ul>';
 		} else {
 			echo '<p>'._('Aucune langue n\'est actuellement créée').'</p>';
+		}
+		
+		// Check if each languages have the same .po files
+		foreach ($languages_files as $language => $files) {
+			foreach ($files as $file) {
+				foreach ($languages_files as $other_language => $other_language_files) {
+					if (!in_array($file, $other_language_files)) {
+						echo '<div class="box error"><p>'.
+							sprintf(
+								_('La langue <strong>%s</strong> n\'a pas le fichier <strong>%s</strong>'),
+								$other_language->getName(),
+								$file->file_path
+							).
+							'</p></div>';
+					}
+				}
+			}
+			array_shift($languages_files);
 		}
 		?>
 		</div>
