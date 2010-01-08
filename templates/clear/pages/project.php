@@ -65,6 +65,11 @@ if (!isset($project)) {
 		}
 		?>
 		</div>
+		
+		<ul>
+			<li><a href="index.php?page=project-new-po-file&project=<?php echo $project->get('project_id'); ?>">Créer un même fichier .po par langue</a></li>
+		</ul>
+		
 		<div class="clear"></div>
 	</div>
 </div>

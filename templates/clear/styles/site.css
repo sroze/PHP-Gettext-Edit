@@ -123,7 +123,7 @@ div#page div#contents {
 div#page div#contents.with_sidebar {
 	margin-right: 220px;
 }
-div#contents h1:FIRST-CHILD {
+div#contents h1 {
 	margin-top: 0;
 }
 div#contents h1 a {
