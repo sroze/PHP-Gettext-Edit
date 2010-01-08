@@ -28,5 +28,4 @@ foreach ($menus as $page => $name) {
 </div>
 <ul id="top_menu">
 	<?php echo $top_menu_lis; ?>
-	<li class="right"><a href="#">12 traductions en attente</a></li>
 </ul>
