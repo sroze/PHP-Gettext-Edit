@@ -276,13 +276,9 @@ class Project_Language_File extends Project_File
 			(int) $template_headers['GetTextEdit-updated'] > (int) $headers['GetTextEdit-updated']) {
 			$warnings[] = self::W_UPDATE;
 		}
-		if (!array_key_exists('GetTextEdit-compiled', $headers) OR
+		if (!array_key_exists('GetTextEdit-compiled', $headers) ||
 			(int) $headers['GetTextEdit-edited'] > (int) $headers['GetTextEdit-compiled']) {
-			if (!array_key_exists('GetTextEdit-compiledJSON', $headers)) {
-				$warnings[] = self::W_COMPILE;
-			} else {
-				$warnings[] = self::W_COMPILE_JSON;
-			}
+			$warnings[] = self::W_COMPILE;
 		}
 		if (array_key_exists('GetTextEdit-compiledJSON', $headers) &&
 			(int)$file_headers['GetTextEdit-compiledJSON'] < (int)$file_headers['GetTextEdit-edited']) {
