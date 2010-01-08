@@ -48,10 +48,10 @@ if (!isset($language)) {
 						echo '<li class="'.(empty($file_warnings) ? 'valid' : 'invalid').'">'.$file->getName().'<br />Compiler en ';
 						
 						echo '<label class="'.
-							(in_array(Project_Language_File::W_COMPILE, $warnings) ? 'invalid' : 'valid')
+							(in_array(Project_Language_File::W_COMPILE, $file_warnings) ? 'invalid' : 'valid')
 							.'"><input type="checkbox" name="files['.$file->getName().'][normal]" value="yes" /> <code>.mo</code></label> ';
 						echo '<label class="'.
-							(in_array(Project_Language_File::W_COMPILE_JSON, $warnings) ? 'invalid' : 'valid')
+							(in_array(Project_Language_File::W_COMPILE_JSON, $file_warnings) ? 'invalid' : 'valid')
 							.'"><input type="checkbox" name="files['.$file->getName().'][json]" value="yes" /> JSON</label> ';
 						echo '</li>';
 					}
