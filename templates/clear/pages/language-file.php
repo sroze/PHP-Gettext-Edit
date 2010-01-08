@@ -32,6 +32,9 @@ $template = $language_file->getTemplate();
 			if (array_key_exists('GetTextEdit-compiled', $file_headers)) {
 				echo '<li>'._('Compilé le').' '.date('d/m/Y H:i:s', (int) $file_headers['GetTextEdit-compiled']).'</li>';
 			}
+			if (array_key_exists('GetTextEdit-compiledJSON', $file_headers)) {
+				echo '<li>'._('Compilé en JSON le').' '.date('d/m/Y H:i:s', (int) $file_headers['GetTextEdit-compiledJSON']).'</li>';
+			}
 			?>
 		</ul>
 		</div>
@@ -55,7 +58,7 @@ $template = $language_file->getTemplate();
 			
 			if (in_array(Project_Language_File::W_COMPILE, $warnings)) {
 				$class_compile = ' class="important"';
-			} else if ($class_compile_json != ' class="inutile"') {
+			} else if (array_key_exists('GetTextEdit-compiled', $file_headers)) {
 				$class_compile = ' class="inutile"';
 			} else {
 				$class_compile = '';
