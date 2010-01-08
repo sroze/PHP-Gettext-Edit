@@ -27,7 +27,7 @@ abstract class Project_File
 	{
 		if (!$this->check()) {
 			throw new Project_File_Exception(
-				_('Invalid file')
+				sprintf(_('Fichier invalide: %s'), $this->file_path)
 			);
 		}
 		
