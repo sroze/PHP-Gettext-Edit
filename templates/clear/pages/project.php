@@ -54,8 +54,11 @@ if (!isset($project)) {
 			foreach ($languages as $language) {
 				$languages_files[$language->getName()] = array();
 				foreach ($language->getFiles() as $language_file) {
-					$last_bracket = strrpos($language_file->file_path, '/');
-					$last_bracket = strrpos($language_file->file_path, '/', strlen($language_file->file_path)-$last_bracket+1);
+					$last_bracket = strrpos(
+						$language_file->file_path, 
+						'/', 
+						-1*(strlen($language_file->file_path)-strrpos($language_file->file_path, '/')+1)
+					);
 					$languages_files[$language->getName()][] = substr($language_file->file_path, $last_bracket);
 				}
 				
