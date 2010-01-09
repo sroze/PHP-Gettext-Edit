@@ -50,16 +50,16 @@
 			<li>La compilation</li>
 		</ul>
 		
-		<a name="php-gettext-edit-templates"><h3>La création de modèles</h3>
+		<a name="php-gettext-edit-templates"></a><h3>La création de modèles</h3>
 		<p>La création de modèle se fait de manière très simple en remplissant un formulaire qui vous permet de configurer le petit
 		programme qui va analyser le code source de votre application et récupérer les chaines de caractère présentes. Vous pourrez en effet
 		choisir dans quels dossiers et quels fichiers analyser, l'extension des fichiers, les mots clés supplémentaires... Rendez-vous sur
 		la page en question pour plus d'informations.</p>
-		<a name="php-gettext-edit-languages"><h3>La création de langues</h3>
+		<a name="php-gettext-edit-languages"></a><h3>La création de langues</h3>
 		<p>Avant ou après la création d'un modèle, il faut créer une langue. Concrètement, lors de la création de la langue, PHP-GetText-Edit
 		créé un dossier du nom du code de la langue, dans lequel vous pourrez créer les fichiers de traduction .po.</p>
 		
-		<a name="php-gettext-edit-po"><h3>La création de fichier de traduction</h3>
+		<a name="php-gettext-edit-po"></a><h3>La création de fichier de traduction</h3>
 		<p>Une fois un modèle créé, vous pouvez, à partir de celui-ci, créer un fichier de traduction. Ce fichier contient au début presque
 		exactement la même chose que le modèle: les chaines à traduire. C'est ce fichier que vous allez pouvoir éditer grâce à l'éditeur
 		intégré de fichiers .po de PHP-GetText-Edit.</p>
@@ -67,7 +67,7 @@
 		chaines de caractères à traduire de votre application et leurs traductions dans ce fichier. C'est à ce moment, qu'il vous faut
 		compiler pour terminer le travail de traduction de votre application.</p>
 		
-		<a name="php-gettext-edit-compilation"><h3>La compilation des fichiers de traduction</h3>
+		<a name="php-gettext-edit-compilation"></a><h3>La compilation des fichiers de traduction</h3>
 		<p>Une fois votre fichier de traduction complété, il faut le compiler en un fichier différent, qui sera plus rapide à lire pour
 		la librairie Gettext ou dans un autre format, suivant l'utilisation que vous en faites.</p>
 		<ul>
