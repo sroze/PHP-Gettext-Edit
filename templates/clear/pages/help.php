@@ -13,10 +13,10 @@
 			</li>
 			<li><a href="#php-gettext-edit">Traduire un projet avec PHP-Gettext-Edit
 			<ol>
-				<li><a name="#php-gettext-edit-templates">La création de modèles</a></li>
-				<li><a name="#php-gettext-edit-languages">La création de langues</a></li>
-				<li><a name="#php-gettext-edit-po">La création de fichier de traduction</a></li>
-				<li><a name="#php-gettext-edit-compilation">La compilation des fichiers de traduction</a></li>
+				<li><a href="#php-gettext-edit-templates">La création de modèles</a></li>
+				<li><a href="#php-gettext-edit-languages">La création de langues</a></li>
+				<li><a href="#php-gettext-edit-po">La création de fichier de traduction</a></li>
+				<li><a href="#php-gettext-edit-compilation">La compilation des fichiers de traduction</a></li>
 			</ol></li>
 			<li><a href="#report-bug">Reporter un bug</li>
 			<li><a href="#languages_codes">Tableau des codes de langues</li>
