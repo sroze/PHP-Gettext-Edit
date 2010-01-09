@@ -11,7 +11,13 @@
 					<li><a href="#gettext_words">Termes</li>
 				</ol>
 			</li>
-			<li><a href="#php-gettext-edit">Traduire un projet avec PHP-Gettext-Edit</li>
+			<li><a href="#php-gettext-edit">Traduire un projet avec PHP-Gettext-Edit
+			<ul>
+				<li><a name="#php-gettext-edit-templates">La création de modèles</a></li>
+				<li><a name="#php-gettext-edit-languages">La création de langues</a></li>
+				<li><a name="#php-gettext-edit-po">La création de fichier de traduction</a></li>
+				<li><a name="#php-gettext-edit-compilation">La compilation des fichiers de traduction</a></li>
+			</ul></li>
 			<li><a href="#report-bug">Reporter un bug</li>
 			<li><a href="#languages_codes">Tableau des codes de langues</li>
 		</ol>
@@ -41,7 +47,39 @@
 			<li>La création de modèles</li>
 			<li>La création de langues</li>
 			<li>La création de fichiers de traduction</li>
+			<li>La compilation</li>
 		</ul>
+		
+		<a name="php-gettext-edit-templates"><h3>La création de modèles</h3>
+		<p>La création de modèle se fait de manière très simple en remplissant un formulaire qui vous permet de configurer le petit
+		programme qui va analyser le code source de votre application et récupérer les chaines de caractère présentes. Vous pourrez en effet
+		choisir dans quels dossiers et quels fichiers analyser, l'extension des fichiers, les mots clés supplémentaires... Rendez-vous sur
+		la page en question pour plus d'informations.</p>
+		<a name="php-gettext-edit-languages"><h3>La création de langues</h3>
+		<p>Avant ou après la création d'un modèle, il faut créer une langue. Concrètement, lors de la création de la langue, PHP-GetText-Edit
+		créé un dossier du nom du code de la langue, dans lequel vous pourrez créer les fichiers de traduction .po.</p>
+		
+		<a name="php-gettext-edit-po"><h3>La création de fichier de traduction</h3>
+		<p>Une fois un modèle créé, vous pouvez, à partir de celui-ci, créer un fichier de traduction. Ce fichier contient au début presque
+		exactement la même chose que le modèle: les chaines à traduire. C'est ce fichier que vous allez pouvoir éditer grâce à l'éditeur
+		intégré de fichiers .po de PHP-GetText-Edit.</p>
+		<p>Une fois ce fichier édité, vous devriez avoir toutes les correspondances entre les
+		chaines de caractères à traduire de votre application et leurs traductions dans ce fichier. C'est à ce moment, qu'il vous faut
+		compiler pour terminer le travail de traduction de votre application.</p>
+		
+		<a name="php-gettext-edit-compilation"><h3>La compilation des fichiers de traduction</h3>
+		<p>Une fois votre fichier de traduction complété, il faut le compiler en un fichier différent, qui sera plus rapide à lire pour
+		la librairie Gettext ou dans un autre format, suivant l'utilisation que vous en faites.</p>
+		<ul>
+			<li>Dans la plus grande partie des cas, vous aurez besoin de <strong>compiler <em>normalement</em> votre fichier <code>.po</code></strong>, 
+			c'est-à-dire de créer un fichier binaire <code>.mo</code> utilisé par les librairies Gettext fournies avec PHP, C...</li>
+			<li>Dans d'autres cas, comme pour de l'internationnalisation JavaScript, vous pouvez avec besoin de <strong>compiler votre fichier
+			en JSON</strong>. PHP-Gettext-Edit vous permet aussi de le faire.</li>
+		</ul>
+		<p>Une fois votre fichier transformé (compilé), PHP-Gettext-Edit vous donne l'adresse du fichier et c'est à vous de l'indiquer dans
+		votre application, comme il se doit. Si vous ne savez pas comment fonctionne la librairie Gettext de PHP, je vous conseil de rechercher
+		sur Google, de nombreux tutoriels éxistes, plus ou moins complets.</p>
+		<p><strong>Note:</strong> vous pouvez retrouver tous les fichiers compilés d'une langue en bas de sa page PHP-Gettext-Edit.</p>
 		
 		<a name="report-bug"></a><h2>Reporter un bug</h2>
 		<p>N'hésitez pas à reporter un bug ou à suggerer une fonctionnalité sur le 
