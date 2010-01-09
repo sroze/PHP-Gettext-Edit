@@ -38,6 +38,7 @@ $template_headers = $template->getHeaders();
 				if ($filemtime > $last_edited) {
 					$last_edited = $filemtime;
 				}
+				$file = str_replace($project->get('project_path'), '/', $file);
 				
 				$file_edited_information .= '<li><code>'.date('d/m/Y H:i:s', $filemtime).'</code> <span>'.$file.'</span></li>';
 			}
