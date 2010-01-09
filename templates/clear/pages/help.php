@@ -12,12 +12,12 @@
 				</ol>
 			</li>
 			<li><a href="#php-gettext-edit">Traduire un projet avec PHP-Gettext-Edit
-			<ul>
+			<ol>
 				<li><a name="#php-gettext-edit-templates">La création de modèles</a></li>
 				<li><a name="#php-gettext-edit-languages">La création de langues</a></li>
 				<li><a name="#php-gettext-edit-po">La création de fichier de traduction</a></li>
 				<li><a name="#php-gettext-edit-compilation">La compilation des fichiers de traduction</a></li>
-			</ul></li>
+			</ol></li>
 			<li><a href="#report-bug">Reporter un bug</li>
 			<li><a href="#languages_codes">Tableau des codes de langues</li>
 		</ol>
@@ -43,12 +43,12 @@
 		
 		<a name="php-gettext-edit"></a><h2>Traduire un projet avec PHP-Gettext-Edit</h2>
 		<p>La traduction d'un projet avec PHP-Gettext-Edit se fait en plusieurs étapes:</p>
-		<ul>
+		<ol>
 			<li>La création de modèles</li>
 			<li>La création de langues</li>
 			<li>La création de fichiers de traduction</li>
 			<li>La compilation</li>
-		</ul>
+		</ol>
 		
 		<a name="php-gettext-edit-templates"></a><h3>La création de modèles</h3>
 		<p>La création de modèle se fait de manière très simple en remplissant un formulaire qui vous permet de configurer le petit
