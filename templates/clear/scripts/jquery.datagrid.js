@@ -1611,6 +1611,8 @@
 					var rowData = $("#po_datagrid")[0].grid.storedData.rows[rowId];
 					rowData.cell[1] = msgid;
 					rowData.cell[2] = msgid;
+					// Deselectionne
+					$(this).removeClass('trSelected');
 				});
 			}	                                      
 		});
