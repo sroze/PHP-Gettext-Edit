@@ -193,7 +193,7 @@
 	.flexigrid div.tDiv2
 		{
 		float: left;
-		clear: both;
+		clear: left;
 		padding: 1px;
 		}
 	.flexigrid div.tDiv2Right

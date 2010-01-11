@@ -1574,15 +1574,42 @@
 				
 				rows.each(function(){
 					var rowId = searchRowId('id', this.id.substr(3));
-					var msgid = data.rows[rowId].cell[1];
+					var row = data.rows[rowId];
+					var msgid = row.cell[1];
 
-					$("#po_datagrid").editSave(
-						msgid,
-						msgid,
-						data.rows[rowId].comments,
-						data.rows[rowId].fuzzy,
-						false
-					);
+					var param = [
+						{name: 'query', value: 'edit'},
+					    {name: 'object', value:
+							$.toJSON({
+								msgid: msgid,
+								msgstr: msgid,
+								comments: row.comments,
+								fuzzy: row.fuzzy
+					    	})
+					    }
+					];
+								
+					for (var pi = 0; pi < p.params.length; pi++) {
+						param[param.length] = p.params[pi];
+					}
+										
+					$.ajax({
+						type: p.method,
+						url: p.url,
+						data: param,
+						dataType: p.dataType,
+						success: function(data) {},
+						error: function(XMLHttpRequest, textStatus, errorThrown) {}
+					});
+					
+					//..on datagrid
+					var trTds = $(this).find('td');
+					$(trTds[1]).find('div').text(msgid);
+					$(trTds[2]).find('div').text(msgid);
+					//..in storedData
+					var rowData = $("#po_datagrid")[0].grid.storedData.rows[rowId];
+					rowData.cell[1] = msgid;
+					rowData.cell[2] = msgid;
 				});
 			}	                                      
 		});
