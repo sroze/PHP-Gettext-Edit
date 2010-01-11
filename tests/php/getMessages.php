@@ -74,11 +74,13 @@ while (false !== ($position = strpos($file_contents, 'msgid', $position))) {
 			if ($i%2) {
 				if (isset($last_bracket_position)) {
 					$string .= substr($file_contents, $last_bracket_position+1, $bracket_position-$last_bracket_position-1);
-					var_dump('.=', $string);
 				}
 			}
 			if ($file_contents[$bracket_position-1] != '\\') {
 				$i++;
+			} else {
+				$string = substr($string, 0, -1); // remove "\"
+				$string .= substr($file_contents, $bracket_position, 1); // add """
 			}
 			
 			$last_bracket_position = $bracket_position;
