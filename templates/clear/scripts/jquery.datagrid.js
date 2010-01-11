@@ -1571,6 +1571,7 @@
 		return this.each(function (){
 			if (this.p && this.grid) {
 				var data = this.grid.storedData;
+				var p = this.p;
 				
 				rows.each(function(){
 					var rowId = searchRowId('id', this.id.substr(3));
