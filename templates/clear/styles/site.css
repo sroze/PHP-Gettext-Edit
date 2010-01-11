@@ -25,6 +25,13 @@ div#header h2 {
 	font-style: italic;
 	font-weight: normal;
 }
+div#header div.link {
+	margin-top: 43px;
+	padding: 5px;
+}
+div#header div.link a {
+	font-size: 12px;
+}
 a, a:link, a:visited {
 	color: #2A5685;
 	text-decoration: none;
@@ -84,6 +91,9 @@ ul#top_menu li {
 }
 ul#top_menu li.right {
 	float: right;
+}
+ul#top_menu li.right a {
+	font-weight: normal;
 }
 ul#top_menu li a {
 	text-align: center;

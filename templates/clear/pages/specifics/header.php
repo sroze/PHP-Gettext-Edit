@@ -11,6 +11,12 @@ foreach ($menus as $page => $name) {
 		(($_GET['page'] == $page) ? ' class="selected"' : '').
 		'>'.$name.'</a></li>'."\n";
 }
+
+if (CONNECTED) {
+	$top_menu_lis .= '<li class="right"><a href="index.php?page=user">'.
+		sprintf(_('Vous êtes connecté en tant que <strong>%s</strong>'), $_USER->get('name')).
+		'</a></li>';
+}
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,6 +29,16 @@ foreach ($menus as $page => $name) {
 </head>
 <body>
 <div id="header">
+	<div class="link right">
+		<?php 
+		if (CONNECTED) {
+			echo '<a class="delete" href="index.php?page=logout">'._('Déconnexion').'</a>';
+		} else {
+			echo '<a class="edit" href="index.php?page=login">'._('Connexion').'</a>';
+			echo '<a class="add" href="index.php?page=register">'._('Inscription').'</a>';
+		}
+		?>
+	</div>
 	<h1>PHP-GetText-Edit</h1>
 	<h2><?php echo _('Gérez vos traductions simplement'); ?></h2>
 </div>
