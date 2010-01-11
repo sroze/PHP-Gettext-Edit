@@ -6,16 +6,30 @@ msgstr ""
 msgid "test2"
 msgstr "translation2"
 
+#: file.php:12
 # Welcome
 # man!
-#:file.php:12
 # other...
 msgid "test"
 msgstr "translation"
 
 # Commentaire :-)
 msgid "longue, très longue traduction"
-msgstr ""
-"Ça c'est du jamais vu!"
+msgstr "Ça c'est du jamais vu!"
 "Parce que elle est très très longur"
 "voir plus..."
+
+#: mon_fichier.php:23474
+# Cool hein?
+#, fuzzy
+msgid ""
+"Néanmoins, MyOnlineSSH ne peut pas fonctionner comme un réel terminal dans "
+"la mesure où trop de commandes seraient à mettre en place (tout en "
+"n'excluant pas la possibilité d'en ajouter au fur et à mesure des "
+"propositions des utilisateurs)."
+msgstr "Néanmoins, MyOnlineSSH ne peut pas fonctionner comme un réel terminal dans "
+"la mesure où trop de commandes seraient à mettre en place (tout en "
+"n'excluant pas la possibilité d'en ajouter au fur et à mesure des "
+"propositions des utilisateurs!!!."
+"Ou là..."
+
