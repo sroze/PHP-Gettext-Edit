@@ -318,8 +318,6 @@ abstract class Project_File
 	 */
 	public function editMessage ($searched_msgid, $new_msgstr, $comments = false, $fuzzy = false)
 	{
-		$searched_msgid = str_replace('"', '\\"', $searched_msgid);
-		
 		$file_contents = $this->getContents();
 		$comments_lines = array();
 		$other_header_lines = array();
