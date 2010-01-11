@@ -779,3 +779,6 @@ div.grid div.message.error {
 .flexigrid div.fbutton .edit {
 	background: url(../images/icons/textfield_rename.png) no-repeat center left;
 }
+.flexigrid div.fbutton .to_right {
+	background: url(../images/icons/arrow_right.png) no-repeat center left;
+}
