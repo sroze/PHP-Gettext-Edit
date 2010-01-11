@@ -25,6 +25,9 @@ while (false !== ($position = strpos($file_contents, 'msgid', $position))) {
 		}
 		if ($file_contents[$bracket_position-1] != '\\') {
 			$i++;
+		} else {
+			$msgid = substr($msgid, 0, -1); // remove "\"
+			$msgid .= substr($file_contents, $bracket_position, 1); // add """
 		}
 			
 		$last_bracket_position = $bracket_position;
