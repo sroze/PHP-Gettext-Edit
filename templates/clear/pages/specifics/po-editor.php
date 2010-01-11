@@ -46,11 +46,11 @@ $(document).ready(function() {
 			{display: '<?php echo _('Traduction'); ?>', name : 'msgstr', width : colWidth, sortable : true, align: 'left'}
 		],
 		buttons: [
-			{name: '<?php echo _('Ajouter'); ?>', bclass: 'add', onpress : function (a,grid){
+			{name: '<?php echo _('Ajouter'); ?>', bclass: 'add', position: 'left', onpress : function (a,grid){
 				var new_id = $("#po_datagrid").editAdd({id:0,cell:[0, '', ''],comments:[],references:[],fuzzy:false});
 				$('tr#row'+new_id, grid).dblclick();
 			}},
-			{name: '<?php echo _('Supprimer'); ?>', bclass: 'delete', onpress : function (a,grid){
+			{name: '<?php echo _('Supprimer'); ?>', bclass: 'delete', position: 'left', onpress : function (a,grid){
 				if ($('.trSelected',grid).length <= 0) {
 					alert('<?php echo _('Vous devez sélectionner au moins un élément'); ?>');
 				} else {
@@ -65,8 +65,11 @@ $(document).ready(function() {
 					}
 				}
 			}},
-			{separator: true},
-			{name: 'Éditer', bclass: 'edit', onpress: function (a,grid){
+			{name: '<?php echo _('Copier à droite'); ?>', bclass: 'to_right', position: 'right', onpress: function (a, grid) {
+				$("#po_datagrid").copyToMsgstr($('.trSelected',grid));
+			}},
+			{separator: true, position: 'left'},
+			{name: 'Éditer', bclass: 'edit', position: 'left', onpress: function (a,grid){
 				if ($('.trSelected',grid).length == 0) {
 					alert('<?php echo _('Vous devez sélectionner un élément'); ?>');
 				} else {
@@ -100,7 +103,8 @@ $(document).ready(function() {
 			$('textarea#right_msgid').val(),
 			$('textarea#right_msgstr').val(),
 			$('textarea#right_comments').val(),
-			$('input#right_fuzzy').attr('checked')
+			$('input#right_fuzzy').attr('checked'),
+			true
 		);
 		
 		return false;

@@ -860,8 +860,10 @@
 		if (p.buttons) 
 		{
 			g.tDiv.className = 'tDiv';
-			var tDiv2 = document.createElement('div');
-			tDiv2.className = 'tDiv2';
+			var tDiv2Left = document.createElement('div');
+			tDiv2Left.className = 'tDiv2';
+			var tDiv2Right = document.createElement('div');
+			tDiv2Right.className = 'tDiv2Right';
 			
 			for (i=0;i<p.buttons.length;i++)
 				{
@@ -888,17 +890,28 @@
 								}
 							);
 						}
-						$(tDiv2).append(btnDiv);
+						
+						if (btn.position && btn.position == 'right') {
+							$(tDiv2Right).append(btnDiv);
+						} else {
+							$(tDiv2Left).append(btnDiv);
+						}
+						
 						if ($.browser.msie&&$.browser.version<7.0)
 						{
 							$(btnDiv).hover(function(){$(this).addClass('fbOver');},function(){$(this).removeClass('fbOver');});
 						}
 						
 					} else {
-						$(tDiv2).append("<div class='btnseparator'></div>");
+						if (btn.position && btn.position == 'right') {
+							$(tDiv2Right).append("<div class='btnseparator'></div>");
+						} else {
+							$(tDiv2Left).append("<div class='btnseparator'></div>");
+						}
 					}
 				}
-				$(g.tDiv).append(tDiv2);
+				$(g.tDiv).append(tDiv2Right);
+				$(g.tDiv).append(tDiv2Left);
 				$(g.tDiv).append("<div style='clear:both'></div>");
 				$(g.gDiv).prepend(g.tDiv);
 		}
@@ -1497,7 +1510,7 @@
 		});
 	};
 	
-	$.fn.editSave = function (msgid, msgstr, comments, fuzzy) {
+	$.fn.editSave = function (msgid, msgstr, comments, fuzzy, confirmation) {
 		return this.each(function(){
 			if (this.p) {
 				var p = this.p;
@@ -1526,7 +1539,9 @@
 					success: function(data) {},
 					error: function(XMLHttpRequest, textStatus, errorThrown) {
 						if (XMLHttpRequest.status == 201) {
-							$('div#right_message').text('Sauvegardé').slideDown();
+							if (confirmation) {
+								$('div#right_message').text('Sauvegardé').slideDown();
+							}
 						} else {
 							$('div#right_message').addClass('error').text('Erreur: '+errorThrown);
 						}
@@ -1548,6 +1563,28 @@
 				rowData.comments = comments;
 				rowData.fuzzy = fuzzy;
 			}
+		});
+	};
+	
+	$.fn.copyToMsgstr = function (rows)
+	{
+		return this.each(function (){
+			if (this.p && this.grid) {
+				var data = this.grid.storedData;
+				
+				rows.each(function(){
+					var rowId = searchRowId('id', this.id.substr(3));
+					var msgid = data.rows[rowId].cell[1];
+
+					$("#po_datagrid").editSave(
+						msgid,
+						msgid,
+						data.rows[rowId].comments,
+						data.rows[rowId].fuzzy,
+						false
+					);
+				});
+			}	                                      
 		});
 	};
 
@@ -1591,6 +1628,17 @@
 
 function openPoLine (object)
 {
+	// Save the last!
+	if ($('textarea#right_msgid').val() != '') {
+		$("#po_datagrid").editSave(
+			$('textarea#right_msgid').val(),
+			$('textarea#right_msgstr').val(),
+			$('textarea#right_comments').val(),
+			$('input#right_fuzzy').attr('checked'),
+			false
+		);
+	}
+	
 	$('tr.trSelected').removeClass('trSelected');
 	$(object).toggleClass('trSelected').focus();
 	$('div#right_message').slideUp();

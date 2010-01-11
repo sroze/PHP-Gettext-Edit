@@ -196,6 +196,12 @@
 		clear: both;
 		padding: 1px;
 		}
+	.flexigrid div.tDiv2Right
+		{
+		float: right !important;
+		clear: none !important;
+		padding: 1px;
+		}
 
 .flexigrid div.sDiv /*toolbar*/
 	{

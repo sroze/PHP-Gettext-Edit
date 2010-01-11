@@ -96,7 +96,10 @@ class Project_Language_File extends Project_File
 		}
 		
 		if (!empty($template)) {
-			$command = 'msginit --input="'.$template->file_path.'" --output-file="'.$file_path.'" --no-translator --locale="'.$language->getCode().'"';
+			$command = 'msginit --input="'.$template->file_path.'" --output-file="'.$file_path.'" --no-translator --locale="fr_FR"';
+			// --locale="'.$language->getCode().'"
+			// Don't specifiy the locale of the new .po file because if locale is en_US, it copies msgid into
+			// msgstr, but not on others...
 			$exec_result = exec($command);
 			//var_dump($command, $exec_result);
 		}
