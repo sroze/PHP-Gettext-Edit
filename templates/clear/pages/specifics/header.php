@@ -14,7 +14,7 @@ foreach ($menus as $page => $name) {
 
 if (CONNECTED) {
 	$top_menu_lis .= '<li class="right"><a href="index.php?page=user">'.
-		sprintf(_('Vous êtes connecté en tant que <strong>%s</strong>'), $_USER->get('name')).
+		sprintf(_('Vous êtes connecté en tant que <strong>%s</strong>'), $_USER->get('username')).
 		'</a></li>';
 }
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
