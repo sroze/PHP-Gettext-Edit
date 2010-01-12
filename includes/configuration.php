@@ -1,7 +1,4 @@
 <?php
-require_once ROOT_PATH.'includes/librairies/File_INI.php';
-require_once ROOT_PATH.'includes/classes/Database.php';
-
 define('TEMPLATE_DIR', ROOT_PATH.'templates/'.$_CONFIG['template'].'/');
 
 if (!is_dir(TEMPLATE_DIR)) {
