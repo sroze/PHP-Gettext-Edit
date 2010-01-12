@@ -11,12 +11,16 @@ define('ROOT_PATH', realpath(dirname(__FILE__)).'/');
 $uris = explode('/', $_SERVER['SCRIPT_NAME']); array_pop($uris); array_shift($uris); if (!empty($uris)) { $uris[] = ''; }
 define('LOCAL_PATH', '/'.implode('/', $uris));
 
-require_once ROOT_PATH.'includes/configuration.php';
-require_once ROOT_PATH.'includes/classes/Project.php';
+define('INI_FILE_PATH', ROOT_PATH.'includes/configuration/configuration.ini');
+$config_ini = new File_INI(INI_FILE_PATH);
+$_CONFIG = $config_ini->read();
 
 if (!((int)$_CONFIG['installed'])) {
 	header('Location: '.LOCAL_PATH.'installation/index.php');
 }
+
+require_once ROOT_PATH.'includes/configuration.php';
+require_once ROOT_PATH.'includes/classes/Project.php';
 
 // What page is wanted by user ?
 $_GET['page'] = (empty($_GET['page'])) ? 'index' : $_GET['page'];
