@@ -31,6 +31,7 @@ class User
 		$this->informations = $informations;
 		
 		define('CONNECTED', true);
+		Rights::setUser((int) $this->get('id'));
 	}
 	
 	/**
@@ -51,6 +52,27 @@ class User
 		}
 	}
 	
+	/**
+	 * Create a new user.
+	 * 
+	 * @param string $username
+	 * @param string $password
+	 * @param string $email
+	 * 
+	 * @return integer $user_id
+	 */
+	static function create ($username, $password, $email)
+	{
+		
+	}
+	
+	/**
+	 * Connect a user from its cookie.
+	 * 
+	 * @param string $cookie_data
+	 * 
+	 * @return User
+	 */
 	static function fromCookie ($cookie_data)
 	{
 		

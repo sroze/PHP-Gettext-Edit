@@ -83,11 +83,13 @@ if ((int) $_CONFIG['installed']) {
 			$sql_contents = str_replace(
 				array(
 					'CREATE TABLE ',
-					'DROP TABLE IF EXISTS '
+					'DROP TABLE IF EXISTS ',
+					'INSERT INTO '
 				),
 				array(
 					'CREATE TABLE '.$_POST['sql-prefix'],
-					'DROP TABLE IF EXISTS '.$_POST['sql-prefix']
+					'DROP TABLE IF EXISTS '.$_POST['sql-prefix'],
+					'INSERT INTO '.$_POST['sql-prefix']
 				),
 				$sql_contents
 			);
@@ -116,8 +118,32 @@ if ((int) $_CONFIG['installed']) {
 				$sql->commit();
 			}
 			
-			// Then, create rights
-			var_dump('rights!');
+			// Fix it in INI file
+			$_CONFIG['database'] = array(
+				'type' => $_POST['sql-type'],
+				'host' => $_POST['sql-host'],
+				'port' => $_POST['sql-port'],
+				'user' => $_POST['sql-user'],
+				'password' => $_POST['sql-password'],
+				'dbname' => $_POST['sql-dbname'],
+				'prefix' => $_POST['sql-prefix']
+			);
+			
+			// Then, create rights and groups
+			require ROOT_PATH.'installation/SQL/create-rights.php';
+			
+			// Create admin user and grant it rights
+			$admin_id = User::create($_POST['admin-user'], $_POST['admin-password'], $_POST['admin-email']);
+			Rights_Admin::addUserGroups($admin_id, $group_admin);
+			
+			// Save INI
+			$_CONFIG['installed'] = true;
+			$config_ini->write($_CONFIG);
+			
+			echo '<div class="box success"><p>'.
+				_('PHP-Gettext-Edit a été installé avec succès').
+				' - <a href="../">'._('Retour').'</a>'.
+				'</p></div>';
 		}
 	}
 }

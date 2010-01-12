@@ -44,3 +44,6 @@ CREATE TABLE rights_users_groups (
 	"group" int NOT NULL,
 	UNIQUE ("user", "group")
 );
+
+INSERT INTO rights_rights_list ("id", "from", "to", "name") VALUES (1, 0, 1, 'ALL');
+INSERT INTO rights_groups_list ("id", "from", "to", "name") VALUES (1, 0, 1, 'ALL');
