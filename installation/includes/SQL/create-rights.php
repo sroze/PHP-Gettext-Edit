@@ -1,5 +1,5 @@
 <?php
-Rights_Config::init($sql, $_POST['sql-prefix']);
+Rights_Config::init($sql, $_POST['sql-prefix'].'rights_');
 
 // Creation of users groups
 $group_admin = Rights_Admin::createGroup('Administrateur');

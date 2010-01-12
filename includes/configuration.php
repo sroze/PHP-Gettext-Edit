@@ -21,6 +21,9 @@ require_once ROOT_PATH.'includes/librairies/Rights/Rights.php';
 require_once ROOT_PATH.'includes/classes/User.php';
 
 require ROOT_PATH.'includes/configuration/database.php';
+
+Rights_Config::init($sql, $_CONFIG['database']['prefix'].'rights_');
+
 require ROOT_PATH.'includes/configuration/user.php';
 require ROOT_PATH.'includes/configuration/language.php';
 ?>
