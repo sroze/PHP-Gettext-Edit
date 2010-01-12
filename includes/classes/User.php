@@ -68,8 +68,6 @@ class User
 	 */
 	static function create ($username, $password, $email)
 	{
-		global $_CONFIG;
-		
 		$query = Database::$sql->query(
 			sprintf(
 				Database::$requests->get('create_user'),
@@ -101,6 +99,55 @@ class User
 	}
 	
 	/**
+	 * Connect a user.
+	 * 
+	 * @param string  $username
+	 * @param string  $encrypted_password
+	 * @param boolean $remember
+	 * 
+	 * @return User
+	 * @throws User_Exception when connection failed
+	 */
+	static function connect ($username, $encrypted_password, $remember = true)
+	{
+		$query = Database::$sql->query(
+			sprintf(
+				Database::$requests->get('connect_user'),
+				Database::$prefix.'users',
+				$username,
+				$encrypted_password
+			)
+		);
+		
+		if (!$query) {
+			$sql_error = Database::$sql->errorInfo();
+			throw new User_Exception(
+				sprintf(
+					_('Impossible connecter l\'utilisateur: %s'),
+					$sql_error[2]
+				)
+			);
+		}
+		
+		$query_fetch = $query->fetch(PDO::FETCH_ASSOC);
+		if (!$query_fetch) {
+			throw new User_Exception(
+				sprintf(
+					_('Identifiants érronés')
+				)
+			);
+		}
+		
+		$_SESSION['user_informations'] = $query_fetch;
+		
+		if ($remember) {
+			setcookie('user', base64_encode($username.';'.$encrypted_password), time()+3600*24*360); // 1 year
+		}
+		
+		return new User($query_fetch);
+	}
+	
+	/**
 	 * Connect a user from its cookie.
 	 * 
 	 * @param string $cookie_data
@@ -109,7 +156,22 @@ class User
 	 */
 	static function fromCookie ($cookie_data)
 	{
+		$cookie_parts = explode(
+			';',
+			base64_decode(
+				$cookie_data
+			)
+		);
 		
+		if (count($cookie_parts) != 2) {
+			return false;
+		} else {
+			try {
+				return self::connect($cookie_parts[0], $cookie_parts[1], true);
+			} catch (Exception $e) {
+				return false;
+			}
+		}
 	}
 }
 
