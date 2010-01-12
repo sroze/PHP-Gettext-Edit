@@ -16,5 +16,6 @@ require_once ROOT_PATH.'includes/librairies/Rights/SQL/Rights_SQL_pgsql.php';
 require_once ROOT_PATH.'includes/librairies/Rights/SQL_Intervals/SQL/SQL_Intervals_pgsql.php';
 require_once ROOT_PATH.'includes/librairies/Rights/SQL_Intervals/SQL_Intervals.php';
 require_once ROOT_PATH.'includes/librairies/Rights/Rights.php';
+require_once ROOT_PATH.'includes/librairies/Rights/Rights_Admin.php';
 require_once ROOT_PATH.'includes/classes/User.php';
 ?>
