@@ -11,4 +11,7 @@ if (!empty($_SESSION['user_informations'])) {
 if (!defined('CONNECTED')) {
 	define('CONNECTED', false);
 }
+if (Rights::$user_id == 0) {
+	Rights::setUser((int) $_CONFIG['anonymous_id']);
+}
 ?>

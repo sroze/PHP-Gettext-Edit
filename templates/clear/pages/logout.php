@@ -9,6 +9,9 @@ if (!CONNECTED) {
 		<?php
 		session_unset();
 		setcookie('user', '', 0);
-		?><div class="box success"><?php echo _('Vous avez bien été déconnecté'); ?></div>
+		?><div class="box success"><p>
+			<?php echo _('Vous avez bien été déconnecté'); ?> - 
+			<a href="index.php"><?php echo _('Retour'); ?></a>
+		</p></div>
 	</div>
 </div>

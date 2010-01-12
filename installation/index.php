@@ -135,11 +135,14 @@ if ((int) $_CONFIG['installed']) {
 			Database::init($sql, $_POST['sql-prefix']);
 			
 			// Create admin user and grant it rights
+			$anonymous_id = User::create('', '', '');
 			$admin_id = User::create($_POST['admin-user'], $_POST['admin-password'], $_POST['admin-email']);
 			Rights_Admin::addUserGroups($admin_id, $group_admin);
+			Rights_Admin::addUserGroups($anonymous_id, 1); // ALL
 			
 			// Save INI
 			$_CONFIG['installed'] = true;
+			$_CONFIG['anonymous_id'] = $anonymous_id;
 			$config_ini->write($_CONFIG);
 			
 			echo '<div class="box success"><p>'.
