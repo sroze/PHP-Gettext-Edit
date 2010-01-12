@@ -56,8 +56,7 @@ class Project
 	 */
 	public function __construct ($id = null)
 	{
-		global $sql;
-		$this->sql = $sql;
+		$this->sql = Database::$sql;
 		
 		$this->id = $id;
 	}
@@ -76,13 +75,34 @@ class Project
 			
 		self::checkData($name, $path, $lang_path);
 		
-		$query = $sql->query('INSERT INTO projects (project_name, project_path, project_languages_path) VALUES
-			("'.$name.'", "'.$path.'", "'.$lang_path.'")
-		');
+		$query = Database::$sql->query(
+			sprintf(
+				Database::$requests->get('create_project'),
+				Database::$prefix.'projects',
+				$name,
+				$path,
+				$lang_path
+			)
+		);
 		
-		if ($query) {
-			return $sql->lastInsertId();
+		if (!$query) {
+			$sql_error = Database::$sql->errorInfo();
+			throw new User_Exception(
+				sprintf(
+					_('Impossible de créer un nouveau projet: %s'),
+					$sql_error[2]
+				)
+			);
 		}
+		
+		if (Database::$database_type == 'pgsql') {
+			$query_result = $query->fetch();
+			$id = $query_result['id'];
+		} else {
+			$id = Database::$sql->lastInsertId();
+		}
+		
+		return $id;
 	}
 	
 	/**
@@ -98,17 +118,27 @@ class Project
 	{
 		self::checkData($name, $path, $lang_path);
 		
-		$query = $this->sql->query('UPDATE projects SET 
-			project_name = "'.$name.'", 
-			project_path = "'.$path.'", 
-			project_languages_path = "'.$lang_path.'"
-			WHERE project_id = '.$this->id
+		$query = Database::$sql->query(
+			sprintf(
+				Database::$requests->get('update_project'),
+				Database::$prefix.'projects',
+				$name,
+				$path,
+				$lang_path,
+				$this->id
+			)
 		);
 		
-		if ($query) {
-			return true;
+		if (!$query) {
+			$sql_error = Database::$sql->errorInfo();
+			throw new User_Exception(
+				sprintf(
+					_('Impossible d\'éditer le projet: %s'),
+					$sql_error[2]
+				)
+			);
 		} else {
-			return false;
+			return true;
 		}
 	}
 	
@@ -119,12 +149,24 @@ class Project
 	 */
 	public function delete ()
 	{
-		$query = $this->sql->query('DELETE FROM projects WHERE project_id = '.$this->id);
+		$query = Database::$sql->query(
+			sprintf(
+				Database::$requests->get('delete_project'),
+				Database::$prefix.'projects',
+				$this->id
+			)
+		);
 		
-		if ($query) {
-			return true;
+		if (!$query) {
+			$sql_error = Database::$sql->errorInfo();
+			throw new User_Exception(
+				sprintf(
+					_('Impossible de supprimer le projet: %s'),
+					$sql_error[2]
+				)
+			);
 		} else {
-			return false;
+			return true;
 		}
 	}
 	
@@ -139,8 +181,9 @@ class Project
 	 */
 	static function checkData ($name, &$path, &$lang_path)
 	{
-		$path = str_replace('"', '\\"', $path);				
-		$lang_path = str_replace('"', '\\"', $lang_path);
+		$path = str_replace('\'', '\\\'', $path);				
+		$lang_path = str_replace('\'', '\\\'', $lang_path);
+		
 		if (substr($lang_path, -1) != '/') {
 			$lang_path .= '/';
 		}
@@ -214,9 +257,22 @@ class Project
 	 */
 	public function getList ()
 	{
-		$query = $this->sql->query(
-			'SELECT project_id, project_name FROM projects'
+		$query = Database::$sql->query(
+			sprintf(
+				Database::$requests->get('get_projects'),
+				Database::$prefix.'projects'
+			)
 		);
+		
+		if (!$query) {
+			$sql_error = Database::$sql->errorInfo();
+			throw new User_Exception(
+				sprintf(
+					_('Impossible récupérer la liste des projets: %s'),
+					$sql_error[2]
+				)
+			);
+		}
 		
 		return $query->fetchAll();
 	}
@@ -228,9 +284,23 @@ class Project
 	 */
 	private function getAll ()
 	{
-		$query = $this->sql->query(
-			'SELECT * FROM projects WHERE project_id = '.$this->id
+		$query = Database::$sql->query(
+			sprintf(
+				Database::$requests->get('get_project'),
+				Database::$prefix.'projects',
+				$this->id
+			)
 		);
+		
+		if (!$query) {
+			$sql_error = Database::$sql->errorInfo();
+			throw new User_Exception(
+				sprintf(
+					_('Impossible récupérer la liste des projets: %s'),
+					$sql_error[2]
+				)
+			);
+		}
 		
 		$this->informations = $query->fetch();
 		

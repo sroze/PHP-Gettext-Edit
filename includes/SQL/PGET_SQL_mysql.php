@@ -21,7 +21,18 @@ class PGET_SQL_mysql extends PGET_SQL
 	 * @var array
 	 */
 	public $requests = array(
-		'create_user' => 'INSERT INTO %s (username, password, email) VALUES (\'%s\', \'%s\', \'%s\')'
+		'create_user' => 'INSERT INTO %s (username, password, email) VALUES (\'%s\', \'%s\', \'%s\')',
+	
+		'create_project' => 'INSERT INTO %s (project_name, project_path, project_languages_path)
+			VALUES (\'%s\', \'%s\', \'%s\')',
+		'update_project' => 'UPDATE %s SET 
+			project_name = \'%s\', 
+			project_path = \'%s\', 
+			project_languages_path = \'%s\'
+			WHERE project_id = %d',
+		'delete_project' => 'DELETE FROM %s WHERE project_id = %d',
+		'get_projects' => 'SELECT project_id, project_name FROM %s',
+		'get_project' => 'SELECT * FROM projects WHERE project_id = %d'
 	);
 }
 
