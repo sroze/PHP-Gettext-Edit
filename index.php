@@ -87,11 +87,17 @@ if (isset($_GET['project'])) {
 	}
 }
 
+ob_start();
+require_once PAGE_DIR.$_GET['page'].'.php';
+
+$contents = ob_get_contents();
+ob_end_clean();
+
+
 // Includes the header
 require_once PAGE_DIR.'specifics/header.php';
 
-// Includes the page
-require_once PAGE_DIR.$_GET['page'].'.php';
+echo $contents;
 
 // Includes the footer
 require_once PAGE_DIR.'specifics/footer.php';
