@@ -146,6 +146,7 @@ if ((int) $_CONFIG['installed']) {
 				_('PHP-Gettext-Edit a été installé avec succès').
 				' - <a href="../">'._('Retour').'</a>'.
 				'</p></div>';
+			define('INSTALLED', true);
 		}
 	}
 }
