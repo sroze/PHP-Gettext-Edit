@@ -1,6 +1,7 @@
 <?php
 define('ROOT_PATH', realpath(dirname(__FILE__).'/../').'/');
 require_once ROOT_PATH.'installation/includes/configuration.php';
+require_once ROOT_PATH.'includes/librairies/String.php';
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,63 +18,160 @@ require_once ROOT_PATH.'installation/includes/configuration.php';
 	<div id="sidebar">
 		<h3><?php echo _('Installation rapide'); ?></h3>
 		<p><?php echo _('Dans une petite minute, vous aurez fini d\'installer GetTextEdit.'); ?></p>
+		<h3><?php echo _('Port de connexion'); ?></h3>
+		<p><?php echo _('Le port de connexion à la base de données est défini par son administrateur.'), ' ',
+		_('Pour MySQL, le port par défaut est 3306 et pour PostgreSQL 5432.'); ?></p>
+		<h3><?php echo _('Préfix des tables'); ?></h3>
+		<p><?php echo _('Si dans une même base de données vous stokez plusieurs applications, vous pouvez préciser un préfix pour le nom des tables '.
+		'de PHP-Gettext-Edit.'), ' ', _('Si vous utilisez une base de données qui supporte les schéma, vous pouvez mettre <code>mon_schema.</code> '.
+		'comme préfix, ce qui aura pour conséquence de mettre les tables dans le schéma <code>mon_schema</code>.'); ?></p>
+		<h3><?php echo _('Administrateur'); ?></h3>
+		<p><?php echo _('Il faut toujours avoir un administrateur pour une application: c\'est celui qui donne les droits et qui peut configurer '.
+		'toutes les options de l\'application.'); ?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
 <?php
-if (isset($_POST['install'])) {
-	
+if ((int) $_CONFIG['installed']) {
+	echo '<div class="box error"><p>'.
+		_('PHP-Gettext-Edit est déjà installé').
+		'</p></div>';
+	define('INSTALLED', true);
+} else if (isset($_POST['install'])) {
+	// Test for fields
+	if (!is_writable(INI_FILE_PATH)) {
+		echo '<div class="box error"><p>'.
+			_('Le fichier INI de configuration n\'est pas accessible en écriture par PHP-Gettext-Edit.').
+			'</p></div>';
+	} else if (!in_array($_POST['sql-type'], $available_databases)) {
+		echo '<div class="box error"><p>'.
+			_('Base de données non supportée').
+			'</p></div>';
+	} else if (empty($_POST['sql-host'])
+		OR empty($_POST['sql-port']) OR empty($_POST['sql-user'])
+		OR empty($_POST['sql-password']) OR empty($_POST['sql-dbname'])
+	) {
+		echo '<div class="box error"><p>'.
+			_('Les informations concernant votre base de données ne sont pas complètes').
+			'</p></div>';
+	} else if (!String::is_username($_POST['admin-user'])) {
+		echo '<div class="box error"><p>'.
+			_('Nom d\'utilisateur administrateur invalide').
+			'</p></div>';
+	} else if (!String::is_password($_POST['admin-password'])) {
+		echo '<div class="box error"><p>'.
+			_('Mot de passe administrateur invalide').
+			'</p></div>';
+	} else if (!String::is_email($_POST['admin-email'])) {
+		echo '<div class="box error"><p>'.
+			_('Adresse email invalide').
+			'</p></div>';
+	} else {
+		// Test database connection
+		$sql = new PDO($_POST['sql-type'].':dbname='.$_POST['sql-dbname'].';host='.$_POST['sql-host'].';port='.$_POST['sql-port'], $_POST['sql-user'], $_POST['sql-password']);
+		
+		if (!$sql) {
+			echo '<div class="box error"><p>'.
+				_('Impossible de se connecter à la base de données avec ces paramètres').
+				'</p></div>';
+		} else {
+			// Creation of tables
+			$sql->beginTransaction();
+			
+			$sql_contents = file_get_contents(ROOT_PATH.'installation/includes/SQL/'.$_POST['sql-type'].'/php-gettext-edit.sql');
+			$sql_contents .= file_get_contents(ROOT_PATH.'installation/includes/SQL/'.$_POST['sql-type'].'/rights.sql');
+			// Add prefixes
+			$sql_contents = str_replace(
+				array(
+					'CREATE TABLE ',
+					'DROP TABLE IF EXISTS '
+				),
+				array(
+					'CREATE TABLE '.$_POST['sql-prefix'],
+					'DROP TABLE IF EXISTS '.$_POST['sql-prefix']
+				),
+				$sql_contents
+			);
+			
+			$sql_queries = explode(';', $sql_contents);
+			foreach ($sql_queries as $query) {
+				if (trim($query) == '') {
+					continue;
+				}
+				
+				if ($sql->exec($query) === false) {
+					echo '<div class="box error"><p>'.
+						_('La requête n\'a pas été éxécutée correctement:').
+						'</p><p>'.
+						'<strong>'._('Requête').':</strpng> '.$query.
+						'</p><p>'.
+						print_r($sql->errorInfo(), true).
+						'</p></div>';
+					
+					$rollback = $sql->rollBack();
+				}
+			}
+			
+			if (!isset($rollback)) {
+				$sql->commit();
+			}
+			
+			// Then, create rights
+			var_dump('rights!');
+		}
+	}
 }
 if (!defined('INSTALLED')) {
 ?>
-<h1>Installation</h1>
+<h1><?php echo _('Installation'); ?></h1>
 <?php 
 if (!is_writable(INI_FILE_PATH)) {
 	echo '<div class="box error"><p>', _('Le fichier INI de configuration n\'est pas accessible en écriture par PHP-Gettext-Edit.'), ' ',
-	_('Le fichier se trouve à cette adresse:'), '</p><p>', INI_FILE_PATH, '</p></div>';
+	_('Le fichier se trouve à cette adresse:'), '</p><p><strong>', INI_FILE_PATH, '</strong></p></div>';
 }
-?><form method="POST" action="">
-<fieldset>
-	<legend><?php echo _('Base de données'); ?></legend>
-	<p><label><?php echo _('Type de base de données'); ?></label><select name="sql-type">
-		<option value="pgsql">PostgreSQL</option>
-		<option value="mysql">MySQL</option>
-	</select></p>
-	<p><label><?php echo _('Adresse de votre serveur SQL'); ?></label>
-		<input type="text" name="sql-host" value="localhost" />
+?><form method="POST" action="" class="formatted">
+	<fieldset>
+		<legend><?php echo _('Base de données'); ?></legend>
+		<p><label><?php echo _('Type de base de données'); ?></label><select name="sql-type">
+			<option value="pgsql">PostgreSQL</option>
+			<option value="mysql">MySQL</option>
+		</select></p>
+		<p><label><?php echo _('Adresse de votre serveur SQL'); ?></label>
+			<input type="text" name="sql-host" value="127.0.0.1" />
+		</p>
+		<p><label><?php echo _('Port de connexion'); ?></label>
+			<input type="text" name="sql-port" value="" />
+		</p>
+		<p><label><?php echo _('Nom d\'utilisateur'); ?></label>
+			<input type="text" name="sql-user" value="" />
+		</p>
+		<p><label><?php echo _('Mot de passe'); ?></label>
+			<input type="password" name="sql-password" value="" />
+		</p>
+		<p><label><?php echo _('Nom de la base de données'); ?></label>
+			<input type="text" name="sql-dbname" value="" />
+		</p>
+		<p><label><?php echo _('Préfix des tables'); ?></label>
+			<input type="text" name="sql-prefix" value="gte_" />
+		</p>
+	</fieldset>
+	
+	<fieldset>
+		<legend><?php echo _('Administrateur'); ?></legend>
+		<p><label><?php echo _('Nom d\'utilisateur'); ?></label>
+			<input type="text" name="admin-user" value="" />
+		</p>
+		<p><label><?php echo _('Mot de passe'); ?></label>
+			<input type="password" name="admin-password" value="" />
+		</p>
+		<p><label><?php echo _('Adresse email'); ?></label>
+			<input type="text" name="admin-email" value="" />
+		</p>
+	</fieldset>
+	
+	<p>
+		<input type="hidden" name="install" value="yes" />
+		<input type="submit" name="submit" value="<?php echo _('Installation !'); ?>" />
 	</p>
-	<p><label><?php echo _('Port de connexion'); ?></label>
-		<input type="text" name="sql-port" value="" />
-	</p>
-	<p><label><?php echo _('Nom d\'utilisateur'); ?></label>
-		<input type="text" name="sql-user" value="" />
-	</p>
-	<p><label><?php echo _('Mot de passe'); ?></label>
-		<input type="text" name="sql-password" value="" />
-	</p>
-	<p><label><?php echo _('Nom de la base de données'); ?></label>
-		<input type="text" name="sql-dbname" value="" />
-	</p>
-	<p><label><?php echo _('Préfix des tables'); ?></label>
-		<input type="text" name="sql-prefix" value="gte_" />
-	</p>
-</fieldset>
-
-<fieldset>
-	<legend><?php echo _('Administrateur'); ?></legend>
-	<p><?php echo _('Un utilisateur administrateur doit être créé, remplissez les informations ci-dessous:'); ?></p>
-	<p><label><?php echo _('Nom d\'utilisateur'); ?></label>
-		<input type="text" name="admin-user" value="" />
-	</p>
-	<p><label><?php echo _('Mot de passe'); ?></label>
-		<input type="text" name="admin-password" value="" />
-	</p>
-	<p><label><?php echo _('Adresse email'); ?></label>
-		<input type="text" name="admin-email" value="" />
-	</p>
-</fieldset>
-
-	<input type="hidden" name="install" value="yes" />
-	<input type="submit" name="submit" value="<?php echo _('Installation !'); ?>" />
 </form>
 <?php 
 }
