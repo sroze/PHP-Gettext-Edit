@@ -144,7 +144,7 @@ if ((int) $_CONFIG['installed']) {
 			
 			echo '<div class="box success"><p>'.
 				_('PHP-Gettext-Edit a été installé avec succès').
-				' - <a href="../">'._('Retour').'</a>'.
+				' - <a href="../">'._('Continuer').'</a>'.
 				'</p></div>';
 			define('INSTALLED', true);
 		}
