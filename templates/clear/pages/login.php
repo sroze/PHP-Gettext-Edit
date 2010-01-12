@@ -1,5 +1,5 @@
 <?php 
-if (defined('CONNECTED')) {
+if (CONNECTED) {
 	echo _('Vous êtes déjà connecté');
 	exit();
 }
