@@ -13,6 +13,7 @@ if (CONNECTED) {
 	<div id="contents" class="with_sidebar">
 		<h1><?php echo _('Connexion'); ?></h1>
 		<?php
+		$was_connected = false;
 		if (isset($_POST['name'])) {
 			if (!String::is_username($_POST['username'])) {
 				echo '<div class="box error"><p>'.
@@ -31,13 +32,14 @@ if (CONNECTED) {
 						' - <a href="index.php">'.
 						_('Continuer').
 						'</a></p><div>';
+					$was_connected = true;
 				} catch (Exception $e) {
 					echo '<div class="box error"><p>'.$e->getMessage().'</p></div>';
 				}
 			}
 		}
 		
-		if (!defined('CONNECTED')) {
+		if (!$was_connected) {
 		?>
 		<form method="POST" action="" class="formatted">
 			<p><label><?php echo _('Nom d\'utilisateur'); ?></label>
