@@ -14,7 +14,7 @@ if (CONNECTED) {
 		<h1><?php echo _('Connexion'); ?></h1>
 		<?php
 		$was_connected = false;
-		if (isset($_POST['name'])) {
+		if (isset($_POST['username'])) {
 			if (!String::is_username($_POST['username'])) {
 				echo '<div class="box error"><p>'.
 					_('Le nom d\'utilisateur est invalide').
