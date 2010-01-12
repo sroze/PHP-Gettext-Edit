@@ -1,11 +1,4 @@
 <?php
-require_once ROOT_PATH.'includes/librairies/Rights/SQL/Rights_SQL_pgsql.php';
-require_once ROOT_PATH.'includes/librairies/Rights/SQL_Intervals/SQL/SQL_Intervals_pgsql.php';
-require_once ROOT_PATH.'includes/librairies/Rights/SQL_Intervals/SQL_Intervals.php';
-require_once ROOT_PATH.'includes/librairies/Rights/Rights.php';
-
-require_once ROOT_PATH.'includes/classes/User.php';
-
 // We need session
 session_start();
 
