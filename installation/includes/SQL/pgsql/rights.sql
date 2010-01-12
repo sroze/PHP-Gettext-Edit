@@ -48,5 +48,5 @@ CREATE TABLE rights_users_groups (
 	UNIQUE ("user", "group")
 );
 
-INSERT INTO rights_rights_list ("id", "from", "to", "name") VALUES (1, 0, 1, 'ALL');
-INSERT INTO rights_groups_list ("id", "from", "to", "name") VALUES (1, 0, 1, 'ALL');
+INSERT INTO rights_rights_list ("from", "to", "name") VALUES (0, 1, 'ALL');
+INSERT INTO rights_groups_list ("from", "to", "name") VALUES (0, 1, 'ALL');
