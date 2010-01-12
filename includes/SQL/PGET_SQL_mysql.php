@@ -33,7 +33,7 @@ class PGET_SQL_mysql extends PGET_SQL
 		'delete_project' => 'DELETE FROM %s WHERE project_id = %d',
 		'get_projects' => 'SELECT project_id, project_name FROM %s',
 		'get_project' => 'SELECT * FROM %s WHERE project_id = %d',
-		'connect_user' => 'SELECT id, name, email FROM %s WHERE username = \'%s\' AND password = \'%s\''
+		'connect_user' => 'SELECT id, username, email FROM %s WHERE username = \'%s\' AND password = \'%s\''
 	);
 }
 
