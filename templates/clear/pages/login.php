@@ -31,7 +31,7 @@ if (CONNECTED) {
 						_('Connexion éffectuée').
 						' - <a href="index.php">'.
 						_('Continuer').
-						'</a></p><div>';
+						'</a></p></div>';
 					$was_connected = true;
 				} catch (Exception $e) {
 					echo '<div class="box error"><p>'.$e->getMessage().'</p></div>';
