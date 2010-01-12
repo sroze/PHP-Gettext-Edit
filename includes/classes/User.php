@@ -32,7 +32,9 @@ class User
 		
 		$this->informations = $informations;
 		
-		define('CONNECTED', true);
+		if (!defined('CONNECTED')) {
+			define('CONNECTED', true);
+		}
 		Rights::setUser((int) $this->get('id'));
 	}
 	
