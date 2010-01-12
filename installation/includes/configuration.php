@@ -18,4 +18,5 @@ require_once ROOT_PATH.'includes/librairies/Rights/SQL_Intervals/SQL_Intervals.p
 require_once ROOT_PATH.'includes/librairies/Rights/Rights.php';
 require_once ROOT_PATH.'includes/librairies/Rights/Rights_Admin.php';
 require_once ROOT_PATH.'includes/classes/User.php';
+require_once ROOT_PATH.'includes/classes/Database.php';
 ?>

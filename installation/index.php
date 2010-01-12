@@ -132,6 +132,8 @@ if ((int) $_CONFIG['installed']) {
 			// Then, create rights and groups
 			require ROOT_PATH.'installation/includes/SQL/create-rights.php';
 			
+			Database::init($sql, $_POST['sql-prefix']);
+			
 			// Create admin user and grant it rights
 			$admin_id = User::create($_POST['admin-user'], $_POST['admin-password'], $_POST['admin-email']);
 			Rights_Admin::addUserGroups($admin_id, $group_admin);

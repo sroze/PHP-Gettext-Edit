@@ -2,82 +2,60 @@
 class Database
 {
 	/**
-	 * Adresse du fichier de base de données SQLLite
+	 * Prefix of tables.
 	 * 
 	 * @var string
 	 */
-	public $filename;
+	static $prefix;
 	
 	/**
-	 * Instance de PDO, avec la connexion à la base.
+	 * PDO instance.
 	 * 
 	 * @var PDO
 	 */
-	private $database;
+	static $sql;
 	
 	/**
-	 * Constructeur.
+	 * PGTE_SQL instance.
 	 * 
-	 * @param string $filename
+	 * @var PGTE_SQL
+	 */
+	static $requests;
+	
+	/**
+	 * Type of database.
+	 * 
+	 * @var string
+	 */
+	static $database_type;
+	
+	/**
+	 * Set $sql and $requests
+	 * 
+	 * @param PDO 	 $sql
+	 * @param string $prefix
+	 * 
 	 * @return Database
 	 */
-	public function __construct ($filename)
+	static function init (PDO $sql, $prefix = '')
 	{
-		$this->filename = $filename;
-	}
-	
-	/**
-	 * Créé la connection au fichier de base de données.
-	 * 
-	 * @return bool
-	 */
-	private function openConnection ()
-	{
-		$this->database = new PDO('sqlite:'.$this->filename);
-		if (!$this->database) {
-			$error = $this->database->errorInfo();
-			throw new Database_Exception(
-				sprintf(_('Impossible de se connecter à la base de données: %s'), $error[2])
-			);
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
-	/**
-	 * Envoi une requête à la base.
-	 * 
-	 * @param string $query
-	 * @return PDOStatement
-	 */
-	public function query ($query)
-	{
-		if (!$this->database) {
-			$this->openConnection();
+        $database_type = $sql->getAttribute(PDO::ATTR_DRIVER_NAME);
+        
+		$className = 'PGET_SQL_'.$database_type;
+		if (!class_exists($className)) {
+		  	@include ROOT_PATH.'includes/SQL/'.$className.'.php';
+			    	
+		   	if (!class_exists($className)) {
+		        throw new Rights_Exception(
+		        	'Unable to find '.$className.' requests class'
+		        );
+		   	}
 		}
 		
-		$result = $this->database->query($query);
-		if (!$result) {
-			$error = $this->database->errorInfo();
-			 throw new Database_Exception(
-			 	sprintf(_('La requête n\'as pas été éxécutée correctement: %s'), $error[2])
-			 );
-		} else {
-			return $result;
-		}
-	}
-	
-	/**
-	 * Renvoi l'ID du dernier élément enregistré.
-	 * 
-	 * @return integer
-	 */
-	public function lastInsertId ()
-	{
-		return (int) $this->database->lastInsertId();
+		self::$database_type = $database_type;
+		self::$prefix = $prefix;
+		self::$sql = $sql;
+		self::$requests = new $className();
 	}
 }
-
-class Database_Exception extends Exception {}
 ?>

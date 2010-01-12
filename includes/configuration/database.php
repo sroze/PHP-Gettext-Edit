@@ -20,4 +20,7 @@ if ($sql === false) {
 		sprintf(_('Impossible de se connecter à la base de données: %s'), $sql_error[2])
 	);
 }
+
+Database::init($sql, $_CONFIG['database']['prefix']);
+
 ?>

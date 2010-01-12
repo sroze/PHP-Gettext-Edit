@@ -1,4 +1,6 @@
 <?php
+require_once ROOT_PATH.'includes/librairies/String.php';
+
 /**
  * This class define a PHP-Gettext-Edit user.
  * 
@@ -24,7 +26,7 @@ class User
 	{
 		if (!array_key_exists('id', $informations)) {
 			throw new User_Exception(
-				'The user id is undefined'
+				_('L\'ID utilisateur n\'est pas défini')
 			);
 		}
 		
@@ -47,7 +49,10 @@ class User
 			return $this->informations[$name];
 		} else {
 			throw new user_Exception(
-				sprintf('Field "%s" doesn\'t exists', $name)
+				sprintf(
+					_('Le champ "%s" n\'éxiste pas'),
+					$name
+				)
 			);
 		}
 	}
@@ -63,7 +68,36 @@ class User
 	 */
 	static function create ($username, $password, $email)
 	{
+		global $_CONFIG;
 		
+		$query = Database::$sql->query(
+			sprintf(
+				Database::$requests->get('create_user'),
+				Database::$prefix.'users',
+				$username,
+				String::crypt($password),
+				$email
+			)
+		);
+		
+		if (!$query) {
+			$sql_error = Database::$sql->errorInfo();
+			throw new User_Exception(
+				sprintf(
+					_('Impossible de créer un nouveau compte utilisateur: %s'),
+					$sql_error[2]
+				)
+			);
+		}
+		
+		if (Database::$database_type == 'pgsql') {
+			$query_result = $query->fetch();
+			$id = $query_result['id'];
+		} else {
+			$id = Database::$sql->lastInsertId();
+		}
+		
+		return $id;
 	}
 	
 	/**
