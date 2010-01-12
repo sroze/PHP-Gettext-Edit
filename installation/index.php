@@ -20,7 +20,7 @@ require_once ROOT_PATH.'includes/librairies/String.php';
 		<p><?php echo _('Dans une petite minute, vous aurez fini d\'installer GetTextEdit.'); ?></p>
 		<h3><?php echo _('Port de connexion'); ?></h3>
 		<p><?php echo _('Le port de connexion à la base de données est défini par son administrateur.'), ' ',
-		_('Pour MySQL, le port par défaut est 3306 et pour PostgreSQL 5432.'); ?></p>
+		_('Pour MySQL, le port par défaut est <code>3306</code> et pour PostgreSQL <code>5432</code>.'); ?></p>
 		<h3><?php echo _('Préfix des tables'); ?></h3>
 		<p><?php echo _('Si dans une même base de données vous stokez plusieurs applications, vous pouvez préciser un préfix pour le nom des tables '.
 		'de PHP-Gettext-Edit.'), ' ', _('Si vous utilisez une base de données qui supporte les schéma, vous pouvez mettre <code>mon_schema.</code> '.
@@ -30,19 +30,19 @@ require_once ROOT_PATH.'includes/librairies/String.php';
 		'toutes les options de l\'application.'); ?></p>
 	</div>
 	<div id="contents" class="with_sidebar">
+	<h1><?php echo _('Installation'); ?></h1>
 <?php
 if ((int) $_CONFIG['installed']) {
 	echo '<div class="box error"><p>'.
 		_('PHP-Gettext-Edit est déjà installé').
 		'</p></div>';
 	define('INSTALLED', true);
+} else if (!is_writable(INI_FILE_PATH)) {
+	echo '<div class="box error"><p>', _('Le fichier INI de configuration n\'est pas accessible en écriture par PHP-Gettext-Edit.'), ' ',
+	_('Le fichier se trouve à cette adresse:'), '</p><p><strong>', INI_FILE_PATH, '</strong></p></div>';
 } else if (isset($_POST['install'])) {
 	// Test for fields
-	if (!is_writable(INI_FILE_PATH)) {
-		echo '<div class="box error"><p>'.
-			_('Le fichier INI de configuration n\'est pas accessible en écriture par PHP-Gettext-Edit.').
-			'</p></div>';
-	} else if (!in_array($_POST['sql-type'], $available_databases)) {
+	if (!in_array($_POST['sql-type'], $available_databases)) {
 		echo '<div class="box error"><p>'.
 			_('Base de données non supportée').
 			'</p></div>';
@@ -99,12 +99,13 @@ if ((int) $_CONFIG['installed']) {
 				}
 				
 				if ($sql->exec($query) === false) {
+					$sql_error = $sql->errorInfo();
 					echo '<div class="box error"><p>'.
 						_('La requête n\'a pas été éxécutée correctement:').
 						'</p><p>'.
-						'<strong>'._('Requête').':</strpng> '.$query.
+						'<strong>'._('Requête').':</strong> '.$query.
 						'</p><p>'.
-						print_r($sql->errorInfo(), true).
+						'<strong>'._('Erreur').':</strong> '.$sql_error[2].
 						'</p></div>';
 					
 					$rollback = $sql->rollBack();
@@ -121,50 +122,80 @@ if ((int) $_CONFIG['installed']) {
 	}
 }
 if (!defined('INSTALLED')) {
-?>
-<h1><?php echo _('Installation'); ?></h1>
-<?php 
-if (!is_writable(INI_FILE_PATH)) {
-	echo '<div class="box error"><p>', _('Le fichier INI de configuration n\'est pas accessible en écriture par PHP-Gettext-Edit.'), ' ',
-	_('Le fichier se trouve à cette adresse:'), '</p><p><strong>', INI_FILE_PATH, '</strong></p></div>';
-}
 ?><form method="POST" action="" class="formatted">
 	<fieldset>
 		<legend><?php echo _('Base de données'); ?></legend>
 		<p><label><?php echo _('Type de base de données'); ?></label><select name="sql-type">
-			<option value="pgsql">PostgreSQL</option>
-			<option value="mysql">MySQL</option>
+			<option value="pgsql"<?php 
+			if (isset($_POST['sql-type']) && $_POST['sql-type'] == 'pgsql') {
+				echo ' selected="selected"';
+			} ?>>PostgreSQL</option>
+			<option value="mysql"<?php 
+			if (isset($_POST['sql-type']) && $_POST['sql-type'] == 'mysql') {
+				echo ' selected="selected"';
+			} ?>>MySQL</option>
 		</select></p>
 		<p><label><?php echo _('Adresse de votre serveur SQL'); ?></label>
-			<input type="text" name="sql-host" value="127.0.0.1" />
+			<input type="text" name="sql-host" value="<?php 
+			if (isset($_POST['sql-host'])) {
+				echo $_POST['sql-host'];
+			} else {
+				echo '127.0.0.1';
+			} ?>" />
 		</p>
 		<p><label><?php echo _('Port de connexion'); ?></label>
-			<input type="text" name="sql-port" value="" />
+			<input type="text" name="sql-port" value="<?php 
+			if (isset($_POST['sql-port'])) {
+				echo $_POST['sql-port'];
+			} ?>" />
 		</p>
 		<p><label><?php echo _('Nom d\'utilisateur'); ?></label>
-			<input type="text" name="sql-user" value="" />
+			<input type="text" name="sql-user" value="<?php 
+			if (isset($_POST['sql-user'])) {
+				echo $_POST['sql-user'];
+			} ?>" />
 		</p>
 		<p><label><?php echo _('Mot de passe'); ?></label>
-			<input type="password" name="sql-password" value="" />
+			<input type="password" name="sql-password" value="<?php 
+			if (isset($_POST['sql-password'])) {
+				echo $_POST['sql-password'];
+			} ?>" />
 		</p>
 		<p><label><?php echo _('Nom de la base de données'); ?></label>
-			<input type="text" name="sql-dbname" value="" />
+			<input type="text" name="sql-dbname" value="<?php 
+			if (isset($_POST['sql-dbname'])) {
+				echo $_POST['sql-dbname'];
+			} ?>" />
 		</p>
 		<p><label><?php echo _('Préfix des tables'); ?></label>
-			<input type="text" name="sql-prefix" value="gte_" />
+			<input type="text" name="sql-prefix" value="<?php 
+			if (isset($_POST['sql-prefix'])) {
+				echo $_POST['sql-prefix'];
+			} else {
+				echo 'gte_';
+			} ?>" />
 		</p>
 	</fieldset>
 	
 	<fieldset>
 		<legend><?php echo _('Administrateur'); ?></legend>
 		<p><label><?php echo _('Nom d\'utilisateur'); ?></label>
-			<input type="text" name="admin-user" value="" />
+			<input type="text" name="admin-user" value="<?php 
+			if (isset($_POST['admin-user'])) {
+				echo $_POST['admin-user'];
+			} ?>" />
 		</p>
 		<p><label><?php echo _('Mot de passe'); ?></label>
-			<input type="password" name="admin-password" value="" />
+			<input type="password" name="admin-password" value="<?php 
+			if (isset($_POST['admin-password'])) {
+				echo $_POST['admin-password'];
+			} ?>" />
 		</p>
 		<p><label><?php echo _('Adresse email'); ?></label>
-			<input type="text" name="admin-email" value="" />
+			<input type="text" name="admin-email" value="<?php 
+			if (isset($_POST['admin-email'])) {
+				echo $_POST['admin-email'];
+			} ?>" />
 		</p>
 	</fieldset>
 	
