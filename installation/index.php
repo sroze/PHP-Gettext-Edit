@@ -130,7 +130,7 @@ if ((int) $_CONFIG['installed']) {
 			);
 			
 			// Then, create rights and groups
-			require ROOT_PATH.'installation/SQL/create-rights.php';
+			require ROOT_PATH.'installation/includes/SQL/create-rights.php';
 			
 			// Create admin user and grant it rights
 			$admin_id = User::create($_POST['admin-user'], $_POST['admin-password'], $_POST['admin-email']);
