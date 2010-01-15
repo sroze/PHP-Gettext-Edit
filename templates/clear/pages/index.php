@@ -13,6 +13,11 @@ if (empty($projects_list)) {
 	$projects_list = _('Aucun projet créé pour le moment.');
 }
 
+var_dump(Rights::check('project_create'));
+var_dump(Rights::check('admin_template_update'));
+var_dump(Rights::check('admin_access'));
+var_dump(Rights::check('project_edit'));
+
 ?>
 <div id="page">
 	<div id="sidebar">
