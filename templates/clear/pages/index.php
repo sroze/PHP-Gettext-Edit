@@ -22,7 +22,7 @@ if (empty($projects_list)) {
 	<div id="contents" class="with_sidebar">
 		<div class="link right">
 		<?php
-		if (Rights::check('create_project')) {
+		if (Rights::check('project_create')) {
 			echo '<a class="add" href="index.php?page=project-new">'._('Créer un nouveau projet').'</a>';
 		}
 		?>
