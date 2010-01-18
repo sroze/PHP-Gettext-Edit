@@ -97,7 +97,7 @@ class Project
 		
 		if (Database::$database_type == 'pgsql') {
 			$query_result = $query->fetch();
-			$id = $query_result['id'];
+			$id = $query_result['project_id'];
 		} else {
 			$id = Database::$sql->lastInsertId();
 		}

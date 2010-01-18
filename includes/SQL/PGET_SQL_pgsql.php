@@ -24,7 +24,7 @@ class PGET_SQL_pgsql extends PGET_SQL
 		'create_user' => 'INSERT INTO %s (username, password, email) VALUES (\'%s\', \'%s\', \'%s\') RETURNING id',
 	
 		'create_project' => 'INSERT INTO %s (project_name, project_path, project_languages_path)
-			VALUES (\'%s\', \'%s\', \'%s\') RETURNING id',
+			VALUES (\'%s\', \'%s\', \'%s\') RETURNING project_id',
 		'update_project' => 'UPDATE %s SET 
 			project_name = \'%s\', 
 			project_path = \'%s\', 
