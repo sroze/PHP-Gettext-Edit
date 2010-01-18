@@ -1,12 +1,12 @@
 <div id="page">
 	<div id="contents">
-		<h1><?php echo _('Configuration'); ?> &raquo; <?php echo _('Affichage'); ?></h1>
+		<h1><a href="index.php?page=configuration"><?php echo _('Configuration'); ?></a> &raquo; <?php echo _('Affichage'); ?></h1>
 		<?php
 		if (isset($_POST['update_conf'])) {
 			$_CONFIG['template'] = $_POST['template'];
 			$config_ini->write($_CONFIG);
 			
-			echo '<div class="message success"><p>'.
+			echo '<div class="box success"><p>'.
 				_('Paramètres mis à jour').
 				'</p></div>'; 
 		}
