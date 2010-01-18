@@ -247,6 +247,13 @@ div.link a.compile_json {
 	padding-left: 16px;
 	background: url(../images/icons/bullet_feed.png) no-repeat;
 }
+div.link a.group {
+	padding-left: 16px;
+	background: url(../images/icons/group.png) no-repeat;
+}
+div.link a.separator {
+	border-left: 1px solid #999999;
+}
 div.clear {
 	clear: both;
 }

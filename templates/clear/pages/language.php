@@ -11,6 +11,8 @@ if (!isset($language)) {
 	<div id="contents" class="with_sidebar">
 		<div class="link right">
 			<a class="delete" href="index.php?page=language-delete&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo _('Supprimer'); ?></a>
+			<a class="separator"></a>
+			<a class="group" href="index.php?page=language-users&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo _('Droits et utilisateurs'); ?></a>
 		</div>
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo $language->getName(); ?></h1>
 		<div class="box little right">

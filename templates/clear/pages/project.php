@@ -15,6 +15,8 @@ if (!isset($project)) {
 		<div class="link right">
 			<a class="delete" href="index.php?page=project-delete&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Supprimer'); ?></a>
 			<a class="edit" href="index.php?page=project-edit&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Editer'); ?></a>
+			<a class="separator"></a>
+			<a class="group" href="index.php?page=project-users&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Droits et utilisateurs'); ?></a>
 		</div>
 		<h1><?php echo $project->get('project_name'); ?></h1>
 		
