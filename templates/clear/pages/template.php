@@ -15,6 +15,8 @@ $template_headers = $template->getHeaders();
 	</div>
 	<div id="contents" class="with_sidebar">
 		<div class="link right">
+			<a class="group" href="index.php?page=template-users&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>"><?php echo _('Droits et utilisateurs'); ?></a>
+			<a class="separator"></a>
 			<a class="delete" href="index.php?page=template-delete&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>"><?php echo _('Supprimer'); ?></a>
 			<a class="edit" href="index.php?page=template-edit&project=<?php echo $project->get('project_id'); ?>&template=<?php echo $template->getName(); ?>"><?php echo _('Editer'); ?></a>
 		</div>
