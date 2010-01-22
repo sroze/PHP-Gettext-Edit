@@ -27,8 +27,6 @@ DROP TABLE IF EXISTS rights_groups_rights;
 CREATE TABLE rights_groups_rights (
 	`group` int NOT NULL,
 	`right` int NOT NULL,
-	`context` int NULL,
-	`grant` boolean NULL,
 	UNIQUE (`group`, `right`)
 );
 
@@ -45,6 +43,8 @@ DROP TABLE IF EXISTS rights_users_groups;
 CREATE TABLE rights_users_groups (
 	`user` int NOT NULL,
 	`group` int NOT NULL,
+	`context` int NULL,
+	`grant` boolean NULL,
 	UNIQUE (`user`, `group`)
 );
 
