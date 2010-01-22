@@ -1,3 +1,12 @@
+$(document).ready(function(){
+	var playerVersion = swfobject.getFlashPlayerVersion();
+	if (!playerVersion || playerVersion.major <= 0) {
+		$('body').prepend($('<div class="information error">Flash Player doit être installé et activé</div>'));
+	} else if (playerVersion.major < 9) {
+		$('body').prepend($('<div class="information error">Votre version de Flash Player n\'est pas assez récente. Mettez-la à jour.'));
+	}
+});
+
 /**
  * Callback for template type <select> changes.
  * 

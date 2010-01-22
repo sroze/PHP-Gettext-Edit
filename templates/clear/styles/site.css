@@ -32,6 +32,18 @@ div#header div.link {
 div#header div.link a {
 	font-size: 12px;
 }
+body div.information {
+	border-bottom: 1px solid #999999;
+	border-left: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+	font-size: 13px;
+	margin: 0 10px;
+	padding: 3px;
+	text-align: center;
+}
+body div.information.error {
+	background: #FF0000;
+}
 a, a:link, a:visited {
 	color: #2A5685;
 	text-decoration: none;
@@ -275,6 +287,20 @@ div.message.error {
 div.message.success {
 	background: #B8FFA4;
 	border: 1px solid #45BE24;
+}
+fieldset {
+	padding: 5px 5px 10px;
+}
+fieldset p {
+	padding: 0px;
+	margin: 0px !important;
+}
+fieldset div.legend.right {
+	background: #FFFFFF;
+	display: block;
+	float: right;
+	margin-top: -24px;
+	padding: 0 10px;
 }
 /* Footer */
 div#footer {
