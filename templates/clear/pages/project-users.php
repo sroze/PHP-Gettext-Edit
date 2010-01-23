@@ -19,7 +19,7 @@ if (!isset($project)) {
 <script type="text/javascript">
 $(document).ready(function() {
 	var gridWidth = $('div#contents').width() - 20;
-	var colWidth = (gridWidth - 60) / 3;
+	var colWidth = (gridWidth - 65) / 3;
 	
 	$("#users_datagrid").flexigrid({
 		url: '<?php echo LOCAL_PATH; ?>engines/get-users.php',
