@@ -290,7 +290,17 @@ class Project
 			);
 		}
 		
-		return $query->fetchAll();
+		$projects = array();
+		
+		foreach ($query as $line) {
+			if (Rights::check('project_access', array(
+				'project' => (int) $line['project_id']
+			))) {
+				$projects[] = $line;
+			}
+		}
+		
+		return $projects;
 	}
 	
 	/**
