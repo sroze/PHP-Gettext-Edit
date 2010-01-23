@@ -47,6 +47,46 @@ class GTE
 		
 		return $users;
 	}
+	
+	/**
+	 * Get the user ID from a user which name is the 1st argument.
+	 * 
+	 * @param string $user_name
+	 * 
+	 * @return integer
+	 */
+	static function getUserIdFromUsername ($user_name)
+	{
+		$query = Database::$sql->query(
+			sprintf(
+				Database::$requests->get('get_user_id_from_name'),
+				Database::$prefix.'users',
+				$user_name
+			)
+		);
+		
+		if (!$query) {
+			$sql_error = Database::$sql->errorInfo();
+			throw new User_Exception(
+				sprintf(
+					_('Impossible récupérer les informations des utilisateurs: %s'),
+					$sql_error[2]
+				)
+			);
+		}
+		
+		$line = $query->fetch();
+		if (!$line) {
+			throw new User_Exception(
+				sprintf(
+					_('L\'utlisateur "%s" n\'éxiste pas'),
+					$user_name
+				)
+			);
+		} else {
+			return (int) $line['id'];
+		}
+	}
 }
 
 class GTE_Exception extends Exception{}

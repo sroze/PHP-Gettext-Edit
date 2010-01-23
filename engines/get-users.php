@@ -12,32 +12,45 @@ if (!Rights::check('project_users_access', array(
 	exit();
 }
 
-if (isset($_POST['project'])) {
-	$users = GTE::getUsersHavingRight('project_access', array(
-		'project' => $_GET['project']
-	));
-	
-	$out = array(
-		'total' => count($users),
-		'rows' => array()
-	);
-	
-	foreach ($users as $informations) {
+if ($_POST['query'] == 'select') {
+	if (isset($_POST['project'])) {
+		$users = GTE::getUsersHavingRight('project_access', array(
+			'project' => $_GET['project']
+		));
 		
-		$out['rows'][] = array(
-			'id' => $informations['id'],
-			'cell' => array(
-				'#'.$informations['id'],
-				$informations['username'],
-				'<img class="loading" />',
-				'<img class="loading" />'
-			)
+		$out = array(
+			'total' => count($users),
+			'rows' => array()
 		);
+		
+		foreach ($users as $informations) {
+			
+			$out['rows'][] = array(
+				'id' => $informations['id'],
+				'cell' => array(
+					'#'.$informations['id'],
+					$informations['username'],
+					'<img class="loading" />',
+					'<img class="loading" />'
+				)
+			);
+		}
+		
+		echo json_encode($out);
+	} else {
+		echo 'Invalid arguments';
 	}
-	
-	echo json_encode($out);
+} else if ($_POST['query'] == 'delete') {
+	if (isset($_POST['project'])) {
+		$user_name = $_POST['msgids'][0];
+		$user_id = GTE::getUserIdFromUsername($user_name);
+		
+		Rights_Admin::removeUserRights($user_id, array('project_access'));
+	} else {
+		echo 'Invalid arguments';
+	}
 } else {
-	echo 'Invalid arguments';
+	echo 'Invalid query';
 }
 
 ?>
