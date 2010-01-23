@@ -77,8 +77,8 @@ if ((int) $_CONFIG['installed']) {
 			// Creation of tables
 			$sql->beginTransaction();
 			
-			$sql_contents = file_get_contents(ROOT_PATH.'installation/includes/SQL/'.$_POST['sql-type'].'/php-gettext-edit.sql');
-			$sql_contents .= file_get_contents(ROOT_PATH.'installation/includes/SQL/'.$_POST['sql-type'].'/rights.sql');
+			$sql_contents = file_get_contents(ROOT_PATH.'installation/includes/SQL/php-gettext-edit/'.$_POST['sql-type'].'.sql');
+			$sql_contents .= file_get_contents(ROOT_PATH.'installation/includes/SQL/rights/'.$_POST['sql-type'].'.sql');
 			// Add prefixes
 			$sql_contents = str_replace(
 				array(
