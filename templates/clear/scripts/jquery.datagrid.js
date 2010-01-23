@@ -1558,7 +1558,7 @@
 				$(trTds[1]).find('div').text(msgid);
 				$(trTds[2]).find('div').text(msgstr);
 				//..in storedData
-				var rowData = $("#po_datagrid")[0].grid.storedData.rows[searchRowId('id', rowId)];
+				var rowData = $('div.flexigrid table.datagrid')[0].grid.storedData.rows[searchRowId('id', rowId)];
 				rowData.cell[0] = fuzzy;
 				rowData.cell[1] = msgid;
 				rowData.cell[2] = msgstr;
@@ -1610,7 +1610,7 @@
 					$(trTds[1]).find('div').text(msgid);
 					$(trTds[2]).find('div').text(msgid);
 					//..in storedData
-					var rowData = $("#po_datagrid")[0].grid.storedData.rows[rowId];
+					var rowData = $('div.flexigrid table.datagrid')[0].grid.storedData.rows[rowId];
 					rowData.cell[1] = msgid;
 					rowData.cell[2] = msgid;
 					// Deselectionne
@@ -1660,7 +1660,7 @@
 
 function searchRowId (field, search)
 {
-	var rows = $("#po_datagrid")[0].grid.storedData.rows;
+	var rows = $('div.flexigrid table.datagrid')[0].grid.storedData.rows;
 	
 	for (var i = 0; i < rows.length; i++) {
 		if (rows[i][field] == search) {
