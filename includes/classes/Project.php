@@ -2,6 +2,8 @@
 require_once ROOT_PATH.'includes/librairies/File_INI.php';
 require_once ROOT_PATH.'includes/librairies/Language_Str.php';
 
+require_once ROOT_PATH.'includes/librairies/Rights/Rights_Admin.php';
+
 require_once ROOT_PATH.'includes/classes/Project_Template.php';
 require_once ROOT_PATH.'includes/classes/Project_Language.php';
 require_once ROOT_PATH.'includes/classes/Project_Language_File.php';
