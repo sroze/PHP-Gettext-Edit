@@ -1,6 +1,7 @@
 <?php
 define('ROOT_PATH', realpath(dirname(__FILE__).'/../').'/');
 
+require_once ROOT_PATH.'includes/ini_conf.php';
 require_once ROOT_PATH.'includes/configuration.php';
 require_once ROOT_PATH.'includes/classes/Project.php';
 require_once ROOT_PATH.'includes/classes/Project_Language.php';
