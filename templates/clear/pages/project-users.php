@@ -32,7 +32,7 @@ $(document).ready(function() {
 		],
 		buttons: [
 			{name: '<?php echo _('Ajouter'); ?>', bclass: 'add', position: 'left', onpress : function (a,grid){
-				alert('Open POPUP DHTML');
+				
 			}},
 			{name: '<?php echo _('Supprimer'); ?>', bclass: 'delete', position: 'left', onpress : function (a,grid){
 				if ($('.trSelected',grid).length <= 0) {
@@ -45,7 +45,7 @@ $(document).ready(function() {
 					}
 					
 					if (confirm(string.replace(/%d/, $('.trSelected',grid).length))) {
-						$("#po_datagrid").editRemove($('.trSelected',grid));
+						$("#users_datagrid").editRemove($('.trSelected',grid));
 					}
 				}
 			}},
@@ -70,7 +70,10 @@ $(document).ready(function() {
 		useRp: false,
 		showTableToggleBtn: false,
 		width: gridWidth,
-		height: 250
+		height: 250,
+		dblclickCallback: function (object) {
+			alert('Edit');
+		}
 	});
 });
 </script>
