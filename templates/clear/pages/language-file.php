@@ -19,7 +19,7 @@ $template = $language_file->getTemplate();
 	</div>
 	<div id="contents" class="with_sidebar">
 		<div class="link right">
-			<a class="group" href="index.php?page=language-file-users&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo _('Droits et utilisateurs'); ?></a>
+			<a class="group" href="index.php?page=language-file-users&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo _('Utilisateurs'); ?></a>
 			<a class="separator"></a>
 			<a class="delete" href="index.php?page=language-file-delete&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>&file=<?php echo $language_file->getName(); ?>"><?php echo _('Supprimer'); ?></a>
 		</div>

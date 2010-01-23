@@ -20,11 +20,11 @@ if (!isset($project)) {
 	<div id="contents" class="with_sidebar">
 		<div class="link right">
 		<?php 
-		if (Rights::check('project_users', array(
+		if (Rights::check('project_users_access', array(
 			'project' => (int) $project->get('project_id')
 		))) {
 			echo '<a class="group" href="index.php?page=project-users&project='.
-			$project->get('project_id').'">'._('Droits et utilisateurs').'</a>'.
+			$project->get('project_id').'">'._('Utilisateurs').'</a>'.
 			'<a class="separator"></a>';
 		}
 		if (Rights::check('project_delete', array(

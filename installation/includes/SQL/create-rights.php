@@ -12,19 +12,28 @@ Rights_Admin::createRightsFromArray(
 				'project_edit',
 				'project_create',
 				'project_delete',
+				'project_users_access' => array(
+					'project_users_admin'
+				),
 				'languages_access' => array(
 					'language_create',
 					'language_delete',
 					'language_access' => array(
 						'language_edit',
 						'language_delete',
+						'language_users_access' => array(
+							'language_users_admin'
+						),
 						'language_files_access' => array(
 							'language_file_create',
 							'language_file_access' => array(
 								'language_file_delete',
 								'language_file_edit',
 								'language_file_compile',
-								'language_file_update'
+								'language_file_update',
+								'language_file_users_access' => array(
+									'language_file_users_admin'
+								)
 							)
 						)
 					)
@@ -34,7 +43,10 @@ Rights_Admin::createRightsFromArray(
 					'template_access' => array(
 						'template_delete',
 						'template_edit',
-						'template_update'
+						'template_update',
+						'template_users_access' => array(
+							'template_users_admin'
+						),
 					)
 				)
 			)

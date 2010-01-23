@@ -10,7 +10,7 @@ if (!isset($language)) {
 	</div>
 	<div id="contents" class="with_sidebar">
 		<div class="link right">
-			<a class="group" href="index.php?page=language-users&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo _('Droits et utilisateurs'); ?></a>
+			<a class="group" href="index.php?page=language-users&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo _('Utilisateurs'); ?></a>
 			<a class="separator"></a>
 			<a class="delete" href="index.php?page=language-delete&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo _('Supprimer'); ?></a>
 		</div>

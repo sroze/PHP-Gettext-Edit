@@ -111,6 +111,7 @@ class Project
 				'project_access',
 				'project_edit',
 				'project_delete',
+				'project_users_admin',
 			
 				'templates_access',
 				'languages_access'
