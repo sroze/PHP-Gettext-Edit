@@ -1,3 +1,10 @@
+<?php 
+if (!Rights::check('project_create')) {
+	throw new GTE_Exception(
+		_('Vous n\'avez pas les autorisations nécessaires')
+	);
+}
+?>
 <div id="page">
 	<div id="sidebar">
 		<h3><?php echo _('Créer un projet'); ?></h3>

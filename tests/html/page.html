@@ -26,8 +26,24 @@
 		<h3>Some things...</h3>
 	</div>
 	<div id="contents" class="with_sidebar">
-		<h2>Projets</h2>
-		<p>La liste de vos projets, ...</p>
+		<h1>Projets</h1>
+		<form action="" method="POST">
+			<fieldset>
+				<div class="legend right"><a href="javascript:;">Tout</a></div>
+				<legend><label><input type="checkbox" name="droits[]" value="ALL" /> Accès général</label></legend>
+				<fieldset>
+					<div class="legend right"><a href="javascript:;">Tout</a></div>
+					<legend><label><input type="checkbox" name="droits[]" value="admin_access" /> Accès à l'administration</label></legend>
+					<p><label><input type="checkbox" name="droits[]" value="admin_access" /> Modification du thème</label></p>
+					<p><label><input type="checkbox" name="droits[]" value="admin_access" /> Modification de la langue</label></p>
+				</fieldset>
+				<fieldset>
+					<div class="legend right"><a href="javascript:;">Tout</a></div>
+					<legend><label><input type="checkbox" name="droits[]" value="projects_access" /> Accès aux projets</label></legend>
+					<p><label><input type="checkbox" name="droits[]" value="project_create" /> Créer un projet</label></p>
+				</fieldset>
+			</fieldset>
+		</form>
 	</div>
 </div>
 <div id="footer"><a href="http://www.d-sites.com/projets/gettextedit/">GetTextEdit</a> &copy; 2009 <a href="http://www.d-sites.com">Samuel ROZE</a></div>

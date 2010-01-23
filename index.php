@@ -93,8 +93,14 @@ if (isset($_GET['project'])) {
 }
 
 ob_start();
-require_once PAGE_DIR.$_GET['page'].'.php';
-
+try {
+	require_once PAGE_DIR.$_GET['page'].'.php';
+} catch (GTE_Exception $e) {
+	ob_end_clean();
+	
+	echo $e->getMessage();
+	exit();
+}
 $contents = ob_get_contents();
 ob_end_clean();
 
