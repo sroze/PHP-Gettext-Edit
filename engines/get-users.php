@@ -5,13 +5,13 @@ require_once ROOT_PATH.'includes/ini_conf.php';
 require_once ROOT_PATH.'includes/configuration.php';
 
 if (!Rights::check('project_users_access', array(
-		'project' => $_GET['project']
+		'project' => $_POST['project']
 	))) {
 	echo 'Forbidden';
 	exit();
 }
 
-if (isset($_GET['project'])) {
+if (isset($_POST['project'])) {
 	$users = GTE::getUsersHavingRight('project_access', array(
 		'project' => $_GET['project']
 	));
