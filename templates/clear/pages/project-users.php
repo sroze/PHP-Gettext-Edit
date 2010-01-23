@@ -19,6 +19,8 @@ if (!isset($project)) {
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+	$("a#users_link").fancybox(); 
+	
 	var gridWidth = $('div#contents').width() - 20;
 	var colWidth = (gridWidth - 65) / 3;
 	
