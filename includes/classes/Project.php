@@ -97,10 +97,26 @@ class Project
 		
 		if (Database::$database_type == 'pgsql') {
 			$query_result = $query->fetch();
-			$id = $query_result['project_id'];
+			$id = (int) $query_result['project_id'];
 		} else {
-			$id = Database::$sql->lastInsertId();
+			$id = (int) Database::$sql->lastInsertId();
 		}
+		
+		// Grant access to creator
+		Rights_Admin::grantUserRights(
+			Rights::$user_id,
+			array(
+				'project_access',
+				'project_edit',
+				'project_delete',
+			
+				'templates_access',
+				'languages_access'
+			),
+			array(
+				'project' => $id
+			)
+		);
 		
 		return $id;
 	}
