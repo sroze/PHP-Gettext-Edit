@@ -34,6 +34,8 @@ if (isset($_GET['project'])) {
 	}
 	
 	echo json_encode($out);
+} else {
+	echo 'Invalid arguments';
 }
 
 ?>
