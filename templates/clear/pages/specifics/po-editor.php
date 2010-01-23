@@ -1,5 +1,5 @@
 <form id="msgeditorform" method="POST" action="">
-	<table id="po_datagrid"></table>
+	<table id="po_datagrid" class="datagrid"></table>
 	<div id="msgeditor" class="flexigrid my">
 		<div class="mDiv">
 			<div class="title"><?php echo _('Édition de la séléction'); ?></div>
