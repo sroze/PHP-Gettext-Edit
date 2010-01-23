@@ -21,6 +21,5 @@ Rights_Config::init($sql, $_CONFIG['database']['prefix'].'rights_');
 
 require ROOT_PATH.'includes/configuration/user.php';
 require ROOT_PATH.'includes/configuration/language.php';
-
-class GTE_Exception extends Exception{}
+require ROOT_PATH.'includes/classes/GTE.php';
 ?>

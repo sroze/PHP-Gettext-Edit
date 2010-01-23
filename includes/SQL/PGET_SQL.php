@@ -54,6 +54,17 @@ abstract class PGET_SQL
 		}
 		return $more;
 	}
+	
+	/**
+	 * Get the SQL code which check if field is in any values which is
+	 * in the array given as the 2nd arg.
+	 * 
+	 * @param string $field
+	 * @param array	 $values
+	 * 
+	 * @return string
+	 */
+	abstract public function inAny ($field, $values);
 }
 
 class PGET_SQL_Exception extends Exception {}

@@ -33,8 +33,36 @@ class PGET_SQL_mysql extends PGET_SQL
 		'delete_project' => 'DELETE FROM %s WHERE project_id = %d',
 		'get_projects' => 'SELECT project_id, project_name FROM %s',
 		'get_project' => 'SELECT * FROM %s WHERE project_id = %d',
-		'connect_user' => 'SELECT id, username, email FROM %s WHERE username = \'%s\' AND password = \'%s\''
+		'connect_user' => 'SELECT id, username, email FROM %s WHERE username = \'%s\' AND password = \'%s\'',
+	
+		'get_users_informations' => 'SELECT id, username FROM %s WHERE %s ORDER BY username DESC'
 	);
+	
+	/**
+	 * @see includes/SQL/PGET_SQL#inAny($field, $values)
+	 */
+	public function inAny ($field, $values)
+	{
+		$sql = '(';
+		$i = 0;
+		foreach ($values as $value) {
+			if ($i > 0) {
+				$sql .= ' OR ';
+			}
+			$sql .= $field.' = ';
+			if (is_int($value)) {
+				$sql .= $value;
+			} else {
+				$sql .= '\''.
+					str_replace('\'', '\\\'', $value).
+					'\'';
+			}
+			$i++;
+		}
+		$sql .= ')';
+		
+		return $sql;
+	}
 }
 
 ?>
