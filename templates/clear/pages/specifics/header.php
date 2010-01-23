@@ -25,6 +25,7 @@ if (CONNECTED) {
 <link rel="stylesheet" href="<?php echo LOCAL_PATH; ?>templates/<?php echo $_CONFIG['template']; ?>/styles/site.css" type="text/css" media="all" />
 <link rel="stylesheet" href="<?php echo LOCAL_PATH; ?>templates/<?php echo $_CONFIG['template']; ?>/styles/jquery.filetree.css" type="text/css" media="all" />
 <link rel="stylesheet" href="<?php echo LOCAL_PATH; ?>templates/<?php echo $_CONFIG['template']; ?>/styles/datagrid.css" type="text/css" media="all" />
+<link rel="stylesheet" href="<?php echo LOCAL_PATH; ?>templates/<?php echo $_CONFIG['template']; ?>/styles/jquery.fancybox-1.2.6.css" type="text/css" media="all" />
 <script type="text/javascript" src="<?php echo LOCAL_PATH; ?>templates/<?php echo $_CONFIG['template']; ?>/scripts/jquery-1.3.2.min.js"></script>
 </head>
 <body>

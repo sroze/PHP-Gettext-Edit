@@ -99,15 +99,17 @@ try {
 	exit();
 }
 $contents = ob_get_contents();
-ob_end_clean();
 
-
-// Includes the header
-require_once PAGE_DIR.'specifics/header.php';
-
-echo $contents;
-
-// Includes the footer
-require_once PAGE_DIR.'specifics/footer.php';
-
+if (isset($_GET['only'])) {
+	ob_end_flush();
+} else {
+	ob_end_clean();
+	
+	// Includes the header
+	require_once PAGE_DIR.'specifics/header.php';
+	// Include the content
+	echo $contents;
+	// Includes the footer
+	require_once PAGE_DIR.'specifics/footer.php';
+}
 ?>

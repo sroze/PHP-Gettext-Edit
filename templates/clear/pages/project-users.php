@@ -13,6 +13,7 @@ if (!isset($project)) {
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php 
 		echo _('Utilisateurs'); ?></h1>
 		<table id="users_datagrid" class="datagrid"></table>
+		<a id="users_link"></a>
 		<div class="clear"></div>
 	</div>
 </div>
@@ -32,7 +33,10 @@ $(document).ready(function() {
 		],
 		buttons: [
 			{name: '<?php echo _('Ajouter'); ?>', bclass: 'add', position: 'left', onpress : function (a,grid){
-				
+				$('a#users_link').attr('href', 
+					'<?php echo LOCAL_PATH; ?>index.php?only&page=project-users-add&project=<?php echo $project->get('project_id'); ?>'
+				);
+				$('a#users_link').click();
 			}},
 			{name: '<?php echo _('Supprimer'); ?>', bclass: 'delete', position: 'left', onpress : function (a,grid){
 				if ($('.trSelected',grid).length <= 0) {
