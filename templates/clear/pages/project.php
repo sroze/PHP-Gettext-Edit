@@ -3,7 +3,7 @@ if (!isset($project)) {
 	echo _('Paramètres URL insuffisants');
 	exit();
 } else if (!Rights::check('project_access', array(
-		'project' => (int)$_PROJECT->get('project_id')
+		'project' => (int) $project->get('project_id')
 	))) {
 	throw new GTE_Exception(
 		_('Vous n\'avez pas les autorisations nécessaires')
@@ -20,16 +20,22 @@ if (!isset($project)) {
 	<div id="contents" class="with_sidebar">
 		<div class="link right">
 		<?php 
-		if (Rights::check('project_users')) {
+		if (Rights::check('project_users', array(
+			'project' => (int) $project->get('project_id')
+		))) {
 			echo '<a class="group" href="index.php?page=project-users&project='.
 			$project->get('project_id').'">'._('Droits et utilisateurs').'</a>'.
 			'<a class="separator"></a>';
 		}
-		if (Rights::check('project_delete')) {
+		if (Rights::check('project_delete', array(
+			'project' => (int) $project->get('project_id')
+		))) {
 			echo '<a class="delete" href="index.php?page=project-delete&project='.
 			$project->get('project_id').'">'._('Supprimer').'</a>';
 		}
-		if (Rights::check('project_edit')) {
+		if (Rights::check('project_edit', array(
+			'project' => (int) $project->get('project_id')
+		))) {
 			echo '<a class="edit" href="index.php?page=project-edit&project='.
 			$project->get('project_id').'">'._('Editer').'</a>';
 		}
