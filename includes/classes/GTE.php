@@ -19,6 +19,7 @@ class GTE
 	static function getUsersHavingRight ($right, $context)
 	{
 		$users_id = Rights_Admin::getUsersHavingRight($right, $context);
+		var_dump($users_id);
 		
 		// Now, we'll get more informations than users' id...
 		$query = Database::$sql->query(
