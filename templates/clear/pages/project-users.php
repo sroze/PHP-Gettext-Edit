@@ -13,12 +13,13 @@ if (!isset($project)) {
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php 
 		echo _('Utilisateurs'); ?></h1>
 		<table id="users_datagrid"></table>
+		<div class="clear"></div>
 	</div>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
 	var gridWidth = $('div#contents').width() - 20;
-	var colWidth = (gridWidth - 15) / 3;
+	var colWidth = (gridWidth - 50) / 3;
 	
 	$("#users_datagrid").flexigrid({
 		url: '<?php echo LOCAL_PATH; ?>engines/get-users.php',
@@ -69,8 +70,7 @@ $(document).ready(function() {
 		useRp: false,
 		showTableToggleBtn: false,
 		width: gridWidth,
-		height: 400
+		height: 250
 	});
 });
 </script>
-<div class="clear" />

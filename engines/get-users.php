@@ -27,8 +27,9 @@ if (isset($_POST['project'])) {
 		$out['rows'][] = array(
 			'id' => $informations['id'],
 			'cell' => array(
-				$informations['id'],
+				'#'.$informations['id'],
 				$informations['username'],
+				'<img class="loading" />',
 				'<img class="loading" />'
 			)
 		);
