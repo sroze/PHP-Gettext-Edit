@@ -4,7 +4,9 @@ define('ROOT_PATH', realpath(dirname(__FILE__).'/../').'/');
 require_once ROOT_PATH.'includes/ini_conf.php';
 require_once ROOT_PATH.'includes/configuration.php';
 
-if (!Rights::check('project_users_access')) {
+if (!Rights::check('project_users_access', array(
+		'project' => $_GET['project']
+	))) {
 	echo 'Forbidden';
 	exit();
 }
