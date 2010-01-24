@@ -132,6 +132,9 @@ function reloadRights (userId)
 	];
 	
 	$('div.rightbutton').each(function(){
+		if (this.id.substr(0, 6) != 'right_') {
+			return;
+		}
 		var right = this.id.substr(6);
 		$(this).addClass('loading');
 
