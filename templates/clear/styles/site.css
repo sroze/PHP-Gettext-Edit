@@ -317,7 +317,12 @@ div#fancy_content div#contents p {
 	font-size: 11px;
 }
 div.rightbutton {
-	
+	float: left;
+	margin-right: 4px;
+}
+ul.additional_user_rights li {
+	list-style: none;
+	min-height: 16px;
 }
 /* Footer */
 div#footer {
