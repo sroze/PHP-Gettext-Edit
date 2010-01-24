@@ -14,6 +14,7 @@
 					<p><div class="rightbutton no"></div> <?php echo _('Droit non-accordé'); ?></p>
 					<p><div class="rightbutton no user"></div> <?php echo _('Droit refusé à l\'utilisateur'); ?></p>
 					<p><div class="rightbutton no group"></div> <?php echo _('Droit refusé au groupe'); ?></p>
+					<p><label class="modified">label</label> <?php echo _('Valeur modifiée'); ?></p>
 				</div>
 				<form id="additionnal_rights" action="" method="POST">
 				<ul class="additional_user_rights">
