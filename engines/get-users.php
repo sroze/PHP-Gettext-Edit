@@ -51,14 +51,26 @@ if ($_POST['query'] == 'select') {
 	}
 } else if ($_POST['query'] == 'select-more') { // Groups & Rights
 	if (isset($_POST['user'])) {
+		$groups_all = Rights_Admin::getUserGroups((int) $_POST['user'], array(
+			'project' => $_POST['project']
+		));
+		$groups = array();
+		foreach ($groups_all as $group) {
+			$groups[] = $group['name'];
+		}
+		
+		$rights_all = Rights_Admin::getUserRights((int) $_POST['user'], array(
+			'project' => $_POST['project']
+		));
+		$rights = array();
+		foreach ($rights_all as $right) {
+			$rights[] = $right['name'];
+		}
+		
 		echo json_encode(
 			array(
-				'groups' => Rights_Admin::getUserGroups((int) $_POST['user'], array(
-					'project' => $_POST['project']
-				)),
-				'rights' => Rights_Admin::getUserRights((int) $_POST['user'], array(
-					'project' => $_POST['project']
-				))
+				'groups' => $groups,
+				'rights' => $rights
 			)
 		);
 	} else {
