@@ -6,7 +6,36 @@
 		</div>
 		<div class="my grid">
 			<div id="right_grid_contents">
-				<p>Rights list</p>
+				<ul class="additional_user_rights">
+					<?php 
+					if (!isset($additional_rights_list)) {
+						throw new GTE_Exception(
+							_('La liste des droit additionnels n\'est pas établie')
+						);
+					}
+					
+					function printAdditionalRight ($right) {
+						echo '<label><input class="right" type="checkbox" name="right['.$right.']" /> '.GTE::getRightName($right).'</label>';
+					}
+					
+					function printAdditionalRights ($rights_array) {
+						foreach ($rights_array as $key => $value) {
+							echo '<li>';
+							
+							if (is_array($value)) {
+								printAdditionalRight($key);
+								echo '<ul>';
+								printAdditionalRights($value);
+								echo '</ul>';
+							} else {
+								printAdditionalRight($value);
+							}
+							echo '</li>';
+						}
+					}
+					printAdditionalRights($additional_rights_list);
+					?>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -16,8 +45,20 @@ $(document).ready(function(){
 	$('div#rightseditor').width(
 		$('div#contents').width() - 250 - 50
 	);
-
+	// groups informations
 	reloadInformations();
+
+	// rights informations
+	var rights_list = new Array();
+	$('input.right').each(function(){
+		var right = this.name.substring(
+			5,
+			this.name.length-1
+		);
+		rights_list.push(right);
+	});
+
+	alert(rights_list);
 });
 
 function reloadInformations ()
@@ -29,7 +70,7 @@ function reloadInformations ()
 function reloadDatagrid ()
 {
 	var gridWidth = 250;
-	var colWidth = 250 - 15;
+	var colWidth = gridWidth - 50;
 	
 	var userId = $('#user_field').val();
 		

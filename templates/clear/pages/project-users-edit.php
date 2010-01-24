@@ -7,7 +7,8 @@
 		echo $informations['username'];
 		?></h1>
 	<input type="hidden" name="user" id="user_field" value="<?php echo $user; ?>" />
-	<?php 
+	<?php
+	require PAGE_DIR.'specifics/rights/project.php';
 	require PAGE_DIR.'specifics/user-rights-editor.php';
 	?>
 </div>

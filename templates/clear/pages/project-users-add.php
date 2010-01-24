@@ -10,7 +10,8 @@
 		echo '<option value="'.$informations['id'].'">'.$informations['username'].'</option>';
 	}
 	?></select></p>
-	<?php 
+	<?php
+	require PAGE_DIR.'specifics/rights/project.php';
 	require PAGE_DIR.'specifics/user-rights-editor.php';
 	?>
 </div>

@@ -200,6 +200,18 @@ class GTE
 			return $context;
 		}
 	}
+	
+	/**
+	 * FIXME Get the name of a right from its in-database name.
+	 * 
+	 * @param string $right
+	 * 
+	 * @return string
+	 */
+	static function getRightName ($right)
+	{
+		return $right;
+	}
 }
 
 class GTE_Exception extends Exception{}
