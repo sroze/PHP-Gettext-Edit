@@ -24,7 +24,7 @@
 					}
 					
 					function printAdditionalRight ($right) {
-						echo '<label><div id="right_'.$right.'" class="rightbutton loading"></div> '.GTE::getRightName($right).'</label>';
+						echo '<div id="right_'.$right.'" class="rightbutton loading"></div> <label>'.GTE::getRightName($right).'</label>';
 					}
 					
 					function printAdditionalRights ($rights_array) {
