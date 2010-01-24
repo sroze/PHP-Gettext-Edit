@@ -8,13 +8,20 @@
 			<div id="right_grid_contents">
 				<div class="right_legend">
 					<h3><?php echo _('Légende'); ?></h3>
-					<p><div class="rightbutton yes"></div> <?php echo _('Droit impliqué'); ?></p>
-					<p><div class="rightbutton yes user"></div> <?php echo _('Droit accordé à l\'utilisateur'); ?></p>
-					<p><div class="rightbutton yes group"></div> <?php echo _('Droit accordé à un de ses groupes'); ?></p>
-					<p><div class="rightbutton no"></div> <?php echo _('Droit non-accordé'); ?></p>
-					<p><div class="rightbutton no user"></div> <?php echo _('Droit refusé à l\'utilisateur'); ?></p>
-					<p><div class="rightbutton no group"></div> <?php echo _('Droit refusé au groupe'); ?></p>
-					<p><label class="modified">label</label> <?php echo _('Valeur modifiée'); ?></p>
+					<p></p>
+					<div class="rightbutton yes"></div> <?php echo _('Droit impliqué'); ?>
+					<p></p>
+					<div class="rightbutton yes user"></div> <?php echo _('Droit accordé à l\'utilisateur'); ?>
+					<p></p>
+					<div class="rightbutton yes group"></div> <?php echo _('Droit accordé à un de ses groupes'); ?>
+					<p></p>
+					<div class="rightbutton no"></div> <?php echo _('Droit non-accordé'); ?>
+					<p></p>
+					<div class="rightbutton no user"></div> <?php echo _('Droit refusé à l\'utilisateur'); ?>
+					<p></p>
+					<div class="rightbutton no group"></div> <?php echo _('Droit refusé au groupe'); ?>
+					<p></p>
+					<label class="modified">label</label> <?php echo _('Valeur modifiée'); ?>
 				</div>
 				<form id="additionnal_rights" action="" method="POST">
 				<ul class="additional_user_rights">
