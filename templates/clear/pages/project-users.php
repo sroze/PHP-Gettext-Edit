@@ -70,10 +70,6 @@ $(document).ready(function() {
 				}
 			}}
 		],
-		searchitems: [
-			{display: '<?php echo str_replace('\'', '\\\'', _('Chaine d\'origine')); ?>', name : 'msgid', isdefault: true},
-			{display: '<?php echo _('Traduction'); ?>', name : 'msgstr'}
-		],
 		params:[
 			{name: 'project', value: '<?php echo $project->get('project_id'); ?>'}
 		],

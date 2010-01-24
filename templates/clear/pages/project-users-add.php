@@ -3,7 +3,7 @@
 		echo _('Utilisateurs'); ?> &raquo; <?php echo _('Nouveau'); ?></h1>
 	<p><?php echo _('Vous pouvez ajouter des autorisations à un utilisateur grâce au formulaire ci-dessous.'); ?></p>
 	<p><strong><?php echo _('Utilisateur concerné:'); ?></strong><br />
-	<select id="user" name="user"><?php 
+	<select id="user_field" name="user"><?php 
 	$users = GTE::getUsers();
 	
 	foreach ($users as $informations) {

@@ -6,7 +6,7 @@
 		
 		echo $informations['username'];
 		?></h1>
-	<input type="hidden" name="user" id="user" value="<?php echo $user; ?>" />
+	<input type="hidden" name="user" id="user_field" value="<?php echo $user; ?>" />
 	<?php 
 	require PAGE_DIR.'specifics/user-rights-editor.php';
 	?>
