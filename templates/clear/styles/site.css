@@ -352,6 +352,8 @@ div.right_legend {
 	float: right;
 	width: 150px;
 	font-size: 12px;
+	margin-bottom: 10px;
+	margin-right: 5px;
 }
 div.right_legend h3 {
 	border-bottom: 1px solid #AAAAAA;
