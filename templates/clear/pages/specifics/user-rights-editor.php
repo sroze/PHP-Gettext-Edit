@@ -172,6 +172,7 @@ function reloadRights (userId)
 				div.removeClass('yes').removeClass('no').removeClass('user').removeClass('group');
 				var originals = div.attr('origin').split(',');
 
+				alert(new_value+"\n"+originals);
 				if (new_value == originals[0]) {
 					$('input#i'+div.id).remove();
 					if (originals[1] != '') {
