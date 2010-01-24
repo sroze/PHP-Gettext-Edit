@@ -130,7 +130,18 @@ function reloadRights (userId)
 			data: param,
 			dataType: 'json',
 			success: function(data) {
-				alert(right+':'+data);
+				var div = $('div#right_'+right);
+				div.removeClass('loading');
+				
+				if (data.grant) {
+					div.addClass('yes');
+				} else {
+					div.addClass('no');
+				}
+
+				if (data.from != '') {
+					div.addClass(data.from);
+				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {}
 		});

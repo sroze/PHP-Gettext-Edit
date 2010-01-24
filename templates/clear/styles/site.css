@@ -330,6 +330,24 @@ ul.additional_user_rights li {
 	background: none !important;
 	padding: 0 !important;
 }
+div.rightbutton.yes {
+	background: url(../images/icons/tick.png) no-repeat;
+}
+div.rightbutton.yes.user {
+	background: url(../images/icons/tick-u.png) no-repeat;
+}
+div.rightbutton.yes.group {
+	background: url(../images/icons/tick-g.png) no-repeat;
+}
+div.rightbutton.no {
+	background: url(../images/icons/cross.png) no-repeat;
+}
+div.rightbutton.no.user {
+	background: url(../images/icons/cross-u.png) no-repeat;
+}
+div.rightbutton.no.group {
+	background: url(../images/icons/cross-g.png) no-repeat;
+}
 /* Footer */
 div#footer {
 	color: #888;
