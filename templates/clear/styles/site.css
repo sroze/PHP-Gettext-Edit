@@ -320,9 +320,15 @@ div.rightbutton {
 	float: left;
 	margin-right: 4px;
 }
+ul.additional_user_rights {
+	padding-left: 15px;
+}
 ul.additional_user_rights li {
 	list-style: none;
 	min-height: 16px;
+	margin-top: 2px;
+	background: none !important;
+	padding: 0 !important;
 }
 /* Footer */
 div#footer {
