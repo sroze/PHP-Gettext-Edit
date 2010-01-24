@@ -84,7 +84,7 @@ $(document).ready(function() {
 			var user_id = object.id.substr(3);
 			
 			$('a#users_link').attr('href', 
-				'<?php echo LOCAL_PATH; ?>index.php?only&page=project-users-add&project=<?php echo $project->get('project_id'); ?>&user='+user_id
+				'<?php echo LOCAL_PATH; ?>index.php?only&page=project-users-edit&project=<?php echo $project->get('project_id'); ?>&user='+user_id
 			);
 			$('a#users_link').click();
 		},
