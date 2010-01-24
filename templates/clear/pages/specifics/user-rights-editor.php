@@ -206,6 +206,7 @@ function reloadRights (userId)
 						);
 					}
 					label.addClass('modified');
+					div.addClass('user');
 				}
 				div.addClass(new_value);
 			}
