@@ -62,16 +62,16 @@ $(document).ready(function(){
 
 function reloadInformations ()
 {
-	reloadDatagrid();
-	reloadRights();
+	var userId = $('#user_field').val();
+	
+	reloadDatagrid(userId);
+	reloadRights(userId);
 }
 
-function reloadDatagrid ()
+function reloadDatagrid (userId)
 {
 	var gridWidth = 250;
 	var colWidth = gridWidth - 50;
-	
-	var userId = $('#user_field').val();
 		
 	var parent = $('div#rights_boxes');
 	var ppg = $('#groups_datagrid').parent().parent();
@@ -122,7 +122,7 @@ function reloadDatagrid ()
 	});
 }
 
-function reloadRights ()
+function reloadRights (userId)
 {
 	var rights_list = new Array();
 	$('div.rightbutton').each(function(){
@@ -131,6 +131,8 @@ function reloadRights ()
 	});
 
 	var param = [
+	 	{name: 'project', value: <?php echo $project->get('project_id'); ?>},
+		{name: 'user', value: userId},
 		{name: 'query', value: 'select'},
 	    {name: 'rights', value: $.toJSON(rights_list)}
 	];
