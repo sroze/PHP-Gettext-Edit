@@ -15,7 +15,7 @@
 					}
 					
 					function printAdditionalRight ($right) {
-						echo '<label><input class="right" type="checkbox" name="right['.$right.']" /> '.GTE::getRightName($right).'</label>';
+						echo '<label><div id="right_'.$right.'" class="rightbutton loading"></div> '.GTE::getRightName($right).'</label>';
 					}
 					
 					function printAdditionalRights ($rights_array) {
@@ -45,16 +45,6 @@ $(document).ready(function(){
 	$('div#rightseditor').width(
 		$('div#contents').width() - 250 - 50
 	);
-	
-	$('input.right').each(function(){
-		var right = this.name.substring(
-			6,
-			this.name.length-1
-		);
-		var parent = $(this).parent();
-		$(this).remove();
-		parent.append('<div id="'+right+'" class="rightbutton loading" />');
-	});
 
 	// groups informations
 	reloadInformations();
@@ -124,28 +114,26 @@ function reloadDatagrid (userId)
 
 function reloadRights (userId)
 {
-	var rights_list = new Array();
-	$('div.rightbutton').each(function(){
-		var right = this.id;
-		rights_list.push(right);
-	});
-
 	var param = [
 	 	{name: 'project', value: <?php echo $project->get('project_id'); ?>},
 		{name: 'user', value: userId},
 		{name: 'query', value: 'select'},
-	    {name: 'rights', value: $.toJSON(rights_list)}
 	];
-						
-	$.ajax({
-		type: 'POST',
-		url: '<?php echo LOCAL_PATH; ?>engines/get-rights.php',
-		data: param,
-		dataType: 'json',
-		success: function(data) {
-			alert(data);
-		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {}
+	
+	$('div.rightbutton').each(function(){
+		var right = this.id.substr(6);
+
+		param[3] = {name: 'right', value: right};
+		$.ajax({
+			type: 'POST',
+			url: '<?php echo LOCAL_PATH; ?>engines/get-rights.php',
+			data: param,
+			dataType: 'json',
+			success: function(data) {
+				alert(right+':'+data);
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {}
+		});
 	});
 }
 </script>

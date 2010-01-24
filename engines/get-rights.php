@@ -13,4 +13,36 @@
  * ...
  * )
  */
+define('ROOT_PATH', realpath(dirname(__FILE__).'/../').'/');
 
+require_once ROOT_PATH.'includes/ini_conf.php';
+require_once ROOT_PATH.'includes/configuration.php';
+require_once ROOT_PATH.'includes/librairies/Rights/Rights_Admin.php';
+
+$context = GTE::buildContext($_POST);
+
+if (!Rights::check('project_users_access', $context)) {
+	echo 'Forbidden';
+	exit();
+}
+
+$user = (int) $_POST['user'];
+if (empty($user)) {
+	echo 'Bad request';
+	exit();
+}
+
+if ($_POST['query'] == 'select') {
+	echo json_encode(
+		Rights_Admin::getUserRightEffectiveInformations(
+			$user,
+			$_POST['right'],
+			$context
+		)
+	);
+} else {
+	echo 'Bad query';
+	exit();
+}
+
+?>
