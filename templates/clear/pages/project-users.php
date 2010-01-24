@@ -27,7 +27,7 @@ $(document).ready(function() {
 		hideOnContentClick: false,
 		centerOnScroll: false,
 		frameWidth: gridWidth,
-		frameHeight: $(window).height() - 50
+		frameHeight: $(window).height() - 100
 	});
 	
 	$("#users_datagrid").flexigrid({
