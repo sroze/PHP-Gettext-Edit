@@ -82,6 +82,37 @@ $(document).ready(function() {
 		height: 250,
 		dblclickCallback: function (object) {
 			alert('Edit');
+		},
+		onSuccess: function () {
+			// We'll check for each tr rows when we will add them additionnal data
+			$('#users_datagrid tbody tr').each(function(){
+				if (this.id.substr(0, 3) != 'row') {
+					return;
+				}
+				var userId = this.id.substr(3, 1);
+				var tr = this;
+				var p = $('#users_datagrid')[0].p;
+
+				var param = [
+					{name: 'user', value: userId},
+					{name: 'query', value: 'select-more'}
+				];
+
+				for (var pi = 0; pi < p.params.length; pi++) {
+					param[param.length] = p.params[pi];
+				}
+									
+				$.ajax({
+					type: p.method,
+					url: p.url,
+					data: param,
+					dataType: p.dataType,
+					success: function(data) {
+						alert(tr.id+':'+data);
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {}
+				});
+			});
 		}
 	});
 });
