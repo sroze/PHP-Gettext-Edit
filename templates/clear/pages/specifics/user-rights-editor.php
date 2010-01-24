@@ -15,6 +15,7 @@
 					<p><div class="rightbutton no user"></div> <?php echo _('Droit refusé à l\'utilisateur'); ?></p>
 					<p><div class="rightbutton no group"></div> <?php echo _('Droit refusé au groupe'); ?></p>
 				</div>
+				<form id="additionnal_rights" action="" method="POST">
 				<ul class="additional_user_rights">
 					<?php 
 					if (!isset($additional_rights_list)) {
@@ -45,6 +46,7 @@
 					printAdditionalRights($additional_rights_list);
 					?>
 				</ul>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -159,8 +161,39 @@ function reloadRights (userId)
 		});
 
 		$(this).click(function(){
-			if ($(this).attr('origin') != undefined) {
-				alert('Change value!');
+			var div = $(this);
+			if (div.attr('origin') != undefined) {
+				if (div.hasClass('no')) {
+					var new_value = 'yes';
+				} else {
+					var new_value = 'no';
+				}
+
+				div.removeClass('yes').removeClass('no').removeClass('user').removeClass('group');
+				var originals = div.attr('origin').split(',');
+
+				if (new_value == originals[0]) {
+					$('input#i'+div.id).remove();
+					if (originals[1] != '') {
+						div.addClass(originals[1]);
+					}
+				} else {
+					var input = $('input#i'+div.id);
+					if (input.length < 0) {
+						$('form#additionnal_rights').append(
+							'<input type="hidden" id="i'+div.id+'" name="rights['+right+']" value="'+new_value+'" />'
+						);
+					} else {
+						input.val(new_value);
+					}
+
+					if ($('input#submit').length < 0) {
+						$('form#additionnal_rights').append(
+							'<input type="submit" id="submit" value="<?php echo _('Enregistrer'); ?>" />'
+						);
+					}
+				}
+				div.addClass(new_value);
 			}
 		});
 	});
