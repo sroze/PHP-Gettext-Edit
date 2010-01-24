@@ -45,38 +45,19 @@ $(document).ready(function(){
 	$('div#rightseditor').width(
 		$('div#contents').width() - 250 - 50
 	);
-	// groups informations
-	reloadInformations();
-
-	// rights informations
-	var rights_list = new Array();
+	
 	$('input.right').each(function(){
 		var right = this.name.substring(
 			6,
 			this.name.length-1
 		);
-		rights_list.push(right);
-
 		var parent = $(this).parent();
 		$(this).remove();
 		parent.append('<div id="'+right+'" class="rightbutton loading" />');
 	});
 
-	var param = [
-		{name: 'query', value: 'select'},
-	    {name: 'rights', value: $.toJSON(rights_list)}
-	];
-						
-	$.ajax({
-		type: 'POST',
-		url: '<?php echo LOCAL_PATH; ?>engines/get-rights.php',
-		data: param,
-		dataType: 'json',
-		success: function(data) {
-			alert(data);
-		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {}
-	});
+	// groups informations
+	reloadInformations();
 });
 
 function reloadInformations ()
@@ -143,6 +124,26 @@ function reloadDatagrid ()
 
 function reloadRights ()
 {
-	alert('Rights reload');
+	var rights_list = new Array();
+	$('div.rightbutton').each(function(){
+		var right = this.id;
+		rights_list.push(right);
+	});
+
+	var param = [
+		{name: 'query', value: 'select'},
+	    {name: 'rights', value: $.toJSON(rights_list)}
+	];
+						
+	$.ajax({
+		type: 'POST',
+		url: '<?php echo LOCAL_PATH; ?>engines/get-rights.php',
+		data: param,
+		dataType: 'json',
+		success: function(data) {
+			alert(data);
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {}
+	});
 }
 </script>
