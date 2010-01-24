@@ -2,10 +2,19 @@
 	<table id="groups_datagrid" class="datagrid"></table>
 	<div id="rightseditor" class="flexigrid my">
 		<div class="mDiv">
-			<div class="title"><?php echo _('Droits supplémentaires'); ?></div>
+			<div class="title"><?php echo _('Droits éffectifs de l\'utilisateur'); ?></div>
 		</div>
 		<div class="my grid">
 			<div id="right_grid_contents">
+				<div class="right_legend">
+					<h3><?php echo _('Légende'); ?></h3>
+					<p><div class="rightbutton yes"></div> <?php echo _('Droit impliqué'); ?></p>
+					<p><div class="rightbutton yes user"></div> <?php echo _('Droit accordé à l\'utilisateur'); ?></p>
+					<p><div class="rightbutton yes group"></div> <?php echo _('Droit accordé à un de ses groupes'); ?></p>
+					<p><div class="rightbutton no"></div> <?php echo _('Droit non-accordé'); ?></p>
+					<p><div class="rightbutton no user"></div> <?php echo _('Droit refusé à l\'utilisateur'); ?></p>
+					<p><div class="rightbutton no group"></div> <?php echo _('Droit refusé au groupe'); ?></p>
+				</div>
 				<ul class="additional_user_rights">
 					<?php 
 					if (!isset($additional_rights_list)) {
@@ -142,8 +151,17 @@ function reloadRights (userId)
 				if (data.from != '') {
 					div.addClass(data.from);
 				}
+
+				div.attr('origin', data.grant+','+data.from);
+				div.css('cursor', 'pointer');
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {}
+		});
+
+		$(this).click(function(){
+			if ($(this).attr('origin') != undefined) {
+				alert('Change value!');
+			}
 		});
 	});
 }
