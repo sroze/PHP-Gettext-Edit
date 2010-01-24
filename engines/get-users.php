@@ -49,6 +49,21 @@ if ($_POST['query'] == 'select') {
 	} else {
 		echo 'Invalid arguments';
 	}
+} else if ($_POST['query'] == 'select-more') { // Groups & Rights
+	if (isset($_POST['user'])) {
+		echo json_encode(
+			array(
+				'groups' => Rights_Admin::getUserGroups((int) $_POST['user'], array(
+					'project' => $_POST['project']
+				)),
+				'rights' => Rights_Admin::getUserRights((int) $_POST['user'], array(
+					'project' => $_POST['project']
+				))
+			)
+		);
+	} else {
+		echo 'Invalid arguments';
+	}
 } else {
 	echo 'Invalid query';
 }
