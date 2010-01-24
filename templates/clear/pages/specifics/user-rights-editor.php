@@ -173,6 +173,8 @@ function reloadRights (userId)
 
 				div.removeClass('yes').removeClass('no').removeClass('user').removeClass('group');
 				var originals = div.attr('origin').split(',');
+				var label = $(div.parent().find('label')[0]);
+				label.removeClass('modified');
 
 				if (new_value == originals[0]) {
 					$('input#i'+div.id).remove();
@@ -181,7 +183,7 @@ function reloadRights (userId)
 					}
 				} else {
 					var input = $('input#i'+div.id);
-					if (input.length < 0) {
+					if (input.length == 0) {
 						$('form#additionnal_rights').append(
 							'<input type="hidden" id="i'+div.id+'" name="rights['+right+']" value="'+new_value+'" />'
 						);
@@ -189,11 +191,12 @@ function reloadRights (userId)
 						input.val(new_value);
 					}
 
-					if ($('input#submit').length < 0) {
+					if ($('input#submit').length == 0) {
 						$('form#additionnal_rights').append(
 							'<input type="submit" id="submit" value="<?php echo _('Enregistrer'); ?>" />'
 						);
 					}
+					label.addClass('modified');
 				}
 				div.addClass(new_value);
 			}

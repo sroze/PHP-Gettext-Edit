@@ -348,6 +348,10 @@ div.rightbutton.no.user {
 div.rightbutton.no.group {
 	background: url(../images/icons/cross-g.png) no-repeat;
 }
+label.modified {
+	background-color: #FFFB8A;
+	font-style: italic;
+}
 div.right_legend {
 	float: right;
 	width: 150px;
