@@ -26,13 +26,13 @@ if (!isset($project)) {
 							Rights_Admin::grantUserRights(
 								$user,
 								$right,
-								$context
+								$_CONTEXT
 							);
 						} else if ($value == 'no') {
 							Rights_Admin::revokeUserRights(
 								$user,
 								$right,
-								$context
+								$_CONTEXT
 							);
 						}
 					}
