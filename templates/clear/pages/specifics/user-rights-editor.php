@@ -72,5 +72,5 @@ function reloadDatagrid (gridWidth, colWidth)
 		width: gridWidth,
 		height: 250
 	});
-});
+}
 </script>
