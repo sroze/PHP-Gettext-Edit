@@ -133,6 +133,7 @@ function reloadRights (userId)
 	
 	$('div.rightbutton').each(function(){
 		var right = this.id.substr(6);
+		$(this).addClass('loading');
 
 		param[3] = {name: 'right', value: right};
 		$.ajax({
