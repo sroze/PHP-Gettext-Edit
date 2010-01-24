@@ -8,32 +8,27 @@
 				<p>Rights list</p>
 			</div>
 		</div>
-		<a id="groups_link"></a>
 	</div>
 <script type="text/javascript">
 $(document).ready(function(){
-	var gridWidth = $('div#contents').width() - 20;
-	var colWidth = (gridWidth - 65) / 3;
-	
-	$("a#groups_link").fancybox({
-		hideOnOverlayClick: false,
-		hideOnContentClick: false,
-		centerOnScroll: false,
-		frameWidth: gridWidth,
-		frameHeight: $(window).height() - 100
-	});
+	reloadDatagrid();
 
-	reloadDatagrid(gridWidth, colWidth);
+	$('div#rightseditor').width(
+		$('div#contents').width() - 250 - 50
+	);
 });
 
-function reloadDatagrid (gridWidth, colWidth)
+function reloadDatagrid ()
 {
+	var gridWidth = 250;
+	var colWidth = 250 - 15;
+	
 	var userId = $('#user_field').val();
 		
 	var parent = $("#groups_datagrid").parent();
 	$("#groups_datagrid").remove();
 
-	$(parent).append('<table id="groups_datagrid" class="datagrid" />');
+	$(parent).prepend('<table id="groups_datagrid" class="datagrid" />');
 	$("#groups_datagrid").flexigrid({
 		url: '<?php echo LOCAL_PATH; ?>engines/get-groups.php',
 		dataType: 'json',
