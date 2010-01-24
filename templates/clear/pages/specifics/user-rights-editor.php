@@ -145,16 +145,18 @@ function reloadRights (userId)
 				div.removeClass('loading');
 				
 				if (data.grant) {
+					var grant = 'yes';
 					div.addClass('yes');
 				} else {
+					var grant = 'no';
 					div.addClass('no');
 				}
 
 				if (data.from != '') {
 					div.addClass(data.from);
 				}
-
-				div.attr('origin', data.grant+','+data.from);
+				
+				div.attr('origin', grant+','+data.from);
 				div.css('cursor', 'pointer');
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {}
@@ -172,7 +174,6 @@ function reloadRights (userId)
 				div.removeClass('yes').removeClass('no').removeClass('user').removeClass('group');
 				var originals = div.attr('origin').split(',');
 
-				alert(new_value+"\n"+originals);
 				if (new_value == originals[0]) {
 					$('input#i'+div.id).remove();
 					if (originals[1] != '') {
