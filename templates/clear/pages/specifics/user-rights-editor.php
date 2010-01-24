@@ -1,3 +1,4 @@
+<div id="rights_boxes">
 	<table id="groups_datagrid" class="datagrid"></table>
 	<div id="rightseditor" class="flexigrid my">
 		<div class="mDiv">
@@ -9,6 +10,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 <script type="text/javascript">
 $(document).ready(function(){
 	reloadDatagrid();
