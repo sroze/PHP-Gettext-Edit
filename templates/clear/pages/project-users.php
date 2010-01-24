@@ -108,7 +108,8 @@ $(document).ready(function() {
 					data: param,
 					dataType: p.dataType,
 					success: function(data) {
-						alert(tr.id+':'+data);
+						$($('td', tr)[2]).text(data.groups.join(', '));
+						$($('td', tr)[3]).text(data.rights.join(', '));
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) {}
 				});
