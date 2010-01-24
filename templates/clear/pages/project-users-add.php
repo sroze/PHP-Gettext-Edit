@@ -1,7 +1,8 @@
-<div id="contents" class="with_sidebar">
+<div id="contents">
 	<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php 
 		echo _('Utilisateurs'); ?> &raquo; <?php echo _('Nouveau'); ?></h1>
-	<p><strong><?php echo _('Utilisateur'); ?>:</strong><br />
+	<p><?php echo _('Vous pouvez ajouter des autorisations à un utilisateur grâce au formulaire ci-dessous.'); ?></p>
+	<p><strong><?php echo _('Utilisateur concerné:'); ?></strong><br />
 	<select id="user" name="user"><?php 
 	$users = GTE::getUsers();
 	

@@ -308,6 +308,12 @@ span.icon.loading {
 	height: 16px;
 	background: url(../images/icons/spinner.gif) no-repeat;
 }
+div#fancy_content div#contents h1 {
+	font-size: 14px;
+}
+div#fancy_content div#contents p {
+	font-size: 11px;
+}
 /* Footer */
 div#footer {
 	color: #888;

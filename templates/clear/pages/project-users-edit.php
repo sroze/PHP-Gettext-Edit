@@ -1,4 +1,4 @@
-<div id="contents" class="with_sidebar">
+<div id="contents">
 	<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php 
 		echo _('Utilisateurs'); ?> &raquo; <?php
 		$user = (int) isset($_POST['user']) ? $_POST['user'] : $_GET['user'];
