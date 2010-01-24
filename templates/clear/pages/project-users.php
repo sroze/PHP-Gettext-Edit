@@ -12,7 +12,13 @@ if (!isset($project)) {
 	<div id="contents" class="with_sidebar">
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php 
 		echo _('Utilisateurs'); ?></h1>
-		<table id="users_datagrid" class="datagrid"></table>
+		<?php 
+		if (isset($_POST['action'])) {
+			if ($_POST['action'] == 'update-user') {
+				print_r($_POST);
+			}
+		}
+		?><table id="users_datagrid" class="datagrid"></table>
 		<a id="users_link"></a>
 		<div class="clear"></div>
 	</div>

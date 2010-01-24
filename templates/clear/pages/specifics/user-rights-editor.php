@@ -23,7 +23,7 @@
 					<p></p>
 					<label class="modified">label</label> <?php echo _('Valeur modifiée'); ?>
 				</div>
-				<form id="additionnal_rights" action="" method="POST">
+				<form id="additionnal_rights" action="index.php?page=project-users&project=<?php echo $project->get('project_id'); ?>" method="POST">
 				<ul class="additional_user_rights">
 					<?php 
 					if (!isset($additional_rights_list)) {
@@ -54,6 +54,7 @@
 					printAdditionalRights($additional_rights_list);
 					?>
 				</ul>
+				<input type="hidden" name="action" value="update-user" />
 				<input type="hidden" name="project" value="<?php echo $project->get('project_id'); ?>" />
 				</form>
 			</div>
@@ -105,12 +106,12 @@ function reloadDatagrid (userId)
 			}},
 			{name: '<?php echo _('Supprimer'); ?>', bclass: 'delete', position: 'left', onpress : function (a,grid){
 				if ($('.trSelected',grid).length <= 0) {
-					alert('<?php echo _('Vous devez sélectionner au moins un utilisateur'); ?>');
+					alert('<?php echo _('Vous devez sélectionner au moins un groupe'); ?>');
 				} else {
 					if ($('.trSelected',grid).length > 1) {
-						var string = '<?php echo _('Êtes-vous sur de vouloir supprimer ces %d utilisateurs ?'); ?>';
+						var string = '<?php echo _('Êtes-vous sur de vouloir supprimer cet utilisateur de ces %d groupes ?'); ?>';
 					} else {
-						var string = '<?php echo _('Êtes-vous sur de vouloir supprimer cet utilisateur ?'); ?>';
+						var string = '<?php echo _('Êtes-vous sur de vouloir supprimer cet utilisateur de ce groupe ?'); ?>';
 					}
 					
 					if (confirm(string.replace(/%d/, $('.trSelected',grid).length))) {
