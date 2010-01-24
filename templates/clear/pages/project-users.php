@@ -108,8 +108,8 @@ $(document).ready(function() {
 					data: param,
 					dataType: p.dataType,
 					success: function(data) {
-						$($('td', tr)[2]).text(data.groups.join(', '));
-						$($('td', tr)[3]).text(data.rights.join(', '));
+						$($('div', $('td', tr)[2])[0]).text(data.groups.join(', '));
+						$($('div', $('td', tr)[3])[0]).text(data.rights.join(', '));
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) {}
 				});
