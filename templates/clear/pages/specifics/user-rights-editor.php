@@ -62,7 +62,7 @@ function reloadDatagrid (gridWidth, colWidth)
 			}}
 		],
 		params:[
-			{name: 'project', value: <?php echo $project->get('project_id'); ?>}
+			{name: 'project', value: <?php echo $project->get('project_id'); ?>},
 			{name: 'user', value: userId}
 		],
 		usepager: false,
