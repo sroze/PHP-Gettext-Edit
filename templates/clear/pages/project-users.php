@@ -19,13 +19,16 @@ if (!isset($project)) {
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("a#users_link").fancybox({
-		hideOnOverlayClick: false,
-		hideOnContentClick: false
-	}); 
-	
 	var gridWidth = $('div#contents').width() - 20;
 	var colWidth = (gridWidth - 65) / 3;
+	
+	$("a#users_link").fancybox({
+		hideOnOverlayClick: false,
+		hideOnContentClick: false,
+		centerOnScroll: false,
+		frameWidth: gridWidth,
+		frameHeight: $(window).height() - 50
+	});
 	
 	$("#users_datagrid").flexigrid({
 		url: '<?php echo LOCAL_PATH; ?>engines/get-users.php',
