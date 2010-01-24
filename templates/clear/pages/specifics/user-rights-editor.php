@@ -46,6 +46,7 @@
 					printAdditionalRights($additional_rights_list);
 					?>
 				</ul>
+				<input type="hidden" name="project" value="<?php echo $project->get('project_id'); ?>" />
 				</form>
 			</div>
 		</div>
@@ -209,6 +210,11 @@ function reloadRights (userId)
 				div.addClass(new_value);
 			}
 		});
+
+		$('form#additionnal_rights input#iuser').remove();
+		$('form#additionnal_rights').append(
+			'<input type="hidden" name="user" id="iuser" value="'+userId+'" />'
+		);
 	});
 }
 </script>
