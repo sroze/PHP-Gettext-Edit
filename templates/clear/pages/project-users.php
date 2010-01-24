@@ -15,7 +15,32 @@ if (!isset($project)) {
 		<?php 
 		if (isset($_POST['action'])) {
 			if ($_POST['action'] == 'update-user') {
-				print_r($_POST);
+				$user = (int) $_POST['user'];
+				if (empty($user)) {
+					echo '<div class="box error"><p>'.
+						_('L\'ID utilisateur est invalide').
+						'</p></div>';
+				} else if (is_array($_POST['rights'])) {
+					foreach ($_POST['rights'] as $right => $value) {
+						if ($value == 'yes') {
+							Rights_Admin::grantUserRights(
+								$user,
+								$right,
+								$context
+							);
+						} else if ($value == 'no') {
+							Rights_Admin::revokeUserRights(
+								$user,
+								$right,
+								$context
+							);
+						}
+					}
+					
+					echo '<div class="box success"><p>'.
+						_('Droits de l\'utilisateur mis à jour').
+						'</p></div>';
+				}
 			}
 		}
 		?><table id="users_datagrid" class="datagrid"></table>
