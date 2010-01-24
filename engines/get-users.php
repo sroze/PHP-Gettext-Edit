@@ -5,18 +5,16 @@ require_once ROOT_PATH.'includes/ini_conf.php';
 require_once ROOT_PATH.'includes/configuration.php';
 require_once ROOT_PATH.'includes/librairies/Rights/Rights_Admin.php';
 
-if (!Rights::check('project_users_access', array(
-		'project' => $_POST['project']
-	))) {
+$context = GTE::buildContext($_POST);
+
+if (!Rights::check('project_users_access', $context)) {
 	echo 'Forbidden';
 	exit();
 }
 
 if ($_POST['query'] == 'select') {
 	if (isset($_POST['project'])) {
-		$users = GTE::getUsersHavingRight('project_access', array(
-			'project' => $_GET['project']
-		));
+		$users = GTE::getUsersHavingRight('project_access', $context);
 		
 		$out = array(
 			'total' => count($users),
@@ -51,17 +49,13 @@ if ($_POST['query'] == 'select') {
 	}
 } else if ($_POST['query'] == 'select-more') { // Groups & Rights
 	if (isset($_POST['user'])) {
-		$groups_all = Rights_Admin::getUserGroups((int) $_POST['user'], array(
-			'project' => $_POST['project']
-		));
+		$groups_all = Rights_Admin::getUserGroups((int) $_POST['user'], $context);
 		$groups = array();
 		foreach ($groups_all as $group) {
 			$groups[] = $group['name'];
 		}
 		
-		$rights_all = Rights_Admin::getUserRights((int) $_POST['user'], array(
-			'project' => $_POST['project']
-		));
+		$rights_all = Rights_Admin::getUserRights((int) $_POST['user'], $context);
 		$rights = array();
 		foreach ($rights_all as $right) {
 			$rights[] = $right['name'];

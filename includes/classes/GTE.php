@@ -165,6 +165,41 @@ class GTE
 			return $line;
 		}
 	}
+	
+	/**
+	 * Build a context array from arguments passed to the application.
+	 * 
+	 * @param array $from
+	 * 
+	 * @return array
+	 */
+	static function buildContext ($from = null)
+	{
+		if ($from == null) {
+			$from = $_GET;
+		} else if (!is_array($from)) {
+			throw new GTE_Exception(
+				_('La donnée entrante doit être un tableau')
+			);
+		}
+		
+		$context = array();
+		$arguments_which_can_build_context = array(
+			'project', 'language', 'language_file', 'template'
+		);
+		
+		foreach ($arguments_which_can_build_context as $field) {
+			if (array_key_exists($field, $from)) {
+				$context[$field] = $from[$field];
+			}
+		}		
+		
+		if (empty($context)) {
+			return NULL;
+		} else {
+			return $context;
+		}
+	}
 }
 
 class GTE_Exception extends Exception{}
