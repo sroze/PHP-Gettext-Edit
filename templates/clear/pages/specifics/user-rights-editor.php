@@ -67,7 +67,7 @@ function reloadDatagrid ()
 		useRp: false,
 		showTableToggleBtn: false,
 		width: gridWidth,
-		height: 250
+		height: 100
 	});
 }
 </script>
