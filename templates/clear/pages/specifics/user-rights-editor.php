@@ -13,12 +13,18 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-	reloadDatagrid();
-
 	$('div#rightseditor').width(
 		$('div#contents').width() - 250 - 50
 	);
+
+	reloadInformations();
 });
+
+function reloadInformations ()
+{
+	reloadDatagrid();
+	reloadRights();
+}
 
 function reloadDatagrid ()
 {
@@ -69,5 +75,10 @@ function reloadDatagrid ()
 		width: gridWidth,
 		height: 100
 	});
+}
+
+function reloadRights ()
+{
+	alert('Rights reload');
 }
 </script>

@@ -14,3 +14,10 @@
 	require PAGE_DIR.'specifics/user-rights-editor.php';
 	?>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('select#user_field').change(function(){
+		reloadInformations();
+	});
+});
+</script>
