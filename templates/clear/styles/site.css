@@ -308,7 +308,7 @@ span.icon, div.rightbutton {
 	height: 16px;
 }
 span.icon.loading, div.rightbutton.loading {
-	background: url(../images/icons/spinner.gif) no-repeat;
+	background: url(../images/icons/spinner.gif) no-repeat !important;
 }
 div#fancy_content div#contents h1 {
 	font-size: 14px;
