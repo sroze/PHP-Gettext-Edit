@@ -31,7 +31,7 @@ class GTE
 		
 		if (!$query) {
 			$sql_error = Database::$sql->errorInfo();
-			throw new User_Exception(
+			throw new GTE_Exception(
 				sprintf(
 					_('Impossible récupérer les informations des utilisateurs: %s'),
 					$sql_error[2]
@@ -67,7 +67,7 @@ class GTE
 		
 		if (!$query) {
 			$sql_error = Database::$sql->errorInfo();
-			throw new User_Exception(
+			throw new GTE_Exception(
 				sprintf(
 					_('Impossible récupérer les informations des utilisateurs: %s'),
 					$sql_error[2]
@@ -77,7 +77,7 @@ class GTE
 		
 		$line = $query->fetch();
 		if (!$line) {
-			throw new User_Exception(
+			throw new GTE_Exception(
 				sprintf(
 					_('L\'utlisateur "%s" n\'éxiste pas'),
 					$user_name
@@ -85,6 +85,84 @@ class GTE
 			);
 		} else {
 			return (int) $line['id'];
+		}
+	}
+	
+	/**
+	 * Return list of users.
+	 * 
+	 * @return array
+	 */
+	static function getUsers ()
+	{
+		$query = Database::$sql->query(
+			sprintf(
+				Database::$requests->get('get_users'),
+				Database::$prefix.'users'
+			)
+		);
+		
+		if (!$query) {
+			$sql_error = Database::$sql->errorInfo();
+			throw new GTE_Exception(
+				sprintf(
+					_('Impossible récupérer la liste des utilisateurs: %s'),
+					$sql_error[2]
+				)
+			);
+		}
+		
+		return $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
+	/**
+	 * Return an array of informations about the user #$userid
+	 * 
+	 * @param integer $userid
+	 * 
+	 * @return array
+	 */
+	static function getUserInformations ($userid)
+	{
+		if (!is_int($userid)) {
+			$userid = (int) $userid;
+			
+			if (empty($userid)) {
+				throw new GTE_Exception(
+					_('Le premier argument (user ID) doit être un entier')
+				);
+			}
+		}
+		
+		$query = Database::$sql->query(
+			sprintf(
+				Database::$requests->get('get_user'),
+				Database::$prefix.'users',
+				$userid
+			)
+		);
+		
+		if (!$query) {
+			$sql_error = Database::$sql->errorInfo();
+			throw new GTE_Exception(
+				sprintf(
+					_('Impossible récupérer les informations de l\'utilisateur #%d: %s'),
+					$userid,
+					$sql_error[2]
+				)
+			);
+		}
+		
+		$line = $query->fetch(PDO::FETCH_ASSOC);
+		if (!$line) {
+			throw new GTE_Exception(
+				sprintf(
+					_('L\'utilisateur #%d n\'éxiste pas'),
+					$userid
+				)
+			);
+		} else {
+			return $line;
 		}
 	}
 }

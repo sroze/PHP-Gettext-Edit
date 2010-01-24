@@ -35,7 +35,9 @@ class PGET_SQL_pgsql extends PGET_SQL
 		'get_project' => 'SELECT * FROM %s WHERE project_id = %d',
 		'connect_user' => 'SELECT id, username, email FROM %s WHERE username = \'%s\' AND password = \'%s\'',
 		'get_user_id_from_name' => 'SELECT id FROM %s WHERE username = \'%s\'',
-		'get_users_informations' => 'SELECT id, username FROM %s WHERE %s ORDER BY username DESC'
+		'get_users_informations' => 'SELECT id, username FROM %s WHERE %s ORDER BY username DESC',
+		'get_users' => 'SELECT id, username FROM %s ORDER BY username DESC',
+		'get_user' => 'SELECT * FROM %s WHERE id = %d'
 	);
 	
 	/**

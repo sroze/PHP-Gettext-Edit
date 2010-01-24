@@ -81,7 +81,12 @@ $(document).ready(function() {
 		width: gridWidth,
 		height: 250,
 		dblclickCallback: function (object) {
-			alert('Edit');
+			var user_id = object.id.substr(3);
+			
+			$('a#users_link').attr('href', 
+				'<?php echo LOCAL_PATH; ?>index.php?only&page=project-users-add&project=<?php echo $project->get('project_id'); ?>&user='+user_id
+			);
+			$('a#users_link').click();
 		},
 		onSuccess: function () {
 			// We'll check for each tr rows when we will add them additionnal data
@@ -89,7 +94,7 @@ $(document).ready(function() {
 				if (this.id.substr(0, 3) != 'row') {
 					return;
 				}
-				var userId = this.id.substr(3, 1);
+				var userId = this.id.substr(3);
 				var tr = this;
 				var p = $('#users_datagrid')[0].p;
 
