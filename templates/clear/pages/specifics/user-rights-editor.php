@@ -181,7 +181,7 @@ function reloadRights (userId)
 				label.removeClass('modified');
 
 				if (new_value == originals[0]) {
-					$('input#i'+div.id).remove();
+					$('input#i'+div.attr('id')).remove();
 					if (originals[1] != '') {
 						div.addClass(originals[1]);
 					}
@@ -190,11 +190,10 @@ function reloadRights (userId)
 						$('input#submit').remove();
 					}
 				} else {
-					var input = $('input#i'+div.id);
+					var input = $('input#i'+div.attr('id'));
 					if (input.length == 0) {
-						alert(div+';'+div.id);
 						$('form#additionnal_rights').append(
-							'<input type="hidden" id="i'+div.id+'" name="rights['+right+']" value="'+new_value+'" />'
+							'<input type="hidden" id="i'+div.attr('id')+'" name="rights['+right+']" value="'+new_value+'" />'
 						);
 					} else {
 						input.val(new_value);
