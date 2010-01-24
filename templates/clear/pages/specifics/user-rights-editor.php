@@ -52,13 +52,31 @@ $(document).ready(function(){
 	var rights_list = new Array();
 	$('input.right').each(function(){
 		var right = this.name.substring(
-			5,
+			6,
 			this.name.length-1
 		);
 		rights_list.push(right);
+
+		var parent = $(this).parent();
+		$(this).remove();
+		parent.append('<div id="'+right+'" class="rightbutton loading" />');
 	});
 
-	alert(rights_list);
+	var param = [
+		{name: 'query', value: 'select'},
+	    {name: 'rights', value: $.toJSON(rights_list)}
+	];
+						
+	$.ajax({
+		type: 'POST',
+		url: '<?php echo LOCAL_PATH; ?>engines/get-rights.php',
+		data: param,
+		dataType: 'json',
+		success: function(data) {
+			alert(data);
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {}
+	});
 });
 
 function reloadInformations ()

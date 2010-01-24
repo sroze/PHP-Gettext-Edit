@@ -302,10 +302,12 @@ fieldset div.legend.right {
 	margin-top: -24px;
 	padding: 0 10px;
 }
-span.icon.loading {
+span.icon, div.rightbutton {
 	display: block;
 	width: 16px;
 	height: 16px;
+}
+span.icon.loading, div.rightbutton.loading {
 	background: url(../images/icons/spinner.gif) no-repeat;
 }
 div#fancy_content div#contents h1 {
@@ -313,6 +315,9 @@ div#fancy_content div#contents h1 {
 }
 div#fancy_content div#contents p {
 	font-size: 11px;
+}
+div.rightbutton {
+	
 }
 /* Footer */
 div#footer {
