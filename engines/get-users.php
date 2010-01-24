@@ -30,8 +30,8 @@ if ($_POST['query'] == 'select') {
 				'cell' => array(
 					'#'.$informations['id'],
 					$informations['username'],
-					'<div class="icon loading" />',
-					'<div class="icon loading" />'
+					'<span class="icon loading" />',
+					'<span class="icon loading" />'
 				)
 			);
 		}
