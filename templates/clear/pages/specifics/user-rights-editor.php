@@ -185,9 +185,14 @@ function reloadRights (userId)
 					if (originals[1] != '') {
 						div.addClass(originals[1]);
 					}
+
+					if ($('label.modified', $('form#additionnal_rights')).length == 0) {
+						$('input#submit').remove();
+					}
 				} else {
 					var input = $('input#i'+div.id);
 					if (input.length == 0) {
+						alert(div+';'+div.id);
 						$('form#additionnal_rights').append(
 							'<input type="hidden" id="i'+div.id+'" name="rights['+right+']" value="'+new_value+'" />'
 						);
