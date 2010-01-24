@@ -52,7 +52,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('div#rightseditor').width(
-		$('div#contents').width() - 250 - 50
+		$('div#contents').width() - 300
 	);
 
 	// groups informations
@@ -70,7 +70,7 @@ function reloadInformations ()
 function reloadDatagrid (userId)
 {
 	var gridWidth = 250;
-	var colWidth = gridWidth - 50;
+	var colWidth = gridWidth - 41;
 		
 	var parent = $('div#rights_boxes');
 	var ppg = $('#groups_datagrid').parent().parent();
