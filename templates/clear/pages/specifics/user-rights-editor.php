@@ -34,8 +34,12 @@ function reloadDatagrid ()
 	var userId = $('#user_field').val();
 		
 	var parent = $('div#rights_boxes');
-	$("#groups_datagrid", parent).remove();
-	$('div.flexigrid', parent).remove();
+	var ppg = $('#groups_datagrid').parent().parent();
+	if (ppg.hasClass('flexigrid')) {
+		ppg.remove();
+	} else {
+		$("#groups_datagrid", parent).remove();
+	}
 
 	$(parent).prepend('<table id="groups_datagrid" class="datagrid" />');
 	$("#groups_datagrid").flexigrid({
