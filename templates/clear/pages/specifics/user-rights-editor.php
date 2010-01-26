@@ -156,7 +156,7 @@ function reloadRights (userId)
 			dataType: 'json',
 			success: function(data) {
 				var div = $('div#right_'+right);
-				div.removeClass('loading');
+				div.removeClass('loading').removeClass('yes').removeClass('no');
 				
 				if (data.grant) {
 					var grant = 'yes';
