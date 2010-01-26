@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../../templates/clear/styles/jquery.fancybox-1.2.6.css" type="text/css" media="all" />
+<script type="text/javascript" src="../../templates/clear/scripts/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../../templates/clear/scripts/jquery.fancybox-1.2.6.js"></script>
+</head>
+<body>
+<a href="#inline">Aperçu</a>
+<div id="inline">
+	<p>Test</p>
+	<a href="#inline2">Test #2</a>
+	<script type="text/javascript">
+	$('a').fancybox({
+		hideOnContentClick: false
+	});
+	</script>
+</div>
+<div id="inline2">
+	<p>Test 2</p>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('a').fancybox({
+		hideOnContentClick: false
+	});
+});
+</script>
+</body>
+</html>
