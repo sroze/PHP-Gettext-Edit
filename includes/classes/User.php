@@ -97,6 +97,9 @@ class User
 			$id = Database::$sql->lastInsertId();
 		}
 		
+		// Add user at group #1
+		Rights_Admin::addUserGroups($id, 1);
+		
 		return $id;
 	}
 	
