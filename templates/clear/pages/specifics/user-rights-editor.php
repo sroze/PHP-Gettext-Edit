@@ -115,7 +115,7 @@ function reloadDatagrid (userId)
 					}
 					
 					if (confirm(string.replace(/%d/, $('.trSelected',grid).length))) {
-						$("#groups_datagrid").editRemove($('.trSelected',grid));
+						$("#groups_datagrid").editRemove($('.trSelected',grid), 'groups', -1);
 					}
 				}
 			}}

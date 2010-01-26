@@ -1477,7 +1477,7 @@
 	};
 	
 	// Remove a field
-	$.fn.editRemove = function (rows) {
+	$.fn.editRemove = function (rows, field_name, cell_id) {
 		return this.each(function(){
 			if (this.p && this.grid) {
 				var p = this.p;
@@ -1486,15 +1486,20 @@
 				var msgids = Array();
 				rows.each(function(){
 					var id = this.id.substr(3);
-					msgids.push(
-						data.rows[searchRowId('id', id)].cell[1]
-					);
+					
+					if (cell_id == -1) {
+						msgids.push(id);
+					} else {
+						msgids.push(
+							data.rows[searchRowId('id', id)].cell[cell_id]
+						);
+					}
 					$(this).remove();
 				});
 				
 				var param = [
 				    {name: 'query', value: 'delete'},
-				    {name: 'msgids', value: $.toJSON(msgids)}
+				    {name: field_name, value: $.toJSON(msgids)}
 				];
 				for (var pi = 0; pi < p.params.length; pi++) {
 					param[param.length] = p.params[pi];

@@ -61,7 +61,7 @@ $(document).ready(function() {
 					}
 					
 					if (confirm(string.replace(/%d/, $('.trSelected',grid).length))) {
-						$("#po_datagrid").editRemove($('.trSelected',grid));
+						$("#po_datagrid").editRemove($('.trSelected',grid), 'msgids', 1);
 					}
 				}
 			}},
