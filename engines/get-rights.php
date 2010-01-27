@@ -40,6 +40,20 @@ if ($_POST['query'] == 'select') {
 			$context
 		)
 	);
+} else if ($_POST['query'] == 'delete') {
+	$groups = json_decode($_POST['groups']);
+	foreach ($groups as $k => $group) {
+		$groups[$k] = (int) $group;
+	}
+	
+	Rights_Admin::removeUserGroups(
+		$user,
+		$groups,
+		$context
+	);
+	
+	header("HTTP/1.0 204 No Content");
+	header("status: 204");
 } else {
 	echo 'Bad query';
 	exit();
