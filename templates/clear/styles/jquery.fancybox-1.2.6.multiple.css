@@ -1,4 +1,4 @@
-div#fancy_overlay {
+div.fancy_overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -8,7 +8,7 @@ div#fancy_overlay {
 	z-index: 30;
 }
 
-div#fancy_loading {
+div.fancy_loading {
 	position: absolute;
 	height: 40px;
 	width: 40px;
@@ -19,7 +19,7 @@ div#fancy_loading {
 	z-index: 100;
 }
 
-div#fancy_loading div {
+div.fancy_loading div {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -28,7 +28,7 @@ div#fancy_loading div {
 	background: transparent url('../images/fancybox/fancy_progress.png') no-repeat;
 }
 
-div#fancy_outer {
+div.fancy_outer {
 	position: absolute;
     top: 0;
     left: 0;
@@ -39,20 +39,20 @@ div#fancy_outer {
     display: none;
 }
 
-div#fancy_inner {
+div.fancy_inner {
 	position: relative;
 	width:100%;
 	height:100%;
 	background: #FFF;
 }
 
-div#fancy_content {
+div.fancy_content {
 	margin: 0;
 	z-index: 100;
 	position: absolute;
 }
 
-div#fancy_div {
+div.fancy_div {
 	background: #000;
 	color: #FFF;
 	height: 100%;
@@ -60,7 +60,7 @@ div#fancy_div {
 	z-index: 100;
 }
 
-img#fancy_img {
+img.fancy_img {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -72,7 +72,7 @@ img#fancy_img {
 	height: 100%;
 }
 
-div#fancy_close {
+div.fancy_close {
 	position: absolute;
 	top: -12px;
 	right: -15px;
@@ -84,20 +84,20 @@ div#fancy_close {
 	display: none;
 }
 
-#fancy_frame {
+.fancy_frame {
 	position: relative;
 	width: 100%;
 	height: 100%;
 	display: none;
 }
 
-#fancy_ajax {
+.fancy_ajax {
 	width: 100%;
 	height: 100%;
 	overflow: auto;
 }
 
-a#fancy_left, a#fancy_right {
+a.fancy_left, a.fancy_right {
 	position: absolute; 
 	bottom: 0px; 
 	height: 100%; 
@@ -110,11 +110,11 @@ a#fancy_left, a#fancy_right {
 	overflow: hidden;
 }
 
-a#fancy_left {
+a.fancy_left {
 	left: 0px; 
 }
 
-a#fancy_right {
+a.fancy_right {
 	right: 0px; 
 }
 
@@ -129,30 +129,30 @@ span.fancy_ico {
 	display: block;
 }
 
-span#fancy_left_ico {
+span.fancy_left_ico {
 	left: -9999px;
 	background: transparent url('../images/fancybox/fancy_left.png') no-repeat;
 }
 
-span#fancy_right_ico {
+span.fancy_right_ico {
 	right: -9999px;
 	background: transparent url('../images/fancybox/fancy_right.png') no-repeat;
 }
 
-a#fancy_left:hover, a#fancy_right:hover {
+a.fancy_left:hover, a.fancy_right:hover {
 	visibility: visible;
 	background-color: transparent;
 }
 
-a#fancy_left:hover span {
+a.fancy_left:hover span {
 	left: 20px; 
 }
 
-a#fancy_right:hover span {
+a.fancy_right:hover span {
 	right: 20px; 
 }
 
-#fancy_bigIframe {
+.fancy_bigIframe {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -161,9 +161,9 @@ a#fancy_right:hover span {
 	background: transparent;
 }
 
-div#fancy_bg {
+div.fancy_bg {
 	position: absolute;
-	top: 0; left: 0;
+/*	top: 0; left: 0;*/
 	width: 100%;
 	height: 100%;
 	z-index: 70;
@@ -181,7 +181,7 @@ div.fancy_bg {
 	margin: 0;
 }
 
-div#fancy_bg_n {
+div.fancy_bg_n {
 	top: -20px;
 	left: 0;
 	width: 100%;
@@ -189,7 +189,7 @@ div#fancy_bg_n {
 	background: transparent url('../images/fancybox/fancy_shadow_n.png') repeat-x;
 }
 
-div#fancy_bg_ne {
+div.fancy_bg_ne {
 	top: -20px;
 	right: -20px;
 	width: 20px;
@@ -197,14 +197,14 @@ div#fancy_bg_ne {
 	background: transparent url('../images/fancybox/fancy_shadow_ne.png') no-repeat;
 }
 
-div#fancy_bg_e {
+div.fancy_bg_e {
 	right: -20px;
 	height: 100%;
 	width: 20px;
 	background: transparent url('../images/fancybox/fancy_shadow_e.png') repeat-y;
 }
 
-div#fancy_bg_se {
+div.fancy_bg_se {
 	bottom: -20px;
 	right: -20px;
 	width: 20px;
@@ -212,7 +212,7 @@ div#fancy_bg_se {
 	background: transparent url('../images/fancybox/fancy_shadow_se.png') no-repeat;
 }
 
-div#fancy_bg_s {
+div.fancy_bg_s {
 	bottom: -20px;
 	left: 0;
 	width: 100%;
@@ -220,7 +220,7 @@ div#fancy_bg_s {
 	background: transparent url('../images/fancybox/fancy_shadow_s.png') repeat-x;
 }
 
-div#fancy_bg_sw {
+div.fancy_bg_sw {
 	bottom: -20px;
 	left: -20px;
 	width: 20px;
@@ -228,14 +228,14 @@ div#fancy_bg_sw {
 	background: transparent url('../images/fancybox/fancy_shadow_sw.png') no-repeat;
 }
 
-div#fancy_bg_w {
+div.fancy_bg_w {
 	left: -20px;
 	height: 100%;
 	width: 20px;
 	background: transparent url('../images/fancybox/fancy_shadow_w.png') repeat-y;
 }
 
-div#fancy_bg_nw {
+div.fancy_bg_nw {
 	top: -20px;
 	left: -20px;
 	width: 20px;
@@ -243,40 +243,40 @@ div#fancy_bg_nw {
 	background: transparent url('../images/fancybox/fancy_shadow_nw.png') no-repeat;
 }
 
-div#fancy_title {
+div.fancy_title {
 	position: absolute;
 	z-index: 100;
 	display: none;
 }
 
-div#fancy_title div {
+div.fancy_title div {
 	color: #FFF;
 	font: bold 12px Arial;
 	padding-bottom: 3px;
 	white-space: nowrap;
 }
 
-div#fancy_title table {
+div.fancy_title table {
 	margin: 0 auto;
 }
 
-div#fancy_title table td {
+div.fancy_title table td {
 	padding: 0;
 	vertical-align: middle;
 }
 
-td#fancy_title_left {
+td.fancy_title_left {
 	height: 32px;
 	width: 15px;
 	background: transparent url('../images/fancybox/fancy_title_left.png') repeat-x;
 }
 
-td#fancy_title_main {
+td.fancy_title_main {
 	height: 32px;
 	background: transparent url('../images/fancybox/fancy_title_main.png') repeat-x;
 }
 
-td#fancy_title_right {
+td.fancy_title_right {
 	height: 32px;
 	width: 15px;
 	background: transparent url('../images/fancybox/fancy_title_right.png') repeat-x;
