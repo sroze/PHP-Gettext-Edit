@@ -38,6 +38,10 @@
 	$.fn.fancybox = function(o, i) {
 		var settings		= $.extend({}, $.fn.fancybox.defaults, o);
 		var matchedGroup	= this;
+		
+		if (!i) {
+			var i $('body');
+		}
 		var contener		= $(i);
 
 		function _initialize() {
