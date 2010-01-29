@@ -53,7 +53,7 @@ if ($_POST['query'] == 'select') {
 	if ($_POST['output'] == 'html') {
 		echo '<form id="groups_form" action="" method="POST">';
 		echo '<p><strong>Nom du groupe:</strong><br />';
-		echo '<select name="group">';
+		echo '<select id="select_group" name="group">';
 		foreach ($groups as $group) {
 			echo '<option value="'.$group['id'].'">'.$group['name'].'</option>';
 		}

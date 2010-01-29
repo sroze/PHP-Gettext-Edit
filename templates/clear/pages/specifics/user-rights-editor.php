@@ -98,7 +98,17 @@ function reloadDatagrid (userId)
 		hideOnContentClick: false,
 		centerOnScroll: false,
 		frameWidth: 300,
-		frameHeight: 140
+		frameHeight: 140,
+		callbackOnShow: function (obj) {
+			$('form#groups_form').submit(function(){
+				var group = $('select#select_group').val();
+				$('.fancy_close', parent).click();
+
+				alert('Group = '+group);
+				
+				return false;
+			});
+		}
 	}, parent);
 
 	$(parent).prepend('<table id="groups_datagrid" class="datagrid" />');
