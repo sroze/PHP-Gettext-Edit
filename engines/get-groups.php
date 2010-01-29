@@ -52,12 +52,14 @@ if ($_POST['query'] == 'select') {
 	
 	if ($_POST['output'] == 'html') {
 		echo '<form id="groups_form" action="" method="POST">';
-		echo '<p><strong>Nom du groupe:</strong>';
+		echo '<p><strong>Nom du groupe:</strong><br />';
 		echo '<select name="group">';
 		foreach ($groups as $group) {
 			echo '<option value="'.$group['id'].'">'.$group['name'].'</option>';
 		}
 		echo '</select>';
+		echo '</p><p>';
+		echo '<input type="submit" name="submit" value="'._('Ajouter').'" />';
 		echo '</p>';
 		echo '</form>';
 	} else {
