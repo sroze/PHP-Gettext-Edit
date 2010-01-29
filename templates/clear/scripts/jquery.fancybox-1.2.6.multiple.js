@@ -186,7 +186,7 @@
 		
 		function _scrollBox ()
 		{
-			var w = $.fn.fancybox.getViewport();
+			var w = _getViewport();
 			
 			if (opts.centerOnScroll && $(".fancy_outer", contener).is(':visible')) {
 				var ow	= $(".fancy_outer", contener).outerWidth();
@@ -260,7 +260,7 @@
 			var horizontal_space	= (opts.padding * 2) + 40;
 			var vertical_space		= (opts.padding * 2) + 60;
 
-			var w = $.fn.fancybox.getViewport();
+			var w = _getViewport();
 			
 			if (opts.imageScale && (width > (w[0] - horizontal_space) || height > (w[1] - vertical_space))) {
 				var ratio = Math.min(Math.min(w[0] - horizontal_space, width) / width, Math.min(w[1] - vertical_space, height) / height);
@@ -340,7 +340,7 @@
 				return;
 			}
 
-			var w = $.fn.fancybox.getViewport();
+			var w = _getViewport();
 
 			var itemTop		= (height	+ 60) > w[1] ? w[3] : (w[3] + Math.round((w[1] - height	- 60) * 0.5));
 			var itemLeft	= (width	+ 40) > w[0] ? w[2] : (w[2] + Math.round((w[0] - width	- 40) * 0.5));
@@ -498,7 +498,7 @@
 		function _showLoading () {
 			clearInterval(loadingTimer);
 
-			var w = $.fn.fancybox.getViewport();
+			var w = _getViewport();
 
 			$(".fancy_loading", contener).css({'left': ((w[0] - 40) * 0.5 + w[2]), 'top': ((w[1] - 40) * 0.5 + w[3])}).show();
 			$(".fancy_loading", contener).bind('click', _close);
@@ -514,6 +514,10 @@
 
 			$(".fancy_loading > div", contener).css('top', (loadingFrame * -40) + 'px');
 			loadingFrame = (loadingFrame + 1) % 12;
+		};
+		
+		function _getViewport () {
+			return [$(contener).width(), $(contener).height(), $(document).scrollLeft(), $(document).scrollTop() ];
 		};
 
 		return this.unbind('click.fb').bind('click.fb', _initialize);
@@ -538,10 +542,6 @@
 	$.fn.fancybox.showIframe = function() {
 		$(".fancy_loading").hide();
 		$(".fancy_frame").show();
-	};
-
-	$.fn.fancybox.getViewport = function() {
-		return [$(window).width(), $(window).height(), $(document).scrollLeft(), $(document).scrollTop() ];
 	};
 
 	$.fn.fancybox.defaults = {
