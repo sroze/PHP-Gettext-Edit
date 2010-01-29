@@ -107,7 +107,7 @@ $(document).ready(function(){
 	}, parent);
 
 	// groups informations
-	reloadInformations();
+	reloadInformations(userId);
 });
 
 function reloadInformations (userId)
