@@ -50,8 +50,23 @@ if ($_POST['query'] == 'select') {
 } else if ($_POST['query'] == 'list') {
 	$groups = Rights_Admin::getGroups();
 	
-	foreach ($groups as $group) {
-		echo $group['name'].',';
+	if ($_POST['output'] == 'html') {
+		echo '<form id="groups_form" action="" method="POST">';
+		echo '<p><strong>Nom du groupe:</strong>';
+		echo '<select name="group">';
+		foreach ($groups as $group) {
+			echo '<option value="'.$group['id'].'">'.$group['name'].'</option>';
+		}
+		echo '</select>';
+		echo '</p>';
+		echo '</form>';
+	} else {
+		foreach ($groups as $group) {
+			if (isset($group)) {
+				echo ', ';
+			}
+			echo $group;
+		}
 	}
 } else {
 	echo 'Bad query';
