@@ -8,6 +8,8 @@ require_once ROOT_PATH.'includes/librairies/Rights/Rights_Admin.php';
 $context = GTE::buildContext($_POST);
 
 if (!Rights::check('project_users_access', $context)) {
+	header('HTTP/1.0 403 Forbidden');
+	header('Status: 403');
 	echo 'Forbidden';
 	exit();
 }

@@ -61,6 +61,7 @@
 		</div>
 	</div>
 </div>
+<a id="users_link"></a>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('div#rightseditor').width(
@@ -92,6 +93,14 @@ function reloadDatagrid (userId)
 		$("#groups_datagrid", parent).remove();
 	}
 
+	$("a#users_link").fancybox({
+		hideOnOverlayClick: false,
+		hideOnContentClick: false,
+		centerOnScroll: false,
+		frameWidth: 300,
+		frameHeight: 100
+	}, parent);
+
 	$(parent).prepend('<table id="groups_datagrid" class="datagrid" />');
 	$("#groups_datagrid").flexigrid({
 		url: '<?php echo LOCAL_PATH; ?>engines/get-groups.php',
@@ -102,7 +111,10 @@ function reloadDatagrid (userId)
 		],
 		buttons: [
 			{name: '<?php echo _('Ajouter'); ?>', bclass: 'add', position: 'left', onpress : function (a,grid){
-				alert('Add group');
+				$('a#users_link').attr('href', 
+					'<?php echo LOCAL_PATH; ?>engines/get-groups?query=list&output=html&project=<?php echo $project->get('project_id'); ?>'
+				);
+				$('a#users_link').click();
 			}},
 			{name: '<?php echo _('Supprimer'); ?>', bclass: 'delete', position: 'left', onpress : function (a,grid){
 				if ($('.trSelected',grid).length <= 0) {
