@@ -47,6 +47,21 @@ if ($_POST['query'] == 'select') {
 	}
 			
 	echo json_encode($out);
+} else if ($_POST['query'] == 'insert') {
+	$user = (int) $_POST['user'];
+	if (empty($user)) {
+		echo 'Bad request';
+		exit();
+	}
+	
+	Rights_Admin::addUserGroups(
+		$user,
+		array($_POST['group']),
+		$context,
+		true
+	);
+	
+	echo 'ok';
 } else if ($_POST['query'] == 'list') {
 	$groups = Rights_Admin::getGroups();
 	

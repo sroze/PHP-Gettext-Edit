@@ -67,15 +67,51 @@ $(document).ready(function(){
 	$('div#rightseditor').width(
 		$('div#contents').width() - 300
 	);
+	
+	var userId = $('#user_field').val();
+	var parent = $('div#rights_boxes');
+
+	$("a#users_link").fancybox({
+		hideOnOverlayClick: false,
+		hideOnContentClick: false,
+		centerOnScroll: false,
+		frameWidth: 300,
+		frameHeight: 140,
+		callbackOnShow: function (obj) {
+			$('form#groups_form').submit(function(){
+				var group = $('select#select_group').val();
+				$('.fancy_close', parent).click();
+
+				$.ajax({
+					type: 'POST',
+					dataType: 'json',
+					url: '<?php echo LOCAL_PATH; ?>engines/get-groups.php',
+					data: [
+						{name: 'project', value: <?php echo $project->get('project_id'); ?>},
+						{name: 'user', value: userId},
+						{name: 'query', value: 'insert'},
+						{name: 'group', value: group}
+					],
+					success: function (data) {
+						if (data != 'ok') {
+							alert('Erreur: '+data);
+						} else {
+							reloadDatagrid();
+						}
+					}
+				});
+
+				return false;
+			});
+		}
+	}, parent);
 
 	// groups informations
 	reloadInformations();
 });
 
-function reloadInformations ()
-{
-	var userId = $('#user_field').val();
-	
+function reloadInformations (userId)
+{	
 	reloadDatagrid(userId);
 	reloadRights(userId);
 }
@@ -92,24 +128,6 @@ function reloadDatagrid (userId)
 	} else {
 		$("#groups_datagrid", parent).remove();
 	}
-
-	$("a#users_link").fancybox({
-		hideOnOverlayClick: false,
-		hideOnContentClick: false,
-		centerOnScroll: false,
-		frameWidth: 300,
-		frameHeight: 140,
-		callbackOnShow: function (obj) {
-			$('form#groups_form').submit(function(){
-				var group = $('select#select_group').val();
-				$('.fancy_close', parent).click();
-
-				alert('Group = '+group);
-				
-				return false;
-			});
-		}
-	}, parent);
 
 	$(parent).prepend('<table id="groups_datagrid" class="datagrid" />');
 	$("#groups_datagrid").flexigrid({
