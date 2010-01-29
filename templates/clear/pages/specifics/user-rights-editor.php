@@ -82,26 +82,6 @@ $(document).ready(function(){
 				var group = $('select#select_group').val();
 				$('.fancy_close', parent).click();
 
-				/*
-				$.ajax({
-					type: 'POST',
-					dataType: 'json',
-					url: '<?php echo LOCAL_PATH; ?>engines/get-groups.php',
-					data: [
-						{name: 'project', value: <?php echo $project->get('project_id'); ?>},
-						{name: 'user', value: userId},
-						{name: 'query', value: 'insert'},
-						{name: 'group', value: group}
-					],
-					success: function (data) {
-						alert(data);
-						if (data != 'ok') {
-							alert('Erreur: '+data);
-						}
-						reloadInformations(userId);
-					}
-				});
-				*/
 				$.post(
 					'<?php echo LOCAL_PATH; ?>engines/get-groups.php',
 					{
@@ -111,7 +91,10 @@ $(document).ready(function(){
 						group: group
 					},
 					function (data) {
-						alert(data);
+						if (data != 'ok') {
+							alert('Erreur: '+data);
+						}
+						reloadInformations(userId);
 					}
 				);
 
