@@ -96,7 +96,7 @@ $(document).ready(function(){
 						if (data != 'ok') {
 							alert('Erreur: '+data);
 						} else {
-							reloadDatagrid();
+							reloadInformations(userId);
 						}
 					}
 				});
