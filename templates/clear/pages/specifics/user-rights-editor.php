@@ -82,6 +82,7 @@ $(document).ready(function(){
 				var group = $('select#select_group').val();
 				$('.fancy_close', parent).click();
 
+				/*
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
@@ -93,13 +94,26 @@ $(document).ready(function(){
 						{name: 'group', value: group}
 					],
 					success: function (data) {
+						alert(data);
 						if (data != 'ok') {
 							alert('Erreur: '+data);
-						} else {
-							reloadInformations(userId);
 						}
+						reloadInformations(userId);
 					}
 				});
+				*/
+				$.post(
+					'<?php echo LOCAL_PATH; ?>engines/get-groups.php',
+					{
+						project: <?php echo $project->get('project_id'); ?>,
+						user: userId,
+						query: 'insert',
+						group: group
+					},
+					function (data) {
+						alert(data);
+					}
+				);
 
 				return false;
 			});
