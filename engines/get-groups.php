@@ -21,13 +21,13 @@ if (!Rights::check('project_users_access', $context)) {
 	exit();
 }
 
-if ($_POST['query'] == 'select') {
-	$user = (int) $_POST['user'];
-	if (empty($user)) {
-		echo 'Bad request';
-		exit();
-	}
-	
+$user = (int) $_POST['user'];
+if (empty($user)) {
+	echo 'Bad request';
+	exit();
+}
+
+if ($_POST['query'] == 'select') {	
 	$groups = Rights_Admin::getUserGroups($user, $context);
 	
 	$out = array(
@@ -47,18 +47,20 @@ if ($_POST['query'] == 'select') {
 	}
 			
 	echo json_encode($out);
-} else if ($_POST['query'] == 'insert') {
-	$user = (int) $_POST['user'];
-	if (empty($user)) {
-		echo 'Bad request';
-		exit();
-	}
-	
+} else if ($_POST['query'] == 'insert') {	
 	Rights_Admin::addUserGroups(
 		$user,
 		array($_POST['group']),
 		$context,
 		true
+	);
+	
+	echo 'ok';
+} else if ($_POST['query'] == 'delete') {
+	Rights_Admin::removeUserGroups(
+		$user,
+		$_POST['groups'],
+		$context
 	);
 	
 	echo 'ok';
