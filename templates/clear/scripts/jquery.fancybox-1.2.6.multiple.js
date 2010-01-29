@@ -503,7 +503,17 @@
 			$(".fancy_loading", contener).css({'left': ((w[0] - 40) * 0.5 + w[2]), 'top': ((w[1] - 40) * 0.5 + w[3])}).show();
 			$(".fancy_loading", contener).bind('click', _close);
 
-			loadingTimer = setInterval($.fn.fancybox.animateLoading, 66);			
+			loadingTimer = setInterval(_animateLoading, 66);			
+		};
+		
+		function _animateLoading () {
+			if (!$(".fancy_loading", contener).is(':visible')){
+				clearInterval(loadingTimer);
+				return;
+			}
+
+			$(".fancy_loading > div", contener).css('top', (loadingFrame * -40) + 'px');
+			loadingFrame = (loadingFrame + 1) % 12;
 		};
 
 		return this.unbind('click.fb').bind('click.fb', _initialize);
@@ -526,23 +536,12 @@
 	};
 
 	$.fn.fancybox.showIframe = function() {
-		$(".fancy_loading", contener).hide();
-		$(".fancy_frame", contener).show();
+		$(".fancy_loading").hide();
+		$(".fancy_frame").show();
 	};
 
 	$.fn.fancybox.getViewport = function() {
 		return [$(window).width(), $(window).height(), $(document).scrollLeft(), $(document).scrollTop() ];
-	};
-
-	$.fn.fancybox.animateLoading = function() {
-		if (!$(".fancy_loading", contener).is(':visible')){
-			clearInterval(loadingTimer);
-			return;
-		}
-
-		$(".fancy_loading > div", contener).css('top', (loadingFrame * -40) + 'px');
-
-		loadingFrame = (loadingFrame + 1) % 12;
 	};
 
 	$.fn.fancybox.defaults = {
