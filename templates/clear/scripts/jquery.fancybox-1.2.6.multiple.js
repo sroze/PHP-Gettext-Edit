@@ -40,7 +40,7 @@
 		var matchedGroup	= this;
 		
 		if (!i) {
-			var i $('body');
+			var i = $('body');
 		}
 		var contener		= $(i);
 
