@@ -112,7 +112,7 @@ function reloadDatagrid (userId)
 		buttons: [
 			{name: '<?php echo _('Ajouter'); ?>', bclass: 'add', position: 'left', onpress : function (a,grid){
 				$('a#users_link').attr('href', 
-					'<?php echo LOCAL_PATH; ?>engines/get-groups?query=list&output=html&project=<?php echo $project->get('project_id'); ?>'
+					'<?php echo LOCAL_PATH; ?>engines/get-groups.php?query=list&output=html&project=<?php echo $project->get('project_id'); ?>'
 				);
 				$('a#users_link').click();
 			}},
