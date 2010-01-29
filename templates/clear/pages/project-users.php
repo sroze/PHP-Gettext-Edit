@@ -59,7 +59,7 @@ $(document).ready(function() {
 		centerOnScroll: false,
 		frameWidth: gridWidth,
 		frameHeight: $(window).height() - 100
-	});
+	}, $('body'));
 	
 	$("#users_datagrid").flexigrid({
 		url: '<?php echo LOCAL_PATH; ?>engines/get-users.php',
