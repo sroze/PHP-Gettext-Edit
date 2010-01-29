@@ -50,7 +50,7 @@ if ($_POST['query'] == 'select') {
 } else if ($_POST['query'] == 'insert') {	
 	Rights_Admin::addUserGroups(
 		$user,
-		array($_POST['group']),
+		array((int) $_POST['group']),
 		$context,
 		true
 	);
@@ -59,7 +59,7 @@ if ($_POST['query'] == 'select') {
 } else if ($_POST['query'] == 'delete') {
 	Rights_Admin::removeUserGroups(
 		$user,
-		$_POST['groups'],
+		json_decode($_POST['groups']),
 		$context
 	);
 	
