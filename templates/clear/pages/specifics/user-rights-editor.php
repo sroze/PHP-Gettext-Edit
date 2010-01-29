@@ -98,7 +98,7 @@ function reloadDatagrid (userId)
 		hideOnContentClick: false,
 		centerOnScroll: false,
 		frameWidth: 300,
-		frameHeight: 100
+		frameHeight: 140
 	}, parent);
 
 	$(parent).prepend('<table id="groups_datagrid" class="datagrid" />');
