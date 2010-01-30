@@ -95,7 +95,7 @@ $(document).ready(function(){
 				$.post(
 					'<?php echo LOCAL_PATH; ?>engines/get-groups.php',
 					{
-						<?php echo $ajax_params_object_string; ?>,
+						<?php echo $ajax_params_object_string; ?>
 						user: userId,
 						query: 'insert',
 						group: group
