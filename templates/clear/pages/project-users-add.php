@@ -18,7 +18,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('select#user_field').change(function(){
-		reloadInformations();
+		reloadInformations($(this).val());
 	});
 });
 </script>
