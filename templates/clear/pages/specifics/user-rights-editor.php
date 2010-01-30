@@ -61,7 +61,7 @@
 		</div>
 	</div>
 </div>
-<a id="users_link"></a>
+<a id="users_link_rights"></a>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('div#rightseditor').width(
@@ -71,7 +71,7 @@ $(document).ready(function(){
 	var userId = $('#user_field').val();
 	var parent = $('div#rights_boxes');
 
-	$("a#users_link").fancybox({
+	$("a#users_link_rights").fancybox({
 		hideOnOverlayClick: false,
 		hideOnContentClick: false,
 		centerOnScroll: false,
@@ -136,10 +136,10 @@ function reloadDatagrid (userId)
 		],
 		buttons: [
 			{name: '<?php echo _('Ajouter'); ?>', bclass: 'add', position: 'left', onpress : function (a,grid){
-				$('a#users_link').attr('href', 
+				$('a#users_link_rights').attr('href', 
 					'<?php echo LOCAL_PATH; ?>engines/get-groups.php?query=list&output=html&user='+userId+'&project=<?php echo $project->get('project_id'); ?>'
 				);
-				$('a#users_link').click();
+				$('a#users_link_rights').click();
 			}},
 			{name: '<?php echo _('Supprimer'); ?>', bclass: 'delete', position: 'left', onpress : function (a,grid){
 				if ($('.trSelected',grid).length <= 0) {

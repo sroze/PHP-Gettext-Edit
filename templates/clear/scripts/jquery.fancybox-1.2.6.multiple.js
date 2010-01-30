@@ -106,7 +106,6 @@
 				var frameDoc = $('.fancy_bigIframe', contener)[0].contentWindow.document;
 				frameDoc.open();
 				frameDoc.close();
-				
 			}
 		};
 
