@@ -10,4 +10,8 @@ $additional_rights_list = array(
 		'templates_access'
 	)
 );
+
+$ajax_params = array(
+	'project' => $project->get('project_id')
+);
 ?>

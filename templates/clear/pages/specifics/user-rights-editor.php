@@ -62,6 +62,16 @@
 	</div>
 </div>
 <a id="users_link_rights"></a>
+<?php 
+$ajax_params_array_string = '';
+$ajax_params_object_string = '';
+$ajax_params_url_string = '';
+foreach ($ajax_params as $param => $value) {
+	$ajax_params_array_string .= '{name: \''.$param.'\', value: \''.$value.'\'},';
+	$ajax_params_object_string .= $param.': \''.$value.'\',';
+	$ajax_params_url_string .= '&'.$param.'='.$value;
+}
+?>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('div#rightseditor').width(
@@ -85,7 +95,7 @@ $(document).ready(function(){
 				$.post(
 					'<?php echo LOCAL_PATH; ?>engines/get-groups.php',
 					{
-						project: <?php echo $project->get('project_id'); ?>,
+						<?php echo $ajax_params_object_string; ?>,
 						user: userId,
 						query: 'insert',
 						group: group
@@ -137,7 +147,7 @@ function reloadDatagrid (userId)
 		buttons: [
 			{name: '<?php echo _('Ajouter'); ?>', bclass: 'add', position: 'left', onpress : function (a,grid){
 				$('a#users_link_rights').attr('href', 
-					'<?php echo LOCAL_PATH; ?>engines/get-groups.php?query=list&output=html&user='+userId+'&project=<?php echo $project->get('project_id'); ?>'
+					'<?php echo LOCAL_PATH; ?>engines/get-groups.php?query=list&output=html&user='+userId+'<?php echo $ajax_params_url_string; ?>'
 				);
 				$('a#users_link_rights').click();
 			}},
@@ -158,7 +168,7 @@ function reloadDatagrid (userId)
 			}}
 		],
 		params:[
-			{name: 'project', value: <?php echo $project->get('project_id'); ?>},
+			<?php echo $ajax_params_array_string; ?>
 			{name: 'user', value: userId}
 		],
 		usepager: false,
@@ -173,7 +183,7 @@ function reloadDatagrid (userId)
 function reloadRights (userId)
 {
 	var param = [
-	 	{name: 'project', value: <?php echo $project->get('project_id'); ?>},
+	 	<?php echo $ajax_params_array_string; ?>
 		{name: 'user', value: userId},
 		{name: 'query', value: 'select'},
 	];
