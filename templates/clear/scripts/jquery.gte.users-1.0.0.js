@@ -5,7 +5,7 @@
  */
 
 ;(function($) {
-	var elem, opts;
+	var elem, opts, paramstring;
 	
 	$.fn.gteusers = function(o) {
 		var settings		= $.extend({}, $.fn.gteusers.defaults, o);
@@ -17,6 +17,11 @@
 
 			var gridWidth = $('div#contents').width() - 20;
 			var colWidth = (gridWidth - 65) / 3;
+			
+			paramstring = '';
+			for (var i = 0; i < opts.params.length; i++) {
+				paramstring += '&'+opts.params[i].name+'='+opts.params[i].value;
+			}
 			
 			$("a#users_link").fancybox({
 				hideOnOverlayClick: false,
@@ -38,7 +43,7 @@
 				buttons: [
 					{name: opts.translations.ajouter, bclass: 'add', position: 'left', onpress : function (a,grid){
 						$('a#users_link').attr('href', 
-							opts.localpath+'index.php?only&page=project-users-add&project='+opts.project
+							opts.localpath+'index.php?only&page=project-users-add'+paramstring
 						);
 						$('a#users_link').click();
 					}},
@@ -66,9 +71,7 @@
 						}
 					}}
 				],
-				params:[
-					{name: 'project', value: opts.project}
-				],
+				params: opts.params,
 				usepager: false,
 				title: opts.translations.utilisateurs,
 				useRp: false,
@@ -79,7 +82,7 @@
 					var user_id = object.id.substr(3);
 					
 					$('a#users_link').attr('href', 
-						opts.localpath+'index.php?only&page=project-users-edit&project='+opts.project+'&user='+user_id
+						opts.localpath+'index.php?only&page=project-users-edit&user='+user_id+paramstring
 					);
 					$('a#users_link').click();
 				},
@@ -124,11 +127,5 @@
 		_initialize();
 	};
 	
-	$.fn.gteusers.myfunction = function() {
-		
-	};
-	
-	$.fn.gteusers.defaults = {
-		callbackOnClose		:	null
-	};
+	$.fn.gteusers.defaults = {};
 })(jQuery);

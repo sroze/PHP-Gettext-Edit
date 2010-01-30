@@ -57,7 +57,9 @@ $(document).ready(function() {
 		   	'<?php echo _('Groupes'); ?>',
 		   	'<?php echo _('Droits supplémentaires'); ?>'
 		],
-		project: <?php echo $project->get('project_id'); ?>,
+		params: [
+			{name: 'project', value: <?php echo $project->get('project_id'); ?>}
+		],
 		localpath: '<?php echo LOCAL_PATH; ?>',
 		translations: {
 			ajouter: '<?php echo _('Ajouter'); ?>',
