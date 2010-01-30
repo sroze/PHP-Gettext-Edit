@@ -65,7 +65,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('div#rightseditor').width(
-		$('div#contents').width() - 300
+		$('div#contents').width() - 315
 	);
 	
 	var userId = $('#user_field').val();
