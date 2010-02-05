@@ -7,7 +7,7 @@
 ;(function($) {
 	var elem, opts, paramstring;
 	
-	$.fn.gteusers = function(o) {
+	$.fn.gteusers = function(type_str, o) {
 		var settings		= $.extend({}, $.fn.gteusers.defaults, o);
 		var datagrid		= this;
 
@@ -43,7 +43,7 @@
 				buttons: [
 					{name: opts.translations.ajouter, bclass: 'add', position: 'left', onpress : function (a,grid){
 						$('a#users_link').attr('href', 
-							opts.localpath+'index.php?only&page=project-users-add'+paramstring
+							opts.localpath+'index.php?only&page='+type_str+'-users-add'+paramstring
 						);
 						$('a#users_link').click();
 					}},
@@ -82,7 +82,7 @@
 					var user_id = object.id.substr(3);
 					
 					$('a#users_link').attr('href', 
-						opts.localpath+'index.php?only&page=project-users-edit&user='+user_id+paramstring
+						opts.localpath+'index.php?only&page='+type_str+'-users-edit&user='+user_id+paramstring
 					);
 					$('a#users_link').click();
 				},

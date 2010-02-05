@@ -14,4 +14,6 @@ $additional_rights_list = array(
 $ajax_params = array(
 	'project' => $project->get('project_id')
 );
+
+$files_start = 'project';
 ?>
