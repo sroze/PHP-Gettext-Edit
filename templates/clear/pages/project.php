@@ -49,18 +49,11 @@ if (!isset($project)) {
 		<?php 
 		$templates = $project->getTemplates();
 		if (!empty($templates)) {
-			echo '<ul>';
+			echo '<ul id="templates">';
 			foreach ($templates as $template) {
 				$template_name = $template->getName();
-				$last_edited_files = $template->getEditedFiles();
 				
-				if (!empty($last_edited_files)) {
-					$class = 'invalid';
-				} else {
-					$class = 'valid';
-				}
-				
-				echo '<li class="'.$class.'"><a href="index.php?page=template&project='.$project->get('project_id').'&template='.$template_name.'">'.$template_name.'</a></li>';
+				echo '<li template="'.$template_name.'" class="loading"><a href="index.php?page=template&project='.$project->get('project_id').'&template='.$template_name.'">'.$template_name.'</a></li>';
 			}
 			echo '</ul>';
 		} else {
@@ -75,7 +68,7 @@ if (!isset($project)) {
 		$languages = $project->getLanguages();
 		$languages_files = array();
 		if (!empty($languages)) {
-			echo '<ul>';
+			echo '<ul id="languages">';
 			foreach ($languages as $language) {
 				$languages_files[$language->getName()] = array();
 				foreach ($language->getFiles() as $language_file) {
@@ -87,13 +80,7 @@ if (!isset($project)) {
 					$languages_files[$language->getName()][] = substr($language_file->file_path, $last_bracket);
 				}
 				
-				$language_warnings = $language->getWarnings();
-				if (!empty($language_warnings)) {
-					$class = 'invalid';
-				} else {
-					$class = 'valid';
-				}
-				echo '<li class="'.$class.'"><a href="index.php?page=language&project='.$project->get('project_id').'&language='.$language->getCode().'">'.$language->getName().'</a></li>';
+				echo '<li language="'.$language->getCode().'" class="loading"><a href="index.php?page=language&project='.$project->get('project_id').'&language='.$language->getCode().'">'.$language->getName().'</a></li>';
 			}
 			echo '</ul>';
 		} else {
@@ -130,3 +117,49 @@ if (!isset($project)) {
 		<div class="clear"></div>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('ul#templates li').each(function(){
+		var li = $(this);
+		$.post(
+			'<?php echo LOCAL_PATH; ?>engines/get-status.php',
+			{
+				project: <?php echo $project->get('project_id'); ?>,
+				template: li.attr('template')
+			},
+			function (data) {
+				li.removeClass('loading');
+				
+				if (data == 'ok') {
+					li.addClass('valid');
+				} else if (data == 'ko') {
+					li.addClass('invalid');
+				} else {
+					alert('Erreur: '+data);
+				}
+			}
+		);
+	});
+	$('ul#languages li').each(function(){
+		var li = $(this);
+		$.post(
+			'<?php echo LOCAL_PATH; ?>engines/get-status.php',
+			{
+				project: <?php echo $project->get('project_id'); ?>,
+				language: li.attr('language')
+			},
+			function (data) {
+				li.removeClass('loading');
+				
+				if (data == 'ok') {
+					li.addClass('valid');
+				} else if (data == 'ko') {
+					li.addClass('invalid');
+				} else {
+					alert('Erreur: '+data);
+				}
+			}
+		);
+	});
+});
+</script>
