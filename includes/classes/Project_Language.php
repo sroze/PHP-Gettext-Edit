@@ -49,7 +49,23 @@ class Project_Language
 			throw new Project_Language_Exception(
 				_('Impossible de créer le dossier')
 			);
-		} 
+		}
+		
+		// Grant access to creator
+		Rights_Admin::grantUserRights(
+			Rights::$user_id,
+			array(
+				'language_access',
+				'language_delete',
+				'language_edit',
+				
+				'language_files_access'
+			),
+			array(
+				'project' => $project->get('project_id'),
+				'language' => $code
+			)
+		);
 		
 		return new Project_Language($project, $code);
 	}
