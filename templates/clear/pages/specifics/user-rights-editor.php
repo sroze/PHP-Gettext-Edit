@@ -195,7 +195,7 @@ function reloadRights (userId)
 		var right = this.id.substr(6);
 		$(this).addClass('loading');
 
-		param[3] = {name: 'right', value: right};
+		param[param.length] = {name: 'right', value: right};
 		$.ajax({
 			type: 'POST',
 			url: '<?php echo LOCAL_PATH; ?>engines/get-rights.php',
