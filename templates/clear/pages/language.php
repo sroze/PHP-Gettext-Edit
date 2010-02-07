@@ -40,6 +40,8 @@ if (!isset($language)) {
 				'</a></p></div>';
 			}
 		}
+		
+		if (Rights::check('language_files_access', $_CONTEXT)) {
 		?>
 		<div class="box little right">
 		<h3><?php echo _('Fichiers .po'); ?></h3>
@@ -75,6 +77,9 @@ if (!isset($language)) {
 		}
 		?>
 		</div>
+		<?php 
+		}
+		?>
 		<ul>
 			<li<?php 
 			if ($need_compile) {

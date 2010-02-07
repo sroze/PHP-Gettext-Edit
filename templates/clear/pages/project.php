@@ -36,7 +36,9 @@ if (!isset($project)) {
 		?>
 		</div>
 		<h1><?php echo $project->get('project_name'); ?></h1>
-		
+		<?php
+		if (Rights::check('templates_access', $_CONTEXT)) {
+		?>
 		<div class="box little right">
 		<div class="link right"><a class="add" href="index.php?page=template-new&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
 		<h3><?php echo _('Modèles'); ?></h3>
@@ -55,6 +57,10 @@ if (!isset($project)) {
 		}
 		?>
 		</div>
+		<?php
+		}
+		if (Rights::check('languages_access', $_CONTEXT)) {
+		?>
 		<div class="box little right">
 		<div class="link right"><a class="add" href="index.php?page=language-new&project=<?php echo $project->get('project_id'); ?>"><?php echo _('Nouveau'); ?></a></div>
 		<h3><?php echo _('Langues'); ?></h3>
@@ -83,6 +89,8 @@ if (!isset($project)) {
 		?>
 		</div>
 		<?php
+		}
+		
 		// Check if each languages have the same .po files
 		foreach ($languages_files as $language_name => $files) {
 			foreach ($files as $file) {
