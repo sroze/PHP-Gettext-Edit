@@ -44,7 +44,7 @@
 		$(document).ready(function() {
 			$('table#users_datagrid').gteusers(
 				'<?php echo $files_start; ?>',
-				,{
+				{
 				colNames: [
 				   	'<?php echo _('ID'); ?>',
 				   	'<?php echo str_replace('\'', '\\\'', _('Nom d\'utilisateur')); ?>',
