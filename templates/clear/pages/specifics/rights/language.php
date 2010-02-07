@@ -13,4 +13,5 @@ $additional_rights_list = array(
 
 $ajax_params = $_CONTEXT;
 $files_start = 'language';
+$form_action = 'index.php?page=language-users&project='.$project->get('project_id').'&language='.$language->getCode();
 ?>

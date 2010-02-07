@@ -16,4 +16,5 @@ $ajax_params = array(
 );
 
 $files_start = 'project';
+$form_action = 'index.php?page=project-users&project='.$project->get('project_id');
 ?>

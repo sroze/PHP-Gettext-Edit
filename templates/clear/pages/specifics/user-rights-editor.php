@@ -23,7 +23,7 @@
 					<p></p>
 					<label class="modified">label</label> <?php echo _('Valeur modifiée'); ?>
 				</div>
-				<form id="additionnal_rights" action="index.php?page=project-users&project=<?php echo $project->get('project_id'); ?>" method="POST">
+				<form id="additionnal_rights" action="<?php echo $form_action; ?>" method="POST">
 				<ul class="additional_user_rights">
 					<?php 
 					if (!isset($additional_rights_list)) {
