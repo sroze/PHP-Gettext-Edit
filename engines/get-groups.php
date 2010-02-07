@@ -17,7 +17,20 @@ if (empty($_POST)) {
 }
 $context = GTE::buildContext($_POST);
 
-if (!Rights::check('project_users_access', $context)) {
+if (array_key_exists('language_file', $context)) {
+	$right = 'language_file_users_';
+} else if (array_key_exists('language', $context)) {
+	$right = 'language_users_';
+} else if (array_key_exists('template', $context)) {
+	$right = 'template_users_';
+} else if (array_key_exists('project', $context)) {
+	$right = 'project_users_';
+} else {
+	echo 'Bad context';
+	exit();
+}
+
+if (!Rights::check($right.'access', $context)) {
 	header('HTTP/1.0 403 Forbidden');
 	header('Status: 403');
 	echo 'Forbidden';
@@ -50,7 +63,7 @@ if ($_POST['query'] == 'select') {
 	}
 			
 	echo json_encode($out);
-} else if ($_POST['query'] == 'insert') {	
+} else if ($_POST['query'] == 'insert' && Rights::check($right.'admin', $context)) {	
 	Rights_Admin::addUserGroups(
 		$user,
 		array((int) $_POST['group']),
@@ -59,7 +72,7 @@ if ($_POST['query'] == 'select') {
 	);
 	
 	echo 'ok';
-} else if ($_POST['query'] == 'delete') {
+} else if ($_POST['query'] == 'delete' && Rights::check($right.'admin', $context)) {
 	Rights_Admin::removeUserGroups(
 		$user,
 		json_decode($_POST['groups']),
