@@ -27,7 +27,7 @@ if (!isset($language)) {
 			if (array_key_exists('grant', $_GET)) {
 				include PAGE_DIR.'specifics/rights/language.php';
 				
-				Rights_Admin::grantUserRights($_USER->get('id'), $additional_rights_list, $_CONTEXT);
+				Rights_Admin::grantUserRights($_USER->get('id'), Rights_Admin::RightsListFromArray($additional_rights_list), $_CONTEXT);
 				
 				echo '<div class="box success"><p>'.
 					_('Droits accordés.').
