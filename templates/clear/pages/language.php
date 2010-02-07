@@ -15,6 +15,15 @@ if (!isset($language)) {
 			<a class="delete" href="index.php?page=language-delete&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo _('Supprimer'); ?></a>
 		</div>
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo $language->getName(); ?></h1>
+		<?php 
+		if (count(GTE::getUsersHavingRight('language_users_admin', $_CONTEXT)) == 0) {
+			echo '<div class="box"><p>'.
+				_('Aucun utilisateur ne peut configurer les droits de cette langue').' - '.
+				'<a href="index.php?page=grant-right&project='.$project->get('project_id').'&language='.$language->getCode().'">'.
+					sprintf(_('Accorder les droits à %s'), $_USER->get('username')).
+				'</a></p></div>';
+		}
+		?>
 		<div class="box little right">
 		<h3><?php echo _('Fichiers .po'); ?></h3>
 		<?php 
