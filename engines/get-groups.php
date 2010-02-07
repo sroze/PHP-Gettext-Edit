@@ -9,6 +9,9 @@ require_once ROOT_PATH.'includes/ini_conf.php';
 require_once ROOT_PATH.'includes/configuration.php';
 require_once ROOT_PATH.'includes/librairies/Rights/Rights_Admin.php';
 
+// Patch for performances
+session_write_close();
+
 if (empty($_POST)) {
 	$_POST = $_GET;
 }

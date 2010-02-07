@@ -7,6 +7,9 @@ require_once ROOT_PATH.'includes/classes/Project.php';
 require_once ROOT_PATH.'includes/classes/Project_Language.php';
 require_once ROOT_PATH.'includes/classes/Project_Language_File.php';
 
+// Patch for performances
+session_write_close();
+
 $project = new Project($_POST['project']);
 $language = new Project_Language($project, $_POST['language']);
 $language_file = new Project_Language_File($language, $_POST['file']);
