@@ -70,7 +70,7 @@ div#contents ul li.spacer {
 	height: 8px;
 }
 div#contents ul li.loading {
-	background: url(../images/icons/bullet_loading.png) no-repeat 8px 3px;
+	background: url(../images/icons/bullet_loading.gif) no-repeat 8px 3px;
 }
 div#contents ul li.important, div#contents ul li.invalid {
 	background: url(../images/icons/exclamation.png) no-repeat;
