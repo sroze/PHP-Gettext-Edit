@@ -20,6 +20,10 @@ class GTE
 	{
 		$users_id = Rights_Admin::getUsersHavingRight($right, $context);
 		
+		if (empty($users_id)) {
+			return array();
+		}
+		
 		// Now, we'll get more informations than users' id...
 		$query = Database::$sql->query(
 			sprintf(
