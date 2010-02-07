@@ -10,18 +10,35 @@ if (!isset($language)) {
 	</div>
 	<div id="contents" class="with_sidebar">
 		<div class="link right">
-			<a class="group" href="index.php?page=language-users&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo _('Utilisateurs'); ?></a>
-			<a class="separator"></a>
-			<a class="delete" href="index.php?page=language-delete&project=<?php echo $project->get('project_id'); ?>&language=<?php echo $language->getCode(); ?>"><?php echo _('Supprimer'); ?></a>
+			<?php 
+			if (Rights::check('language_users_access', $_CONTEXT)) {
+				echo '<a class="group" href="index.php?page=language-users&project='.$project->get('project_id').
+					'&language='.$language->getCode().'">'._('Utilisateurs').'</a><a class="separator"></a>';
+			}
+			if (Rights::check('language_delete', $_CONTEXT)) {
+				echo '<a class="delete" href="index.php?page=language-delete&project='.$project->get('project_id').
+					'&language='.$language->getCode().'">'._('Supprimer').'</a>';
+			}
+			?>
 		</div>
 		<h1><a href="index.php?page=project&project=<?php echo $project->get('project_id'); ?>"><?php echo $project->get('project_name'); ?></a> &raquo; <?php echo $language->getName(); ?></h1>
 		<?php 
 		if (count(GTE::getUsersHavingRight('language_users_admin', $_CONTEXT)) == 0) {
-			echo '<div class="box"><p>'.
+			if (array_key_exists('grant', $_GET)) {
+				include PAGE_DIR.'specifics/rights/language.php';
+				
+				Rights_Admin::grantUserRights($_USER->get('id'), $additional_rights_list, $_CONTEXT);
+				
+				echo '<div class="box success"><p>'.
+					_('Droits accordés.').
+					'</p></div>';
+			} else {
+				echo '<div class="box error"><p>'.
 				_('Aucun utilisateur ne peut configurer les droits de cette langue').' - '.
-				'<a href="index.php?page=grant-right&project='.$project->get('project_id').'&language='.$language->getCode().'">'.
+				'<a href="index.php?page=language&project='.$project->get('project_id').'&language='.$language->getCode().'&grant">'.
 					sprintf(_('Accorder les droits à %s'), $_USER->get('username')).
 				'</a></p></div>';
+			}
 		}
 		?>
 		<div class="box little right">

@@ -20,22 +20,16 @@ if (!isset($project)) {
 	<div id="contents" class="with_sidebar">
 		<div class="link right">
 		<?php 
-		if (Rights::check('project_users_access', array(
-			'project' => (int) $project->get('project_id')
-		))) {
+		if (Rights::check('project_users_access', $_CONTEXT)) {
 			echo '<a class="group" href="index.php?page=project-users&project='.
 			$project->get('project_id').'">'._('Utilisateurs').'</a>'.
 			'<a class="separator"></a>';
 		}
-		if (Rights::check('project_delete', array(
-			'project' => (int) $project->get('project_id')
-		))) {
+		if (Rights::check('project_delete', $_CONTEXT)) {
 			echo '<a class="delete" href="index.php?page=project-delete&project='.
 			$project->get('project_id').'">'._('Supprimer').'</a>';
 		}
-		if (Rights::check('project_edit', array(
-			'project' => (int) $project->get('project_id')
-		))) {
+		if (Rights::check('project_edit', $_CONTEXT)) {
 			echo '<a class="edit" href="index.php?page=project-edit&project='.
 			$project->get('project_id').'">'._('Editer').'</a>';
 		}
