@@ -7,6 +7,7 @@
  * @link   http://www.d-sites.com/projets/gettextedit/
  */
 define('ROOT_PATH', realpath(dirname(__FILE__)).'/');
+define('START_TIME', microtime(true));
 
 $uris = explode('/', $_SERVER['SCRIPT_NAME']); array_pop($uris); array_shift($uris); if (!empty($uris)) { $uris[] = ''; }
 define('LOCAL_PATH', '/'.implode('/', $uris));
