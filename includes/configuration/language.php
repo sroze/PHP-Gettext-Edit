@@ -24,8 +24,10 @@ if (!isset($_COOKIE['GetTextEdit-language'])) {
 	foreach ($langs as $lang => $val) {
 		if (strpos($lang, 'fr') === 0) {
 			define('LANGUAGE', 'fr_FR');
+			break;
 		} else if (strpos($lang, 'en') === 0) {
 			define('LANGUAGE', 'en_US');
+			break;
 		} 
 	}
 	
